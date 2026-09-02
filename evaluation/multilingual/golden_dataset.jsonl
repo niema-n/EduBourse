@@ -1,0 +1,110 @@
+{"text":"C'est quoi une action ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Comment fonctionne une obligation ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Quels sont les risques des actions ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Je veux apprendre les bases de la Bourse.","expected_language":"fr","expected_script":"latin"}
+{"text":"Quelle est la différence entre une action et une obligation ?","expected_language":"fr","expected_script":"latin"}
+{"text":"C'est quoi une société cotée ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Comment acheter une action ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Quelle est la valeur d'une obligation ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Je veux comprendre le marché financier.","expected_language":"fr","expected_script":"latin"}
+{"text":"Quels risques existent en Bourse ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Comment fonctionne le MASI ?","expected_language":"fr","expected_script":"latin"}
+{"text":"C'est quoi un ETF ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Quelle différence entre rendement et risque ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Je veux apprendre la finance.","expected_language":"fr","expected_script":"latin"}
+{"text":"Pourquoi le prix d'une action change ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Comment lire un indice boursier ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Quels sont les frais d'un OPCVM ?","expected_language":"fr","expected_script":"latin"}
+{"text":"La Bourse est-elle risquée ?","expected_language":"fr","expected_script":"latin"}
+{"text":"C'est quoi une introduction en Bourse ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Comment diversifier un portefeuille ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Quelle est la différence entre épargne et investissement ?","expected_language":"fr","expected_script":"latin"}
+{"text":"Je veux comprendre une société cotée.","expected_language":"fr","expected_script":"latin"}
+{"text":"What is a stock?","expected_language":"en","expected_script":"latin"}
+{"text":"How does a bond work?","expected_language":"en","expected_script":"latin"}
+{"text":"What are the risks of investing in stocks?","expected_language":"en","expected_script":"latin"}
+{"text":"I want to learn about the stock market.","expected_language":"en","expected_script":"latin"}
+{"text":"What is the difference between a stock and a bond?","expected_language":"en","expected_script":"latin"}
+{"text":"How can I buy a stock?","expected_language":"en","expected_script":"latin"}
+{"text":"What is the MASI?","expected_language":"en","expected_script":"latin"}
+{"text":"What is an ETF?","expected_language":"en","expected_script":"latin"}
+{"text":"I want to understand market risk.","expected_language":"en","expected_script":"latin"}
+{"text":"How does a stock index work?","expected_language":"en","expected_script":"latin"}
+{"text":"What are investment fees?","expected_language":"en","expected_script":"latin"}
+{"text":"Why does a stock price change?","expected_language":"en","expected_script":"latin"}
+{"text":"How do I diversify a portfolio?","expected_language":"en","expected_script":"latin"}
+{"text":"What is an IPO?","expected_language":"en","expected_script":"latin"}
+{"text":"I want to learn finance basics.","expected_language":"en","expected_script":"latin"}
+{"text":"What is a listed company?","expected_language":"en","expected_script":"latin"}
+{"text":"How does saving differ from investing?","expected_language":"en","expected_script":"latin"}
+{"text":"What is the risk of a bond?","expected_language":"en","expected_script":"latin"}
+{"text":"How does the stock market work?","expected_language":"en","expected_script":"latin"}
+{"text":"What is a mutual fund?","expected_language":"en","expected_script":"latin"}
+{"text":"I want to understand the difference between return and risk.","expected_language":"en","expected_script":"latin"}
+{"text":"What are the basics of investing?","expected_language":"en","expected_script":"latin"}
+{"text":"ما هو السهم؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هي البورصة؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هي مخاطر الاستثمار؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"كيف يعمل سوق رأس المال؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما الفرق بين السهم والسند؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هو مؤشر البورصة؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما معنى التنويع في الاستثمار؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"كيف يتم تقييم السهم؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هي تكلفة الاستثمار؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هو العائد المتوقع؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"كيف يعمل الصندوق الاستثماري؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هي الشركة المدرجة؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما المقصود بسوق الأسهم؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هو الفرق بين الادخار والاستثمار؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"كيف أقرأ القوائم المالية؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هي مخاطر السندات؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هو الاكتتاب العام؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"كيف تتغير أسعار الأسهم؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما هو صندوق المؤشر؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"ما معنى السيولة في السوق؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"كيف يعمل مؤشر MASI؟","expected_language":"ar","expected_script":"mixed"}
+{"text":"ما هي قواعد الاستثمار المسؤول؟","expected_language":"ar","expected_script":"arabic"}
+{"text":"chno hiya lborsa?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"achno howa sou9 lborsa?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"bghit nt3ellem lborsa","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"wach OPCVM fih risk?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"kifach n9der nt3ellem lborsa?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"fin n9der nla9a formation?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"ch7al kayn mn naw3 dyal actions?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"3lach taman dyal action kaytbedel?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"wach ETF fih risk?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"bghit nfhem MASI","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"kifach kaykhdem sou9 lborsa?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"wach lborsa mzyana l investissement?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"fin kayn risk f actions?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"achno howa rendement?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"bghit n9ra 3la obligation","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"wach IPO howa idkhal lborsa?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"3lach prix dyal action kaytla3?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"chno hiya diversification?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"kifach n9der nchri action?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"wach kayn risk f OPCVM?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"bghit nt3ellem finance b darija","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"ch7al khasni bach nbda investissement?","expected_language":"ary-latin","expected_script":"latin"}
+{"text":"شنو هي البورصة؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"بغيت نتعلم البورصة","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"شنو هو سوق الأسهم؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"واش الاستثمار فيه المخاطر؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"كيفاش نقدر نتعلم البورصة؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"فين نقدر نلقى تكوين؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"علاش ثمن السهم كيتبدل؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"شنو هو MASI؟","expected_language":"ary-arabic","expected_script":"mixed"}
+{"text":"واش ETF فيه risk؟","expected_language":"ary-arabic","expected_script":"mixed"}
+{"text":"بغيت نفهم ديال الأسهم","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"كاين شي خطر فالبورصة؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"كيفاش كنحسبو الربح؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"علاش السعر كيطالع؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"فين نلقى معلومات على OPCVM؟","expected_language":"ary-arabic","expected_script":"mixed"}
+{"text":"شنو معنى التنويع؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"واش السند فيه ريسك؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"بغيت نعرف الفرق بين السهم والسند","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"هاد الاستثمار واش مناسب؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"شنو خاصني باش نبدا؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"كيفاش نخدم ميزانية صغيرة؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"واش كاينة مصاريف فالبورصة؟","expected_language":"ary-arabic","expected_script":"arabic"}
+{"text":"علاش السوق كيتبدل بزاف؟","expected_language":"ary-arabic","expected_script":"arabic"}
