@@ -320,6 +320,16 @@ ARABIC_TRANSLATION_TABLE = str.maketrans(
 )
 MSA_STRONG = {token.translate(ARABIC_TRANSLATION_TABLE) for token in MSA_STRONG_RAW}
 MSA_WEAK = {token.translate(ARABIC_TRANSLATION_TABLE) for token in MSA_WEAK_RAW}
+MSA_MA_QUESTION_COMPLEMENTS = {
+    token.translate(ARABIC_TRANSLATION_TABLE)
+    for token in {
+        "\u0647\u0648",
+        "\u0647\u064a",
+        "\u0627\u0644\u0645\u0642\u0635\u0648\u062f",
+        "\u0645\u0639\u062f\u0644",
+        "\u0646\u0633\u0628\u0629",
+    }
+}
 DARJA_ARABIC_STRONG = {
     token.translate(ARABIC_TRANSLATION_TABLE) for token in DARJA_ARABIC_STRONG_RAW
 }
@@ -354,7 +364,7 @@ def _arabic_matching_tokens(tokens: list[str]) -> list[str]:
         for prefix in ("و", "ف", "ب", "ل"):
             if token.startswith(prefix) and len(token) > 4:
                 remainder = token[len(prefix) :]
-                if remainder.startswith(("ما", "هاد", "ديال", "غادي", "غا")):
+                if remainder.startswith(("ما", "هاد", "ديال", "غادي", "غان")):
                     matching_tokens.append(remainder)
     return matching_tokens
 
@@ -458,9 +468,7 @@ def _latin_language(text: str, script: str, tokens: list[str]) -> tuple[Language
 def _darija_arabic_pattern_score(tokens: list[str]) -> float:
     score = 0.0
     for index, token in enumerate(tokens):
-        if token.startswith("غا") and len(token) >= 4:
-            score += 2.5
-        if token == "غادي":
+        if _is_darija_future_token(token):
             score += 2.5
         if token.startswith(("كي", "كن")) and len(token) >= 4:
             score += 1.5
@@ -473,6 +481,10 @@ def _darija_arabic_pattern_score(tokens: list[str]) -> float:
     if tokens and tokens[0] in {"اش", "اشنو", "شنو", "شحال", "شكون", "فين", "علاش", "واش"}:
         score += 2.0
     return score
+
+
+def _is_darija_future_token(token: str) -> bool:
+    return token == "غادي" or (token.startswith("غان") and len(token) >= 5)
 
 
 def _arabic_language(text: str) -> tuple[LanguageCode, float]:
@@ -557,7 +569,7 @@ def _has_high_precision_darija_rule(normalized_text: str, language: LanguageCode
         token_set = set(tokens)
         if {"شنو", "كيفاش", "واش", "بغيت", "بغينا", "غادي"} & token_set:
             return True
-        if any(token.startswith("غا") and len(token) >= 4 for token in tokens):
+        if any(_is_darija_future_token(token) for token in tokens):
             return True
         return "كلشي" in token_set and any(token.startswith(("كي", "كن")) for token in tokens)
     return False
@@ -567,14 +579,14 @@ def _has_high_precision_msa_rule(normalized_text: str, language: LanguageCode) -
     if language != "ar":
         return False
     tokens = _arabic_tokens(normalized_text)
+    if (
+        len(tokens) >= 2
+        and tokens[0] == "\u0645\u0627".translate(ARABIC_TRANSLATION_TABLE)
+        and tokens[1] in MSA_MA_QUESTION_COMPLEMENTS
+    ):
+        return True
     darija_score, msa_score = _arabic_scores(tokens)
     if msa_score >= 5.0 and msa_score > darija_score + 1.0:
-        return True
-    has_split_darija_negation = any(
-        token == "ما" and index + 1 < len(tokens) and tokens[index + 1].endswith("ش")
-        for index, token in enumerate(tokens)
-    )
-    if tokens and tokens[0] == "ما" and darija_score <= 1.0 and not has_split_darija_negation:
         return True
     return False
 
@@ -589,6 +601,24 @@ def _is_ambiguous_input(normalized_text: str) -> bool:
 def detect_language(text: str) -> LanguageAnalysis:
     normalized_text = normalize_text(text)
     script = detect_script(normalized_text)
+    uses_arabic_branch = _use_arabic_branch(script, normalized_text)
+
+    if uses_arabic_branch and not _is_ambiguous_input(normalized_text):
+        try:
+            language, confidence = _classifier_detection(normalized_text, script)
+        except StatisticalDetectorUnavailable:
+            language, confidence = _heuristic_detection(normalized_text, script)
+        if language == "ar" and _has_high_precision_darija_rule(normalized_text, "ary-arabic"):
+            language, confidence = "ary-arabic", max(confidence, 0.93)
+        if language == "ary-arabic" and _has_high_precision_msa_rule(normalized_text, "ar"):
+            language, confidence = "ar", max(confidence, 0.93)
+        return LanguageAnalysis(
+            language=language,
+            script=script,
+            normalized_text=normalized_text,
+            confidence=confidence,
+        )
+
     heuristic_language, heuristic_confidence = _heuristic_detection(normalized_text, script)
 
     if (

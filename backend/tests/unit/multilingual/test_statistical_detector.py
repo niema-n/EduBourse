@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import socket
 from pathlib import Path
 
 import pytest
 
-from app.multilingual.detector import detect_language
+from app.multilingual.detector import (
+    _has_high_precision_msa_rule,
+    _is_darija_future_token,
+    detect_language,
+)
 from app.multilingual.statistical_detector import (
     ARTIFACT_PATH,
     StatisticalDetectorUnavailable,
@@ -14,6 +19,8 @@ from app.multilingual.statistical_detector import (
     predict_arabic,
     predict_latin,
 )
+
+METRICS_PATH = ARTIFACT_PATH.with_name("language_detector_metrics.json")
 
 
 def _load_arabic_lid_module():
@@ -52,6 +59,15 @@ def test_arabic_statistical_inference_is_deterministic() -> None:
 
     assert first == second
     assert first.language in {"ar", "ary-arabic"}
+
+
+def test_arabic_threshold_metadata_is_loaded_and_bounded() -> None:
+    artifact = load_artifact(ARTIFACT_PATH)
+    threshold = artifact["metadata"]["selected_arabic_threshold"]
+
+    assert isinstance(threshold, int | float)
+    assert 0.0 <= threshold <= 1.0
+    assert artifact["metadata"]["selection_used_test_data"] is False
 
 
 def test_missing_artifact_raises_controlled_error(tmp_path) -> None:
@@ -110,7 +126,7 @@ def test_darija_lid_preprocessing_filters_arabizi_from_arabic_branch() -> None:
     assert not preparer.is_arabic_script("chno hiya lborsa?")
 
 
-def test_source_split_keeps_source_disjoint_records_separate() -> None:
+def test_split_keeps_upstream_test_holdout_records_separate() -> None:
     preparer = _load_arabic_lid_module()
 
     train_records = [
@@ -127,7 +143,7 @@ def test_source_split_keeps_source_disjoint_records_separate() -> None:
             "source": "train-source",
         },
     ] * 10
-    source_disjoint_records = [
+    upstream_holdout_records = [
         {
             "text": "كيف يعمل السوق؟",
             "normalized_text": preparer.normalized_text("كيف يعمل السوق؟"),
@@ -136,9 +152,9 @@ def test_source_split_keeps_source_disjoint_records_separate() -> None:
         }
     ]
 
-    splits = preparer.split_records(train_records, source_disjoint_records, seed=42)
+    splits = preparer.split_records(train_records, upstream_holdout_records, seed=42)
 
-    assert {record["source"] for record in splits["source_disjoint"]} == {"held-out-source"}
+    assert {record["source"] for record in splits["upstream_test_holdout"]} == {"held-out-source"}
     assert not any(record["source"] == "held-out-source" for record in splits["train"])
 
 
@@ -166,9 +182,68 @@ def test_deduplication_prevents_normalized_overlap() -> None:
     assert normalized == 0
 
 
+def test_global_deduplication_removes_train_holdout_overlap() -> None:
+    preparer = _load_arabic_lid_module()
+    shared_text = "\u0634\u0646\u0648 \u0647\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f"
+    train_record = {
+        "text": shared_text,
+        "normalized_text": preparer.normalized_text(shared_text),
+        "expected_language": "ary-arabic",
+    }
+    holdout_record = {
+        "text": "  ".join(shared_text.split()),
+        "normalized_text": preparer.normalized_text("  ".join(shared_text.split())),
+        "expected_language": "ary-arabic",
+    }
+    splits, removed = preparer.deduplicate_splits(
+        {
+            "train": [train_record],
+            "validation": [],
+            "test": [],
+            "upstream_test_holdout": [holdout_record],
+        }
+    )
+    exact, normalized = preparer.overlap(splits["train"], splits["upstream_test_holdout"])
+
+    assert splits["upstream_test_holdout"] == []
+    assert removed["upstream_test_holdout"] == 1
+    assert exact == 0
+    assert normalized == 0
+
+
+def test_gha_rule_requires_structural_future_token() -> None:
+    assert _is_darija_future_token("\u063a\u0627\u062f\u064a")
+    assert _is_darija_future_token("\u063a\u0627\u0646\u0628\u062f\u0627")
+    assert not _is_darija_future_token("\u063a\u0627")
+    assert not _is_darija_future_token("\u063a\u0627\u0644\u0628\u0627")
+    assert not _is_darija_future_token("\u063a\u0627\u0644\u064a\u0629")
+    assert not _is_darija_future_token("\u063a\u0627\u064a\u0629")
+
+
+def test_initial_ma_is_not_forced_to_msa() -> None:
+    text = "\u0645\u0627 \u0639\u0646\u062f\u064a \u0648\u0642\u062a \u0628\u0632\u0627\u0641"
+
+    assert not _has_high_precision_msa_rule(text, "ar")
+
+
 def test_artifact_metadata_documents_dataset_provenance() -> None:
     artifact = load_artifact(Path(ARTIFACT_PATH))
     metadata = artifact["metadata"]
 
     assert metadata["model_parameters"]["analyzer"] == "char_wb"
     assert "model_type" in metadata
+    assert metadata["selection_dataset"] == (
+        "validation only: DODa Arabic validation + Darija-LID validation"
+    )
+    assert metadata["strict_source_disjoint"] is False
+    assert metadata["train_holdout_exact_overlap"] == 0
+    assert metadata["train_holdout_normalized_overlap"] == 0
+
+
+def test_metrics_separate_classifier_and_pipeline_results() -> None:
+    metrics = json.loads(METRICS_PATH.read_text(encoding="utf-8"))
+
+    assert "classifier_metrics" in metrics
+    assert "pipeline_metrics" in metrics
+    assert "validation_comparison" in metrics
+    assert metrics["metadata"]["selection_used_test_data"] is False

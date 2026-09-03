@@ -210,7 +210,7 @@ def split_records(
         "train": [],
         "validation": [],
         "test": [],
-        "source_disjoint": list(test_source_records),
+        "upstream_test_holdout": list(test_source_records),
     }
     for records in by_label.values():
         validation_end = int(len(records) * 0.15)
@@ -221,6 +221,30 @@ def split_records(
     for records in splits.values():
         rng.shuffle(records)
     return splits
+
+
+def deduplicate_splits(
+    splits: dict[str, list[dict[str, object]]],
+) -> tuple[dict[str, list[dict[str, object]]], dict[str, int]]:
+    seen_exact: set[str] = set()
+    seen_normalized: set[str] = set()
+    removed: dict[str, int] = {}
+    deduplicated: dict[str, list[dict[str, object]]] = {}
+    for split_name in ("train", "validation", "test", "upstream_test_holdout"):
+        kept: list[dict[str, object]] = []
+        dropped = 0
+        for record in splits[split_name]:
+            exact = str(record["text"])
+            normalized = str(record["normalized_text"])
+            if exact in seen_exact or normalized in seen_normalized:
+                dropped += 1
+                continue
+            seen_exact.add(exact)
+            seen_normalized.add(normalized)
+            kept.append(record)
+        deduplicated[split_name] = kept
+        removed[split_name] = dropped
+    return deduplicated, removed
 
 
 def overlap(left: list[dict[str, object]], right: list[dict[str, object]]) -> tuple[int, int]:
@@ -301,6 +325,7 @@ def main() -> int:
     selected_train_candidates = balanced_sample(train_candidates, args.per_label_limit, SEED)
     selected_test_candidates = balanced_sample(test_candidates, args.per_label_limit // 4, SEED + 1)
     splits = split_records(selected_train_candidates, selected_test_candidates, SEED)
+    splits, removed_by_global_deduplication = deduplicate_splits(splits)
 
     train_test_exact, train_test_normalized = overlap(splits["train"], splits["test"])
     validation_test_exact, validation_test_normalized = overlap(
@@ -329,12 +354,13 @@ def main() -> int:
         "train_size": len(splits["train"]),
         "validation_size": len(splits["validation"]),
         "test_size": len(splits["test"]),
-        "source_disjoint_size": len(splits["source_disjoint"]),
+        "upstream_test_holdout_size": len(splits["upstream_test_holdout"]),
+        "removed_by_global_deduplication": removed_by_global_deduplication,
         "train_sources": sorted({str(record["source"]) for record in splits["train"]}),
         "validation_sources": sorted({str(record["source"]) for record in splits["validation"]}),
         "test_sources": sorted({str(record["source"]) for record in splits["test"]}),
-        "source_disjoint_sources": sorted(
-            {str(record["source"]) for record in splits["source_disjoint"]}
+        "upstream_test_holdout_sources": sorted(
+            {str(record["source"]) for record in splits["upstream_test_holdout"]}
         ),
         "train_test_exact_overlap": train_test_exact,
         "train_test_normalized_overlap": train_test_normalized,
@@ -344,7 +370,7 @@ def main() -> int:
             splits["train"],
             args.doda_dir if args.doda_dir.is_absolute() else PROJECT_ROOT / args.doda_dir,
         ),
-        "source_disjoint_note": (
+        "upstream_test_holdout_note": (
             "Darija-LID train/test splits are used as the hardest held-out diagnostic boundary. "
             "This is not a strict upstream-source-disjoint split: within the selected ary/MSA "
             "phase, each class is dominated by one upstream source, so a stricter by-source "

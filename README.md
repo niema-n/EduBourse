@@ -95,6 +95,34 @@ npm install
 npm run build
 ```
 
+## Multilingual Language Detector
+
+The local language detector is intentionally offline at inference time. It uses a
+character TF-IDF plus Logistic Regression artifact stored in
+`backend/app/multilingual/artifacts/language_detector.joblib`.
+
+Arabic-script detection is calibrated on validation data only:
+
+- selection datasets: DODa Arabic validation and Darija-LID validation
+- selected values recorded in artifact metadata:
+  `selected_doda_weight` and `selected_arabic_threshold`
+- model selection never uses test, upstream holdout, challenge, audit, or external
+  datasets
+
+Darija-LID test-derived records are reported as `upstream_test_holdout`. This is
+not a strict upstream-source-disjoint split, because the selected MSA/Darija
+phase is dominated by one upstream source per class. Global exact and normalized
+text deduplication is applied across train, validation, test, and
+`upstream_test_holdout`; train/holdout overlaps must remain zero.
+
+`language_detector_metrics.json` separates `classifier_metrics` from
+`pipeline_metrics`. The external Moroccan-Codeswitching evaluator remains a
+diagnostic-only check and defaults to the full dataset:
+
+```bash
+python scripts/evaluate_external_moroccan_codeswitching.py --limit all
+```
+
 ## Environment Variables
 
 Copy `.env.example` to `.env` for local customization. Keep real secrets out of Git.

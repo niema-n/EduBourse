@@ -35,7 +35,7 @@ def grouped_sentences(tsv_text: str) -> list[tuple[str, list[tuple[str, str]]]]:
     return list(rows_by_sentence.items())
 
 
-def candidate_subsets(tsv_text: str, limit: int) -> dict[str, list[str]]:
+def candidate_subsets(tsv_text: str, limit: int | None) -> dict[str, list[str]]:
     subsets: dict[str, list[str]] = {
         "RAW": [],
         "CLEAR_DARIJA": [],
@@ -57,8 +57,10 @@ def candidate_subsets(tsv_text: str, limit: int) -> dict[str, list[str]]:
             subsets["CLEAR_DARIJA"].append(text)
         if lang2_tokens >= 1 and lang1_tokens == 0:
             subsets["PURE_DARIJA_WITHOUT_MSA"].append(text)
-        if all(len(texts) >= limit for texts in subsets.values()):
+        if limit is not None and all(len(texts) >= limit for texts in subsets.values()):
             break
+    if limit is None:
+        return subsets
     return {name: texts[:limit] for name, texts in subsets.items()}
 
 
@@ -73,13 +75,18 @@ def evaluate_subset(texts: list[str]) -> tuple[int, int, float]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Evaluate external Moroccan code-switching data.")
-    parser.add_argument("--limit", type=int, default=100)
+    parser.add_argument(
+        "--limit",
+        default="all",
+        help="Maximum examples per subset, or 'all' for the full reconstructed test set.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    subsets = candidate_subsets(fetch_tsv(SOURCE_URL), args.limit)
+    limit = None if args.limit == "all" else int(args.limit)
+    subsets = candidate_subsets(fetch_tsv(SOURCE_URL), limit)
     print("EXTERNAL MOROCCAN CODESWITCHING EVALUATION")
     print(f"Source: {SOURCE_URL}")
     print("Expected label: ary-arabic")

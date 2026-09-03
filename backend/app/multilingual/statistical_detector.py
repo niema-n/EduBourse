@@ -53,6 +53,26 @@ def _predict_with_model(model: Any, text: str) -> StatisticalPrediction:
     )
 
 
+def _predict_arabic_with_threshold(
+    model: Any,
+    text: str,
+    threshold: float,
+) -> StatisticalPrediction:
+    labels = list(model.classes_)
+    probabilities = model.predict_proba([text])[0]
+    probability_by_label = {
+        label: float(probabilities[index])
+        for index, label in enumerate(labels)
+    }
+    ary_probability = probability_by_label["ary-arabic"]
+    language: LanguageCode = "ary-arabic" if ary_probability >= threshold else "ar"
+    return StatisticalPrediction(
+        language=language,
+        confidence=round(probability_by_label[language], 2),
+        source="classifier",
+    )
+
+
 def predict_latin(text: str) -> StatisticalPrediction:
     artifact = load_artifact()
     return _predict_with_model(artifact["latin_model"], text)
@@ -60,4 +80,7 @@ def predict_latin(text: str) -> StatisticalPrediction:
 
 def predict_arabic(text: str) -> StatisticalPrediction:
     artifact = load_artifact()
-    return _predict_with_model(artifact["arabic_model"], text)
+    threshold = artifact["metadata"].get("selected_arabic_threshold", 0.5)
+    if not isinstance(threshold, int | float) or not 0.0 <= threshold <= 1.0:
+        raise StatisticalDetectorUnavailable("language detector artifact has invalid threshold")
+    return _predict_arabic_with_threshold(artifact["arabic_model"], text, float(threshold))
