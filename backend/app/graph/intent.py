@@ -83,30 +83,41 @@ def high_precision_security_rule(text: str) -> bool:
     return any(re.search(pattern, normalized) for pattern in direct)
 
 
+def has_actionable_context(text: str) -> bool:
+    """Identify personal/direct action context without deciding the label alone."""
+    normalized = normalize_text(text)
+    action = (
+        r"\b(?:buy|acheter|vendre|sell|invest|investir|allocate|allouer|"
+        r"choose|choisir|should|dois|recommande|best|meilleur|اشتر|نبيع|"
+        r"نشري|استثمر|قسم)\b"
+    )
+    asset = (
+        r"\b(?:stock|stocks|action|actions|bond|bonds|titre|titres|portfolio|"
+        r"portefeuille|saham|سهم|السهم|الاسهم)\b"
+    )
+    personal = r"\b(?:my|me|for me|moi|mon|ma|mes|personnel|flousi|lia|لي|ليا|اموالي)\b"
+    return (
+        bool(re.search(action, normalized))
+        and bool(re.search(asset, normalized))
+        and bool(re.search(personal, normalized) or re.search(r"\d", normalized))
+    )
+
+
 def security_decision(text: str) -> tuple[bool, float, dict[str, float], str]:
     if high_precision_security_rule(text):
         return True, 1.0, {"safe": 0.0, "sensitive_personalized_financial_advice": 1.0}, "rule"
     normalized = normalize_text(text)
-    if (
-        any(
-            marker in normalized
-            for marker in ("\u0633\u0647\u0645", "\u0627\u0644\u0633\u0647\u0645")
-        )
-        and any(
-            marker in normalized
-            for marker in ("\u0627\u0634\u062a\u0631", "\u0627\u0634\u062a\u0631\u064a")
-        )
+    if any(
+        marker in normalized for marker in ("\u0633\u0647\u0645", "\u0627\u0644\u0633\u0647\u0645")
+    ) and any(
+        marker in normalized
+        for marker in ("\u0627\u0634\u062a\u0631", "\u0627\u0634\u062a\u0631\u064a")
     ):
         return True, 1.0, {"safe": 0.0, "sensitive_personalized_financial_advice": 1.0}, "rule"
-    if re.search(r"\b(?:what is|explain|definition of|how does|difference between)\b", normalized):
-        return (
-            False,
-            1.0,
-            {"safe": 1.0, "sensitive_personalized_financial_advice": 0.0},
-            "educational_rule",
-        )
     label, confidence, scores = security_model.predict(text)
     threshold = float(security_model.load()["metadata"]["threshold"])
+    if label == "sensitive_personalized_financial_advice" and not has_actionable_context(text):
+        return False, confidence, scores, "model_safe_context"
     return (
         label == "sensitive_personalized_financial_advice" and confidence >= threshold,
         confidence,

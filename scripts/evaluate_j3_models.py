@@ -11,8 +11,8 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parents[1] / "backend"))
-from prepare_j3_intent_dataset import build_rows
-from train_j3_models import deduplicate, split
+from prepare_j3_intent_dataset import load_rows, split_rows
+from train_j3_models import deduplicate
 
 
 def evaluate(
@@ -27,7 +27,7 @@ def evaluate(
         if (row["label"] in {"safe", "sensitive_personalized_financial_advice"})
         == security
     ]
-    _, validation = split(deduplicate(rows))
+    _, validation, _ = split_rows(deduplicate(rows))
     probabilities = model.predict_proba([row["text"] for row in validation])
     classes = list(model.classes_)
     if security:
@@ -71,7 +71,7 @@ def evaluate(
 
 
 def main() -> None:
-    rows = build_rows()
+    rows = load_rows(Path("data/j3/contract_examples.jsonl"))
     print(
         json.dumps(
             {

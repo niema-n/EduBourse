@@ -16,7 +16,7 @@ from sklearn.pipeline import FeatureUnion, Pipeline
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parents[1] / "backend"))
 from app.graph.intent import normalize_text
-from prepare_j3_intent_dataset import build_rows
+from prepare_j3_intent_dataset import load_rows, split_rows
 
 SEED = 42
 
@@ -136,7 +136,7 @@ def train(kind: str, rows: list[dict[str, str]], output: Path) -> dict[str, obje
         == security
     ]
     rows = deduplicate(rows)
-    train_rows, validation_rows = split(rows)
+    train_rows, validation_rows, test_rows = split_rows(rows)
     fitted = model().fit(
         [row["text"] for row in train_rows], [row["label"] for row in train_rows]
     )
@@ -145,12 +145,13 @@ def train(kind: str, rows: list[dict[str, str]], output: Path) -> dict[str, obje
         "model_family": "FeatureUnion(char_wb_2_5+word_1_2)+LogisticRegression",
         "classes": list(fitted.named_steps["classifier"].classes_),
         "threshold": threshold,
-        "training_dataset_version": "j3-contract-v1",
+        "training_dataset_version": "j3-contract-v2-natural",
         "language_coverage": ["fr", "en", "ar", "ary-latin", "ary-arabic"],
         "source": "internal project contract dataset",
         "random_seed": SEED,
         "train_size": len(train_rows),
         "validation_size": len(validation_rows),
+        "internal_test_size": len(test_rows),
         "train_validation_exact_overlap": 0,
         "train_validation_normalized_overlap": 0,
         "semantic_group_leakage": 0,
@@ -169,17 +170,7 @@ def main() -> None:
         "--artifact-dir", type=Path, default=Path("backend/app/graph/artifacts")
     )
     args = parser.parse_args()
-    if not args.dataset.exists():
-        args.dataset.parent.mkdir(parents=True, exist_ok=True)
-        args.dataset.write_text(
-            "\n".join(json.dumps(row, ensure_ascii=False) for row in build_rows())
-            + "\n",
-            encoding="utf-8",
-        )
-    rows = [
-        json.loads(line)
-        for line in args.dataset.read_text(encoding="utf-8").splitlines()
-    ]
+    rows = load_rows(args.dataset)
     print(
         json.dumps(
             {

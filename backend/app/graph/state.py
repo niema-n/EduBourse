@@ -4,6 +4,8 @@ from datetime import UTC, datetime
 from typing import Any, Literal, TypedDict
 from uuid import uuid4
 
+from app.graph.language_adapter import normalize_business_language
+
 Route = Literal[
     "pedagogie",
     "formation_elearning",
@@ -112,8 +114,12 @@ def create_turn_input(
         "assessment_required": False,
     }
     if language is not None:
-        state["language"] = language
-    if script is not None:
+        # J2 supplies script-specific Darija labels; their mapped script wins.
+        mapped_script = script if language == "ary" else None
+        business_language, business_script = normalize_business_language(language, mapped_script)
+        state["language"] = business_language
+        state["script"] = business_script
+    elif script is not None:
         state["script"] = script
     if thread_id is not None:
         state["thread_id"] = thread_id
