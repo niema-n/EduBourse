@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import UTC, datetime, timedelta
 
 import pytest
+
 from app.graph.catalog import FixtureTrainingCatalog
 from app.graph.core import SUPPORTED_ROUTES, build_graph
 from app.graph.state import create_initial_state, is_assessment_recent
@@ -71,7 +72,7 @@ def test_formation_without_assessment_requests_one():
     result = invoke("Je cherche une formation")
     assert result["selected_route"] == "formation_elearning"
     assert result["assessment_required"] is True
-    assert result["assessment_completed"] is False
+    assert result.get("assessment_completed", False) is False
 
 
 def test_assessment_scoring_and_levels():

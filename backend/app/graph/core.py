@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from collections.abc import Callable
 from typing import Any
 
@@ -20,7 +19,8 @@ from app.graph.agents import (
     support_ecole_agent,
 )
 from app.graph.catalog import TrainingCatalog
-from app.graph.state import GraphState, Route
+from app.graph.routing import is_in_domain, is_sensitive_request, route_request
+from app.graph.state import GraphState, Route, safe_thread_id
 
 SUPPORTED_ROUTES: tuple[Route, ...] = (
     "pedagogie",
@@ -35,102 +35,29 @@ SUPPORTED_ROUTES: tuple[Route, ...] = (
     "fallback",
 )
 
-SECURITY_PATTERNS = (
-    r"\b(quelle action|quel titre).*(acheter|prendre)",
-    r"\b(dois[- ]je|je dois).*(acheter|vendre)",
-    r"\b(investis|investir|place).*(\d+|mon argent|mon portefeuille)",
-    r"\b(what should i buy|should i sell|where should i invest)",
-    r"\b(quelle valeur|quel titre).*(monter|baisser|demain|hausser)",
-    r"\b(شنو|ماذا).*(نشري|نبيع|نستثمر)",
-)
 
-
-def security_domain_node(state: GraphState) -> GraphState:
-    text = state.get("user_input", "").lower()
-    if any(re.search(pattern, text) for pattern in SECURITY_PATTERNS):
+def security_guard_node(state: GraphState) -> GraphState:
+    text = state.get("user_input", "")
+    if is_sensitive_request(text, state.get("language", "unknown")):
         return {
-            "domain_status": "in_domain",
-            "security_status": "blocked",
+            "security_status": "sensitive",
             "risk_level": "high",
             "selected_route": "securite",
             "status": "secured",
         }
-    in_domain = any(
-        token in text
-        for token in (
-            "bourse",
-            "casablanca",
-            "action",
-            "obligation",
-            "marché",
-            "marche",
-            "investissement",
-            "formation",
-            "cisi",
-            "quiz",
-            "championnat",
-            "ebourse",
-            "e-bourse",
-            "école",
-            "ecole",
-            "stock",
-            "bond",
-            "investment",
-            "support",
-            "connexion",
-            "login",
-            "mot de passe",
-            "inscription",
-            "password",
-        )
-    )
+    return {"security_status": "clear", "risk_level": "none", "status": "secured"}
+
+
+def router_node(state: GraphState) -> GraphState:
+    text = state.get("user_input", "")
     return {
-        "domain_status": "in_domain" if in_domain else "out_of_domain",
-        "security_status": "clear",
-        "risk_level": "low" if in_domain else "none",
-        "status": "secured",
+        "domain_status": "in_domain" if is_in_domain(text) else "out_of_domain",
+        "selected_route": route_request(text),
     }
 
 
-def route_request(state: GraphState) -> GraphState:
-    text = state.get("user_input", "").lower()
-    if state.get("domain_status") != "in_domain":
-        route: Route = "out_of_domain"
-    elif any(
-        word in text
-        for word in (
-            "support",
-            "connexion",
-            "login",
-            "mot de passe",
-            "inscription",
-            "account",
-            "password",
-        )
-    ):
-        route = "support_ecole"
-    elif re.search(r"\bformation\b|e-learning|elearning", text):
-        route = "formation_elearning"
-    elif "cisi" in text or "certification" in text or "compliance" in text:
-        route = "cisi"
-    elif "quiz" in text or "questionnaire" in text:
-        route = "quiz"
-    elif "championnat" in text or "e-bourse" in text or "ebourse" in text:
-        route = "championnat"
-    elif "orientation" in text or "parcours" in text:
-        route = "orientation"
-    elif any(
-        word in text
-        for word in ("action", "obligation", "indice", "ordre", "marché", "marche", "bourse")
-    ):
-        route = "pedagogie"
-    else:
-        route = "fallback"
-    return {"selected_route": route}
-
-
 def route_after_security(state: GraphState) -> str:
-    return "securite" if state.get("security_status") == "blocked" else "router"
+    return "securite" if state.get("security_status") == "sensitive" else "router"
 
 
 def route_to_agent(state: GraphState) -> str:
@@ -139,10 +66,10 @@ def route_to_agent(state: GraphState) -> str:
 
 
 def route_after_formation(state: GraphState) -> str:
-    text = state.get("user_input", "").lower()
+    text = state.get("user_input", "").casefold()
     return (
         "cisi"
-        if "cisi" in text or "certification" in text or "compliance" in text
+        if any(keyword in text for keyword in ("cisi", "certification", "compliance"))
         else "output_guard"
     )
 
@@ -164,6 +91,23 @@ def output_guard(state: GraphState) -> GraphState:
             ),
             "status": "error",
             "error": "agent_failure_handled",
+        }
+    if state.get("security_status") == "sensitive" and route != "securite":
+        return {
+            "selected_route": "securite",
+            "security_status": "sensitive",
+            "business_answer": (
+                "Je ne peux pas fournir une recommandation financière personnalisée."
+            ),
+            "status": "completed",
+            "error": None,
+        }
+    if not state.get("business_answer", "").strip():
+        return {
+            "selected_route": "fallback",
+            "business_answer": "Une réponse contrôlée n'est pas disponible pour cette demande.",
+            "status": "completed",
+            "error": None,
         }
     return {"status": "completed", "error": None}
 
@@ -188,8 +132,8 @@ def build_graph(
     *, checkpointer: Any | None = None, training_catalog: TrainingCatalog | None = None
 ):
     graph = StateGraph(GraphState)
-    graph.add_node("security_domain", safe_node(security_domain_node))
-    graph.add_node("router", safe_node(route_request))
+    graph.add_node("security_guard", safe_node(security_guard_node))
+    graph.add_node("router", safe_node(router_node))
     graph.add_node("pedagogie", safe_node(pedagogie_agent))
     graph.add_node(
         "formation_elearning", safe_node(lambda state: formation_agent(state, training_catalog))
@@ -203,15 +147,17 @@ def build_graph(
     graph.add_node("out_of_domain", safe_node(out_of_domain_agent))
     graph.add_node("fallback", safe_node(fallback_agent))
     graph.add_node("output_guard", safe_node(output_guard))
-    graph.add_edge(START, "security_domain")
+    graph.add_edge(START, "security_guard")
     graph.add_conditional_edges(
-        "security_domain", route_after_security, {"securite": "securite", "router": "router"}
+        "security_guard", route_after_security, {"securite": "securite", "router": "router"}
     )
     graph.add_conditional_edges(
-        "router", route_to_agent, {route: route for route in SUPPORTED_ROUTES}
+        "router",
+        route_to_agent,
+        {route: route for route in SUPPORTED_ROUTES if route != "securite"},
     )
     for route in SUPPORTED_ROUTES:
-        if route not in {"formation_elearning"}:
+        if route != "formation_elearning":
             graph.add_edge(route, "output_guard")
     graph.add_conditional_edges(
         "formation_elearning",
@@ -220,3 +166,18 @@ def build_graph(
     )
     graph.add_edge("output_guard", END)
     return graph.compile(checkpointer=checkpointer or MemorySaver())
+
+
+def invoke_graph(graph: Any, state: GraphState, *, thread_id: str | None = None) -> GraphState:
+    """Application boundary that never exposes LangGraph's missing-thread error."""
+    selected_thread = safe_thread_id(thread_id or state.get("thread_id"))
+    try:
+        return graph.invoke(state, config={"configurable": {"thread_id": selected_thread}})
+    except ValueError:
+        return {
+            **state,
+            "selected_route": "fallback",
+            "status": "error",
+            "error": "invalid_graph_invocation",
+            "business_answer": "La demande ne peut pas être traitée dans cette session.",
+        }

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any, Literal, TypedDict
+from uuid import uuid4
 
 Route = Literal[
     "pedagogie",
@@ -72,8 +73,28 @@ def create_initial_state(
     session_id: str | None = None,
     metadata: dict[str, Any] | None = None,
 ) -> GraphState:
-    """Create state while preserving J2 metadata supplied by the caller."""
-    return {
+    """Backward-compatible first-turn helper; persistent fields are not reset."""
+    return create_turn_input(
+        user_input,
+        language=language,
+        script=script,
+        thread_id=thread_id,
+        session_id=session_id,
+        metadata=metadata,
+    )
+
+
+def create_turn_input(
+    user_input: str,
+    *,
+    language: str | None = None,
+    script: str | None = None,
+    thread_id: str | None = None,
+    session_id: str | None = None,
+    metadata: dict[str, Any] | None = None,
+) -> GraphState:
+    """Create only per-turn fields so checkpointed session data survives."""
+    state: GraphState = {
         "user_input": user_input,
         "language": language or "unknown",
         "script": script or "unknown",
@@ -84,18 +105,15 @@ def create_initial_state(
         "business_answer": "",
         "error": None,
         "status": "initialized",
-        "thread_id": thread_id or "local",
-        "session_id": session_id or thread_id or "local",
-        "assessment_completed": False,
         "assessment_required": False,
-        "assessment_topics": [],
-        "assessment_weak_topics": [],
-        "learner_profile": {},
-        "training_candidates": [],
-        "recommended_training": None,
-        "cisi_delegated": False,
-        "metadata": metadata or {},
     }
+    if thread_id is not None:
+        state["thread_id"] = thread_id
+    if session_id is not None:
+        state["session_id"] = session_id
+    if metadata is not None:
+        state["metadata"] = metadata
+    return state
 
 
 def is_assessment_recent(state: GraphState, *, now: datetime | None = None) -> bool:
@@ -104,8 +122,17 @@ def is_assessment_recent(state: GraphState, *, now: datetime | None = None) -> b
         return False
     try:
         timestamp = datetime.fromisoformat(state["assessment_timestamp"])
-    except ValueError:
+    except (TypeError, ValueError):
         return False
-    current = now or datetime.now(timestamp.tzinfo)
-    age_seconds = (current - timestamp).total_seconds()
+    if timestamp.tzinfo is None or timestamp.utcoffset() is None:
+        return False
+    current = now or datetime.now(UTC)
+    try:
+        age_seconds = (current - timestamp).total_seconds()
+    except (TypeError, ValueError):
+        return False
     return 0 <= age_seconds <= 30 * 24 * 60 * 60
+
+
+def safe_thread_id(thread_id: str | None) -> str:
+    return thread_id or f"stateless-{uuid4()}"

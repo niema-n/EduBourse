@@ -22,6 +22,7 @@ def formation_agent(state: GraphState, catalog: TrainingCatalog | None = None) -
 def cisi_agent(state: GraphState) -> GraphState:
     return {
         "selected_route": "cisi",
+        "cisi_delegated": state.get("selected_route") == "formation_elearning",
         "business_answer": (
             "Les informations détaillées sur les certifications CISI nécessitent "
             "un catalogue officiel; cette intégration sera ajoutée derrière un port dédié."
@@ -33,15 +34,20 @@ def cisi_agent(state: GraphState) -> GraphState:
 def quiz_agent(state: GraphState) -> GraphState:
     answers = list(state.get("assessment_answers", []))
     if answers:
-        from app.graph.workflows import assessment_node
+        from app.graph.workflows import assessment_node, learner_profile_node
 
-        return assessment_node(state) | {
-            "business_answer": (
-                "Le quiz éducatif a alimenté l'état d'évaluation; ce résultat n'est "
-                "pas une certification officielle."
-            ),
-            "status": "completed",
-        }
+        assessed = assessment_node(state)
+        return (
+            assessed
+            | learner_profile_node(state | assessed)
+            | {
+                "business_answer": (
+                    "Le quiz éducatif a alimenté l'état d'évaluation; ce résultat n'est "
+                    "pas une certification officielle."
+                ),
+                "status": "completed",
+            }
+        )
     return {
         "business_answer": (
             "Un quiz éducatif court peut être lancé sur les notions de marché, risque "

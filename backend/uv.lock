@@ -322,7 +322,7 @@ requires-dist = [
     { name = "chromadb-client", specifier = "==0.5.23" },
     { name = "fastapi", specifier = ">=0.115.6" },
     { name = "httpx", marker = "extra == 'dev'", specifier = ">=0.28.1" },
-    { name = "langgraph", specifier = ">=0.2.0,<1.0.0" },
+    { name = "langgraph", specifier = ">=0.6.11,<0.7.0" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2.3" },
     { name = "pydantic-settings", specifier = ">=2.7.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.4" },

@@ -39,12 +39,24 @@ ASSESSMENT_QUESTIONS = [
 ]
 
 # Provisional educational defaults, subject to later pedagogical validation.
-LEVEL_THRESHOLDS = {"debutant": (0.0, 0.49), "intermediaire": (0.5, 0.79), "avance": (0.8, 1.0)}
+LEVEL_THRESHOLDS = {"debutant": (0.0, 0.40), "intermediaire": (0.40, 0.75), "avance": (0.75, 1.0)}
+
+
+def level_for_score(score: float) -> str:
+    if not 0.0 <= score <= 1.0:
+        raise ValueError("assessment score must be between 0 and 1")
+    if score < 0.40:
+        return "debutant"
+    if score < 0.75:
+        return "intermediaire"
+    return "avance"
 
 
 def score_assessment(answers: list[bool]) -> tuple[float, str, list[str], list[str]]:
+    if len(answers) > len(ASSESSMENT_QUESTIONS):
+        raise ValueError("assessment has too many answers")
     score = sum(answers) / len(answers) if answers else 0.0
-    level = next(level for level, (low, high) in LEVEL_THRESHOLDS.items() if low <= score <= high)
+    level = level_for_score(score)
     understood = [
         question["topic"]
         for question, answer in zip(ASSESSMENT_QUESTIONS, answers, strict=True)
@@ -95,9 +107,12 @@ def formation_workflow(state: GraphState, catalog: TrainingCatalog | None = None
         next_state = {"assessment_required": True}
         if not state.get("assessment_answers"):
             return next_state | {
+                "training_candidates": [],
+                "recommended_training": None,
                 "business_answer": (
-                    "Une courte évaluation est nécessaire avant de proposer un parcours."
-                )
+                    "Une courte évaluation est nécessaire avant de proposer un parcours; "
+                    "le catalogue officiel n'est pas encore connecté."
+                ),
             }
         next_state |= assessment_node(state)
     profile_state = state | next_state
@@ -107,8 +122,14 @@ def formation_workflow(state: GraphState, catalog: TrainingCatalog | None = None
     candidates, recommendation = match_training(
         profile_state["learner_profile"], catalog.search(profile_state["learner_profile"])
     )
+    answer = (
+        "Votre profil pédagogique est disponible, mais le catalogue officiel de formations "
+        "n'est pas encore connecté; aucune formation précise ne peut être recommandée."
+        if not candidates
+        else "Votre profil pédagogique a été réutilisé pour orienter le parcours."
+    )
     return profile_state | {
         "training_candidates": candidates,
         "recommended_training": recommendation,
-        "business_answer": "Votre profil pédagogique a été réutilisé pour orienter le parcours.",
+        "business_answer": answer,
     }
