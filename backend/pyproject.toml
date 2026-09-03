@@ -7,6 +7,7 @@ dependencies = [
     "alembic>=1.14.0",
     "chromadb-client==0.5.23",
     "fastapi>=0.115.6",
+    "langgraph>=0.2.0,<1.0.0",
     "psycopg[binary]>=3.2.3",
     "pydantic-settings>=2.7.0",
     "scikit-learn>=1.5.0,<2.0.0",
