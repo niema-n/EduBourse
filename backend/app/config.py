@@ -9,9 +9,9 @@ LOCAL_PLACEHOLDER_PASSWORDS = {"change_me_for_local_only", "postgres", "password
 
 
 class Settings(BaseSettings):
-    app_name: str = Field(default="Financial Education Assistant", alias="APP_NAME")
+    app_name: str = Field(default="EduBourse AI API", alias="APP_NAME")
     app_env: AppEnvironment = Field(default="local", alias="APP_ENV")
-    app_version: str = Field(default="0.1.0", alias="APP_VERSION")
+    app_version: str = Field(default="1.0.0", alias="APP_VERSION")
 
     backend_host: str = Field(default="0.0.0.0", alias="BACKEND_HOST")
     backend_port: int = Field(default=8000, alias="BACKEND_PORT")

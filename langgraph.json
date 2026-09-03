@@ -1,0 +1,7 @@
+{
+    "dependencies": ["./backend"],
+    "graphs": {
+        "financial_assistant": "./backend/app/graph/langgraph_entrypoint.py:financial_assistant"
+    },
+    "env": ".env"
+}

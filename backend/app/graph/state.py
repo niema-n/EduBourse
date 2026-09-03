@@ -40,6 +40,8 @@ class TrainingRecord(TypedDict, total=False):
 
 class GraphState(TypedDict, total=False):
     user_input: str
+    raw_user_message: str
+    normalized_message: str
     language: str
     script: str
     domain_status: str
@@ -51,6 +53,8 @@ class GraphState(TypedDict, total=False):
     risk_level: str
     selected_route: Route
     business_answer: str
+    raw_agent_answer: str
+    localized_answer: str
     error: str | None
     status: str
     route_confidence: float
@@ -104,11 +108,14 @@ def create_turn_input(
     """Create only per-turn fields so checkpointed session data survives."""
     state: GraphState = {
         "user_input": user_input,
+        "raw_user_message": user_input,
         "domain_status": "unchecked",
         "security_status": "unchecked",
         "risk_level": "none",
         "selected_route": "fallback",
         "business_answer": "",
+        "raw_agent_answer": "",
+        "localized_answer": "",
         "error": None,
         "status": "initialized",
         "assessment_required": False,

@@ -34,6 +34,7 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
         latency_ms = round((time.perf_counter() - start_time) * 1000, 2)
 
         response.headers["x-request-id"] = request_id
+        response.headers["x-content-type-options"] = "nosniff"
         logging.getLogger("app.http").info(
             json.dumps(
                 {

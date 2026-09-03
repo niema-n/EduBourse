@@ -5,10 +5,15 @@ from app.database.postgres import check_postgres
 from app.providers.chroma import check_chroma
 from app.schemas.health import ComponentHealth, HealthResponse, LiveResponse, VectorStoreHealth
 
-router = APIRouter(tags=["health"])
+router = APIRouter(tags=["System"])
 
 
-@router.get("/health/live", response_model=LiveResponse)
+@router.get(
+    "/health/live",
+    response_model=LiveResponse,
+    summary="Check application liveness",
+    operation_id="live_health",
+)
 def live() -> LiveResponse:
     settings = get_settings()
     return LiveResponse(
@@ -18,7 +23,12 @@ def live() -> LiveResponse:
     )
 
 
-@router.get("/health", response_model=HealthResponse)
+@router.get(
+    "/health",
+    response_model=HealthResponse,
+    summary="Check application dependencies",
+    operation_id="health_check",
+)
 def health() -> HealthResponse:
     settings = get_settings()
     postgres_status = check_postgres()
@@ -46,3 +56,24 @@ def health() -> HealthResponse:
             document_count=chroma_status.document_count,
         ),
     )
+
+
+legacy_router = APIRouter(tags=["System"])
+legacy_router.add_api_route(
+    "/health/live",
+    live,
+    methods=["GET"],
+    response_model=LiveResponse,
+    summary="Check application liveness (legacy)",
+    operation_id="live_health_legacy",
+    deprecated=True,
+)
+legacy_router.add_api_route(
+    "/health",
+    health,
+    methods=["GET"],
+    response_model=HealthResponse,
+    summary="Check application dependencies (legacy)",
+    operation_id="health_check_legacy",
+    deprecated=True,
+)

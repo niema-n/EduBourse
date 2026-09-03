@@ -20,6 +20,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "httpx>=0.28.1",
+    "langgraph-cli[inmem]>=0.4.31",
     "pytest>=8.3.4",
     "ruff>=0.8.4",
 ]

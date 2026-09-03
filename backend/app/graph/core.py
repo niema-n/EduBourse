@@ -27,6 +27,7 @@ from app.graph.intent import (
 )
 from app.graph.routing import is_in_domain, route_request
 from app.graph.state import GraphState, Route, safe_thread_id
+from app.graph.supervisor import SupervisorRequest, parse_route_decision
 
 SUPPORTED_ROUTES: tuple[Route, ...] = (
     "pedagogie",
@@ -75,8 +76,31 @@ def security_guard_node(state: GraphState) -> GraphState:
     }
 
 
-def router_node(state: GraphState) -> GraphState:
+def router_node(state: GraphState, supervisor_provider: Any | None = None) -> GraphState:
     text = state.get("user_input", "")
+    if supervisor_provider is not None:
+        try:
+            request = SupervisorRequest(
+                user_message=state.get("normalized_message", text),
+                business_language=state.get("language", "fr"),
+                script=state.get("script", "latin"),
+            )
+            decision = parse_route_decision(supervisor_provider.invoke_structured(request))
+            return {
+                "domain_status": decision.domain_status,
+                "selected_route": decision.route,
+                "route_confidence": 1.0,
+                "route_scores": {},
+            }
+        except Exception:
+            return {
+                "domain_status": "unknown",
+                "selected_route": "fallback",
+                "route_confidence": 0.0,
+                "route_scores": {},
+                "error": "supervisor_failure",
+                "status": "error",
+            }
     try:
         route, confidence, scores = route_decision(text)
     except MissingRouterArtifact:
@@ -109,7 +133,7 @@ def route_to_agent(state: GraphState) -> str:
 
 
 def route_after_formation(state: GraphState) -> str:
-    text = state.get("user_input", "").casefold()
+    text = state.get("normalized_message", state.get("user_input", "")).casefold()
     return (
         "cisi"
         if any(keyword in text for keyword in ("cisi", "certification", "compliance"))
@@ -187,11 +211,14 @@ def safe_node(node: Callable[..., dict[str, Any]]) -> Callable[..., dict[str, An
 
 
 def build_graph(
-    *, checkpointer: Any | None = None, training_catalog: TrainingCatalog | None = None
+    *,
+    checkpointer: Any | None = None,
+    training_catalog: TrainingCatalog | None = None,
+    supervisor_provider: Any | None = None,
 ):
     graph = StateGraph(GraphState)
     graph.add_node("security_guard", safe_node(security_guard_node))
-    graph.add_node("router", safe_node(router_node))
+    graph.add_node("router", safe_node(lambda state: router_node(state, supervisor_provider)))
     graph.add_node("pedagogie", safe_node(pedagogie_agent))
     graph.add_node(
         "formation_elearning", safe_node(lambda state: formation_agent(state, training_catalog))
