@@ -5,6 +5,11 @@ from collections import Counter
 from app.multilingual.models import LanguageAnalysis, LanguageCode
 from app.multilingual.normalizer import normalize_text
 from app.multilingual.script_detector import count_scripts, detect_script
+from app.multilingual.statistical_detector import (
+    StatisticalDetectorUnavailable,
+    predict_arabic,
+    predict_latin,
+)
 
 LATIN_TOKEN_RE = re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ0-9']+", re.IGNORECASE)
 ARABIC_TOKEN_RE = re.compile(r"[\u0621-\u064a]+")
@@ -513,18 +518,65 @@ def _use_arabic_branch(script: str, normalized_text: str) -> bool:
     return arabic_count >= max(6, effective_latin_count * 0.75)
 
 
+def _heuristic_detection(normalized_text: str, script: str) -> tuple[LanguageCode, float]:
+    if _use_arabic_branch(script, normalized_text):
+        return _arabic_language(normalized_text)
+    return _latin_language(
+        normalized_text,
+        script,
+        _latin_tokens(normalized_text),
+    )
+
+
+def _classifier_detection(normalized_text: str, script: str) -> tuple[LanguageCode, float]:
+    if _use_arabic_branch(script, normalized_text):
+        prediction = predict_arabic(normalized_text)
+    else:
+        prediction = predict_latin(normalized_text)
+    return prediction.language, prediction.confidence
+
+
+def _has_high_precision_darija_rule(normalized_text: str, language: LanguageCode) -> bool:
+    if language == "ary-latin":
+        tokens = _latin_tokens(normalized_text)
+        return bool(
+            {"chno", "kifach", "wach", "bghit", "bghina", "ghadi"} & set(tokens)
+            or any(token.startswith("gha") and len(token) >= 5 for token in tokens)
+        )
+    if language == "ary-arabic":
+        tokens = _arabic_matching_tokens(_arabic_tokens(normalized_text))
+        token_set = set(tokens)
+        if {"شنو", "كيفاش", "واش", "بغيت", "بغينا", "غادي"} & token_set:
+            return True
+        if any(token.startswith("غا") and len(token) >= 4 for token in tokens):
+            return True
+        return "كلشي" in token_set and any(token.startswith(("كي", "كن")) for token in tokens)
+    return False
+
+
+def _is_ambiguous_input(normalized_text: str) -> bool:
+    tokens = _latin_tokens(normalized_text)
+    if not tokens and not _arabic_tokens(normalized_text):
+        return True
+    return bool(tokens) and all(token in FINANCIAL_TERMS or token.isdigit() for token in tokens)
+
+
 def detect_language(text: str) -> LanguageAnalysis:
     normalized_text = normalize_text(text)
     script = detect_script(normalized_text)
+    heuristic_language, heuristic_confidence = _heuristic_detection(normalized_text, script)
 
-    if _use_arabic_branch(script, normalized_text):
-        language, confidence = _arabic_language(normalized_text)
+    if (
+        _is_ambiguous_input(normalized_text)
+        or heuristic_confidence >= 0.92
+        or _has_high_precision_darija_rule(normalized_text, heuristic_language)
+    ):
+        language, confidence = heuristic_language, heuristic_confidence
     else:
-        language, confidence = _latin_language(
-            normalized_text,
-            script,
-            _latin_tokens(normalized_text),
-        )
+        try:
+            language, confidence = _classifier_detection(normalized_text, script)
+        except StatisticalDetectorUnavailable:
+            language, confidence = heuristic_language, heuristic_confidence
 
     return LanguageAnalysis(
         language=language,

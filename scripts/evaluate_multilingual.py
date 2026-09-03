@@ -24,6 +24,8 @@ THRESHOLD_PROFILES = {
 }
 
 sys.path.insert(0, str(BACKEND_ROOT))
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 
 def load_dataset(path: Path) -> list[dict[str, str]]:
@@ -73,6 +75,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     from app.multilingual.detector import detect_language
+    from sklearn.metrics import classification_report, confusion_matrix, f1_score
 
     args = parse_args()
     dataset_path = args.dataset
@@ -121,6 +124,36 @@ def main() -> int:
             print(f"{expected} -> {detected}: {count}")
     else:
         print("none")
+
+    expected_labels = [row["expected_language"] for row in rows]
+    predicted_labels = [detect_language(row["text"]).language for row in rows]
+    report = classification_report(
+        expected_labels,
+        predicted_labels,
+        labels=LANGUAGES,
+        output_dict=True,
+        zero_division=0,
+    )
+    matrix = confusion_matrix(expected_labels, predicted_labels, labels=LANGUAGES)
+
+    print()
+    print("Precision/recall/F1 per language:")
+    for language in LANGUAGES:
+        metrics = report[language]
+        print(
+            f"{language}: "
+            f"precision={metrics['precision']:.4f} "
+            f"recall={metrics['recall']:.4f} "
+            f"f1={metrics['f1-score']:.4f}"
+        )
+    macro_f1 = f1_score(expected_labels, predicted_labels, labels=LANGUAGES, average="macro")
+    print(f"Macro F1: {macro_f1:.4f}")
+    print()
+    print("Confusion matrix labels:")
+    print(",".join(LANGUAGES))
+    print("Confusion matrix:")
+    for row in matrix.tolist():
+        print(",".join(str(value) for value in row))
 
     print()
     print("Errors:")
