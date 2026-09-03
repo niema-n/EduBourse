@@ -12,32 +12,231 @@
       "random_state": 42
     },
     "seed": 42,
-    "train_size": 3520,
-    "validation_size": 750,
-    "test_size": 730,
+    "latin_model_source": "existing artifact",
+    "arabic_model_strategy": "model C: DODa Arabic branch + Darija-LID ary/MSA Arabic-script subset",
+    "train_size": 20775,
+    "validation_size": 4447,
+    "test_size": 4428,
+    "doda_train_size": 3520,
+    "darija_lid_train_size": 17255,
+    "darija_lid_validation_size": 3697,
+    "darija_lid_test_size": 3698,
+    "darija_lid_source_disjoint_size": 6570,
+    "doda_arabic_weight": 8,
+    "effective_arabic_train_size": 28519,
     "class_distribution": {
       "fr": 704,
       "en": 704,
-      "ar": 704,
+      "ar": 3959,
       "ary-latin": 704,
-      "ary-arabic": 704
+      "ary-arabic": 14704
     },
-    "training_duration_ms": 1287.02,
+    "effective_arabic_class_distribution": {
+      "ar": 8887,
+      "ary-arabic": 19632
+    },
+    "training_duration_ms": 3488.38,
     "train_test_exact_overlap": 0,
     "train_test_normalized_overlap": 0,
     "parallel_index_leakage": 0,
+    "lid_train_test_exact_overlap": 0,
+    "lid_train_test_normalized_overlap": 0,
+    "lid_validation_test_overlap": 0,
+    "doda_overlap": 0,
+    "train_sources": {
+      "doda": [
+        "MBZUAI-Paris/DODa-10K"
+      ],
+      "darija_lid": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ]
+    },
+    "validation_sources": {
+      "doda": [
+        "MBZUAI-Paris/DODa-10K"
+      ],
+      "darija_lid": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ]
+    },
+    "test_sources": {
+      "doda": [
+        "MBZUAI-Paris/DODa-10K"
+      ],
+      "darija_lid": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ],
+      "source_disjoint": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ]
+    },
+    "darija_lid_total_rows": 266129,
+    "darija_lid_used_rows": 31220,
+    "darija_lid_metadata": {
+      "dataset_source": "atlasia/Darija-LID",
+      "dataset_revision": "main",
+      "license": "MIT",
+      "total_rows": 266129,
+      "split_rows": {
+        "train": 212903,
+        "test": 53226
+      },
+      "seed": 42,
+      "phase": "ary Arabic-script vs MSA only; other dialects excluded from training",
+      "selection": {
+        "train_fetch_limit": 60000,
+        "test_fetch_limit": 20000,
+        "per_label_limit": 20000
+      },
+      "analysis": {
+        "train_fetched": {
+          "rows": 60000,
+          "label_distribution": {
+            "other": 17433,
+            "ary": 42567
+          },
+          "dialect_distribution": {
+            "Jordan": 1453,
+            "Lebanon": 472,
+            "Levant": 6254,
+            "Palestine": 2799,
+            "Syria": 1722,
+            "ary": 42567,
+            "msa": 4733
+          },
+          "source_distribution": {
+            "guymorlan/levanti": 9511,
+            "QCRI/AraDICE-ArabicMMLU-lev": 3189,
+            "atlasia/moroccan_darija_domain_classifier_dataset": 42567,
+            "PRAli22/Arabic_dialects_to_MSA": 4733
+          },
+          "script_distribution": {
+            "arabic": 59816,
+            "latin_or_mixed": 184
+          },
+          "min_words": 1,
+          "max_words": 428,
+          "mean_words": 6.9,
+          "normalized_duplicates": 85
+        },
+        "test_fetched": {
+          "rows": 20000,
+          "label_distribution": {
+            "other": 5811,
+            "ary": 14189
+          },
+          "dialect_distribution": {
+            "Jordan": 485,
+            "Lebanon": 157,
+            "Levant": 2085,
+            "Palestine": 933,
+            "Syria": 573,
+            "ary": 14189,
+            "msa": 1578
+          },
+          "source_distribution": {
+            "guymorlan/levanti": 3169,
+            "QCRI/AraDICE-ArabicMMLU-lev": 1064,
+            "atlasia/moroccan_darija_domain_classifier_dataset": 14189,
+            "PRAli22/Arabic_dialects_to_MSA": 1578
+          },
+          "script_distribution": {
+            "arabic": 19940,
+            "latin_or_mixed": 60
+          },
+          "min_words": 1,
+          "max_words": 331,
+          "mean_words": 6.97,
+          "normalized_duplicates": 8
+        },
+        "train_candidates": {
+          "rows": 47094,
+          "label_distribution": {
+            "ary-arabic": 42444,
+            "ar": 4650
+          },
+          "dialect_distribution": {
+            "ary": 42444,
+            "msa": 4650
+          },
+          "source_distribution": {
+            "atlasia/moroccan_darija_domain_classifier_dataset": 42444,
+            "PRAli22/Arabic_dialects_to_MSA": 4650
+          },
+          "script_distribution": {
+            "arabic": 47094
+          },
+          "min_words": 1,
+          "max_words": 428,
+          "mean_words": 6.69,
+          "normalized_duplicates": 0
+        },
+        "test_candidates": {
+          "rows": 15721,
+          "label_distribution": {
+            "ary-arabic": 14151,
+            "ar": 1570
+          },
+          "dialect_distribution": {
+            "ary": 14151,
+            "msa": 1570
+          },
+          "source_distribution": {
+            "atlasia/moroccan_darija_domain_classifier_dataset": 14151,
+            "PRAli22/Arabic_dialects_to_MSA": 1570
+          },
+          "script_distribution": {
+            "arabic": 15721
+          },
+          "min_words": 1,
+          "max_words": 331,
+          "mean_words": 6.77,
+          "normalized_duplicates": 0
+        }
+      },
+      "train_size": 17255,
+      "validation_size": 3697,
+      "test_size": 3698,
+      "source_disjoint_size": 6570,
+      "train_sources": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ],
+      "validation_sources": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ],
+      "test_sources": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ],
+      "source_disjoint_sources": [
+        "PRAli22/Arabic_dialects_to_MSA",
+        "atlasia/moroccan_darija_domain_classifier_dataset"
+      ],
+      "train_test_exact_overlap": 0,
+      "train_test_normalized_overlap": 0,
+      "validation_test_exact_overlap": 0,
+      "validation_test_normalized_overlap": 0,
+      "doda_train_overlap_with_doda_test": 0,
+      "source_disjoint_note": "Darija-LID train/test splits are used as the hardest held-out diagnostic boundary. This is not a strict upstream-source-disjoint split: within the selected ary/MSA phase, each class is dominated by one upstream source, so a stricter by-source split would remove a class from training."
+    },
     "artifact_path": "backend\\app\\multilingual\\artifacts\\language_detector.joblib",
-    "artifact_size": 939905
+    "artifact_size": 2360561
   },
   "validation": {
-    "overall_accuracy": 0.984,
-    "macro_f1": 0.9839903067575785,
+    "overall_accuracy": 0.98,
+    "macro_f1": 0.9799898178435033,
     "per_language_accuracy": {
       "fr": 0.9933333333333333,
       "en": 0.9733333333333334,
-      "ar": 0.9733333333333334,
+      "ar": 0.96,
       "ary-latin": 1.0,
-      "ary-arabic": 0.98
+      "ary-arabic": 0.9733333333333334
     },
     "classification_report": {
       "fr": {
@@ -53,9 +252,9 @@
         "support": 150.0
       },
       "ar": {
-        "precision": 0.9798657718120806,
-        "recall": 0.9733333333333334,
-        "f1-score": 0.9765886287625418,
+        "precision": 0.972972972972973,
+        "recall": 0.96,
+        "f1-score": 0.9664429530201343,
         "support": 150.0
       },
       "ary-latin": {
@@ -65,22 +264,22 @@
         "support": 150.0
       },
       "ary-arabic": {
-        "precision": 0.9735099337748344,
-        "recall": 0.98,
-        "f1-score": 0.9767441860465116,
+        "precision": 0.9605263157894737,
+        "recall": 0.9733333333333334,
+        "f1-score": 0.9668874172185431,
         "support": 150.0
       },
-      "accuracy": 0.984,
+      "accuracy": 0.98,
       "macro avg": {
-        "precision": 0.9841045658674155,
-        "recall": 0.984,
-        "f1-score": 0.9839903067575785,
+        "precision": 0.9801292825025218,
+        "recall": 0.9800000000000001,
+        "f1-score": 0.9799898178435033,
         "support": 750.0
       },
       "weighted avg": {
-        "precision": 0.9841045658674155,
-        "recall": 0.984,
-        "f1-score": 0.9839903067575785,
+        "precision": 0.9801292825025217,
+        "recall": 0.98,
+        "f1-score": 0.9799898178435031,
         "support": 750.0
       }
     },
@@ -102,9 +301,9 @@
       [
         0,
         0,
-        146,
+        144,
         0,
-        4
+        6
       ],
       [
         0,
@@ -116,9 +315,9 @@
       [
         0,
         0,
-        3,
+        4,
         0,
-        147
+        146
       ]
     ],
     "labels": [
@@ -127,17 +326,20 @@
       "ar",
       "ary-latin",
       "ary-arabic"
-    ]
+    ],
+    "mean_confidence_correct": 0.8873297524047572,
+    "mean_confidence_error": 0.5876823995164792,
+    "max_confidence_on_error": 0.7491555595333584
   },
   "test": {
-    "overall_accuracy": 0.9767123287671233,
-    "macro_f1": 0.9766754896294291,
+    "overall_accuracy": 0.9726027397260274,
+    "macro_f1": 0.9725703528603604,
     "per_language_accuracy": {
       "fr": 0.9863013698630136,
       "en": 0.952054794520548,
-      "ar": 0.9931506849315068,
+      "ar": 0.9657534246575342,
       "ary-latin": 1.0,
-      "ary-arabic": 0.952054794520548
+      "ary-arabic": 0.958904109589041
     },
     "classification_report": {
       "fr": {
@@ -153,9 +355,9 @@
         "support": 146.0
       },
       "ar": {
-        "precision": 0.9539473684210527,
-        "recall": 0.9931506849315068,
-        "f1-score": 0.9731543624161074,
+        "precision": 0.9591836734693877,
+        "recall": 0.9657534246575342,
+        "f1-score": 0.962457337883959,
         "support": 146.0
       },
       "ary-latin": {
@@ -165,22 +367,22 @@
         "support": 146.0
       },
       "ary-arabic": {
-        "precision": 0.9928571428571429,
-        "recall": 0.952054794520548,
-        "f1-score": 0.972027972027972,
+        "precision": 0.9655172413793104,
+        "recall": 0.958904109589041,
+        "f1-score": 0.9621993127147767,
         "support": 146.0
       },
-      "accuracy": 0.9767123287671233,
+      "accuracy": 0.9726027397260274,
       "macro avg": {
-        "precision": 0.9772978679575651,
-        "recall": 0.9767123287671232,
-        "f1-score": 0.9766754896294291,
+        "precision": 0.9728771486716656,
+        "recall": 0.9726027397260275,
+        "f1-score": 0.9725703528603604,
         "support": 730.0
       },
       "weighted avg": {
-        "precision": 0.977297867957565,
-        "recall": 0.9767123287671233,
-        "f1-score": 0.9766754896294292,
+        "precision": 0.9728771486716656,
+        "recall": 0.9726027397260274,
+        "f1-score": 0.9725703528603604,
         "support": 730.0
       }
     },
@@ -202,9 +404,9 @@
       [
         0,
         0,
-        145,
+        141,
         0,
-        1
+        5
       ],
       [
         0,
@@ -216,9 +418,9 @@
       [
         0,
         0,
-        7,
+        6,
         0,
-        139
+        140
       ]
     ],
     "labels": [
@@ -227,6 +429,537 @@
       "ar",
       "ary-latin",
       "ary-arabic"
-    ]
+    ],
+    "mean_confidence_correct": 0.8784424913257111,
+    "mean_confidence_error": 0.5595960017719708,
+    "max_confidence_on_error": 0.8582126780133202
+  },
+  "doda_arabic_test": {
+    "overall_accuracy": 0.9623287671232876,
+    "macro_f1": 0.9623283252993678,
+    "per_language_accuracy": {
+      "ar": 0.9657534246575342,
+      "ary-arabic": 0.958904109589041
+    },
+    "classification_report": {
+      "ar": {
+        "precision": 0.9591836734693877,
+        "recall": 0.9657534246575342,
+        "f1-score": 0.962457337883959,
+        "support": 146.0
+      },
+      "ary-arabic": {
+        "precision": 0.9655172413793104,
+        "recall": 0.958904109589041,
+        "f1-score": 0.9621993127147767,
+        "support": 146.0
+      },
+      "accuracy": 0.9623287671232876,
+      "macro avg": {
+        "precision": 0.9623504574243491,
+        "recall": 0.9623287671232876,
+        "f1-score": 0.9623283252993678,
+        "support": 292.0
+      },
+      "weighted avg": {
+        "precision": 0.962350457424349,
+        "recall": 0.9623287671232876,
+        "f1-score": 0.9623283252993678,
+        "support": 292.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        141,
+        5
+      ],
+      [
+        6,
+        140
+      ]
+    ],
+    "labels": [
+      "ar",
+      "ary-arabic"
+    ],
+    "mean_confidence_correct": 0.9148967801770355,
+    "mean_confidence_error": 0.6404702694555271,
+    "max_confidence_on_error": 0.8582126780133202
+  },
+  "darija_lid_validation": {
+    "overall_accuracy": 0.9937787395185286,
+    "macro_f1": 0.9898392862370731,
+    "per_language_accuracy": {
+      "ar": 0.9842180774748924,
+      "ary-arabic": 0.996
+    },
+    "classification_report": {
+      "ar": {
+        "precision": 0.9828080229226361,
+        "recall": 0.9842180774748924,
+        "f1-score": 0.9835125448028674,
+        "support": 697.0
+      },
+      "ary-arabic": {
+        "precision": 0.9963321107035679,
+        "recall": 0.996,
+        "f1-score": 0.9961660276712786,
+        "support": 3000.0
+      },
+      "accuracy": 0.9937787395185286,
+      "macro avg": {
+        "precision": 0.989570066813102,
+        "recall": 0.9901090387374463,
+        "f1-score": 0.9898392862370731,
+        "support": 3697.0
+      },
+      "weighted avg": {
+        "precision": 0.9937823976434355,
+        "recall": 0.9937787395185286,
+        "f1-score": 0.9937804508362008,
+        "support": 3697.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        686,
+        11
+      ],
+      [
+        12,
+        2988
+      ]
+    ],
+    "labels": [
+      "ar",
+      "ary-arabic"
+    ],
+    "mean_confidence_correct": 0.9432025839042842,
+    "mean_confidence_error": 0.6217924398256861,
+    "max_confidence_on_error": 0.8956578662416528
+  },
+  "darija_lid_test": {
+    "overall_accuracy": 0.9929691725256896,
+    "macro_f1": 0.988508373822786,
+    "per_language_accuracy": {
+      "ar": 0.9799426934097422,
+      "ary-arabic": 0.996
+    },
+    "classification_report": {
+      "ar": {
+        "precision": 0.9827586206896551,
+        "recall": 0.9799426934097422,
+        "f1-score": 0.9813486370157819,
+        "support": 698.0
+      },
+      "ary-arabic": {
+        "precision": 0.9953364423717521,
+        "recall": 0.996,
+        "f1-score": 0.9956681106297901,
+        "support": 3000.0
+      },
+      "accuracy": 0.9929691725256896,
+      "macro avg": {
+        "precision": 0.9890475315307037,
+        "recall": 0.9879713467048711,
+        "f1-score": 0.988508373822786,
+        "support": 3698.0
+      },
+      "weighted avg": {
+        "precision": 0.992962370026132,
+        "recall": 0.9929691725256896,
+        "f1-score": 0.9929653003045934,
+        "support": 3698.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        684,
+        14
+      ],
+      [
+        12,
+        2988
+      ]
+    ],
+    "labels": [
+      "ar",
+      "ary-arabic"
+    ],
+    "mean_confidence_correct": 0.9425370207783113,
+    "mean_confidence_error": 0.6379125076926039,
+    "max_confidence_on_error": 0.9336359308445489
+  },
+  "darija_lid_source_disjoint": {
+    "overall_accuracy": 0.9928462709284627,
+    "macro_f1": 0.990150845892076,
+    "per_language_accuracy": {
+      "ar": 0.9828025477707006,
+      "ary-arabic": 0.996
+    },
+    "classification_report": {
+      "ar": {
+        "precision": 0.9872040946896993,
+        "recall": 0.9828025477707006,
+        "f1-score": 0.9849984040855411,
+        "support": 1570.0
+      },
+      "ary-arabic": {
+        "precision": 0.9946075494307969,
+        "recall": 0.996,
+        "f1-score": 0.995303287698611,
+        "support": 5000.0
+      },
+      "accuracy": 0.9928462709284627,
+      "macro avg": {
+        "precision": 0.990905822060248,
+        "recall": 0.9894012738853504,
+        "f1-score": 0.990150845892076,
+        "support": 6570.0
+      },
+      "weighted avg": {
+        "precision": 0.9928383829249333,
+        "recall": 0.9928462709284627,
+        "f1-score": 0.9928407812644375,
+        "support": 6570.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        1543,
+        27
+      ],
+      [
+        20,
+        4980
+      ]
+    ],
+    "labels": [
+      "ar",
+      "ary-arabic"
+    ],
+    "mean_confidence_correct": 0.9416707832531581,
+    "mean_confidence_error": 0.6137888226531654,
+    "max_confidence_on_error": 0.8732560095432966
+  },
+  "model_selection": {
+    "model_a_doda_only": {
+      "doda_arabic_test": {
+        "overall_accuracy": 0.9726027397260274,
+        "macro_f1": 0.9725911672220398,
+        "per_language_accuracy": {
+          "ar": 0.9931506849315068,
+          "ary-arabic": 0.952054794520548
+        },
+        "classification_report": {
+          "ar": {
+            "precision": 0.9539473684210527,
+            "recall": 0.9931506849315068,
+            "f1-score": 0.9731543624161074,
+            "support": 146.0
+          },
+          "ary-arabic": {
+            "precision": 0.9928571428571429,
+            "recall": 0.952054794520548,
+            "f1-score": 0.972027972027972,
+            "support": 146.0
+          },
+          "accuracy": 0.9726027397260274,
+          "macro avg": {
+            "precision": 0.9734022556390978,
+            "recall": 0.9726027397260274,
+            "f1-score": 0.9725911672220398,
+            "support": 292.0
+          },
+          "weighted avg": {
+            "precision": 0.9734022556390978,
+            "recall": 0.9726027397260274,
+            "f1-score": 0.9725911672220398,
+            "support": 292.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            145,
+            1
+          ],
+          [
+            7,
+            139
+          ]
+        ],
+        "labels": [
+          "ar",
+          "ary-arabic"
+        ],
+        "mean_confidence_correct": 0.7921993975109015,
+        "mean_confidence_error": 0.570572690005593,
+        "max_confidence_on_error": 0.7043278803801578
+      },
+      "darija_lid_validation": {
+        "overall_accuracy": 0.7619691641871787,
+        "macro_f1": 0.71834292806445,
+        "per_language_accuracy": {
+          "ar": 0.9770444763271162,
+          "ary-arabic": 0.712
+        },
+        "classification_report": {
+          "ar": {
+            "precision": 0.4407766990291262,
+            "recall": 0.9770444763271162,
+            "f1-score": 0.6074933095450491,
+            "support": 697.0
+          },
+          "ary-arabic": {
+            "precision": 0.9925650557620818,
+            "recall": 0.712,
+            "f1-score": 0.8291925465838509,
+            "support": 3000.0
+          },
+          "accuracy": 0.7619691641871787,
+          "macro avg": {
+            "precision": 0.716670877395604,
+            "recall": 0.8445222381635581,
+            "f1-score": 0.71834292806445,
+            "support": 3697.0
+          },
+          "weighted avg": {
+            "precision": 0.888535711795928,
+            "recall": 0.7619691641871787,
+            "f1-score": 0.7873953141748586,
+            "support": 3697.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            681,
+            16
+          ],
+          [
+            864,
+            2136
+          ]
+        ],
+        "labels": [
+          "ar",
+          "ary-arabic"
+        ],
+        "mean_confidence_correct": 0.6809143337798385,
+        "mean_confidence_error": 0.5983552015905927,
+        "max_confidence_on_error": 0.8882501598243087
+      }
+    },
+    "model_b_darija_lid_only": {
+      "doda_arabic_test": {
+        "overall_accuracy": 0.8938356164383562,
+        "macro_f1": 0.8938044791703328,
+        "per_language_accuracy": {
+          "ar": 0.910958904109589,
+          "ary-arabic": 0.8767123287671232
+        },
+        "classification_report": {
+          "ar": {
+            "precision": 0.8807947019867549,
+            "recall": 0.910958904109589,
+            "f1-score": 0.8956228956228957,
+            "support": 146.0
+          },
+          "ary-arabic": {
+            "precision": 0.9078014184397163,
+            "recall": 0.8767123287671232,
+            "f1-score": 0.89198606271777,
+            "support": 146.0
+          },
+          "accuracy": 0.8938356164383562,
+          "macro avg": {
+            "precision": 0.8942980602132355,
+            "recall": 0.8938356164383561,
+            "f1-score": 0.8938044791703328,
+            "support": 292.0
+          },
+          "weighted avg": {
+            "precision": 0.8942980602132355,
+            "recall": 0.8938356164383562,
+            "f1-score": 0.8938044791703329,
+            "support": 292.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            133,
+            13
+          ],
+          [
+            18,
+            128
+          ]
+        ],
+        "labels": [
+          "ar",
+          "ary-arabic"
+        ],
+        "mean_confidence_correct": 0.8125550485698563,
+        "mean_confidence_error": 0.6719542648459869,
+        "max_confidence_on_error": 0.9458609175401059
+      },
+      "darija_lid_validation": {
+        "overall_accuracy": 0.995942656207736,
+        "macro_f1": 0.9933661451256091,
+        "per_language_accuracy": {
+          "ar": 0.9885222381635581,
+          "ary-arabic": 0.9976666666666667
+        },
+        "classification_report": {
+          "ar": {
+            "precision": 0.9899425287356322,
+            "recall": 0.9885222381635581,
+            "f1-score": 0.9892318736539842,
+            "support": 697.0
+          },
+          "ary-arabic": {
+            "precision": 0.9973342219260246,
+            "recall": 0.9976666666666667,
+            "f1-score": 0.9975004165972338,
+            "support": 3000.0
+          },
+          "accuracy": 0.995942656207736,
+          "macro avg": {
+            "precision": 0.9936383753308284,
+            "recall": 0.9930944524151124,
+            "f1-score": 0.9933661451256091,
+            "support": 3697.0
+          },
+          "weighted avg": {
+            "precision": 0.995940656831704,
+            "recall": 0.995942656207736,
+            "f1-score": 0.9959415379303566,
+            "support": 3697.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            689,
+            8
+          ],
+          [
+            7,
+            2993
+          ]
+        ],
+        "labels": [
+          "ar",
+          "ary-arabic"
+        ],
+        "mean_confidence_correct": 0.936825270612232,
+        "mean_confidence_error": 0.6162727450402632,
+        "max_confidence_on_error": 0.8390459852157253
+      }
+    },
+    "model_c_doda_plus_darija_lid": {
+      "doda_arabic_test": {
+        "overall_accuracy": 0.9623287671232876,
+        "macro_f1": 0.9623283252993678,
+        "per_language_accuracy": {
+          "ar": 0.9657534246575342,
+          "ary-arabic": 0.958904109589041
+        },
+        "classification_report": {
+          "ar": {
+            "precision": 0.9591836734693877,
+            "recall": 0.9657534246575342,
+            "f1-score": 0.962457337883959,
+            "support": 146.0
+          },
+          "ary-arabic": {
+            "precision": 0.9655172413793104,
+            "recall": 0.958904109589041,
+            "f1-score": 0.9621993127147767,
+            "support": 146.0
+          },
+          "accuracy": 0.9623287671232876,
+          "macro avg": {
+            "precision": 0.9623504574243491,
+            "recall": 0.9623287671232876,
+            "f1-score": 0.9623283252993678,
+            "support": 292.0
+          },
+          "weighted avg": {
+            "precision": 0.962350457424349,
+            "recall": 0.9623287671232876,
+            "f1-score": 0.9623283252993678,
+            "support": 292.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            141,
+            5
+          ],
+          [
+            6,
+            140
+          ]
+        ],
+        "labels": [
+          "ar",
+          "ary-arabic"
+        ],
+        "mean_confidence_correct": 0.9148967801770355,
+        "mean_confidence_error": 0.6404702694555271,
+        "max_confidence_on_error": 0.8582126780133202
+      },
+      "darija_lid_validation": {
+        "overall_accuracy": 0.9937787395185286,
+        "macro_f1": 0.9898392862370731,
+        "per_language_accuracy": {
+          "ar": 0.9842180774748924,
+          "ary-arabic": 0.996
+        },
+        "classification_report": {
+          "ar": {
+            "precision": 0.9828080229226361,
+            "recall": 0.9842180774748924,
+            "f1-score": 0.9835125448028674,
+            "support": 697.0
+          },
+          "ary-arabic": {
+            "precision": 0.9963321107035679,
+            "recall": 0.996,
+            "f1-score": 0.9961660276712786,
+            "support": 3000.0
+          },
+          "accuracy": 0.9937787395185286,
+          "macro avg": {
+            "precision": 0.989570066813102,
+            "recall": 0.9901090387374463,
+            "f1-score": 0.9898392862370731,
+            "support": 3697.0
+          },
+          "weighted avg": {
+            "precision": 0.9937823976434355,
+            "recall": 0.9937787395185286,
+            "f1-score": 0.9937804508362008,
+            "support": 3697.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            686,
+            11
+          ],
+          [
+            12,
+            2988
+          ]
+        ],
+        "labels": [
+          "ar",
+          "ary-arabic"
+        ],
+        "mean_confidence_correct": 0.9432025839042842,
+        "mean_confidence_error": 0.6217924398256861,
+        "max_confidence_on_error": 0.8956578662416528
+      }
+    }
   }
 }

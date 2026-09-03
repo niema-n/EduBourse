@@ -242,11 +242,9 @@ DARJA_ARABIC_STRONG_RAW = {
     "بزاف",
     "بالدارجه",
     "باش",
-    "خاص",
     "خاصني",
     "ديال",
     "ديالي",
-    "درهم",
     "صاحبي",
     "صافي",
     "شحال",
@@ -282,7 +280,7 @@ DARJA_ARABIC_STRONG_RAW = {
     "هادشي",
     "واش",
 }
-DARJA_ARABIC_WEAK_RAW = {"شي", "ثمن", "خسرت", "كيتبدل", "مغربي", "مشكله"}
+DARJA_ARABIC_WEAK_RAW = {"درهم", "ثمن", "خاص", "شي", "خسرت", "كيتبدل", "مغربي", "مشكله"}
 
 MSA_STRONG_RAW = {
     "أجد",
@@ -358,6 +356,14 @@ def _arabic_matching_tokens(tokens: list[str]) -> list[str]:
                 remainder = token[len(prefix) :]
                 if remainder.startswith(("ما", "هاد", "ديال", "غادي", "غا")):
                     matching_tokens.append(remainder)
+    return matching_tokens
+
+
+def _msa_matching_tokens(tokens: list[str]) -> list[str]:
+    matching_tokens = list(tokens)
+    for token in tokens:
+        if token.startswith("ال") and len(token) > 4:
+            matching_tokens.append(token[2:])
     return matching_tokens
 
 
@@ -451,7 +457,7 @@ def _latin_language(text: str, script: str, tokens: list[str]) -> tuple[Language
 
 def _darija_arabic_pattern_score(tokens: list[str]) -> float:
     score = 0.0
-    for token in tokens:
+    for index, token in enumerate(tokens):
         if token.startswith("غا") and len(token) >= 4:
             score += 2.5
         if token == "غادي":
@@ -459,6 +465,8 @@ def _darija_arabic_pattern_score(tokens: list[str]) -> float:
         if token.startswith(("كي", "كن")) and len(token) >= 4:
             score += 1.5
         if token.startswith("ما") and token.endswith("ش") and len(token) >= 4:
+            score += 2.4
+        if token == "ما" and index + 1 < len(tokens) and tokens[index + 1].endswith("ش"):
             score += 2.4
         if token.endswith("تش") and len(token) >= 5:
             score += 2.0
@@ -480,11 +488,12 @@ def _arabic_language(text: str) -> tuple[LanguageCode, float]:
 
 def _arabic_scores(tokens: list[str]) -> tuple[float, float]:
     matching_tokens = _arabic_matching_tokens(tokens)
+    msa_matching_tokens = _msa_matching_tokens(tokens)
     darija_score = (
         _token_score(matching_tokens, DARJA_ARABIC_STRONG, DARJA_ARABIC_WEAK)
         + _darija_arabic_pattern_score(matching_tokens)
     )
-    msa_score = _token_score(tokens, MSA_STRONG, MSA_WEAK)
+    msa_score = _token_score(msa_matching_tokens, MSA_STRONG, MSA_WEAK)
     return darija_score, msa_score
 
 
@@ -554,6 +563,22 @@ def _has_high_precision_darija_rule(normalized_text: str, language: LanguageCode
     return False
 
 
+def _has_high_precision_msa_rule(normalized_text: str, language: LanguageCode) -> bool:
+    if language != "ar":
+        return False
+    tokens = _arabic_tokens(normalized_text)
+    darija_score, msa_score = _arabic_scores(tokens)
+    if msa_score >= 5.0 and msa_score > darija_score + 1.0:
+        return True
+    has_split_darija_negation = any(
+        token == "ما" and index + 1 < len(tokens) and tokens[index + 1].endswith("ش")
+        for index, token in enumerate(tokens)
+    )
+    if tokens and tokens[0] == "ما" and darija_score <= 1.0 and not has_split_darija_negation:
+        return True
+    return False
+
+
 def _is_ambiguous_input(normalized_text: str) -> bool:
     tokens = _latin_tokens(normalized_text)
     if not tokens and not _arabic_tokens(normalized_text):
@@ -570,6 +595,7 @@ def detect_language(text: str) -> LanguageAnalysis:
         _is_ambiguous_input(normalized_text)
         or heuristic_confidence >= 0.92
         or _has_high_precision_darija_rule(normalized_text, heuristic_language)
+        or _has_high_precision_msa_rule(normalized_text, heuristic_language)
     ):
         language, confidence = heuristic_language, heuristic_confidence
     else:

@@ -35,20 +35,40 @@ def grouped_sentences(tsv_text: str) -> list[tuple[str, list[tuple[str, str]]]]:
     return list(rows_by_sentence.items())
 
 
-def candidate_darija_arabic_sentences(tsv_text: str, limit: int) -> list[str]:
-    candidates: list[str] = []
+def candidate_subsets(tsv_text: str, limit: int) -> dict[str, list[str]]:
+    subsets: dict[str, list[str]] = {
+        "RAW": [],
+        "CLEAR_DARIJA": [],
+        "PURE_DARIJA_WITHOUT_MSA": [],
+    }
     for _, tokens in grouped_sentences(tsv_text):
         words = [word for word, _ in tokens]
         labels = [label for _, label in tokens]
         text = " ".join(words).strip()
         arabic_letters = count_arabic_letters(text)
         latin_letters = count_latin_letters(text)
+        if arabic_letters < max(8, latin_letters * 2):
+            continue
+        lang1_tokens = sum(1 for label in labels if label == "lang1")
         lang2_tokens = sum(1 for label in labels if label == "lang2")
-        if lang2_tokens >= 3 and arabic_letters >= max(8, latin_letters * 2):
-            candidates.append(text)
-        if len(candidates) >= limit:
+        if lang2_tokens >= 1:
+            subsets["RAW"].append(text)
+        if lang2_tokens >= 2 * max(1, lang1_tokens):
+            subsets["CLEAR_DARIJA"].append(text)
+        if lang2_tokens >= 1 and lang1_tokens == 0:
+            subsets["PURE_DARIJA_WITHOUT_MSA"].append(text)
+        if all(len(texts) >= limit for texts in subsets.values()):
             break
-    return candidates
+    return {name: texts[:limit] for name, texts in subsets.items()}
+
+
+def evaluate_subset(texts: list[str]) -> tuple[int, int, float]:
+    from app.multilingual.detector import detect_language
+
+    correct = sum(1 for text in texts if detect_language(text).language == "ary-arabic")
+    total = len(texts)
+    accuracy = correct / total if total else 0.0
+    return total, correct, accuracy
 
 
 def parse_args() -> argparse.Namespace:
@@ -58,19 +78,16 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    from app.multilingual.detector import detect_language
-
     args = parse_args()
-    texts = candidate_darija_arabic_sentences(fetch_tsv(SOURCE_URL), args.limit)
-    correct = sum(1 for text in texts if detect_language(text).language == "ary-arabic")
-    total = len(texts)
-    accuracy = correct / total if total else 0.0
+    subsets = candidate_subsets(fetch_tsv(SOURCE_URL), args.limit)
     print("EXTERNAL MOROCCAN CODESWITCHING EVALUATION")
     print(f"Source: {SOURCE_URL}")
     print("Expected label: ary-arabic")
-    print(f"Total: {total}")
-    print(f"Correct: {correct}")
-    print(f"Accuracy: {accuracy * 100:.2f}%")
+    for name, texts in subsets.items():
+        total, correct, accuracy = evaluate_subset(texts)
+        print(f"{name}_TOTAL: {total}")
+        print(f"{name}_CORRECT: {correct}")
+        print(f"{name}_ACCURACY: {accuracy * 100:.2f}%")
     return 0
 
 
