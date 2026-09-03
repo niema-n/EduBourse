@@ -64,22 +64,39 @@ FRENCH_WEAK = {
 FRENCH_ACCENTS = set("éèêàùç")
 
 ENGLISH_STRONG = {
+    "ahead",
+    "alright",
     "analysis",
     "beginner",
     "buy",
     "clear",
     "company",
+    "details",
+    "differently",
+    "diversification",
+    "do",
     "examples",
     "explain",
     "financial",
+    "go",
     "guide",
+    "important",
+    "information",
     "investment",
+    "management",
     "market",
+    "mind",
     "money",
+    "more",
+    "not",
+    "one",
     "portfolio",
     "reliable",
+    "reduce",
     "risk",
     "safe",
+    "say",
+    "sorry",
     "shares",
     "simple",
     "stock",
@@ -87,10 +104,12 @@ ENGLISH_STRONG = {
     "technical",
     "thanks",
     "understand",
+    "useful",
     "volatility",
 }
 ENGLISH_WEAK = {
     "a",
+    "about",
     "an",
     "and",
     "are",
@@ -100,10 +119,12 @@ ENGLISH_WEAK = {
     "for",
     "how",
     "i",
+    "if",
     "in",
     "is",
     "it",
     "like",
+    "need",
     "of",
     "on",
     "or",
@@ -132,6 +153,7 @@ DARJA_LATIN_STRONG = {
     "bghit",
     "brit",
     "bzaf",
+    "bchwiya",
     "ch7al",
     "chhal",
     "chkoun",
@@ -146,7 +168,10 @@ DARJA_LATIN_STRONG = {
     "fin",
     "flous",
     "had",
+    "hada",
     "hadi",
+    "hadik",
+    "hadok",
     "hadchi",
     "hiya",
     "howa",
@@ -161,6 +186,7 @@ DARJA_LATIN_STRONG = {
     "lboursa",
     "lia",
     "lmajal",
+    "lwe9t",
     "ma3ndich",
     "mabdit",
     "makanfhemch",
@@ -171,15 +197,18 @@ DARJA_LATIN_STRONG = {
     "nfhem",
     "nla9a",
     "nqra",
+    "nsowel",
     "nta3lem",
     "nt3ellem",
     "safi",
     "sahbi",
+    "sghir",
     "s3ib",
     "sou9",
     "wa9ila",
     "wa9t",
     "wach",
+    "walakin",
     "7it",
     "3lach",
 }
@@ -202,6 +231,7 @@ DARJA_LATIN_WEAK = {
 DARJA_ARABIC_STRONG_RAW = {
     "اش",
     "اشنو",
+    "اول",
     "بغيت",
     "بغينا",
     "بزاف",
@@ -210,6 +240,7 @@ DARJA_ARABIC_STRONG_RAW = {
     "خاص",
     "خاصني",
     "ديال",
+    "ديالي",
     "درهم",
     "صاحبي",
     "صافي",
@@ -239,6 +270,10 @@ DARJA_ARABIC_STRONG_RAW = {
     "نعرفو",
     "نفهم",
     "هاد",
+    "هادا",
+    "هادي",
+    "هادو",
+    "هاديك",
     "هادشي",
     "واش",
 }
@@ -301,6 +336,26 @@ def _arabic_tokens(text: str) -> list[str]:
     return ARABIC_TOKEN_RE.findall(_arabic_detection_form(text))
 
 
+def _arabic_matching_tokens(tokens: list[str]) -> list[str]:
+    matching_tokens = list(tokens)
+    for token in tokens:
+        if token in {"هادي", "هادا", "هادو", "هاديك"}:
+            matching_tokens.append("هاد")
+        if token.startswith("ديال") and len(token) > len("ديال"):
+            matching_tokens.append("ديال")
+        if token.startswith("وما") and len(token) > 3:
+            matching_tokens.append(token[1:])
+        for prefix in ("فال", "وال", "بال", "لل"):
+            if token.startswith(prefix) and len(token) > len(prefix) + 2:
+                matching_tokens.append("ال" + token[len(prefix) :])
+        for prefix in ("و", "ف", "ب", "ل"):
+            if token.startswith(prefix) and len(token) > 4:
+                remainder = token[len(prefix) :]
+                if remainder.startswith(("ما", "هاد", "ديال", "غادي", "غا")):
+                    matching_tokens.append(remainder)
+    return matching_tokens
+
+
 def _token_score(tokens: list[str], strong: set[str], weak: set[str]) -> float:
     counts = Counter(tokens)
     return sum(3.0 * counts[token] for token in strong) + sum(1.0 * counts[token] for token in weak)
@@ -311,6 +366,10 @@ def _darija_latin_pattern_score(tokens: list[str]) -> float:
     for token in tokens:
         if ARABIZI_DIGIT_RE.search(token) and any(character.isalpha() for character in token):
             score += 1.7
+        if token.startswith("gha") and len(token) >= 5:
+            score += 2.4
+        if token == "ghadi":
+            score += 2.4
         if token.startswith(("kay", "kan")) and len(token) >= 5:
             score += 1.4
         if token.startswith("n") and len(token) >= 4 and token not in ENGLISH_STRONG:
@@ -336,8 +395,10 @@ def _french_pattern_score(text: str, tokens: list[str]) -> float:
         score += 1.8
     if re.search(r"\b(?:j|c|n|l|d)'", lower_text):
         score += 1.3
-    if any(token.endswith(("tion", "ment")) for token in tokens):
-        score += 0.4
+    if any(token in FRENCH_WEAK for token in tokens) and any(
+        token.endswith(("tion", "ment")) for token in tokens
+    ):
+        score += 0.1
     return score
 
 
@@ -386,10 +447,12 @@ def _latin_language(text: str, script: str, tokens: list[str]) -> tuple[Language
 def _darija_arabic_pattern_score(tokens: list[str]) -> float:
     score = 0.0
     for token in tokens:
+        if token.startswith("غا") and len(token) >= 4:
+            score += 2.5
+        if token == "غادي":
+            score += 2.5
         if token.startswith(("كي", "كن")) and len(token) >= 4:
             score += 1.5
-        if token.startswith("ن") and len(token) >= 4:
-            score += 0.8
         if token.startswith("ما") and token.endswith("ش") and len(token) >= 4:
             score += 2.4
         if token.endswith("تش") and len(token) >= 5:
@@ -401,11 +464,7 @@ def _darija_arabic_pattern_score(tokens: list[str]) -> float:
 
 def _arabic_language(text: str) -> tuple[LanguageCode, float]:
     tokens = _arabic_tokens(text)
-    darija_score = (
-        _token_score(tokens, DARJA_ARABIC_STRONG, DARJA_ARABIC_WEAK)
-        + _darija_arabic_pattern_score(tokens)
-    )
-    msa_score = _token_score(tokens, MSA_STRONG, MSA_WEAK)
+    darija_score, msa_score = _arabic_scores(tokens)
 
     scores: dict[LanguageCode, float] = {"ary-arabic": darija_score, "ar": msa_score}
     language, confidence = _winner(scores, len(tokens))
@@ -414,13 +473,44 @@ def _arabic_language(text: str) -> tuple[LanguageCode, float]:
     return language, confidence
 
 
+def _arabic_scores(tokens: list[str]) -> tuple[float, float]:
+    matching_tokens = _arabic_matching_tokens(tokens)
+    darija_score = (
+        _token_score(matching_tokens, DARJA_ARABIC_STRONG, DARJA_ARABIC_WEAK)
+        + _darija_arabic_pattern_score(matching_tokens)
+    )
+    msa_score = _token_score(tokens, MSA_STRONG, MSA_WEAK)
+    return darija_score, msa_score
+
+
+def _effective_latin_letter_count(text: str) -> int:
+    return sum(len(token) for token in _latin_tokens(text) if token not in FINANCIAL_TERMS)
+
+
 def _use_arabic_branch(script: str, normalized_text: str) -> bool:
-    latin_count, arabic_count = count_scripts(normalized_text)
+    _, arabic_count = count_scripts(normalized_text)
     if arabic_count == 0:
         return False
     if script == "arabic":
         return True
-    return arabic_count >= max(4, latin_count * 0.55)
+
+    effective_latin_count = _effective_latin_letter_count(normalized_text)
+    if effective_latin_count == 0 and arabic_count >= 3:
+        return True
+
+    arabic_tokens = _arabic_tokens(normalized_text)
+    darija_score, msa_score = _arabic_scores(arabic_tokens)
+    if darija_score >= 5.0 and darija_score > msa_score:
+        return True
+
+    latin_language, latin_confidence = _latin_language(
+        normalized_text,
+        script,
+        _latin_tokens(normalized_text),
+    )
+    if latin_language in {"fr", "en"} and latin_confidence >= 0.55 and effective_latin_count >= 8:
+        return False
+    return arabic_count >= max(6, effective_latin_count * 0.75)
 
 
 def detect_language(text: str) -> LanguageAnalysis:

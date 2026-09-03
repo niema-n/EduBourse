@@ -220,3 +220,75 @@ def test_edge_cases_do_not_crash_and_stay_low_confidence(text: str) -> None:
     assert result.language in {"fr", "en", "ar", "ary-latin", "ary-arabic"}
     assert result.confidence is not None
     assert result.confidence <= 0.25
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "هادي أول مرة نسول على هاد الموضوع",
+        "الحساب ديالي صغير",
+        "أنا خدام وماعنديش بزاف ديال الوقت",
+        "فالبورصة كاين بزاف ديال المفاهيم",
+        "والسوق ديالي مازال ما فهمتوش",
+    ],
+)
+def test_darija_arabic_clitic_handling(text: str) -> None:
+    assert detect_language(text).language == "ary-arabic"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "ghanjrb walakin b chwiya",
+        "ghanbda b chi mablagh sghir",
+        "ghadi nbda mn zero",
+        "غانحاول نفهم شوية بشوية",
+        "غادي نبدا من الصفر",
+    ],
+)
+def test_darija_future_gha_forms(text: str) -> None:
+    assert detect_language(text).language in {"ary-latin", "ary-arabic"}
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "كم من الوقت يلزم لرؤية نتيجة؟",
+        "هل توجد نسخة مختصرة من الدليل؟",
+        "أحتاج إلى نصيحة.",
+        "ما نسبة المخاطر في هذا الاستثمار؟",
+        "كيف يعمل النظام المالي؟",
+        "ما معدل نمو السوق؟",
+    ],
+)
+def test_standard_arabic_n_prefix_words_are_not_darija(text: str) -> None:
+    assert detect_language(text).language == "ar"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Sorry, one more question if you do not mind.",
+        "Investment management is important.",
+        "This information is useful.",
+        "Diversification can reduce risk.",
+        "Alright, go ahead.",
+        "Sorry, I did not understand that.",
+        "Could you say that differently?",
+    ],
+)
+def test_english_tion_ment_and_low_marker_sentences(text: str) -> None:
+    assert detect_language(text).language == "en"
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("Je cherche des infos sur السوق المالي", "fr"),
+        ("I need details about سوق الأسهم", "en"),
+        ("بغيت نفهم stock market مزيان", "ary-arabic"),
+        ("wach had ETF intéressant?", "ary-latin"),
+    ],
+)
+def test_code_switching_uses_language_dominance(text: str, expected: str) -> None:
+    assert detect_language(text).language == expected

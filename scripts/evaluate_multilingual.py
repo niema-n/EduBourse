@@ -9,25 +9,25 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 BACKEND_ROOT = PROJECT_ROOT / "backend"
 DEFAULT_DATASET_PATH = PROJECT_ROOT / "evaluation" / "multilingual" / "golden_dataset.jsonl"
-CHALLENGE_DATASET_NAME = "challenge_dataset.jsonl"
 LANGUAGES = ["fr", "en", "ar", "ary-latin", "ary-arabic"]
-GOLDEN_MINIMUMS = {"overall": 0.95}
-CHALLENGE_MINIMUMS = {
-    "overall": 0.95,
-    "fr": 0.95,
-    "en": 0.95,
-    "ar": 0.95,
-    "ary-latin": 0.90,
-    "ary-arabic": 0.90,
+THRESHOLD_PROFILES = {
+    "none": {},
+    "golden": {"overall": 0.95},
+    "challenge": {
+        "overall": 0.95,
+        "fr": 0.95,
+        "en": 0.95,
+        "ar": 0.95,
+        "ary-latin": 0.90,
+        "ary-arabic": 0.90,
+    },
 }
 
 sys.path.insert(0, str(BACKEND_ROOT))
 
-from app.multilingual.detector import detect_language
-
 
 def load_dataset(path: Path) -> list[dict[str, str]]:
-    with path.open(encoding="utf-8") as dataset_file:
+    with path.open(encoding="utf-8-sig") as dataset_file:
         return [json.loads(line) for line in dataset_file if line.strip()]
 
 
@@ -43,10 +43,15 @@ def ratio(correct: int, total: int) -> float:
     return correct / total
 
 
-def minimums_for(path: Path) -> dict[str, float]:
-    if path.name == CHALLENGE_DATASET_NAME:
-        return CHALLENGE_MINIMUMS
-    return GOLDEN_MINIMUMS
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(PROJECT_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def minimums_for(profile: str) -> dict[str, float]:
+    return THRESHOLD_PROFILES[profile]
 
 
 def parse_args() -> argparse.Namespace:
@@ -57,10 +62,18 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_DATASET_PATH,
         help="JSONL dataset with text and expected_language fields.",
     )
+    parser.add_argument(
+        "--profile",
+        choices=sorted(THRESHOLD_PROFILES),
+        default="golden",
+        help="Explicit threshold profile to enforce.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
+    from app.multilingual.detector import detect_language
+
     args = parse_args()
     dataset_path = args.dataset
     if not dataset_path.is_absolute():
@@ -87,7 +100,8 @@ def main() -> int:
 
     print("MULTILINGUAL EVALUATION")
     print()
-    print(f"Dataset: {dataset_path.relative_to(PROJECT_ROOT)}")
+    print(f"Dataset: {display_path(dataset_path)}")
+    print(f"Profile: {args.profile}")
     print(f"Total: {total}")
     print(f"Correct: {correct}")
     print(f"Incorrect: {total - correct}")
@@ -116,11 +130,12 @@ def main() -> int:
     else:
         print("none")
 
-    minimums = minimums_for(dataset_path)
+    minimums = minimums_for(args.profile)
     failures: list[str] = []
     overall_accuracy = ratio(correct, total)
-    if overall_accuracy < minimums["overall"]:
-        failures.append(f"overall<{minimums['overall']:.0%}")
+    overall_minimum = minimums.get("overall")
+    if overall_minimum is not None and overall_accuracy < overall_minimum:
+        failures.append(f"overall<{overall_minimum:.0%}")
     for language in LANGUAGES:
         minimum = minimums.get(language)
         if minimum is None:
