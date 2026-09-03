@@ -30,6 +30,7 @@ htmlcov/
 *.log
 logs/
 data/
+results/
 
 .DS_Store
 Thumbs.db

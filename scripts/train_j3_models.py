@@ -147,7 +147,6 @@ def train(kind: str, rows: list[dict[str, str]], output: Path) -> dict[str, obje
         "classes": list(fitted.named_steps["classifier"].classes_),
         "threshold": threshold,
         "training_dataset_version": "j3-contract-v2-natural",
-        "language_coverage": ["fr", "en", "ar", "ary-latin", "ary-arabic"],
         "source": "internal project contract dataset",
         "random_seed": SEED,
         "train_size": len(train_rows),
