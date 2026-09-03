@@ -56,7 +56,7 @@ def test_canonical_routes(text: str, route: str):
 def test_sensitive_requests_reach_security_before_business(text: str):
     result = invoke(text)
     assert result["selected_route"] == "securite"
-    assert result["security_status"] == "blocked"
+    assert result["security_status"] == "sensitive"
     assert "choisir" in result["business_answer"]
 
 

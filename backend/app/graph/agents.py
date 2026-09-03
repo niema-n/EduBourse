@@ -20,9 +20,11 @@ def formation_agent(state: GraphState, catalog: TrainingCatalog | None = None) -
 
 
 def cisi_agent(state: GraphState) -> GraphState:
+    text = state.get("user_input", "").casefold()
     return {
         "selected_route": "cisi",
-        "cisi_delegated": state.get("selected_route") == "formation_elearning",
+        "cisi_delegated": state.get("selected_route") == "formation_elearning"
+        or ("formation" in text and "cisi" in text),
         "business_answer": (
             "Les informations détaillées sur les certifications CISI nécessitent "
             "un catalogue officiel; cette intégration sera ajoutée derrière un port dédié."
@@ -90,7 +92,8 @@ def support_ecole_agent(state: GraphState) -> GraphState:
 
 def securite_agent(state: GraphState) -> GraphState:
     return {
-        "security_status": "blocked",
+        "security_status": "sensitive",
+        "response_status": "blocked",
         "risk_level": "high",
         "business_answer": (
             "Je ne peux pas choisir un titre, recommander une vente ou répartir votre "

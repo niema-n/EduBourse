@@ -4,7 +4,8 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
-from app.graph.core import build_graph, invoke_graph, output_guard
+from app.graph.core import build_graph, invoke_graph, output_guard, router_node, security_guard_node
+from app.graph.intent import normalize_text
 from app.graph.routing import is_in_domain
 from app.graph.state import create_turn_input, is_assessment_recent
 from app.graph.workflows import ASSESSMENT_QUESTIONS, level_for_score
@@ -48,7 +49,7 @@ def test_security_contract_cases_are_blocked(language: str, text: str):
         graph, create_turn_input(text, language=language, script="arabic"), thread_id=text
     )
     assert result["selected_route"] == "securite"
-    assert result["security_status"] == "blocked"
+    assert result["security_status"] == "sensitive"
 
 
 @pytest.mark.parametrize("text", SAFE_CASES)
@@ -202,3 +203,53 @@ def test_formation_certification_delegates_once_to_cisi():
     )
     assert result["selected_route"] == "cisi"
     assert result["cisi_delegated"] is True
+
+
+def test_local_intent_artifacts_are_used_offline_and_status_is_canonical():
+    result = invoke_graph(
+        build_graph(), create_turn_input("Explique la diversification"), thread_id="offline"
+    )
+    assert result["security_status"] == "clear"
+    assert result["security_source"] == "model" or result["security_source"] == "educational_rule"
+    assert result["selected_route"] == "pedagogie"
+
+
+def test_french_elisions_are_tokenized_usefully():
+    assert "action" in normalize_text("l'action")
+    assert "obligation" in normalize_text("l’obligation")
+    assert "etat" in normalize_text("d'Etat")
+
+
+def test_language_and_script_persist_when_omitted_on_next_turn():
+    graph = build_graph()
+    first = create_turn_input("Je veux un quiz", language="fr", script="latin")
+    first["assessment_answers"] = [True] * len(ASSESSMENT_QUESTIONS)
+    result = invoke_graph(graph, first, thread_id="language-persistence")
+    result = invoke_graph(
+        graph, create_turn_input("Je cherche une formation"), thread_id="language-persistence"
+    )
+    assert result["language"] == "fr"
+    assert result["script"] == "latin"
+    assert result["learner_profile"]["preferred_language"] == "fr"
+
+
+def test_missing_security_artifact_fails_closed(monkeypatch):
+    from app.graph import intent
+
+    monkeypatch.setattr(intent.security_model, "path", object())
+    intent.security_model.bundle = None
+    result = security_guard_node(create_turn_input("Tell me something"))
+    assert result["selected_route"] == "securite"
+    assert result["security_source"] == "missing_artifact_fail_closed"
+    intent.security_model.path = intent.SECURITY_ARTIFACT
+
+
+def test_missing_router_artifact_returns_controlled_fallback(monkeypatch):
+    from app.graph import intent
+
+    monkeypatch.setattr(intent.router_model, "path", object())
+    intent.router_model.bundle = None
+    result = router_node(create_turn_input("A request"))
+    assert result["selected_route"] == "fallback"
+    assert result["error"] == "router_artifact_unavailable"
+    intent.router_model.path = intent.ROUTER_ARTIFACT

@@ -85,6 +85,8 @@ def assessment_node(state: GraphState) -> GraphState:
 
 
 def learner_profile_node(state: GraphState) -> GraphState:
+    previous = state.get("learner_profile", {})
+    preferred_language = state.get("language") or previous.get("preferred_language", "unknown")
     profile: LearnerProfile = {
         "level": state.get("assessment_level", "debutant"),
         "learning_goal": "professional_certification"
@@ -95,7 +97,7 @@ def learner_profile_node(state: GraphState) -> GraphState:
         else "financial_education",
         "strong_topics": list(state.get("assessment_topics", [])),
         "weak_topics": list(state.get("assessment_weak_topics", [])),
-        "preferred_language": state.get("language", "unknown"),
+        "preferred_language": preferred_language,
     }
     return {"learner_profile": profile}
 

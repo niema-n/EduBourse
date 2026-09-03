@@ -19,7 +19,13 @@ from app.graph.agents import (
     support_ecole_agent,
 )
 from app.graph.catalog import TrainingCatalog
-from app.graph.routing import is_in_domain, is_sensitive_request, route_request
+from app.graph.intent import (
+    MissingRouterArtifact,
+    MissingSecurityArtifact,
+    route_decision,
+    security_decision,
+)
+from app.graph.routing import is_in_domain, route_request
 from app.graph.state import GraphState, Route, safe_thread_id
 
 SUPPORTED_ROUTES: tuple[Route, ...] = (
@@ -38,21 +44,58 @@ SUPPORTED_ROUTES: tuple[Route, ...] = (
 
 def security_guard_node(state: GraphState) -> GraphState:
     text = state.get("user_input", "")
-    if is_sensitive_request(text, state.get("language", "unknown")):
+    try:
+        sensitive, confidence, scores, source = security_decision(text)
+    except MissingSecurityArtifact:
         return {
             "security_status": "sensitive",
             "risk_level": "high",
             "selected_route": "securite",
+            "security_confidence": 1.0,
+            "security_source": "missing_artifact_fail_closed",
             "status": "secured",
         }
-    return {"security_status": "clear", "risk_level": "none", "status": "secured"}
+    if sensitive:
+        return {
+            "security_status": "sensitive",
+            "risk_level": "high",
+            "selected_route": "securite",
+            "security_confidence": confidence,
+            "security_scores": scores,
+            "security_source": source,
+            "status": "secured",
+        }
+    return {
+        "security_status": "clear",
+        "risk_level": "none",
+        "security_confidence": confidence,
+        "security_scores": scores,
+        "security_source": source,
+        "status": "secured",
+    }
 
 
 def router_node(state: GraphState) -> GraphState:
     text = state.get("user_input", "")
+    try:
+        route, confidence, scores = route_decision(text)
+    except MissingRouterArtifact:
+        return {
+            "domain_status": "unknown",
+            "selected_route": "fallback",
+            "route_confidence": 0.0,
+            "route_scores": {},
+            "error": "router_artifact_unavailable",
+        }
+    if confidence < 0.50:
+        # The ML model remains primary; this narrow contract tie-break only
+        # resolves low-confidence legacy phrasing and preserves true fallback.
+        route = route_request(text) if is_in_domain(text) else "out_of_domain"
     return {
-        "domain_status": "in_domain" if is_in_domain(text) else "out_of_domain",
-        "selected_route": route_request(text),
+        "domain_status": "in_domain" if route != "out_of_domain" else "out_of_domain",
+        "selected_route": route,
+        "route_confidence": confidence,
+        "route_scores": scores,
     }
 
 
@@ -92,6 +135,21 @@ def output_guard(state: GraphState) -> GraphState:
             "status": "error",
             "error": "agent_failure_handled",
         }
+    if route != "securite":
+        try:
+            sensitive, _, _, _ = security_decision(state.get("user_input", ""))
+        except MissingSecurityArtifact:
+            sensitive = True
+        if sensitive:
+            return {
+                "selected_route": "securite",
+                "security_status": "sensitive",
+                "business_answer": (
+                    "Je ne peux pas fournir une recommandation financiere personnalisee."
+                ),
+                "status": "completed",
+                "error": None,
+            }
     if state.get("security_status") == "sensitive" and route != "securite":
         return {
             "selected_route": "securite",

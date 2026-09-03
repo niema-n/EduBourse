@@ -42,11 +42,17 @@ class GraphState(TypedDict, total=False):
     script: str
     domain_status: str
     security_status: str
+    response_status: str
+    security_confidence: float
+    security_scores: dict[str, float]
+    security_source: str
     risk_level: str
     selected_route: Route
     business_answer: str
     error: str | None
     status: str
+    route_confidence: float
+    route_scores: dict[str, float]
     thread_id: str
     session_id: str
     assessment_completed: bool
@@ -96,8 +102,6 @@ def create_turn_input(
     """Create only per-turn fields so checkpointed session data survives."""
     state: GraphState = {
         "user_input": user_input,
-        "language": language or "unknown",
-        "script": script or "unknown",
         "domain_status": "unchecked",
         "security_status": "unchecked",
         "risk_level": "none",
@@ -107,6 +111,10 @@ def create_turn_input(
         "status": "initialized",
         "assessment_required": False,
     }
+    if language is not None:
+        state["language"] = language
+    if script is not None:
+        state["script"] = script
     if thread_id is not None:
         state["thread_id"] = thread_id
     if session_id is not None:

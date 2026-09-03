@@ -132,6 +132,8 @@ ROUTE_CUES: dict[Route, tuple[tuple[str, ...], ...]] = {
         ("nt3ellem",),
         ("nt3lem",),
         ("bghit", "nt3ellem"),
+        ("bghit", "nt3ellem", "lborsa"),
+        ("\u0628\u063a\u064a\u062a", "\u0646\u062a\u0639\u0644\u0645"),
         ("\u062a\u0643\u0648\u064a\u0646",),
         ("\u0646\u062a\u0639\u0644\u0645",),
         ("\u062f\u0648\u0631\u0629",),
