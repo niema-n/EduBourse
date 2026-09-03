@@ -8,6 +8,7 @@ dependencies = [
     "chromadb-client==0.5.23",
     "fastapi>=0.115.6",
     "groq>=1.7.0",
+    "joblib>=1.4.0",
     "langgraph>=0.6.11,<0.7.0",
     "psycopg[binary]>=3.2.3",
     "pydantic-settings>=2.7.0",

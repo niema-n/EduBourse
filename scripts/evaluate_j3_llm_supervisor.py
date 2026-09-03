@@ -15,8 +15,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parents[1] / "backend"))
 sys.path.insert(0, str(Path(__file__).parent))
-from prepare_j3_intent_dataset import load_rows, split_rows
-
 from app.graph.supervisor import (
     SUPERVISOR_INSTRUCTION,
     SupervisorRequest,
@@ -24,6 +22,7 @@ from app.graph.supervisor import (
 )
 from app.llm.base import ProviderUnavailable
 from app.llm.factory import create_provider
+from prepare_j3_intent_dataset import load_rows, split_rows
 
 BATCH_SIZE = 20
 MAX_RETRIES = 2

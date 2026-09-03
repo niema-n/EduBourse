@@ -74,9 +74,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    from sklearn.metrics import classification_report, confusion_matrix, f1_score
-
     from app.multilingual.detector import detect_language
+    from sklearn.metrics import classification_report, confusion_matrix, f1_score
 
     args = parse_args()
     dataset_path = args.dataset
