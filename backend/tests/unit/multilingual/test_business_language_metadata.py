@@ -1,7 +1,7 @@
 import pytest
 
-from app.graph.state import create_turn_input
 from app.graph.language_adapter import normalize_business_language
+from app.graph.state import create_turn_input
 
 
 @pytest.mark.parametrize(

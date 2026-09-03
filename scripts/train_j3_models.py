@@ -15,8 +15,9 @@ from sklearn.pipeline import FeatureUnion, Pipeline
 
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parents[1] / "backend"))
-from app.graph.intent import normalize_text
 from prepare_j3_intent_dataset import load_rows, split_rows
+
+from app.graph.intent import normalize_text
 
 SEED = 42
 
