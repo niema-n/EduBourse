@@ -14,3 +14,8 @@ from app.multilingual.script_detector import detect_script
 )
 def test_detect_script(text: str, expected: str) -> None:
     assert detect_script(text) == expected
+
+
+@pytest.mark.parametrize("text", ["\ufeff", "؟", "،", "ـ", "١٢٣"])
+def test_detect_script_ignores_non_letter_arabic_codepoints(text: str) -> None:
+    assert detect_script(text) == "latin"

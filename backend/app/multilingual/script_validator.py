@@ -1,3 +1,5 @@
+import re
+
 from app.multilingual.models import LanguageCode, ScriptCode, ScriptValidationResult
 from app.multilingual.script_detector import count_scripts, detect_script
 
@@ -8,6 +10,16 @@ EXPECTED_SCRIPT_BY_LANGUAGE: dict[LanguageCode, ScriptCode] = {
     "ary-latin": "latin",
     "ary-arabic": "arabic",
 }
+FINANCIAL_ACRONYMS = {"ETF", "IPO", "OPCVM", "CISI", "MASI"}
+ACRONYM_RE = re.compile(r"\b[A-Z]{2,8}\b")
+
+
+def _latin_acronym_letter_count(text: str) -> int:
+    return sum(
+        len(match.group(0))
+        for match in ACRONYM_RE.finditer(text)
+        if match.group(0) in FINANCIAL_ACRONYMS
+    )
 
 
 def validate_script(text: str, expected_language: LanguageCode) -> ScriptValidationResult:
@@ -24,9 +36,13 @@ def validate_script(text: str, expected_language: LanguageCode) -> ScriptValidat
         )
 
     if detected_script == "mixed":
+        weighted_latin_count = latin_count
+        if expected_script == "arabic":
+            weighted_latin_count = max(0, latin_count - _latin_acronym_letter_count(text))
+
         if expected_script == "latin" and latin_count >= arabic_count:
             valid = True
-        elif expected_script == "arabic" and arabic_count >= latin_count:
+        elif expected_script == "arabic" and arabic_count >= weighted_latin_count:
             valid = True
         else:
             valid = False

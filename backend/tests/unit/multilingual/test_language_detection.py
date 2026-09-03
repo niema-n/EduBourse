@@ -93,3 +93,130 @@ def test_ambiguous_short_phrase_has_low_confidence() -> None:
     assert result.language in {"fr", "en"}
     assert result.confidence is not None
     assert result.confidence <= 0.40
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Thanks, that was very clear.",
+        "Is technical analysis reliable?",
+        "Please explain volatility in simple terms.",
+        "I would like a simple beginner guide.",
+    ],
+)
+def test_detects_natural_english_regressions(text: str) -> None:
+    assert detect_language(text).language == "en"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "wa9ila khassni nqra chwiya 9bel ma nbda",
+        "hadchi s3ib bezzaf 3liya",
+        "ana jdid f had lmajal",
+        "chhal mn dirham khassni bach nbda?",
+        "kolchi kayqol lbourse khatira",
+        "makanfhemch had rendement o risque",
+        "ma3ndich wa9t bach ntab3 lmarche kol yom",
+        "safi fhemt, chokran bzaf",
+    ],
+)
+def test_detects_darija_latin_regressions(text: str) -> None:
+    assert detect_language(text).language == "ary-latin"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "خاصني شي كتاب باش نتعلم",
+        "شحال من درهم خاصني باش نبدا؟",
+        "ماعنديش الوقت باش نتبع السوق",
+        "صاحبي قال ليا خاص التنويع",
+        "كلشي كيقول البورصة خطيرة",
+        "بغينا نعرفو الفرق بين البنك والبورصة",
+        "شكون لي كيراقب البورصة فالمغرب؟",
+        "ماشي مشكل إلا خسرت شوية؟",
+    ],
+)
+def test_detects_darija_arabic_regressions(text: str) -> None:
+    assert detect_language(text).language == "ary-arabic"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "ما هي البورصة؟",
+        "كيف يمكنني التعلم؟",
+        "أين أجد التكوين؟",
+        "لماذا يتغير سعر السهم؟",
+        "ما المقصود بتنويع المحفظة؟",
+    ],
+)
+def test_standard_arabic_not_reclassified_as_darija(text: str) -> None:
+    assert detect_language(text).language == "ar"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "شنو هي البورصة؟",
+        "كيفاش نقدر نتعلم؟",
+        "فين نلقى التكوين؟",
+        "علاش كيتبدل ثمن السهم؟",
+        "بغيت نفهم البورصة",
+    ],
+)
+def test_darija_arabic_not_reclassified_as_standard_arabic(text: str) -> None:
+    assert detect_language(text).language == "ary-arabic"
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("Je veux comprendre la Bourse.", "fr"),
+        ("Cette action a baissé de 3 %.", "fr"),
+        ("Il existe 7 catégories.", "fr"),
+        ("J'ai acheté 9 titres fictifs.", "fr"),
+        ("bghit nefhem lboursa", "ary-latin"),
+        ("7it l'bourse s3iba", "ary-latin"),
+        ("ma3ndich wa9t", "ary-latin"),
+        ("chhal khassni bach nbda", "ary-latin"),
+    ],
+)
+def test_french_and_darija_latin_digit_regressions(text: str, expected: str) -> None:
+    assert detect_language(text).language == expected
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("wach OPCVM fih risk?", "ary-latin"),
+        ("شنو هو MASI؟", "ary-arabic"),
+        ("I want to understand السهم", "en"),
+        ("Bonjour؟", "fr"),
+        ("Le prix est ٥٠٠ dirhams", "fr"),
+    ],
+)
+def test_code_switching_dominance(text: str, expected: str) -> None:
+    assert detect_language(text).language == expected
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("شَنو هي البورصة؟", "ary-arabic"),
+        ("شـــنو هي البورصة؟", "ary-arabic"),
+        ("مَا هُوَ السَّهْمُ؟", "ar"),
+    ],
+)
+def test_arabic_diacritics_and_tatweel(text: str, expected: str) -> None:
+    assert detect_language(text).language == expected
+
+
+@pytest.mark.parametrize("text", ["", " ", "?", "123", "😂", "---", "\n\t", "\ufeff"])
+def test_edge_cases_do_not_crash_and_stay_low_confidence(text: str) -> None:
+    result = detect_language(text)
+
+    assert result.language in {"fr", "en", "ar", "ary-latin", "ary-arabic"}
+    assert result.confidence is not None
+    assert result.confidence <= 0.25

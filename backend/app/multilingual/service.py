@@ -1,5 +1,10 @@
 from app.multilingual.detector import detect_language
-from app.multilingual.models import LanguageAnalysis, LanguageCode, ScriptValidationResult
+from app.multilingual.models import (
+    LanguageAnalysis,
+    LanguageCode,
+    ScriptCode,
+    ScriptValidationResult,
+)
 from app.multilingual.normalizer import normalize_text
 from app.multilingual.script_detector import detect_script
 from app.multilingual.script_validator import validate_script
@@ -12,7 +17,7 @@ class MultilingualService:
     def normalize(self, text: str) -> str:
         return normalize_text(text)
 
-    def detect_script(self, text: str) -> str:
+    def detect_script(self, text: str) -> ScriptCode:
         return detect_script(text)
 
     def validate_response_script(

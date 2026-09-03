@@ -24,6 +24,9 @@ jobs:
         run: ruff check .
       - name: Tests
         run: pytest
+      - name: Multilingual challenge evaluation
+        working-directory: .
+        run: python scripts/evaluate_multilingual.py --dataset evaluation/multilingual/challenge_dataset.jsonl
 
   frontend:
     runs-on: ubuntu-latest
