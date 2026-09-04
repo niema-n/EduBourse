@@ -34,6 +34,17 @@ class Settings(BaseSettings):
     frontend_url: str = Field(default="http://localhost:5173", alias="FRONTEND_URL")
     log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
+    voice_provider: str = Field(default="gemini", alias="VOICE_PROVIDER")
+    voice_mode: str = Field(default="streaming", alias="VOICE_MODE")
+    gemini_api_key: str = Field(default="", alias="GEMINI_API_KEY")
+    gemini_stt_model: str = Field(default="", alias="GEMINI_STT_MODEL")
+    gemini_tts_model: str = Field(
+        default="gemini-3.1-flash-tts-preview", alias="GEMINI_TTS_MODEL"
+    )
+    gemini_tts_voice: str = Field(default="Kore", alias="GEMINI_TTS_VOICE")
+    gemini_http_timeout_ms: int = Field(default=60_000, alias="GEMINI_HTTP_TIMEOUT_MS")
+    voice_max_audio_bytes: int = Field(default=10_485_760, alias="VOICE_MAX_AUDIO_BYTES")
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

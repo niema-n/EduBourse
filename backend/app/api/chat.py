@@ -32,7 +32,7 @@ def get_chat_graph() -> Any:
     return build_graph(supervisor_provider=provider)
 
 
-def chat(
+def process_text_message(
     payload: ChatRequest,
     graph: Annotated[Any, Depends(get_chat_graph)],
 ) -> ChatResponse:
@@ -99,6 +99,13 @@ def chat(
         thread_id=payload.thread_id.strip(),
         status=status,
     )
+
+
+def chat(
+    payload: ChatRequest,
+    graph: Annotated[Any, Depends(get_chat_graph)],
+) -> ChatResponse:
+    return process_text_message(payload, graph)
 
 
 router.add_api_route(
