@@ -47,6 +47,9 @@ class Settings(BaseSettings):
         default="gemini-3.5-transcribe-live", alias="GEMINI_LIVE_STT_MODEL"
     )
     voice_ws_max_chunk_bytes: int = Field(default=65_536, alias="VOICE_WS_MAX_CHUNK_BYTES")
+    voice_ws_output_chunk_bytes: int = Field(
+        default=4_096, alias="VOICE_WS_OUTPUT_CHUNK_BYTES"
+    )
     voice_ws_max_session_seconds: int = Field(
         default=300, alias="VOICE_WS_MAX_SESSION_SECONDS"
     )
@@ -68,6 +71,12 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def reject_placeholder_credentials_outside_local(self) -> "Settings":
+        if self.voice_ws_output_chunk_bytes <= 0:
+            raise ValueError("VOICE_WS_OUTPUT_CHUNK_BYTES must be greater than zero")
+        if self.voice_ws_output_chunk_bytes > self.voice_ws_max_chunk_bytes:
+            raise ValueError(
+                "VOICE_WS_OUTPUT_CHUNK_BYTES must not exceed VOICE_WS_MAX_CHUNK_BYTES"
+            )
         if self.app_env not in {"local", "test"}:
             password = self.postgres_password.strip().lower()
             if password in LOCAL_PLACEHOLDER_PASSWORDS:

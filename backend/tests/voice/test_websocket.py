@@ -97,6 +97,7 @@ def make_client(session, tts=None, *, max_chunk=65536, max_seconds=300, supervis
     old_settings = voice_api.get_settings
     voice_api.get_settings = lambda: SimpleNamespace(
         voice_ws_max_chunk_bytes=max_chunk,
+        voice_ws_output_chunk_bytes=min(4096, max_chunk),
         voice_ws_max_session_seconds=max_seconds,
     )
     return TestClient(app), provider, tts, old_settings
@@ -786,3 +787,143 @@ def test_live_websocket_disconnect_during_processing_runs_no_business_turn():
 
     assert session.closed is True
     assert tts.calls == []
+
+
+class BargeLiveSession(FakeLiveSession):
+    def __init__(self, turn_events):
+        super().__init__(events=[], sent_audio=[])
+        self.turn_events = turn_events
+        self.current_turn = -1
+
+    async def start_turn(self):
+        self.started_turns += 1
+        self.current_turn += 1
+
+    async def receive_events(self):
+        for event in self.turn_events[self.current_turn]:
+            yield event
+
+
+class LargeTTS(FakeTTS):
+    def synthesize(self, text: str, *, language: str, script: str):
+        self.calls.append((text, language, script))
+        return SpeechSynthesisResult(
+            audio=b"\x01\x00" * 20,
+            mime_type="audio/l16",
+            provider=self.provider_name,
+            model="fake-model",
+            voice="Kore",
+            sample_rate=24000,
+            channels=1,
+            sample_width_bytes=2,
+        )
+
+
+def test_live_websocket_barge_in_cancels_old_output_and_reuses_live_session(monkeypatch):
+    session = BargeLiveSession(
+        [
+            [SimpleNamespace(kind="final", text="What is a stock?")],
+            [SimpleNamespace(kind="final", text="How do I save money?")],
+        ]
+    )
+    tts = LargeTTS()
+    release_output = threading.Event()
+    original_send_bytes = voice_api._send_bytes
+    sends = 0
+
+    async def paused_send_bytes(websocket, lock, audio):
+        nonlocal sends
+        sends += 1
+        if sends == 3:
+            await __import__("asyncio").to_thread(release_output.wait, 5)
+        await original_send_bytes(websocket, lock, audio)
+
+    monkeypatch.setattr(voice_api, "_send_bytes", paused_send_bytes)
+    client, provider, _, old_settings = make_client(session, tts, max_chunk=4)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            ready = websocket.receive_json()
+            old_request_id = ready["request_id"]
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            while websocket.receive_json()["type"] != "response.audio.start":
+                pass
+            websocket.send_json({"type": "audio.start"})
+            while True:
+                message = websocket.receive()
+                if message.get("bytes") is not None:
+                    continue
+                interrupted = json.loads(message["text"])
+                if interrupted["type"] == "response.interrupted":
+                    break
+            assert interrupted == {
+                "type": "response.interrupted",
+                "request_id": old_request_id,
+                "reason": "barge_in",
+            }
+            release_output.set()
+            websocket.send_bytes(b"\x02\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = _finish_messages(websocket)
+        new_response = next(m for m in messages if m["type"] == "response.text")
+        assert new_response["request_id"] != old_request_id
+        assert new_response["thread_id"] == "thread-1"
+        assert [m["type"] for m in messages].count("response.complete") == 1
+        assert session.started_turns == 2
+        assert provider.session is session
+        assert len(tts.calls) == 2
+    finally:
+        cleanup(old_settings)
+
+
+def test_audio_timing_helpers_use_output_metadata():
+    assert voice_api._audio_bytes_per_second(24000, 1, 2) == 48000
+    assert voice_api._audio_duration_seconds(4096, 24000, 1, 2) == pytest.approx(
+        0.0853333333
+    )
+    assert voice_api._audio_duration_seconds(209280, 24000, 1, 2) == pytest.approx(4.36)
+
+
+def test_live_websocket_realistic_barge_in_after_first_frame(monkeypatch):
+    session = BargeLiveSession(
+        [
+            [SimpleNamespace(kind="final", text="What is a stock?")],
+            [SimpleNamespace(kind="final", text="How do I save money?")],
+        ]
+    )
+    tts = LargeTTS()
+    client, provider, _, old_settings = make_client(session, tts, max_chunk=4)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            ready = websocket.receive_json()
+            old_request_id = ready["request_id"]
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            first_audio_seen = False
+            interrupted = None
+            while interrupted is None:
+                message = websocket.receive()
+                if message.get("bytes") is not None:
+                    if not first_audio_seen:
+                        first_audio_seen = True
+                        websocket.send_json({"type": "audio.start"})
+                    continue
+                payload = json.loads(message["text"])
+                if payload["type"] == "response.interrupted":
+                    interrupted = payload
+            assert first_audio_seen is True
+            assert interrupted == {
+                "type": "response.interrupted",
+                "request_id": old_request_id,
+                "reason": "barge_in",
+            }
+            websocket.send_bytes(b"\x02\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = _finish_messages(websocket)
+        assert provider.session is session
+        assert session.started_turns == 2
+        assert [m["type"] for m in messages].count("response.complete") == 1
+    finally:
+        cleanup(old_settings)

@@ -21,6 +21,7 @@ from app.voice.errors import (
     InvalidVoiceState,
     SessionTimeout,
     TranscriptionFailed,
+    TTSFailed,
     VoiceError,
 )
 from app.voice.providers.factory import create_live_provider, create_voice_provider
@@ -68,6 +69,18 @@ def _busy_payload(request_id: str) -> dict[str, str]:
     return _error_payload(BusyVoiceInput("busy"), request_id)
 
 
+def _audio_bytes_per_second(sample_rate: int, channels: int, sample_width_bytes: int) -> int:
+    if sample_rate <= 0 or channels <= 0 or sample_width_bytes <= 0:
+        raise ValueError("audio metadata must contain positive values")
+    return sample_rate * channels * sample_width_bytes
+
+
+def _audio_duration_seconds(
+    audio_bytes: int, sample_rate: int, channels: int, sample_width_bytes: int
+) -> float:
+    return audio_bytes / _audio_bytes_per_second(sample_rate, channels, sample_width_bytes)
+
+
 def _validate_start(message: dict[str, Any]) -> tuple[str, str]:
     if message.get("type") != "session.start":
         raise InvalidVoiceSession("session.start is required")
@@ -113,14 +126,18 @@ async def live_voice(
     request_id = str(uuid.uuid4())
     live_session = None
     active_task: asyncio.Task[None] | None = None
+    turn_generation = 0
     state = "NEW"
     session_id = None
     thread_id = None
     had_audio = False
+    turn_started = False
     session_log_id = request_id
     turns = 0
     audio_chunks = 0
     audio_bytes = 0
+    assistant_audio_chunks_sent = 0
+    assistant_audio_bytes_sent = 0
     started = time.monotonic()
 
     async def send_error(error: VoiceError, current_request_id: str) -> None:
@@ -129,18 +146,25 @@ async def live_voice(
         except Exception:
             pass
 
-    async def process_turn(current_request_id: str) -> None:
-        nonlocal state, had_audio, request_id
-        turn_started = time.monotonic()
+    async def process_turn(current_request_id: str, generation: int) -> None:
+        nonlocal state, had_audio, request_id, turn_started
+        nonlocal assistant_audio_chunks_sent, assistant_audio_bytes_sent
+        turn_started_at = time.monotonic()
         final_text = None
         latest_interim_text = None
         saw_input_transcription = False
+
+        def owns_turn() -> bool:
+            return generation == turn_generation
+
         try:
             remaining = settings.voice_ws_max_session_seconds - (time.monotonic() - started)
             if remaining <= 0:
                 raise SessionTimeout("voice session timed out")
             await live_session.finish_turn()
             async for event in receive_final_event(live_session, min(30, remaining)):
+                if not owns_turn():
+                    return
                 if getattr(event, "source", "") == "input_transcription":
                     saw_input_transcription = True
                 if event.kind == "partial":
@@ -180,6 +204,8 @@ async def live_voice(
                 )
             except Exception as exc:
                 raise BusinessPipelineFailed("business pipeline failed") from exc
+            if not owns_turn():
+                return
             state = "SPEAKING"
             await _send(
                 websocket,
@@ -197,6 +223,19 @@ async def live_voice(
                 language=response.language,
                 script=response.script,
             )
+            if not owns_turn():
+                return
+            try:
+                bytes_per_second = _audio_bytes_per_second(
+                    synthesis.sample_rate,
+                    synthesis.channels,
+                    synthesis.sample_width_bytes,
+                )
+            except (AttributeError, TypeError, ValueError) as exc:
+                raise TTSFailed("invalid synthesized audio metadata") from exc
+            output_chunk_bytes = settings.voice_ws_output_chunk_bytes
+            if output_chunk_bytes <= 0 or output_chunk_bytes > settings.voice_ws_max_chunk_bytes:
+                raise TTSFailed("invalid output audio chunk configuration")
             await _send(
                 websocket,
                 send_lock,
@@ -209,17 +248,36 @@ async def live_voice(
                     "sample_width_bytes": synthesis.sample_width_bytes,
                 },
             )
-            for offset in range(0, len(synthesis.audio), settings.voice_ws_max_chunk_bytes):
+            pace_started = time.monotonic()
+            bytes_sent = 0
+            assistant_audio_chunks_sent = 0
+            assistant_audio_bytes_sent = 0
+            for offset in range(0, len(synthesis.audio), output_chunk_bytes):
+                if not owns_turn():
+                    return
+                chunk = synthesis.audio[offset : offset + output_chunk_bytes]
                 await _send_bytes(
                     websocket,
                     send_lock,
-                    synthesis.audio[offset : offset + settings.voice_ws_max_chunk_bytes],
+                    chunk,
                 )
+                bytes_sent += len(chunk)
+                assistant_audio_chunks_sent += 1
+                assistant_audio_bytes_sent += len(chunk)
+                delay = bytes_sent / bytes_per_second - (time.monotonic() - pace_started)
+                if delay > 0:
+                    await asyncio.sleep(delay)
+                if not owns_turn():
+                    return
+            if not owns_turn():
+                return
             await _send(
                 websocket,
                 send_lock,
                 {"type": "response.audio.end", "request_id": current_request_id},
             )
+            if not owns_turn():
+                return
             await _send(
                 websocket,
                 send_lock,
@@ -229,14 +287,17 @@ async def live_voice(
                     "thread_id": thread_id,
                 },
             )
+            if not owns_turn():
+                return
             state = "READY"
             had_audio = False
+            turn_started = False
             request_id = str(uuid.uuid4())
             logger.info(
                 "voice_ws_turn_complete request_id=%s duration_ms=%s route=%s "
                 "blocked=%s status=%s",
                 current_request_id,
-                round((time.monotonic() - turn_started) * 1000, 2),
+                round((time.monotonic() - turn_started_at) * 1000, 2),
                 response.route,
                 response.blocked,
                 response.status,
@@ -244,8 +305,11 @@ async def live_voice(
         except asyncio.CancelledError:
             raise
         except VoiceError as exc:
+            if not owns_turn():
+                return
             state = "READY"
             had_audio = False
+            turn_started = False
             code = getattr(exc, "code", "VOICE_PROVIDER_UNAVAILABLE")
             if code == "TRANSCRIPTION_TIMEOUT":
                 # Diagnostics only: never log or forward the partial hypothesis itself.
@@ -263,13 +327,17 @@ async def live_voice(
                     "voice_ws_turn_error request_id=%s code=%s", current_request_id, code
                 )
             await send_error(exc, current_request_id)
-        except Exception:
+        except Exception as exc:
+            if not owns_turn():
+                return
             state = "READY"
             had_audio = False
+            turn_started = False
             logger.warning(
-                "voice_ws_turn_error request_id=%s code=%s",
+                "voice_ws_turn_error request_id=%s code=%s detail=%s",
                 current_request_id,
                 "BUSINESS_PIPELINE_ERROR",
+                type(exc).__name__,
             )
             await send_error(BusinessPipelineFailed("turn failed"), current_request_id)
 
@@ -321,8 +389,9 @@ async def live_voice(
                 audio = packet["bytes"]
                 if len(audio) > settings.voice_ws_max_chunk_bytes:
                     raise AudioChunkTooLarge("audio chunk exceeds limit")
-                if not had_audio:
+                if not turn_started:
                     await live_session.start_turn()
+                    turn_started = True
                 await live_session.send_audio(audio)
                 had_audio = True
                 audio_chunks += 1
@@ -344,6 +413,50 @@ async def live_voice(
                     await asyncio.gather(active_task, return_exceptions=True)
                 state = "CLOSED"
                 return
+            if event_type == "audio.start":
+                if state == "PROCESSING":
+                    await _send(websocket, send_lock, _busy_payload(request_id))
+                    continue
+                if state == "SPEAKING":
+                    old_request_id = request_id
+                    turn_generation += 1
+                    if active_task is not None and not active_task.done():
+                        active_task.cancel()
+                        await asyncio.gather(active_task, return_exceptions=True)
+                    active_task = None
+                    request_id = str(uuid.uuid4())
+                    state = "RECEIVING_AUDIO"
+                    had_audio = False
+                    logger.info(
+                        "voice_ws_barge_in session_log_id=%s old_request_id=%s "
+                        "new_generation=%s state=%s old_audio_chunks_sent=%s "
+                        "old_audio_bytes_sent=%s",
+                        session_log_id,
+                        old_request_id,
+                        turn_generation,
+                        "SPEAKING",
+                        assistant_audio_chunks_sent,
+                        assistant_audio_bytes_sent,
+                    )
+                    await _send(
+                        websocket,
+                        send_lock,
+                        {
+                            "type": "response.interrupted",
+                            "request_id": old_request_id,
+                            "reason": "barge_in",
+                        },
+                    )
+                    await live_session.start_turn()
+                    turn_started = True
+                    continue
+                if state == "READY":
+                    await live_session.start_turn()
+                    state = "RECEIVING_AUDIO"
+                    had_audio = False
+                    turn_started = True
+                    continue
+                raise InvalidVoiceState("audio.start is not allowed in the current state")
             if busy:
                 if event_type == "session.start":
                     await send_error(
@@ -363,6 +476,8 @@ async def live_voice(
             if state != "RECEIVING_AUDIO" or not had_audio:
                 raise InvalidVoiceState("audio.end requires audio chunks")
             state = "PROCESSING"
+            turn_generation += 1
+            generation = turn_generation
             turns += 1
             logger.info(
                 "voice_ws_turn_start request_id=%s audio_chunks=%d audio_bytes=%d",
@@ -381,7 +496,7 @@ async def live_voice(
                     "thread_id": thread_id,
                 },
             )
-            active_task = asyncio.create_task(process_turn(request_id))
+            active_task = asyncio.create_task(process_turn(request_id, generation))
     except WebSocketDisconnect:
         return
     except TimeoutError:
