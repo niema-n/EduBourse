@@ -96,9 +96,11 @@ def main() -> int:
                 continue
             print(message)
             payload = json.loads(message)
-            if payload.get("code") == "BUSY":
-                # BUSY is a non-fatal notice that one frame was dropped; keep waiting.
-                continue
+            if payload.get("type") == "error":
+                # Missing fatal on older servers is conservatively fatal.
+                if payload.get("fatal", True) is False:
+                    continue
+                break
             if payload.get("type") in {"response.complete", "error"}:
                 break
         websocket.send(json.dumps({"type": "session.close"}))

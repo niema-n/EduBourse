@@ -28,3 +28,11 @@ def test_settings_reject_unknown_environment() -> None:
 def test_settings_reject_placeholder_password_outside_local_or_test() -> None:
     with pytest.raises(ValidationError):
         Settings(APP_ENV="production", POSTGRES_PASSWORD="change_me_for_local_only")
+
+
+def test_settings_validate_voice_output_chunk_boundaries() -> None:
+    assert Settings(VOICE_WS_MAX_CHUNK_BYTES=4096).voice_ws_output_chunk_bytes == 4096
+    with pytest.raises(ValidationError):
+        Settings(VOICE_WS_MAX_CHUNK_BYTES=4096, VOICE_WS_OUTPUT_CHUNK_BYTES=0)
+    with pytest.raises(ValidationError):
+        Settings(VOICE_WS_MAX_CHUNK_BYTES=4096, VOICE_WS_OUTPUT_CHUNK_BYTES=4097)

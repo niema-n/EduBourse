@@ -3,7 +3,8 @@ from __future__ import annotations
 import importlib.util
 import json
 import threading
-from dataclasses import dataclass
+import time
+from dataclasses import dataclass, field
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -13,7 +14,12 @@ from fastapi.testclient import TestClient
 from app.api import voice as voice_api
 from app.graph.core import build_graph
 from app.main import app
-from app.voice.errors import TTSFailed, VoiceProviderUnavailable
+from app.voice.errors import (
+    TranscriptionFailed,
+    TranscriptionTimeout,
+    TTSFailed,
+    VoiceProviderUnavailable,
+)
 from app.voice.models import SpeechSynthesisResult
 from app.voice.providers.live import GeminiLiveSTTProvider, GeminiLiveTranscriptionSession
 
@@ -32,17 +38,21 @@ class FakeLiveSession:
     events: list[object]
     sent_audio: list[bytes]
     finished: bool = False
+    finished_turns: int = 0
     closed: bool = False
     started_turns: int = 0
+    send_times: list[float] = field(default_factory=list)
 
     async def start_turn(self) -> None:
         self.started_turns += 1
 
     async def send_audio(self, audio: bytes) -> None:
         self.sent_audio.append(audio)
+        self.send_times.append(time.monotonic())
 
     async def finish_turn(self) -> None:
         self.finished = True
+        self.finished_turns += 1
 
     async def receive_events(self):
         for event in self.events:
@@ -228,6 +238,78 @@ def test_live_websocket_rejects_malformed_event_json():
         cleanup(old_settings)
 
 
+def test_voice_error_payloads_expose_fatality_context():
+    busy = voice_api._busy_payload("request-1")
+    assert busy["fatal"] is False
+    fatal = voice_api._error_payload(
+        VoiceProviderUnavailable("private"), "request-2", fatal=True
+    )
+    assert fatal["fatal"] is True
+    assert "private" not in fatal["message"]
+
+
+def test_audio_pacing_uses_cumulative_target():
+    rate = voice_api._audio_bytes_per_second(24000, 1, 2)
+    assert voice_api._audio_pacing_delay(4096, rate, 0.0, 0.0) == pytest.approx(
+        4096 / 48000
+    )
+    assert voice_api._audio_pacing_delay(48000, rate, 0.0, 0.5) == pytest.approx(0.5)
+    assert voice_api._audio_duration_seconds(48000, 24000, 1, 2) == pytest.approx(1.0)
+    assert voice_api._audio_duration_seconds(209280, 24000, 1, 2) == pytest.approx(4.36)
+
+
+def test_duplicate_audio_start_is_non_fatal_and_socket_reusable():
+    session = FakeLiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], []
+    )
+    client, _, tts, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_json({"type": "audio.start"})
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.start"})
+            duplicate = websocket.receive_json()
+            assert duplicate["code"] == "INVALID_STATE"
+            assert duplicate["fatal"] is False
+            websocket.send_bytes(b"\x01\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = _finish_messages(websocket)
+        assert messages[-1]["type"] == "response.complete"
+        assert session.started_turns == 1
+        assert session.finished_turns == 1
+        assert len(tts.calls) == 1
+    finally:
+        cleanup(old_settings)
+
+
+def test_empty_utterance_is_non_fatal_balanced_and_reusable():
+    session = FakeLiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], []
+    )
+    client, _, tts, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_json({"type": "audio.start"})
+            websocket.send_json({"type": "audio.end"})
+            empty = websocket.receive_json()
+            assert empty["code"] == "INVALID_AUDIO_FORMAT"
+            assert empty["fatal"] is False
+            websocket.send_json({"type": "audio.start"})
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = _finish_messages(websocket)
+        assert messages[-1]["type"] == "response.complete"
+        assert session.started_turns == 2
+        assert session.finished_turns == 2
+        assert len(tts.calls) == 1
+    finally:
+        cleanup(old_settings)
+
+
 def test_live_websocket_ignores_model_text_and_requires_final_for_j4():
     session = FakeLiveSession(
         events=[SimpleNamespace(kind="final", text="What is a stock?")], sent_audio=[]
@@ -358,6 +440,35 @@ def test_live_websocket_session_close_cleans_up():
             websocket.receive_json()
             websocket.send_json({"type": "session.close"})
         assert provider.connected is True
+        assert session.closed is True
+    finally:
+        cleanup(old_settings)
+
+
+def test_live_websocket_session_close_balances_open_activity():
+    session = FakeLiveSession([], [])
+    client, _, _, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_json({"type": "audio.start"})
+            websocket.send_json({"type": "session.close"})
+        assert session.finished_turns == 1
+        assert session.closed is True
+    finally:
+        cleanup(old_settings)
+
+
+def test_live_websocket_disconnect_balances_open_activity():
+    session = FakeLiveSession([], [])
+    client, _, _, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_json({"type": "audio.start"})
+        assert session.finished_turns == 1
         assert session.closed is True
     finally:
         cleanup(old_settings)
@@ -551,10 +662,19 @@ def test_live_websocket_drops_processing_audio_and_next_turn_is_clean():
             websocket.send_json({"type": "audio.end"})
             assert websocket.receive_json()["type"] == "processing.started"
             assert tts.entered.wait(timeout=5)
+            websocket.send_json(start_message())
+            session_start_error = None
+            while session_start_error is None:
+                candidate = websocket.receive_json()
+                if candidate.get("code") == "INVALID_STATE":
+                    session_start_error = candidate
+            assert session_start_error["code"] == "INVALID_STATE"
+            assert session_start_error["fatal"] is False
             for _ in range(5):
                 websocket.send_bytes(b"busy")
             busy = _receive_busy(websocket, 5)
             assert sum(message.get("code") == "BUSY" for message in busy) == 5
+            assert all(message["fatal"] is False for message in busy)
             assert session.sent_audio == [b"\x00\x00"]
             tts.release.set()
             messages = _finish_messages(websocket)
@@ -603,7 +723,9 @@ def test_live_websocket_reports_provider_failure():
     try:
         with client.websocket_connect("/api/v1/voice/live") as websocket:
             websocket.send_json(start_message())
-            assert websocket.receive_json()["code"] == "VOICE_PROVIDER_UNAVAILABLE"
+            error = websocket.receive_json()
+            assert error["code"] == "VOICE_PROVIDER_UNAVAILABLE"
+            assert error["fatal"] is True
     finally:
         cleanup(old_settings)
 
@@ -626,6 +748,192 @@ def test_live_websocket_reports_tts_failure_without_detail_leak():
             messages = _finish_messages(websocket)
         assert messages[-1]["code"] == "TTS_FAILED"
         assert "provider detail" not in messages[-1]["message"]
+    finally:
+        cleanup(old_settings)
+
+
+def test_tts_failure_preserves_text_and_allows_next_turn():
+    class FailOnceTTS(FakeTTS):
+        def __init__(self):
+            super().__init__()
+            self.failed = False
+
+        def synthesize(self, text: str, *, language: str, script: str):
+            if not self.failed:
+                self.failed = True
+                raise TTSFailed("private provider detail")
+            return super().synthesize(text, language=language, script=script)
+
+    session = FakeLiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], []
+    )
+    tts = FailOnceTTS()
+    client, _, _, old_settings = make_client(session, tts)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            first = _finish_messages(websocket)
+            assert any(message["type"] == "response.text" for message in first)
+            assert first[-1]["code"] == "TTS_FAILED"
+            assert first[-1]["fatal"] is False
+            assert not any(message["type"] == "response.audio.start" for message in first)
+            websocket.send_bytes(b"\x01\x00")
+            websocket.send_json({"type": "audio.end"})
+            second = _finish_messages(websocket)
+        assert second[-1]["type"] == "response.complete"
+        assert len(tts.calls) == 1
+    finally:
+        cleanup(old_settings)
+
+
+class FailOnceReceiveSession(FakeLiveSession):
+    def __init__(self, events, sent_audio, error):
+        super().__init__(events, sent_audio)
+        self.error = error
+        self.failed = False
+
+    async def receive_events(self):
+        if not self.failed:
+            self.failed = True
+            raise self.error
+        async for event in super().receive_events():
+            yield event
+
+
+def test_unpaced_inbound_audio_forwards_all_chunks_without_playback_delay():
+    session = FakeLiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], []
+    )
+    chunks = [bytes([index % 256]) * 3200 for index in range(30)]
+    client, _, _, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_json({"type": "audio.start"})
+            started = time.monotonic()
+            for chunk in chunks:
+                websocket.send_bytes(chunk)
+            forwarded = time.monotonic()
+            websocket.send_json({"type": "audio.end"})
+            _finish_messages(websocket)
+        assert session.sent_audio == chunks
+        assert len(session.send_times) == 30
+        assert session.send_times[-1] - session.send_times[0] < 0.5
+        assert forwarded - started < 0.5
+    finally:
+        cleanup(old_settings)
+
+
+def test_unexpected_turn_exception_is_fatal_and_terminates_session():
+    class MalformedTTS(FakeTTS):
+        def synthesize(self, text: str, *, language: str, script: str):
+            self.calls.append((text, language, script))
+            return SpeechSynthesisResult(
+                audio=None,
+                mime_type="audio/l16",
+                provider=self.provider_name,
+                model="fake-model",
+                voice="Kore",
+                sample_rate=24000,
+                channels=1,
+                sample_width_bytes=2,
+            )
+
+    session = FakeLiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], []
+    )
+    client, _, _, old_settings = make_client(session, MalformedTTS())
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = []
+            while True:
+                message = websocket.receive()
+                if message.get("type") == "websocket.disconnect":
+                    break
+                if message.get("text"):
+                    payload = json.loads(message["text"])
+                    messages.append(payload)
+                    if payload["type"] == "error":
+                        assert payload["code"] == "BUSINESS_PIPELINE_ERROR"
+                        assert payload["fatal"] is True
+                        break
+            assert messages[-1]["fatal"] is True
+            assert websocket.receive()["type"] == "websocket.close"
+        assert session.closed is True
+    finally:
+        cleanup(old_settings)
+
+
+@pytest.mark.parametrize(
+    ("error", "expected_code"),
+    [
+        (TranscriptionFailed("turn failed"), "TRANSCRIPTION_FAILED"),
+        (TranscriptionTimeout("turn timed out"), "TRANSCRIPTION_TIMEOUT"),
+    ],
+)
+def test_turn_transcription_errors_are_non_fatal_and_reusable(error, expected_code):
+    session = FailOnceReceiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], [], error
+    )
+    client, _, tts, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            first = _finish_messages(websocket)
+            assert first[-1]["code"] == expected_code
+            assert first[-1]["fatal"] is False
+            assert tts.calls == []
+            websocket.send_bytes(b"\x01\x00")
+            websocket.send_json({"type": "audio.end"})
+            second = _finish_messages(websocket)
+        assert second[-1]["type"] == "response.complete"
+        assert len(tts.calls) == 1
+    finally:
+        cleanup(old_settings)
+
+
+def test_business_pipeline_error_is_non_fatal_and_reusable(monkeypatch):
+    session = FakeLiveSession(
+        [SimpleNamespace(kind="final", text="What is a stock?")], []
+    )
+    original = voice_api.process_text_message
+    failed = False
+
+    def fail_once(payload, graph):
+        nonlocal failed
+        if not failed:
+            failed = True
+            raise RuntimeError("private business failure")
+        return original(payload, graph)
+
+    monkeypatch.setattr(voice_api, "process_text_message", fail_once)
+    client, _, tts, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            first = _finish_messages(websocket)
+            assert first[-1]["code"] == "BUSINESS_PIPELINE_ERROR"
+            assert first[-1]["fatal"] is False
+            assert tts.calls == []
+            websocket.send_bytes(b"\x01\x00")
+            websocket.send_json({"type": "audio.end"})
+            second = _finish_messages(websocket)
+        assert second[-1]["type"] == "response.complete"
+        assert len(tts.calls) == 1
     finally:
         cleanup(old_settings)
 
@@ -764,7 +1072,9 @@ def test_live_websocket_finalization_timeout_never_promotes_a_partial():
     error = messages[-1]
     assert error["type"] == "error"
     assert error["code"] in {"TRANSCRIPTION_TIMEOUT", "SESSION_TIMEOUT"}
+    assert error["fatal"] is False
     assert tts.calls == []
+    assert session.finished_turns == 1
     assert session.closed is True
 
 

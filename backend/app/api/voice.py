@@ -21,6 +21,7 @@ from app.voice.errors import (
     InvalidVoiceState,
     SessionTimeout,
     TranscriptionFailed,
+    TranscriptionTimeout,
     TTSFailed,
     VoiceError,
 )
@@ -40,7 +41,9 @@ def get_voice_tts_provider():
     return create_voice_provider()
 
 
-def _error_payload(error: VoiceError, request_id: str) -> dict[str, str]:
+def _error_payload(
+    error: VoiceError, request_id: str, *, fatal: bool, message: str | None = None
+) -> dict[str, Any]:
     messages = {
         "INVALID_SESSION": "Invalid voice session.",
         "INVALID_STATE": "The voice session is not ready for this event.",
@@ -60,13 +63,14 @@ def _error_payload(error: VoiceError, request_id: str) -> dict[str, str]:
     return {
         "type": "error",
         "code": code,
-        "message": messages.get(code, "Voice request failed."),
+        "message": message or messages.get(code, "Voice request failed."),
         "request_id": request_id,
+        "fatal": fatal,
     }
 
 
-def _busy_payload(request_id: str) -> dict[str, str]:
-    return _error_payload(BusyVoiceInput("busy"), request_id)
+def _busy_payload(request_id: str) -> dict[str, Any]:
+    return _error_payload(BusyVoiceInput("busy"), request_id, fatal=False)
 
 
 def _audio_bytes_per_second(sample_rate: int, channels: int, sample_width_bytes: int) -> int:
@@ -79,6 +83,13 @@ def _audio_duration_seconds(
     audio_bytes: int, sample_rate: int, channels: int, sample_width_bytes: int
 ) -> float:
     return audio_bytes / _audio_bytes_per_second(sample_rate, channels, sample_width_bytes)
+
+
+def _audio_pacing_delay(
+    bytes_sent: int, bytes_per_second: int, pace_started: float, now: float
+) -> float:
+    target_elapsed = bytes_sent / bytes_per_second
+    return max(0.0, target_elapsed - (now - pace_started))
 
 
 def _validate_start(message: dict[str, Any]) -> tuple[str, str]:
@@ -132,6 +143,7 @@ async def live_voice(
     thread_id = None
     had_audio = False
     turn_started = False
+    live_activity_open = False
     session_log_id = request_id
     turns = 0
     audio_chunks = 0
@@ -140,14 +152,39 @@ async def live_voice(
     assistant_audio_bytes_sent = 0
     started = time.monotonic()
 
-    async def send_error(error: VoiceError, current_request_id: str) -> None:
+    async def send_error(
+        error: VoiceError,
+        current_request_id: str,
+        *,
+        fatal: bool,
+        message: str | None = None,
+    ) -> None:
         try:
-            await _send(websocket, send_lock, _error_payload(error, current_request_id))
+            await _send(
+                websocket,
+                send_lock,
+                _error_payload(error, current_request_id, fatal=fatal, message=message),
+            )
         except Exception:
             pass
 
+    async def finish_open_activity() -> None:
+        nonlocal live_activity_open
+        if not live_activity_open or live_session is None:
+            return
+        try:
+            await live_session.finish_turn()
+        except Exception as exc:
+            logger.warning(
+                "voice_ws_activity_end_cleanup_failed session_log_id=%s error_class=%s",
+                session_log_id,
+                type(exc).__name__,
+            )
+        finally:
+            live_activity_open = False
+
     async def process_turn(current_request_id: str, generation: int) -> None:
-        nonlocal state, had_audio, request_id, turn_started
+        nonlocal state, had_audio, request_id, turn_started, live_activity_open
         nonlocal assistant_audio_chunks_sent, assistant_audio_bytes_sent
         turn_started_at = time.monotonic()
         final_text = None
@@ -162,6 +199,7 @@ async def live_voice(
             if remaining <= 0:
                 raise SessionTimeout("voice session timed out")
             await live_session.finish_turn()
+            live_activity_open = False
             async for event in receive_final_event(live_session, min(30, remaining)):
                 if not owns_turn():
                     return
@@ -217,12 +255,15 @@ async def live_voice(
                     **response.model_dump(),
                 },
             )
-            synthesis = await asyncio.to_thread(
-                tts_provider.synthesize,
-                response.answer,
-                language=response.language,
-                script=response.script,
-            )
+            try:
+                synthesis = await asyncio.to_thread(
+                    tts_provider.synthesize,
+                    response.answer,
+                    language=response.language,
+                    script=response.script,
+                )
+            except Exception as exc:
+                raise TTSFailed("voice response audio failed") from exc
             if not owns_turn():
                 return
             try:
@@ -264,7 +305,9 @@ async def live_voice(
                 bytes_sent += len(chunk)
                 assistant_audio_chunks_sent += 1
                 assistant_audio_bytes_sent += len(chunk)
-                delay = bytes_sent / bytes_per_second - (time.monotonic() - pace_started)
+                delay = _audio_pacing_delay(
+                    bytes_sent, bytes_per_second, pace_started, time.monotonic()
+                )
                 if delay > 0:
                     await asyncio.sleep(delay)
                 if not owns_turn():
@@ -310,6 +353,9 @@ async def live_voice(
             state = "READY"
             had_audio = False
             turn_started = False
+            fatal = not isinstance(
+                exc, (TTSFailed, TranscriptionFailed, TranscriptionTimeout, BusinessPipelineFailed)
+            )
             code = getattr(exc, "code", "VOICE_PROVIDER_UNAVAILABLE")
             if code == "TRANSCRIPTION_TIMEOUT":
                 # Diagnostics only: never log or forward the partial hypothesis itself.
@@ -326,11 +372,11 @@ async def live_voice(
                 logger.warning(
                     "voice_ws_turn_error request_id=%s code=%s", current_request_id, code
                 )
-            await send_error(exc, current_request_id)
+            await send_error(exc, current_request_id, fatal=fatal)
         except Exception as exc:
             if not owns_turn():
                 return
-            state = "READY"
+            state = "ERROR"
             had_audio = False
             turn_started = False
             logger.warning(
@@ -339,7 +385,13 @@ async def live_voice(
                 "BUSINESS_PIPELINE_ERROR",
                 type(exc).__name__,
             )
-            await send_error(BusinessPipelineFailed("turn failed"), current_request_id)
+            await send_error(
+                BusinessPipelineFailed("turn failed"), current_request_id, fatal=True
+            )
+            try:
+                await websocket.close(code=1011)
+            except Exception:
+                pass
 
     try:
         first_packet = await asyncio.wait_for(websocket.receive(), timeout=10)
@@ -392,6 +444,7 @@ async def live_voice(
                 if not turn_started:
                     await live_session.start_turn()
                     turn_started = True
+                    live_activity_open = True
                 await live_session.send_audio(audio)
                 had_audio = True
                 audio_chunks += 1
@@ -411,6 +464,7 @@ async def live_voice(
                 if active_task is not None:
                     active_task.cancel()
                     await asyncio.gather(active_task, return_exceptions=True)
+                await finish_open_activity()
                 state = "CLOSED"
                 return
             if event_type == "audio.start":
@@ -449,12 +503,21 @@ async def live_voice(
                     )
                     await live_session.start_turn()
                     turn_started = True
+                    live_activity_open = True
                     continue
                 if state == "READY":
                     await live_session.start_turn()
                     state = "RECEIVING_AUDIO"
                     had_audio = False
                     turn_started = True
+                    live_activity_open = True
+                    continue
+                if state == "RECEIVING_AUDIO":
+                    await send_error(
+                        InvalidVoiceState("audio.start is already active"),
+                        request_id,
+                        fatal=False,
+                    )
                     continue
                 raise InvalidVoiceState("audio.start is not allowed in the current state")
             if busy:
@@ -462,6 +525,7 @@ async def live_voice(
                     await send_error(
                         InvalidVoiceState("session.start is not allowed while busy"),
                         request_id,
+                        fatal=False,
                     )
                 else:
                     logger.info(
@@ -473,8 +537,19 @@ async def live_voice(
                 continue
             if event_type != "audio.end":
                 raise InvalidVoiceState("unsupported voice event")
-            if state != "RECEIVING_AUDIO" or not had_audio:
+            if state != "RECEIVING_AUDIO":
                 raise InvalidVoiceState("audio.end requires audio chunks")
+            if not had_audio:
+                await finish_open_activity()
+                state = "READY"
+                turn_started = False
+                await send_error(
+                    InvalidAudio("no audio data was received"),
+                    request_id,
+                    fatal=False,
+                    message="No audio data was received for the current utterance.",
+                )
+                continue
             state = "PROCESSING"
             turn_generation += 1
             generation = turn_generation
@@ -500,14 +575,17 @@ async def live_voice(
     except WebSocketDisconnect:
         return
     except TimeoutError:
-        await send_error(SessionTimeout("voice session timed out"), request_id)
+        await send_error(
+            SessionTimeout("voice session timed out"), request_id, fatal=True
+        )
     except VoiceError as exc:
-        await send_error(exc, request_id)
+        await send_error(exc, request_id, fatal=True)
     finally:
         if active_task is not None and not active_task.done():
             active_task.cancel()
             await asyncio.gather(active_task, return_exceptions=True)
         if live_session is not None:
+            await finish_open_activity()
             await live_session.close()
         if session_id is not None:
             logger.info(
