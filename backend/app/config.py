@@ -43,6 +43,13 @@ class Settings(BaseSettings):
     )
     gemini_tts_voice: str = Field(default="Kore", alias="GEMINI_TTS_VOICE")
     gemini_http_timeout_ms: int = Field(default=60_000, alias="GEMINI_HTTP_TIMEOUT_MS")
+    gemini_live_stt_model: str = Field(
+        default="gemini-3.5-transcribe-live", alias="GEMINI_LIVE_STT_MODEL"
+    )
+    voice_ws_max_chunk_bytes: int = Field(default=65_536, alias="VOICE_WS_MAX_CHUNK_BYTES")
+    voice_ws_max_session_seconds: int = Field(
+        default=300, alias="VOICE_WS_MAX_SESSION_SECONDS"
+    )
     voice_max_audio_bytes: int = Field(default=10_485_760, alias="VOICE_MAX_AUDIO_BYTES")
 
     model_config = SettingsConfigDict(
