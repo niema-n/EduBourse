@@ -31,7 +31,8 @@ htmlcov/
 
 *.log
 logs/
-data/
+/data/
+/backend/data/*
 !backend/data/
 !backend/data/rag/
 backend/data/rag/*
@@ -44,7 +45,13 @@ backend/data/models/
 backend/data/rag/manifests/*
 !backend/data/rag/manifests/*.json
 backend/data/memory/**
-results/
+/results/*
+!/results/latency-audit/
+/results/latency-audit/*
+!/results/latency-audit/report.mjs
+!/results/latency-audit/run.mjs
+!/results/latency-audit/serve_audit.py
+!/results/latency-audit/summarize.mjs
 tmp_tts_listen/
 .langgraph_api/
 
