@@ -1,0 +1,23 @@
+﻿{
+    "captured_at":  "2026-09-23T15:47:14.7058211Z",
+    "question":  "How does an IPO work, and why does a company choose to go public?",
+    "thread_id":  "jury-final-en-13bdc144-3503-4f68-b05b-01a871bec1a1",
+    "response":  {
+                     "answer":  "The source-grounded answer is temporarily unavailable.",
+                     "language":  "en",
+                     "script":  "latin",
+                     "route":  "pedagogie",
+                     "blocked":  false,
+                     "thread_id":  "jury-final-en-13bdc144-3503-4f68-b05b-01a871bec1a1",
+                     "status":  "error",
+                     "grounded":  false,
+                     "citations":  [
+
+                                   ],
+                     "internal_pedagogical_source":  null,
+                     "knowledge_source":  null,
+                     "web_sources":  [
+
+                                     ]
+                 }
+}

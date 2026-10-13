@@ -19,19 +19,31 @@ class GroqProvider:
         self._client = Groq(api_key=api_key, timeout=timeout, max_retries=2)
         self.model = model
         self.last_metadata: dict[str, object] = {}
+        self.last_retries_taken: int | None = None
 
     def invoke_structured(self, request: SupervisorRequest) -> object:
-        response = self._client.chat.completions.create(
-            model=self.model,
-            temperature=0,
-            reasoning_effort="none",
-            max_completion_tokens=100,
-            response_format={"type": "json_object"},
-            messages=[
+        kwargs = {
+            "model": self.model,
+            "temperature": 0,
+            "reasoning_effort": "none",
+            "max_completion_tokens": 100,
+            "response_format": {"type": "json_object"},
+            "messages": [
                 {"role": "system", "content": SUPERVISOR_INSTRUCTION},
                 {"role": "user", "content": self._request_text(request)},
             ],
-        )
+        }
+        completions = self._client.chat.completions
+        retries_taken = None
+        raw_api = getattr(completions, "with_raw_response", None)
+        if raw_api is not None:
+            # The raw response exposes how many SDK retries (429/5xx backoff) happened.
+            raw = raw_api.create(**kwargs)
+            retries_taken = getattr(raw, "retries_taken", None)
+            response = raw.parse()
+        else:
+            response = completions.create(**kwargs)
+        self.last_retries_taken = retries_taken
         headers = getattr(response, "headers", {}) or {}
         usage = getattr(response, "usage", None)
         self.last_metadata = {
@@ -73,9 +85,9 @@ class GroqProvider:
         return json.dumps(payload, ensure_ascii=False)
 
 
-def from_environment() -> GroqProvider:
+def from_environment(model: str | None = None) -> GroqProvider:
     api_key = os.getenv("GROQ_API_KEY", "").strip()
-    model = os.getenv("GROQ_MODEL", "").strip()
+    model = (model or os.getenv("GROQ_MODEL", "")).strip()
     if not api_key:
         raise ProviderUnavailable("GROQ_API_KEY is not configured")
     if not model:

@@ -1,0 +1,102 @@
+{
+  "schema_version": "j6-07c-confirmatory-gold-v1",
+  "dataset_path": "evaluation/rag/embedding_gold_confirmatory_v1.jsonl",
+  "dataset_sha256": "09984f65ceab47d5b0aafdaec051cedf45219c183d765985bd95b2652b839289",
+  "case_count": 60,
+  "semantic_group_count": 12,
+  "language_counts": {
+    "fr": 12,
+    "en": 12,
+    "ar": 12,
+    "ary-latin": 12,
+    "ary-arabic": 12
+  },
+  "source_coverage": {
+    "ammc-brochure-produits-de-placement": 5,
+    "ammc-comprendre-le-financement-collaboratif": 5,
+    "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes": 5,
+    "ammc-comprendre-les-ipo": 5,
+    "ammc-comprendre-les-offres-publics": 5,
+    "ammc-comprendre-les-operations-sur-titres": 5,
+    "ammc-les-assemblees-generales-ordinaires": 5,
+    "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre": 5,
+    "ammc-les-opcvm": 5,
+    "ammc-pea": 5,
+    "ammc-renforcer-la-protection-de-vos-placements": 5,
+    "ammc-sur-le-budget-l-epargne-et-l-investissement": 5
+  },
+  "source_count": 12,
+  "construction_protocol": "Phase A authored semantic intents from the frozen AMMC corpus only; Phase B read the development gold only to reject duplicate or trivial-overlap questions.",
+  "phase_a_blind_to_old_gold": true,
+  "old_gold_used_only_for_deduplication": true,
+  "prior_experiment_results_used": false,
+  "prior_failure_ids_used": false,
+  "retrieval_used_for_case_selection": false,
+  "H1_used_for_case_selection": false,
+  "BGE_used_for_case_selection": false,
+  "external_llm_used": false,
+  "independent_from_policy_selection": true,
+  "purpose": "J6_07C_CONFIRMATORY_EVALUATION",
+  "overlap_audit": {
+    "development_gold_path": "evaluation/rag/embedding_gold_v1.jsonl",
+    "exact_normalized_duplicate_count": 0,
+    "same_language_normalized_duplicate_count": 0,
+    "obvious_duplicate_semantic_group_count": 0,
+    "high_lexical_overlap_warning_count": 0,
+    "near_duplicate_information_need_count": 0,
+    "related_topic_only_count": 6,
+    "warnings": [],
+    "related_topic_only": [
+      {
+        "confirmatory_group": "01",
+        "closest_dev_case_or_group": "actions_obligations",
+        "reason": "Both concern shares, but the confirmatory need asks about acquisition steps rather than instrument distinction."
+      },
+      {
+        "confirmatory_group": "02",
+        "closest_dev_case_or_group": "opcvm_definition",
+        "reason": "Both concern OPCVM, but the confirmatory need asks about diversification rather than definition."
+      },
+      {
+        "confirmatory_group": "03",
+        "closest_dev_case_or_group": "ipo",
+        "reason": "Both concern IPOs, but the confirmatory need asks about the prospectus role rather than the event."
+      },
+      {
+        "confirmatory_group": "04",
+        "closest_dev_case_or_group": "public_offerings",
+        "reason": "Both concern public offers, but the confirmatory need asks for an OPA/OPE distinction."
+      },
+      {
+        "confirmatory_group": "09",
+        "closest_dev_case_or_group": "crowdfunding",
+        "reason": "Both concern crowdfunding, but the confirmatory need asks about investor risks."
+      },
+      {
+        "confirmatory_group": "12",
+        "closest_dev_case_or_group": "investor_protection",
+        "reason": "Both concern investor protection, but the confirmatory need asks how to verify an authorized intermediary."
+      }
+    ]
+  },
+  "frozen_inputs": {
+    "chunks_sha256": "62d76b117a2273ba3fd2ddbc2cf32a5fdb72ced468e1cf6b2097a2322a4346e1",
+    "corpus_manifest_sha256": "2ec834e160851a59d52b9d200470aa714ec850a39f672e480b2c8207880f3b0a",
+    "pages_sha256": "69312419a872f02eb74e1547dc4a80c8d322be6796580d54a17b1ee2b7252968",
+    "old_gold_sha256": "68da7ebcd739dc42e874bf0052b7a2a6c33a2013ba1cd91979ccea7b6d0355b5"
+  },
+  "semantic_group_integrity": {
+    "variants_per_group": 5,
+    "expected_source_ids_equal_within_group": true,
+    "unique_case_ids": true
+  },
+  "script_validation": {
+    "ary_latin_no_arabic_unicode": true,
+    "ary_arabic_contains_arabic_unicode": true,
+    "ar_contains_arabic_unicode": true,
+    "fr_en_latin_expected": true
+  },
+  "evaluation_status": "NOT_EVALUATED",
+  "query_adapter_confirmatory_created": false,
+  "retrieval_evaluation_created": false
+}

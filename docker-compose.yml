@@ -5,6 +5,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-financial_education}
       POSTGRES_USER: ${POSTGRES_USER:-financial_app}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_for_local_only}
+    ports:
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -46,8 +48,66 @@ services:
       CHROMA_COLLECTION: ${CHROMA_COLLECTION:-financial_education_foundation}
       FRONTEND_URL: http://localhost:${FRONTEND_PUBLIC_PORT:-5173}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      EDUBOURSE_N8N_INTERNAL_TOKEN: ${EDUBOURSE_N8N_INTERNAL_TOKEN:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-}
+      # Voice-to-Voice (/api/v1/voice/live): Gemini Live STT + Gemini TTS.
+      VOICE_PROVIDER: ${VOICE_PROVIDER:-gemini}
+      VOICE_MODE: ${VOICE_MODE:-streaming}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
+      AZURE_OPENAI_DEPLOYMENT: ${AZURE_OPENAI_DEPLOYMENT:-}
+      AZURE_FINAL_RESPONSE_MAX_OUTPUT_TOKENS: ${AZURE_FINAL_RESPONSE_MAX_OUTPUT_TOKENS:-4096}
+      FINAL_RESPONSE_PROVIDER: ${FINAL_RESPONSE_PROVIDER:-azure_openai}
+      GEMINI_STT_MODEL: ${GEMINI_STT_MODEL:-}
+      GEMINI_TTS_MODEL: ${GEMINI_TTS_MODEL:-gemini-2.5-flash-preview-tts}
+      GEMINI_TTS_VOICE: ${GEMINI_TTS_VOICE:-Kore}
+      GEMINI_HTTP_TIMEOUT_MS: ${GEMINI_HTTP_TIMEOUT_MS:-60000}
+      # Gemini is used only after the business pipeline, to localize ary output.
+      DARIJA_LOCALIZER_PROVIDER: ${DARIJA_LOCALIZER_PROVIDER:-gemini}
+      GEMINI_LOCALIZER_MODEL: ${GEMINI_LOCALIZER_MODEL:-gemini-3.6-flash}
+      GEMINI_LOCALIZER_MAX_OUTPUT_TOKENS: ${GEMINI_LOCALIZER_MAX_OUTPUT_TOKENS:-4096}
+      GEMINI_LIVE_STT_MODEL: ${GEMINI_LIVE_STT_MODEL:-gemini-3.5-transcribe-live}
+      VOICE_WS_MAX_CHUNK_BYTES: ${VOICE_WS_MAX_CHUNK_BYTES:-65536}
+      VOICE_WS_OUTPUT_CHUNK_BYTES: ${VOICE_WS_OUTPUT_CHUNK_BYTES:-4096}
+      VOICE_WS_MAX_SESSION_SECONDS: ${VOICE_WS_MAX_SESSION_SECONDS:-300}
+      VOICE_MAX_AUDIO_BYTES: ${VOICE_MAX_AUDIO_BYTES:-10485760}
+      # Server-side bridge of the MCP & n8n page (app/api/integrations.py).
+      # The token stays in the backend and is never sent to the browser.
+      EDUBOURSE_MCP_AUTH_TOKEN: ${EDUBOURSE_MCP_AUTH_TOKEN:-}
+      EDUBOURSE_MCP_URL: http://mcp:8000/mcp
+      EDUBOURSE_N8N_URL: http://n8n:5678
+      # Existing PostgreSQL persistence: conversation history, LangGraph
+      # checkpoints and learning profiles (schema from alembic/versions).
+      # Set here, not from .env, whose DATABASE_URL targets the host.
+      PERSISTENCE_ENABLED: "true"
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-financial_app}:${POSTGRES_PASSWORD:-change_me_for_local_only}@postgres:5432/${POSTGRES_DB:-financial_education}
+      # Existing financial-expert fallback (app/financial_expert): runs only on
+      # the pedagogie route after security and Supervisor, when RAG evidence is
+      # insufficient; web grounding only for current or dated market figures.
+      FINANCIAL_EXPERT_FALLBACK_ENABLED: "true"
+      FINANCIAL_EXPERT_WEB_GROUNDING_ENABLED: "true"
+      # gemini-2.5-flash is no longer served for this key (404).
+      GEMINI_FINANCIAL_EXPERT_MODEL: ${GEMINI_FINANCIAL_EXPERT_MODEL:-gemini-3.5-flash}
+      # Extra approved web-grounding hosts, comma-separated (official AMMC, Bourse
+      # de Casablanca and Ecole de la Bourse hosts are always approved).
+      FINANCIAL_EXPERT_APPROVED_DOMAINS: ${FINANCIAL_EXPERT_APPROVED_DOMAINS:-}
+      # Load BGE-M3 in a background thread at startup so the first question does
+      # not pay the ~70 s model load; /health stays available meanwhile.
+      RAG_WARMUP_ENABLED: ${RAG_WARMUP_ENABLED:-true}
+      # Semantic relevant memory (BGE-M3 per turn) is off for the constrained local
+      # runtime; history, recent context and checkpoints remain persisted.
+      RELEVANT_MEMORY_ENABLED: ${RELEVANT_MEMORY_ENABLED:-false}
     ports:
-      - "${BACKEND_PUBLIC_PORT:-8080}:8000"
+      - "127.0.0.1:${BACKEND_PUBLIC_PORT:-8080}:8000"
+    volumes:
+      - ./backend/data/rag/manifests:/backend/data/rag/manifests:ro
+      - ./backend/data/rag/processed:/backend/data/rag/processed:ro
+      - ./backend/data/rag/indexes:/backend/data/rag/indexes:rw
+      # BGE_M3_CACHE_DIR overrides the host snapshot location when the Hugging Face
+      # cache is not under the default user cache.
+      - ${BGE_M3_CACHE_DIR:-${USERPROFILE}/.cache/huggingface/hub/models--BAAI--bge-m3}:/home/appuser/.cache/huggingface/hub/models--BAAI--bge-m3:ro
     depends_on:
       postgres:
         condition: service_healthy
@@ -55,6 +115,8 @@ services:
         condition: service_healthy
     networks:
       - app_network
+      - n8n_backend_network
+      - mcp_backend_network
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live', timeout=5)"]
       interval: 10s
@@ -81,3 +143,9 @@ volumes:
 networks:
   app_network:
     driver: bridge
+  n8n_backend_network:
+    name: financial-education-assistant_n8n_backend_network
+    external: true
+  mcp_backend_network:
+    name: financial-education-assistant_mcp_backend_network
+    external: true

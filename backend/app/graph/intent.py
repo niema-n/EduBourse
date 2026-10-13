@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 import unicodedata
 from pathlib import Path
+from threading import Lock
 from typing import Any
 
 import joblib
@@ -35,13 +36,15 @@ class LocalIntentModel:
         self.path = path
         self.missing_error = missing_error
         self.bundle: dict[str, Any] | None = None
+        self._load_lock = Lock()
 
     def load(self) -> dict[str, Any]:
-        if self.bundle is None:
-            if not isinstance(self.path, Path) or not self.path.is_file():
-                name = getattr(self.path, "name", "unknown")
-                raise self.missing_error(f"Missing local intent artifact: {name}")
-            self.bundle = joblib.load(self.path)
+        with self._load_lock:
+            if self.bundle is None:
+                if not isinstance(self.path, Path) or not self.path.is_file():
+                    name = getattr(self.path, "name", "unknown")
+                    raise self.missing_error(f"Missing local intent artifact: {name}")
+                self.bundle = joblib.load(self.path)
         return self.bundle
 
     def predict(self, text: str) -> tuple[str, float, dict[str, float]]:
@@ -58,8 +61,53 @@ security_model = LocalIntentModel(SECURITY_ARTIFACT, MissingSecurityArtifact)
 router_model = LocalIntentModel(ROUTER_ARTIFACT, MissingRouterArtifact)
 
 
+# Explicit personalized investment selection ("the best investment for me",
+# "what should I invest in"). Every pattern needs BOTH a recommendation/selection
+# intent AND a personal reference, so profile or educational questions
+# ("mon profil d'investisseur", "what is an investment?") are untouched. Patterns
+# run on normalize_text output: casefolded, accents and Arabic hamza removed.
+PERSONALIZED_SELECTION_PATTERNS = (
+    # FR: meilleur + investissement/placement + pour moi (any order)
+    r"(?=.*\bmeilleure?s?\b)(?=.*\b(?:investissements?|placements?|investir|placer)\b)"
+    r"(?=.*\bpour moi\b)",
+    # FR: dans quoi / où / quel ... dois-je|devrais-je ... investir|placer
+    r"\b(?:dans quoi|ou|quels?|quelles?)\b.{0,25}\b(?:dois|devrais)\s*-?\s*je\b"
+    r".{0,20}\b(?:investir|placer)\b",
+    # FR: quel investissement/placement ... dois-je ... choisir|prendre|faire
+    r"\b(?:quels?|quelles?)\s+(?:investissements?|placements?)\b.{0,25}"
+    r"\b(?:dois|devrais)\s*-?\s*je\b.{0,15}\b(?:choisir|prendre|faire)\b",
+    # FR: quel investissement/placement me recommandes-tu / me conseillez-vous
+    r"\b(?:investissements?|placements?)\b.{0,25}"
+    r"\bme\s+(?:recommandes?|recommandez|conseilles?|conseillez)\b",
+    # EN: best + investment + for me (any order)
+    r"(?=.*\bbest\b)(?=.*\b(?:investments?|invest)\b)(?=.*\bfor me\b)",
+    # EN: what / where / which ... should I ... invest
+    r"\b(?:what|where|which)\b.{0,25}\bshould i\b.{0,10}\binvest\b",
+    # EN: which / what investment ... should I ... choose|pick|make|buy
+    r"\b(?:which|what)\s+investments?\b.{0,25}\bshould i\b.{0,15}\b(?:choose|pick|make|buy)\b",
+    # AR / Darija: افضل|احسن ... استثمار ... لي|ليا
+    r"(?:افضل|احسن)\s*(?:\S+\s+){0,3}?(?:ال)?استثمار(?:ات)?\b.{0,20}(?:\bلي\b|\bليا\b)",
+    # AR / Darija: ماذا|اين|فين|فاش|شنو|اش ... يجب|ينبغي|خاصني ... استثمر|نستثمر
+    r"(?:ماذا|اين|فين|فاش|شنو|اش)\b.{0,25}(?:يجب|ينبغي|خاصني|خصني)\b.{0,20}(?:استثمر|نستثمر)",
+    # Darija Latin: ahsan|a7san + investissement|istithmar + lia (any order)
+    r"(?=.*\b(?:ahsan|a7san|ahssan)\b)(?=.*\b(?:investissement|istithmar|placement)\b)"
+    r"(?=.*\b(?:lia|liya|lya)\b)",
+    # Darija Latin: fach|fin|achmen ... khassni ... nstathmer|ninvesti
+    r"\b(?:fach|fash|fin|achmen|ach)\b.{0,20}\b(?:khassni|khasni|khsni|khessni)\b"
+    r".{0,20}\b(?:nstathmer|nstatmer|nstthmr|ninvesti)\b",
+)
+
+
+def personalized_selection_rule(text: str) -> bool:
+    """Explicit request to pick an investment for the user, in FR/EN/AR/Darija."""
+    normalized = normalize_text(text)
+    return any(re.search(pattern, normalized) for pattern in PERSONALIZED_SELECTION_PATTERNS)
+
+
 def high_precision_security_rule(text: str) -> bool:
     """Small defense layer for unambiguous direct financial instructions."""
+    if personalized_selection_rule(text):
+        return True
     normalized = normalize_text(text)
     direct = (
         r"\b(?:buy|acheter|vendre|sell)\b.{0,50}\b(?:for me|pour moi|now|maintenant)\b",

@@ -1,0 +1,278 @@
+/* =====================================================================
+ * Architecture page — reference design.
+ * Scoped to .architecture-page / .page-architecture so the validated
+ * Dashboard, Assistant and Agents pages cannot be affected.
+ * ===================================================================== */
+
+.page-architecture .topbar h1 { font-size: 2.35rem; line-height: 1.08; letter-spacing: -.035em; }
+.page-architecture .topbar-subtitle { margin-top: 6px; color: #4a6680; font-size: 1.25rem; }
+.page-architecture .topbar-leading { flex: 1 1 auto; min-width: 0; }
+
+.architecture-page { display: grid; gap: 18px; }
+
+/* ---------- tones ---------- */
+.architecture-page .ar-tone-blue { --tone: #1f7ad8; --tone-soft: #e8f1fc; --tone-line: #d3e4f7; }
+.architecture-page .ar-tone-green { --tone: #129a6b; --tone-soft: #e5f6ee; --tone-line: #cdebdd; }
+.architecture-page .ar-tone-purple { --tone: #7b56d8; --tone-soft: #efe9fd; --tone-line: #ddd1f8; }
+.architecture-page .ar-tone-teal { --tone: #0f8f86; --tone-soft: #e1f4f1; --tone-line: #c9e9e4; }
+.architecture-page .ar-tone-orange { --tone: #e28a10; --tone-soft: #fdf1df; --tone-line: #f6dfbb; }
+.architecture-page .ar-tone-cyan { --tone: #0e93b3; --tone-soft: #e2f4f9; --tone-line: #c6e7f1; }
+.architecture-page .ar-tone-rose { --tone: #e0485f; --tone-soft: #fdebee; --tone-line: #f8d0d7; }
+.architecture-page .ar-solid-blue { color: #fff; background: linear-gradient(145deg, #3a9cf5, #1f7ada); box-shadow: 0 6px 14px rgb(31 134 232 / 25%); }
+.architecture-page .ar-solid-cyan { color: #fff; background: linear-gradient(145deg, #2cb3e8, #1590cf); box-shadow: 0 6px 14px rgb(21 144 207 / 25%); }
+.architecture-page .ar-solid-green { color: #fff; background: linear-gradient(145deg, #1bb07f, #0d8f63); box-shadow: 0 6px 14px rgb(16 150 105 / 25%); }
+
+.architecture-page .ar-panel {
+  min-width: 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow);
+}
+.architecture-page .ar-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.architecture-page .ar-head-tile {
+  display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 11px;
+  color: #fff; background: linear-gradient(145deg, #2f8cef, #1b6fd6);
+}
+.architecture-page .ar-head-glyph { display: grid; place-items: center; width: 42px; flex: none; color: #1c4f8c; }
+.architecture-page .ar-head-copy { min-width: 0; display: grid; gap: 3px; }
+.architecture-page .ar-head-copy h2 { color: #0f2a47; font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; }
+.architecture-page .ar-head-copy p { color: #6a8196; font-size: .86rem; }
+
+/* ---------- summary cards (static facts: no hover lift) ---------- */
+.architecture-page .ar-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.architecture-page .ar-summary-card {
+  position: relative; display: flex; align-items: center; gap: 18px; min-width: 0; min-height: 96px; padding: 14px 20px;
+  border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow); cursor: default;
+}
+.architecture-page .ar-summary-icon { display: grid; place-items: center; width: 56px; height: 56px; flex: none; border-radius: 13px; }
+.architecture-page .ar-summary-copy { display: grid; justify-items: start; gap: 1px; min-width: 0; }
+.architecture-page .ar-summary-copy span { color: #1d3350; font-size: .9rem; font-weight: 500; }
+.architecture-page .ar-summary-copy strong { color: #0f2a47; font-size: 1.45rem; font-weight: 700; line-height: 1.2; letter-spacing: -.02em; white-space: nowrap; }
+.architecture-page .ar-summary-copy small { color: #6d8296; font-size: .82rem; }
+.architecture-page .ar-summary-mark { position: absolute; top: 10px; right: 12px; width: 22px; height: 22px; color: #c8def3; }
+
+/* ---------- main area ---------- */
+.architecture-page .ar-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 16px; align-items: stretch; }
+.architecture-page .ar-overview { display: flex; flex-direction: column; }
+.architecture-page .ar-head-overview { margin-bottom: 10px; }
+.architecture-page .ar-hint { margin-top: 6px; color: #8196aa; font-size: .76rem; text-align: center; }
+
+/* ---------- diagram ---------- */
+.architecture-page .ar-diagram { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.architecture-page .ar-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) 16px repeat(7, minmax(0, 1fr) 16px) minmax(0, 1.35fr);
+  grid-template-rows: 40px auto 30px auto;
+  align-items: stretch;
+}
+.architecture-page .ar-arrow { display: grid; place-items: center; color: #4f6f8f; pointer-events: none; }
+
+.architecture-page .ar-endpoint {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 0; padding: 10px 6px;
+  border-radius: 14px; background: #eaf2fb; color: #0f2a47; text-align: center; cursor: default;
+}
+.architecture-page .ar-endpoint-icon { color: #1c4f8c; }
+.architecture-page .ar-endpoint strong { font-size: .9rem; font-weight: 700; }
+.architecture-page .ar-endpoint small { color: #6a8196; font-size: .72rem; line-height: 1.35; }
+.architecture-page .ar-mini-row { display: flex; gap: 6px; margin-top: 4px; }
+.architecture-page .ar-mini-row i {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #1c4f8c; background: #fff; font-style: normal;
+  box-shadow: 0 1px 3px rgb(21 71 116 / 10%);
+}
+.architecture-page .ar-mini-row-boxed i { border-radius: 8px; }
+.architecture-page .ar-flags { display: flex; gap: 5px; }
+.architecture-page .ar-flags .lang-flag { width: 20px; height: 20px; flex: 0 0 20px; border-radius: 50%; }
+
+.architecture-page .ar-node {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 0; padding: 9px 3px;
+  border: 1px solid var(--tone-line); border-radius: 12px; color: #0f2a47; background: var(--tone-soft); text-align: center;
+  transition: box-shadow .15s, transform .15s, border-color .15s;
+}
+.architecture-page .ar-node:hover { border-color: var(--tone); box-shadow: 0 8px 18px rgb(21 71 116 / 12%); transform: translateY(-2px); }
+.architecture-page .ar-node:focus-visible { outline: 2px solid #2f80d8; outline-offset: 3px; }
+.architecture-page .ar-node-strong { box-shadow: 0 0 0 2px var(--tone-line); }
+.architecture-page .ar-node-icon { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 2px; border-radius: 11px; color: var(--tone); background: #fff; }
+.architecture-page .ar-node strong { font-size: .8rem; font-weight: 700; line-height: 1.2; }
+.architecture-page .ar-node em { margin-top: -3px; color: #5b6f84; font-size: .72rem; font-style: normal; }
+.architecture-page .ar-node small { margin-top: 2px; color: #62788d; font-size: .7rem; line-height: 1.35; }
+
+/* connectors */
+.architecture-page .ar-seg { position: relative; }
+.architecture-page .ar-seg::before {
+  content: ""; position: absolute; left: var(--seg-left); right: var(--seg-right); border-top: 1.5px solid #2a4f78;
+}
+.architecture-page .ar-seg-loop::before { top: 26px; }
+.architecture-page .ar-seg-bus::before { bottom: 10px; border-top-style: dashed; border-top-color: #56789b; }
+.architecture-page .ar-riser { position: absolute; left: 50%; }
+.architecture-page .ar-seg-loop .ar-riser { top: 26px; bottom: 0; border-left: 1.5px solid #2a4f78; }
+.architecture-page .ar-seg-bus .ar-riser { top: 0; bottom: 10px; border-left: 1.5px dashed #56789b; }
+.architecture-page .ar-riser-arrow::after { content: ""; position: absolute; left: -5.5px; border: 5px solid transparent; }
+.architecture-page .ar-seg-loop .ar-riser-arrow::after { bottom: -2px; border-top: 7px solid #2a4f78; border-bottom-width: 0; }
+.architecture-page .ar-seg-bus .ar-riser-arrow::after { top: -2px; border-bottom: 7px solid #56789b; border-top-width: 0; }
+
+.architecture-page .ar-annotation {
+  align-self: start; justify-self: center; padding: 3px 10px; border-radius: 999px; color: #2d4d6c; background: #fff;
+  font-size: .76rem; font-weight: 500; position: relative; z-index: 1;
+}
+.architecture-page .ar-annotation-loop { margin-top: 2px; }
+.architecture-page .ar-annotation-bus { margin-top: 4px; }
+.architecture-page .ar-annotation:hover { color: #1f6fc0; background: #e7f1fd; }
+.architecture-page .ar-annotation:focus-visible { outline: 2px solid #2f80d8; outline-offset: 2px; }
+.architecture-page .ar-legend { display: none; }
+
+/* ---------- stack ---------- */
+.architecture-page .ar-stack { display: flex; flex-direction: column; }
+.architecture-page .ar-stack-rows { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-stack-rows li {
+  display: grid; grid-template-columns: 26px max-content minmax(0, 1fr); align-items: center; gap: 10px;
+  min-height: 34px; padding: 4px 10px; border-radius: 9px; background: #f6f9fc; cursor: default;
+}
+.architecture-page .ar-stack-icon { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; color: var(--tone); background: var(--tone-soft); }
+.architecture-page .ar-stack-rows strong { color: #0f2a47; font-size: .84rem; font-weight: 600; }
+.architecture-page .ar-stack-rows span:last-child { color: #4a6178; font-size: .8rem; text-align: right; }
+.architecture-page .ar-stack-note { margin-top: auto; padding-top: 10px; color: #7d92a6; font-size: .72rem; line-height: 1.45; }
+
+/* ---------- bottom row ---------- */
+.architecture-page .ar-bottom { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) minmax(0, .92fr); gap: 16px; align-items: stretch; }
+
+.architecture-page .ar-dataflow { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-dataflow li {
+  display: grid; grid-template-columns: 22px minmax(0, 160px) minmax(0, 1fr); align-items: center; gap: 10px;
+  min-height: 32px; padding: 4px 10px; border-radius: 8px; background: #f6f9fc; cursor: default;
+}
+.architecture-page .ar-step {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: #1f6fc0; background: #dcebfa;
+  font-size: .7rem; font-weight: 700;
+}
+.architecture-page .ar-dataflow strong { color: #0f2a47; font-size: .84rem; font-weight: 600; }
+.architecture-page .ar-dataflow li > span:last-child { color: #5a7187; font-size: .72rem; line-height: 1.3; }
+
+.architecture-page .ar-components { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-components li {
+  display: flex; align-items: flex-start; gap: 10px; min-width: 0; padding: 10px; border: 1px solid #e3eaf2; border-radius: 10px; cursor: default;
+}
+.architecture-page .ar-component-icon { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 11px; color: var(--tone); background: var(--tone-soft); }
+.architecture-page .ar-component-copy { display: grid; gap: 3px; min-width: 0; }
+.architecture-page .ar-component-copy strong { color: #0f2a47; font-size: .88rem; font-weight: 600; }
+.architecture-page .ar-component-copy small { color: #62788d; font-size: .74rem; line-height: 1.4; }
+
+.architecture-page .ar-points { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-points li {
+  display: flex; align-items: center; gap: 12px; min-height: 38px; padding: 5px 10px; border-radius: 9px; background: #f6f9fc; cursor: default;
+}
+.architecture-page .ar-points svg { flex: none; color: #16a06a; }
+.architecture-page .ar-points span { display: grid; gap: 1px; min-width: 0; }
+.architecture-page .ar-points strong { color: #0f2a47; font-size: .86rem; font-weight: 600; }
+.architecture-page .ar-points small { color: #5a7187; font-size: .76rem; }
+
+/* ---------- detail drawer ---------- */
+.architecture-page .ar-drawer-backdrop {
+  position: fixed; inset: 0; z-index: 60; display: flex; justify-content: flex-end; background: rgb(13 42 68 / 38%);
+  animation: ar-fade .16s ease-out;
+}
+.architecture-page .ar-drawer {
+  display: flex; flex-direction: column; width: min(480px, 100vw); height: 100%; background: #fff;
+  box-shadow: -18px 0 40px rgb(16 48 78 / 18%); animation: ar-slide .2s ease-out;
+}
+@keyframes ar-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ar-slide { from { transform: translateX(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+.architecture-page .ar-drawer-head { display: flex; align-items: center; gap: 14px; padding: 20px 22px; border-bottom: 1px solid #edf2f7; }
+.architecture-page .ar-drawer-icon { display: grid; place-items: center; width: 54px; height: 54px; flex: none; border-radius: 14px; color: var(--tone); background: var(--tone-soft); }
+.architecture-page .ar-drawer-title { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.architecture-page .ar-drawer-title h2 { color: #0f2a47; font-size: 1.3rem; font-weight: 700; }
+.architecture-page .ar-drawer-title span { color: #6a8196; font-size: .8rem; }
+.architecture-page .ar-drawer-close { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 9px; color: #5c7892; }
+.architecture-page .ar-drawer-close:hover { background: #eef4fa; }
+.architecture-page .ar-drawer-close:focus-visible,
+.architecture-page .ar-cta:focus-visible,
+.architecture-page .ar-legend button:focus-visible { outline: 2px solid #2f80d8; outline-offset: 2px; }
+.architecture-page .ar-drawer-body { flex: 1; display: grid; align-content: start; gap: 16px; padding: 18px 22px 22px; overflow-y: auto; }
+.architecture-page .ar-facts { display: grid; gap: 8px; margin: 0; }
+.architecture-page .ar-facts div { padding: 10px 12px; border: 1px solid #e3eaf2; border-radius: 10px; background: #f8fbfe; }
+.architecture-page .ar-facts dt { color: #1f6fc0; font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.architecture-page .ar-facts dd { margin: 4px 0 0; color: #1d3350; font-size: .88rem; line-height: 1.5; }
+.architecture-page .ar-rule {
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1px solid #f6dfbb; border-radius: 10px;
+  color: #6b4a14; background: #fff8ec; font-size: .86rem; line-height: 1.5;
+}
+.architecture-page .ar-rule svg { flex: none; margin-top: 2px; color: #d9831a; }
+.architecture-page .ar-rule strong { display: block; margin-bottom: 2px; color: #4e3409; }
+.architecture-page .ar-detail-section h3 { margin-bottom: 8px; color: #0f2a47; font-size: .9rem; font-weight: 700; }
+.architecture-page .ar-check-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-check-list li { display: flex; align-items: flex-start; gap: 9px; color: #1d3350; font-size: .86rem; line-height: 1.45; }
+.architecture-page .ar-check-list svg { flex: none; margin-top: 2px; color: #16a06a; }
+.architecture-page .ar-route-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-route-list code {
+  display: inline-block; padding: 4px 9px; border-radius: 7px; color: #0f7f76; background: #e1f4f1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem;
+}
+.architecture-page .ar-example { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.architecture-page .ar-example li { display: grid; gap: 2px; padding: 8px 12px; border-radius: 9px; color: #1f5fa8; background: #eef5fc; font-size: .86rem; }
+.architecture-page .ar-example li span { color: #6a8196; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.architecture-page .ar-example li:last-child { color: #7a4a0d; background: #fdf1df; }
+.architecture-page .ar-drawer-foot { padding: 14px 22px 20px; border-top: 1px solid #edf2f7; }
+.architecture-page .ar-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 46px; border-radius: 10px;
+  color: #fff; background: linear-gradient(145deg, #2b8ff0, #1a73d9); font-size: .95rem; font-weight: 600;
+  box-shadow: 0 6px 14px rgb(31 134 232 / 25%);
+}
+.architecture-page .ar-cta:hover { filter: brightness(1.05); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1600px) {
+  .architecture-page .ar-summary-card { gap: 14px; padding: 12px 16px; }
+  .architecture-page .ar-summary-icon { width: 50px; height: 50px; }
+  .architecture-page .ar-summary-copy strong { font-size: 1.22rem; }
+  .architecture-page .ar-main { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); }
+  .architecture-page .ar-dataflow li { grid-template-columns: 22px minmax(0, 140px) minmax(0, 1fr); }
+}
+@media (max-width: 1640px) {
+  .architecture-page .ar-main { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 1500px) {
+  .architecture-page .ar-stack-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture-page .ar-bottom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture-page .ar-bottom > :last-child { grid-column: 1 / -1; }
+  .architecture-page .ar-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1240px) {
+  .architecture-page .ar-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1300px) {
+  /* The diagram reflows into a vertical flow instead of shrinking its text. */
+  .architecture-page .ar-grid { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+  .architecture-page .ar-seg, .architecture-page .ar-annotation { display: none; }
+  .architecture-page .ar-arrow { height: 18px; }
+  .architecture-page .ar-arrow svg { transform: rotate(90deg); }
+  .architecture-page .ar-endpoint { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 10px; padding: 12px 16px; text-align: left; }
+  .architecture-page .ar-node { flex-direction: row; justify-content: flex-start; gap: 12px; padding: 10px 14px; text-align: left; }
+  .architecture-page .ar-node-icon { margin: 0; flex: none; }
+  .architecture-page .ar-node strong { font-size: .9rem; }
+  .architecture-page .ar-node em { margin: 0; }
+  .architecture-page .ar-node small { margin: 0 0 0 auto; text-align: right; }
+  .architecture-page .ar-node small br, .architecture-page .ar-endpoint small br { display: none; }
+  .architecture-page .ar-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .architecture-page .ar-legend button {
+    flex: 1 1 200px; padding: 9px 12px; border: 1px dashed #b7cbe0; border-radius: 9px; color: #1f5fa8; background: #f6f9fc; font-size: .82rem;
+  }
+  .page-architecture .topbar h1 { font-size: 2rem; }
+  .page-architecture .topbar-subtitle { font-size: 1.05rem; }
+}
+@media (max-width: 900px) {
+  .architecture-page .ar-bottom { grid-template-columns: minmax(0, 1fr); }
+  .architecture-page .ar-bottom > :last-child { grid-column: auto; }
+  .architecture-page .ar-points, .architecture-page .ar-stack-rows { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .page-architecture .topbar h1 { font-size: 1.7rem; }
+  .page-architecture .topbar-subtitle { font-size: .95rem; }
+  .architecture-page .ar-summary { grid-template-columns: minmax(0, 1fr); }
+  .architecture-page .ar-summary-mark { display: none; }
+  .architecture-page .ar-components { grid-template-columns: minmax(0, 1fr); }
+  .architecture-page .ar-dataflow li { grid-template-columns: 22px minmax(0, 1fr); }
+  .architecture-page .ar-dataflow li > span:last-child { grid-column: 2; }
+  .architecture-page .ar-node small { display: none; }
+  .architecture-page .ar-stack-rows li { grid-template-columns: 26px minmax(0, 1fr); }
+  .architecture-page .ar-stack-rows li > span:last-child { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .architecture-page .ar-drawer-backdrop, .architecture-page .ar-drawer { animation: none; }
+  .architecture-page .ar-node { transition: none; }
+}

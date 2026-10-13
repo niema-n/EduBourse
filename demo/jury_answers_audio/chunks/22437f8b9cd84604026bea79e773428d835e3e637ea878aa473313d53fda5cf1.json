@@ -1,0 +1,6 @@
+{
+  "exact_tts_input": "\n- **Obligation :** l’investisseur est principalement exposé à trois types de risques :\n  - **Risque de défaut ou de crédit :** risque lié à la capacité de l’émetteur à respecter ses engagements, notamment le paiement des intérêts et le remboursement du capital.\n  - **Risque de taux :** le taux d’intérêt et le prix de l’obligation évoluent en sens inverse. Si les taux augmentent, le prix de l’obligation baisse, et inversement.\n  - **Risque de liquidité :** risque de ne pas trouver de contrepartie pour vendre l’obligation avant son échéance.",
+  "sample_rate_hz": 24000,
+  "tts_model": "gemini-2.5-flash-preview-tts",
+  "tts_voice": "Kore"
+}

@@ -1,0 +1,220 @@
+/* =====================================================================
+ * MCP & n8n page — same design system as the other EduBourse pages.
+ * Scoped to .integrations-page / .page-integrations.
+ * ===================================================================== */
+
+.page-integrations .topbar h1 { font-size: 2.2rem; line-height: 1.08; letter-spacing: -.035em; }
+.page-integrations .topbar-kicker { margin-top: 4px; color: #0f2a47; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; }
+.page-integrations .topbar-subtitle { margin-top: 2px; color: #4a6680; font-size: 1.05rem; }
+.page-integrations .topbar-leading { flex: 1 1 auto; min-width: 0; }
+
+.integrations-page { display: grid; gap: 16px; }
+.integrations-page button, .integrations-page textarea { font: inherit; }
+.integrations-page button:focus-visible, .integrations-page textarea:focus-visible, .integrations-page a:focus-visible, .integrations-page input:focus-visible { outline: 2px solid #2f80d8; outline-offset: 2px; }
+.integrations-page code { padding: 1px 5px; border-radius: 5px; color: #35506b; background: #eef3f8; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .76em; overflow-wrap: anywhere; }
+
+.integrations-page .ig-tone-blue { --tone: #1f6fd1; --soft: #eaf2fb; --line: #d6e6f7; }
+.integrations-page .ig-tone-green { --tone: #129a6b; --soft: #eaf7f1; --line: #d2ede0; }
+.integrations-page .ig-tone-purple { --tone: #7b56d8; --soft: #f2eefd; --line: #e2d8fa; }
+.integrations-page .ig-tone-orange { --tone: #d27f0c; --soft: #fdf4e6; --line: #f6e2c3; }
+.integrations-page .ig-tone-cyan { --tone: #0e8fae; --soft: #e8f6fa; --line: #cde8f0; }
+.integrations-page .ig-tone-pink { --tone: #d8436a; --soft: #fdeef2; --line: #f8d3dd; }
+
+.integrations-page .ig-solid-purple { color: #7b56d8; background: #efe9fd; }
+.integrations-page .ig-solid-green { color: #fff; background: linear-gradient(145deg, #1bb07f, #0d8f63); box-shadow: 0 6px 14px rgb(16 150 105 / 22%); }
+.integrations-page .ig-solid-orange { color: #e28a10; background: #fdf0dc; }
+.integrations-page .ig-solid-red { color: #d93a55; background: #fde6ea; }
+.integrations-page .ig-solid-blue { color: #fff; background: linear-gradient(145deg, #3a9cf5, #1f7ada); box-shadow: 0 6px 14px rgb(31 134 232 / 22%); }
+.integrations-page .ig-solid-teal { color: #fff; background: linear-gradient(145deg, #1fbf9b, #0f9a7c); box-shadow: 0 6px 14px rgb(16 160 125 / 22%); }
+.integrations-page .ig-value-purple, .integrations-page .ig-value-blue, .integrations-page .ig-value-teal { color: #1f6fd1 !important; }
+.integrations-page .ig-value-green { color: #0d8f63 !important; }
+.integrations-page .ig-value-orange { color: #b86b06 !important; }
+.integrations-page .ig-value-red { color: #c62f47 !important; }
+
+.integrations-page .ig-panel { min-width: 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+.integrations-page .ig-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.integrations-page .ig-head-tile { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 11px; color: #fff; background: linear-gradient(145deg, #2f8cef, #1b6fd6); }
+.integrations-page .ig-head-copy { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.integrations-page .ig-head-copy h2 { color: #0f2a47; font-size: 1.12rem; font-weight: 700; letter-spacing: -.01em; }
+.integrations-page .ig-head-copy p { color: #6a8196; font-size: .82rem; }
+
+.integrations-page .ig-badge { display: inline-flex; flex: none; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+.integrations-page .ig-badge-ok { color: #148a5a; background: #dff5ea; }
+.integrations-page .ig-badge-ko { color: #b3263e; background: #fde8ec; }
+.integrations-page .ig-badge-wait { color: #a4600a; background: #fdf0dc; }
+.integrations-page .ig-badge-muted { color: #55697d; background: #eef2f6; }
+.integrations-page .ig-inline-ok { color: #148a5a; font-size: .76rem; }
+.integrations-page .ig-inline-ko { color: #b3263e; font-size: .76rem; }
+.integrations-page .ig-spin { animation: ig-spin 1s linear infinite; }
+@keyframes ig-spin { to { transform: rotate(360deg); } }
+
+/* ---------- KPI cards ---------- */
+.integrations-page .ig-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.integrations-page .ig-card { display: flex; align-items: center; gap: 14px; min-width: 0; min-height: 90px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow); cursor: default; }
+.integrations-page .ig-card-icon { display: grid; place-items: center; width: 50px; height: 50px; flex: none; border-radius: 12px; }
+.integrations-page .ig-card-copy { display: grid; justify-items: start; gap: 1px; min-width: 0; }
+.integrations-page .ig-card-copy span { color: #1d3350; font-size: .8rem; font-weight: 600; }
+.integrations-page .ig-card-copy strong { color: #0f2a47; font-size: 1.18rem; font-weight: 700; line-height: 1.2; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.integrations-page .ig-card-copy small { color: #6d8296; font-size: .72rem; line-height: 1.3; overflow-wrap: anywhere; }
+
+/* ---------- rows ---------- */
+.integrations-page .ig-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.integrations-page .ig-row-top { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+.integrations-page .ig-side { display: grid; gap: 16px; min-width: 0; }
+
+/* ---------- architecture ---------- */
+.integrations-page .ig-flow-host { container: ig-flow / inline-size; }
+.integrations-page .ig-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 16px; margin: 0; padding: 0; list-style: none; }
+.integrations-page .ig-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; padding: 12px 6px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); text-align: center; cursor: default; }
+.integrations-page .ig-stage-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; color: var(--tone); background: #fff; box-shadow: 0 1px 3px rgb(21 71 116 / 10%); }
+.integrations-page .ig-stage strong { color: #0f2a47; font-size: .8rem; font-weight: 700; line-height: 1.2; overflow-wrap: break-word; }
+.integrations-page .ig-stage small { color: #62788d; font-size: .69rem; line-height: 1.3; }
+.integrations-page .ig-flow-arrow { position: absolute; top: 50%; left: -15px; color: #3f6488; transform: translateY(-50%); }
+.integrations-page .ig-flow .ig-stage:nth-child(6) .ig-flow-arrow { display: none; }
+@container ig-flow (max-width: 520px) {
+  .integrations-page .ig-flow { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .integrations-page .ig-flow-arrow { display: none; }
+  .integrations-page .ig-stage { display: grid; grid-template-columns: 38px minmax(0, 1fr); column-gap: 12px; padding: 8px 12px; text-align: left; }
+  .integrations-page .ig-stage-icon { grid-row: span 2; }
+}
+.integrations-page .ig-arch-notes { display: grid; gap: 8px; margin-top: 14px; }
+.integrations-page .ig-arch-notes p { display: flex; align-items: flex-start; gap: 8px; padding: 9px 11px; border: 1px dashed #b9cfe4; border-radius: 10px; color: #3d5870; background: #f7fafd; font-size: .8rem; line-height: 1.45; }
+.integrations-page .ig-arch-notes svg { flex: none; margin-top: 2px; color: #1f6fd1; }
+.integrations-page .ig-arch-notes strong { color: #0f2a47; }
+.integrations-page .ig-callout { display: flex; align-items: flex-start; gap: 12px; margin-top: 12px; padding: 14px 16px; border: 1px solid #cdebdc; border-radius: 12px; color: #0d6e4c; background: #eefaf4; }
+.integrations-page .ig-callout svg { flex: none; margin-top: 1px; }
+.integrations-page .ig-callout strong { color: #0f3d2c; font-size: .92rem; }
+.integrations-page .ig-callout p { margin-top: 3px; color: #2f6a52; font-size: .82rem; line-height: 1.5; }
+
+/* ---------- MCP / n8n cards ---------- */
+.integrations-page .ig-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.integrations-page .ig-facts > div { display: grid; gap: 2px; min-width: 0; padding: 7px 9px; border-radius: 8px; background: #f6f9fc; }
+.integrations-page .ig-facts dt { color: #6a8196; font-size: .62rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.integrations-page .ig-facts dd { margin: 0; color: #0f2a47; font-size: .8rem; overflow-wrap: anywhere; }
+.integrations-page .ig-caps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.integrations-page .ig-caps-title { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; color: #0f2a47; font-size: .8rem; font-weight: 700; }
+.integrations-page .ig-title-ko { color: #b3263e; }
+.integrations-page .ig-caps ul { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.integrations-page .ig-caps li { display: grid; gap: 3px; padding: 8px 10px; border: 1px solid #e2d8fa; border-radius: 9px; background: #faf8ff; }
+.integrations-page .ig-caps li code { justify-self: start; color: #5b3fb0; background: #efe9fd; }
+.integrations-page .ig-caps small { color: #5a7187; font-size: .72rem; line-height: 1.4; }
+.integrations-page .ig-actions-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.integrations-page .ig-button-soft { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 12px; border-radius: 9px; color: #1f5fa8; background: #e7f1fd; font-size: .82rem; font-weight: 600; cursor: pointer; }
+.integrations-page .ig-button-soft:hover { background: #d9e9fb; }
+.integrations-page .ig-docs { display: grid; gap: 10px; margin-top: 10px; padding: 12px; border: 1px dashed #b9cfe4; border-radius: 11px; background: #f8fbfe; }
+.integrations-page .ig-boundaries { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.integrations-page .ig-boundaries ul { display: grid; gap: 3px; margin: 0; padding-left: 18px; color: #35506b; font-size: .78rem; line-height: 1.45; }
+.integrations-page .ig-doc-note { margin-top: 10px; color: #4a6178; font-size: .76rem; line-height: 1.5; }
+.integrations-page .ig-docs .ig-doc-note { margin-top: 0; }
+.integrations-page .ig-workflows { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.integrations-page .ig-workflows li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 11px; border: 1px solid #e3eaf2; border-radius: 10px; }
+.integrations-page .ig-workflow-copy { display: grid; gap: 2px; min-width: 0; }
+.integrations-page .ig-workflow-copy strong { color: #0f2a47; font-size: .84rem; }
+.integrations-page .ig-workflow-copy small { color: #5a7187; font-size: .72rem; line-height: 1.4; }
+.integrations-page .ig-workflow-detail ol { display: grid; gap: 2px; margin: 0; padding-left: 20px; color: #35506b; font-size: .76rem; line-height: 1.45; }
+
+/* ---------- tester ---------- */
+.integrations-page .ig-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 11px; background: #eef3f8; }
+.integrations-page .ig-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 36px; padding: 0 6px; border-radius: 8px; color: #4a6178; background: transparent; font-size: .8rem; font-weight: 600; cursor: pointer; }
+.integrations-page .ig-tabs button.active { color: #fff; background: linear-gradient(145deg, #2b8ff0, #1a73d9); box-shadow: 0 3px 8px rgb(31 134 232 / 22%); }
+.integrations-page .ig-tabs button:disabled { cursor: not-allowed; opacity: .5; }
+.integrations-page .ig-path { display: flex; align-items: flex-start; gap: 6px; margin: 10px 0; color: #4a6178; font-size: .76rem; line-height: 1.4; }
+.integrations-page .ig-path svg { flex: none; margin-top: 1px; color: #1f6fd1; }
+.integrations-page .ig-field { display: grid; gap: 5px; }
+.integrations-page .ig-field > span { color: #1d3350; font-size: .8rem; font-weight: 600; }
+.integrations-page .ig-field textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1px solid #d9e3ee; border-radius: 10px; outline: none; color: #1d3350; background: #fff; font-size: .9rem; line-height: 1.5; resize: vertical; }
+.integrations-page .ig-field textarea[dir="rtl"] { text-align: right; }
+.integrations-page .ig-field textarea:focus { border-color: #a9d2f6; box-shadow: 0 0 0 3px rgb(31 134 232 / 12%); }
+.integrations-page .ig-validation { margin-top: 6px; color: #b3263e; font-size: .78rem; }
+.integrations-page .ig-examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.integrations-page .ig-examples button { max-width: 100%; padding: 5px 10px; border: 1px solid #d7e5f3; border-radius: 999px; color: #1f5fa8; background: #f3f8fd; font-size: .76rem; cursor: pointer; }
+.integrations-page .ig-examples button:hover:not(:disabled) { background: #e7f1fd; }
+.integrations-page .ig-examples span { overflow-wrap: anywhere; }
+.integrations-page .ig-check { display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; color: #35506b; font-size: .78rem; line-height: 1.4; }
+.integrations-page .ig-check input { margin-top: 2px; }
+.integrations-page .ig-actions { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 8px; margin-top: 12px; }
+.integrations-page .ig-button-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 10px; border-radius: 10px; color: #fff; background: linear-gradient(145deg, #2b8ff0, #1a73d9); font-size: .88rem; font-weight: 600; box-shadow: 0 6px 14px rgb(31 134 232 / 22%); cursor: pointer; }
+.integrations-page .ig-button-primary:disabled { cursor: progress; background: #9fc2e6; box-shadow: none; }
+.integrations-page .ig-button-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 0 12px; border: 1px solid #c9dcf1; border-radius: 10px; color: #1f5fa8; background: #fff; font-size: .86rem; font-weight: 600; text-decoration: none; cursor: pointer; }
+.integrations-page .ig-button-ghost:hover:not(:disabled) { background: #f3f7fb; }
+.integrations-page .ig-button-ghost:disabled { cursor: not-allowed; opacity: .5; }
+.integrations-page .ig-button-small { min-height: 34px; padding: 0 10px; font-size: .76rem; }
+
+/* ---------- voice tab ---------- */
+.integrations-page .ig-voice { display: grid; gap: 10px; }
+.integrations-page .ig-voice-row { display: flex; align-items: center; gap: 14px; padding: 14px; border: 1px solid #d3e4f7; border-radius: 12px; background: #f3f8fd; }
+.integrations-page .ig-mic { display: grid; place-items: center; width: 62px; height: 62px; flex: none; border-radius: 50%; color: #fff; cursor: pointer; background: radial-gradient(circle at 35% 30%, #3f9cf7, #1765cf); box-shadow: 0 0 0 7px #e3effc, 0 8px 18px rgb(23 101 207 / 26%); }
+.integrations-page .ig-mic.is-listening { background: radial-gradient(circle at 35% 30%, #f06a86, #cf2f55); box-shadow: 0 0 0 7px #fde3ea, 0 8px 18px rgb(207 47 85 / 26%); }
+.integrations-page .ig-mic:disabled { cursor: progress; background: #8fb4de; box-shadow: 0 0 0 7px #e8eff7; }
+.integrations-page .ig-voice-status { flex: 1; display: grid; gap: 4px; min-width: 0; }
+.integrations-page .ig-voice-status strong { color: #0f2a47; font-size: .88rem; }
+.integrations-page .ig-voice-status small { color: #6a8196; font-size: .74rem; line-height: 1.4; }
+.integrations-page .ig-voice-level { display: flex; align-items: center; gap: 8px; }
+.integrations-page .ig-voice-level i { display: block; height: 7px; max-width: 100%; min-width: 2px; border-radius: 4px; background: #cf2f55; transition: width .08s linear; }
+.integrations-page .ig-voice-level em { color: #cf2f55; font-size: .76rem; font-style: normal; font-weight: 700; font-variant-numeric: tabular-nums; }
+.integrations-page .ig-voice .ig-doc-note { margin-top: 0; }
+.integrations-page .ig-audio { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 8px; }
+.integrations-page .ig-audio small { color: #6a8196; font-size: .72rem; }
+
+/* ---------- result ---------- */
+.integrations-page .ig-empty { display: grid; justify-items: center; gap: 6px; padding: 24px 14px; border: 1px dashed #d9e6f2; border-radius: 12px; color: #6a8196; background: #f8fbfe; font-size: .82rem; text-align: center; }
+.integrations-page .ig-empty strong { color: #0f2a47; font-size: .95rem; }
+.integrations-page .ig-empty-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; color: #1f6fd1; background: #e3effc; }
+.integrations-page .ig-outcome { display: flex; align-items: flex-start; gap: 10px; padding: 11px 13px; border: 1px solid; border-radius: 11px; }
+.integrations-page .ig-outcome div { display: grid; gap: 2px; }
+.integrations-page .ig-outcome strong { font-size: .92rem; }
+.integrations-page .ig-outcome span { color: #4a6178; font-size: .78rem; }
+.integrations-page .ig-outcome svg { flex: none; margin-top: 1px; }
+.integrations-page .ig-outcome-ok { border-color: #cdebdc; color: #0d6e4c; background: #eefaf4; }
+.integrations-page .ig-outcome-protected { border-color: #f5c9d1; color: #b3263e; background: #fff4f6; }
+.integrations-page .ig-outcome-error { border-color: #f5c9d1; color: #a32a41; background: #fff6f8; }
+.integrations-page .ig-question { margin-top: 10px; color: #4a6178; font-size: .78rem; }
+.integrations-page .ig-question q { color: #0f2a47; font-weight: 600; }
+.integrations-page .ig-answer { max-height: 220px; margin-top: 8px; padding: 10px 12px; overflow-y: auto; border: 1px solid #d3e4f7; border-radius: 10px; color: #0f2a47; background: #f3f8fd; font-size: .86rem; line-height: 1.6; white-space: pre-line; scrollbar-gutter: stable; }
+.integrations-page .ig-answer[dir="rtl"] { text-align: right; }
+.integrations-page .ig-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 10px 0 0; }
+.integrations-page .ig-meta > div { display: grid; gap: 2px; min-width: 0; padding: 7px 9px; border-radius: 8px; background: #f6f9fc; }
+.integrations-page .ig-meta .ig-meta-wide { grid-column: 1 / -1; }
+.integrations-page .ig-meta dt { color: #6a8196; font-size: .62rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.integrations-page .ig-meta dd { margin: 0; color: #0f2a47; font-size: .8rem; overflow-wrap: anywhere; }
+
+/* ---------- history / info ---------- */
+.integrations-page .ig-history-empty { padding: 12px; border: 1px dashed #d9e6f2; border-radius: 10px; color: #6a8196; font-size: .8rem; }
+.integrations-page .ig-history { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.integrations-page .ig-history li { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 8px; padding: 7px 9px; border-radius: 9px; background: #f6f9fc; font-size: .76rem; }
+.integrations-page .ig-history-time { color: #6a8196; font-variant-numeric: tabular-nums; }
+.integrations-page .ig-history-kind { color: #0f2a47; font-weight: 700; }
+.integrations-page .ig-history-preview { flex-basis: 100%; min-width: 0; color: #35506b; overflow-wrap: anywhere; }
+.integrations-page .ig-info { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.integrations-page .ig-info li { display: flex; align-items: flex-start; gap: 8px; color: #35506b; font-size: .79rem; line-height: 1.45; }
+.integrations-page .ig-info svg { flex: none; margin-top: 2px; color: #16a06a; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1600px) {
+  .integrations-page .ig-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 1440px) {
+  .integrations-page .ig-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .integrations-page .ig-row > .ig-side { grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .integrations-page .ig-row-top { grid-template-columns: minmax(0, 1fr); }
+  .integrations-page .ig-row-top > .ig-side { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+}
+@media (max-width: 1100px) {
+  .integrations-page .ig-row { grid-template-columns: minmax(0, 1fr); }
+  .page-integrations .topbar h1 { font-size: 1.9rem; }
+  .page-integrations .topbar-kicker { font-size: 1.25rem; }
+}
+@media (max-width: 900px) {
+  .integrations-page .ig-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .integrations-page .ig-cards { grid-template-columns: minmax(0, 1fr); }
+  .integrations-page .ig-row > .ig-side, .integrations-page .ig-row-top > .ig-side { grid-template-columns: minmax(0, 1fr); }
+  .integrations-page .ig-facts, .integrations-page .ig-caps, .integrations-page .ig-boundaries, .integrations-page .ig-meta { grid-template-columns: minmax(0, 1fr); }
+  .integrations-page .ig-actions { grid-template-columns: minmax(0, 1fr); }
+  .integrations-page .ig-tabs { grid-template-columns: minmax(0, 1fr); }
+  .integrations-page .ig-head { flex-wrap: wrap; }
+  .integrations-page .ig-workflows li { flex-wrap: wrap; }
+  .page-integrations .topbar h1 { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { .integrations-page .ig-spin { animation: none; } }

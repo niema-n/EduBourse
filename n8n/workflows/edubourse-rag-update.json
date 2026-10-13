@@ -1,0 +1,161 @@
+{
+  "name": "EduBourse - RAG Update",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "id": "f8b2a096-0a00-451f-b931-52b4383593aa"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "mode",
+              "name": "mode",
+              "type": "string",
+              "value": "validate"
+            },
+            {
+              "id": "source",
+              "name": "source",
+              "type": "string",
+              "value": "local_approved_corpus"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Prepare Update Request",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [240, 0],
+      "id": "e8764ed2-1af6-40b2-9709-35322054a8be"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://backend:8000/api/v1/admin/rag/update",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { mode: $json.mode, source: $json.source } }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          },
+          "timeout": 30000
+        },
+        "onError": "continueRegularOutput"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Header Auth account"
+        }
+      },
+      "name": "Call EduBourse Backend RAG Update",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 0],
+      "id": "c41c09d8-0b05-411e-a537-52639e01ade8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "status",
+              "name": "status",
+              "type": "string",
+              "value": "={{ $json.status === 'ok' ? 'ok' : 'error' }}"
+            },
+            {
+              "id": "mode",
+              "name": "mode",
+              "type": "string",
+              "value": "={{ $json.mode }}"
+            },
+            {
+              "id": "source",
+              "name": "source",
+              "type": "string",
+              "value": "={{ $json.source }}"
+            },
+            {
+              "id": "sources_checked",
+              "name": "sources_checked",
+              "type": "number",
+              "value": "={{ $json.sources_checked }}"
+            },
+            {
+              "id": "documents_changed",
+              "name": "documents_changed",
+              "type": "number",
+              "value": "={{ $json.documents_changed }}"
+            },
+            {
+              "id": "chunks_added",
+              "name": "chunks_added",
+              "type": "number",
+              "value": "={{ $json.chunks_added }}"
+            },
+            {
+              "id": "chunks_updated",
+              "name": "chunks_updated",
+              "type": "number",
+              "value": "={{ $json.chunks_updated }}"
+            },
+            {
+              "id": "chunks_unchanged",
+              "name": "chunks_unchanged",
+              "type": "number",
+              "value": "={{ $json.chunks_unchanged }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Prepare Automation Result",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [800, 0],
+      "id": "6febdefc-996d-4c07-8e5d-d6e4f97413d3"
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{
+        "node": "Prepare Update Request",
+        "type": "main",
+        "index": 0
+      }]]
+    },
+    "Prepare Update Request": {
+      "main": [[{
+        "node": "Call EduBourse Backend RAG Update",
+        "type": "main",
+        "index": 0
+      }]]
+    },
+    "Call EduBourse Backend RAG Update": {
+      "main": [[{
+        "node": "Prepare Automation Result",
+        "type": "main",
+        "index": 0
+      }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

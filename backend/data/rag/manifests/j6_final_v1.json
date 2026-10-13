@@ -1,0 +1,38 @@
+{
+  "schema_version": "j6-final-v1",
+  "j6_version": 1,
+  "retrieval_service_manifest_sha256": "4467a6ed7c8a1d23ee2d90a39159ac0c404567d42c8d7da10d30dfce9e450f1e",
+  "grounded_generation_manifest_sha256": "4a98e96df45ad177e311d3a99cbf250b6cdd3cf18e1bb39262921053650c9d7a",
+  "grounding_prompt_sha256": "2339deb276ae2ac3d20ab457a4acb1fb4996fcee6bb1e4156e0cb846beb5dd8d",
+  "retrieval_policy": "H1_LANGUAGE_ROUTED_V1",
+  "rrf_k": 60,
+  "embedding_model": "BAAI/bge-m3",
+  "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "chroma_collection": "j6_bge_m3_content_v1",
+  "content_chunk_count": 353,
+  "supported_languages": [
+    "fr",
+    "en",
+    "ar",
+    "ary"
+  ],
+  "supported_language_script_combinations": 5,
+  "direct_target_language_generation": true,
+  "structured_citations": true,
+  "source_context_delimiter_hardened": true,
+  "security_upstream_authoritative": true,
+  "supervisor_upstream_authoritative": true,
+  "text_voice_shared_business_pipeline": true,
+  "retrieval_science_frozen": true,
+  "no_more_retrieval_policy_tuning": true,
+  "confirmatory_quality_gate": false,
+  "retrieval_policy_status": "ACCEPTED_WITH_DOCUMENTED_CONFIRMATORY_LIMITATIONS",
+  "known_limitations": [
+    "Ary-Latin RRF dilution",
+    "thin 3-chunk brochure retrieval competition"
+  ],
+  "production_integration": true,
+  "external_provider_calls_in_tests": 0,
+  "j6_complete_candidate": true,
+  "next_step": "J6_FINAL_AUDIT"
+}

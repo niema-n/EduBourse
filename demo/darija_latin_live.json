@@ -1,0 +1,52 @@
+﻿{
+    "latency_seconds":  98.917,
+    "question":  "Chno kay3ni IPO w 3lach chi charika katdkhol lborsa?",
+    "thread_id":  "jury-darija-latin-2288f568-6a2c-47c3-847a-d0dbbb6c1032",
+    "response":  {
+                     "answer":  "IPO kat3ni Â« Initial Public Offering Â», yani introduction en bourse. Hiya opÃ©ration financiÃ¨re fin charika kat7ett partie men capital social dyalha Ã  la disposition dyal public, w f l mo9abil katjma3 capitaux jdod.\n\nCharika t9der tdir had l opÃ©ration l chi wa7ed men had l asbab:\n\n- Tmowel dÃ©veloppement dyalha, b collecte dyal fonds jdod f marchÃ© des capitaux.\n- Tnawwe3 modes de financement dyalha.\n- Tdir appel public Ã  lâÃ©pargne (APE), bach tetleb Ã©pargne dyal public.\n\nLâintroduction en bourse t9der takhod plusieurs formes, menhom augmentation de capital, li katjib liquiditÃ©s jdod l charika, ou cession dâactions existantes. Had cession ma katjibch liquiditÃ©s jdod l charika, walakin katkhalli actionnaires dâorigine y9ellso participation dyalhom.",
+                     "language":  "ary",
+                     "script":  "latin",
+                     "route":  "pedagogie",
+                     "blocked":  false,
+                     "thread_id":  "jury-darija-latin-2288f568-6a2c-47c3-847a-d0dbbb6c1032",
+                     "status":  "ok",
+                     "grounded":  true,
+                     "citations":  [
+                                       {
+                                           "evidence_id":  "S1",
+                                           "chunk_id":  "ammc-comprendre-les-ipo-p008-c005-43410108",
+                                           "source_id":  "ammc-comprendre-les-ipo",
+                                           "title":  "Comprendre les IPO",
+                                           "page":  8,
+                                           "page_start":  8,
+                                           "page_end":  8,
+                                           "heading":  null
+                                       },
+                                       {
+                                           "evidence_id":  "S2",
+                                           "chunk_id":  "ammc-comprendre-les-ipo-p026-c036-2385d786",
+                                           "source_id":  "ammc-comprendre-les-ipo",
+                                           "title":  "Comprendre les IPO",
+                                           "page":  26,
+                                           "page_start":  26,
+                                           "page_end":  26,
+                                           "heading":  null
+                                       },
+                                       {
+                                           "evidence_id":  "S5",
+                                           "chunk_id":  "ammc-comprendre-les-ipo-p010-c008-6ca1d995",
+                                           "source_id":  "ammc-comprendre-les-ipo",
+                                           "title":  "Comprendre les IPO",
+                                           "page":  10,
+                                           "page_start":  10,
+                                           "page_end":  10,
+                                           "heading":  null
+                                       }
+                                   ],
+                     "internal_pedagogical_source":  null,
+                     "knowledge_source":  "rag",
+                     "web_sources":  [
+
+                                     ]
+                 }
+}

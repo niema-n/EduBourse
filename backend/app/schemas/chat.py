@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -39,8 +39,40 @@ class ChatRequest(BaseModel):
         return value
 
 
+KnowledgeSource = Literal[
+    "rag",
+    "llm_general_financial_knowledge",
+    "llm_web_grounded_financial_knowledge",
+    "controlled_current_data_limitation",
+]
+MAX_WEB_SOURCES = 10
+
+
+class WebSource(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    title: str | None = Field(default=None, max_length=300)
+    uri: str | None = Field(default=None, max_length=2000)
+
+
+class InternalPedagogicalSource(BaseModel):
+    """Internal module provenance, independent of RAG grounding and citations."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    label: str
+    description: str
+    level: Literal["beginner", "intermediate", "advanced"]
+    path_id: str
+    module_id: str
+    module_title: str
+    module_number: int = Field(ge=1)
+    module_count: int = Field(ge=1)
+
+
 class ChatResponse(BaseModel):
     answer: str = Field(
+        min_length=1,
         description="Educational answer returned in the detected language and script."
     )
     language: Literal["fr", "en", "ar", "ary"] = Field(
@@ -54,6 +86,24 @@ class ChatResponse(BaseModel):
     thread_id: str = Field(description="Conversation identifier echoed from the request.")
     status: Literal["ok", "blocked", "fallback", "error"] = Field(
         description="Response status: ok, blocked, fallback or error."
+    )
+    grounded: bool | None = Field(default=None)
+    citations: list[dict[str, Any]] = Field(default_factory=list)
+    internal_pedagogical_source: InternalPedagogicalSource | None = Field(
+        default=None, description="Internal EduBourse module metadata; not a RAG citation."
+    )
+    knowledge_source: KnowledgeSource | None = Field(
+        default=None,
+        description=(
+            "Provenance of this turn's answer when the pedagogie route proves it: "
+            "approved RAG corpus, general financial knowledge, web-grounded financial "
+            "research, or the controlled current-data limitation."
+        ),
+    )
+    web_sources: list[WebSource] = Field(
+        default_factory=list,
+        max_length=MAX_WEB_SOURCES,
+        description="Sources returned by the authorized web-grounded financial research.",
     )
 
     model_config = ConfigDict(

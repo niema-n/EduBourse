@@ -1,0 +1,55 @@
+{
+  "case": {
+    "id": "unsupported_aspect",
+    "language": "fr",
+    "script": "latin",
+    "question": "Définis un ETF et donne les frais annuels exacts de conservation chez mon courtier.",
+    "source": "Un ETF est un fonds négocié en Bourse qui cherche à suivre un indice.",
+    "aspects": {
+      "definition": [
+        "fonds",
+        "indice"
+      ],
+      "specific_gap": [
+        "frais",
+        "courtier|conservation",
+        "pas|aucun|insuffisant|indisponible|manqu|absent"
+      ]
+    },
+    "forbidden": [
+      "\\d\\s*%",
+      "\\d\\s*(?:euro|dirham|mad|eur)"
+    ]
+  },
+  "result": {
+    "original_query": "Définis un ETF et donne les frais annuels exacts de conservation chez mon courtier.",
+    "language": "fr",
+    "script": "latin",
+    "answer": "Un ETF est un fonds négocié en Bourse qui cherche à suivre un indice. Les informations disponibles ne permettent pas de déterminer les frais annuels exacts de conservation chez votre courtier.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "definition": true,
+    "specific_gap": true
+  }
+}

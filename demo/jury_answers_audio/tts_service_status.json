@@ -1,0 +1,9 @@
+[
+  {
+    "error": {
+      "code": "rate_limit_exceeded",
+      "message": "Rate limit exceeded for model gemini-2.5-flash-tts (limit: 10 requests per day on Free Tier). Please retry in 17s or upgrade your tier at https://ai.dev/rate-limit."
+    },
+    "event_type": "error"
+  }
+]

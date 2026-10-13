@@ -1,0 +1,62 @@
+{
+  "case": {
+    "id": "en_multi",
+    "language": "en",
+    "script": "latin",
+    "question": "What is a stock and what are its main sources of return and risk?",
+    "source": "A stock represents ownership of part of a company. A bond is a debt: its holder is a creditor, not an owner. Stocks may pay dividends and generate a capital gain on resale. A bond generally pays interest and repays principal at maturity. A stock's price can fall, and dividends are not guaranteed. Bond holders face issuer default risk and a resale price that can fall when market interest rates rise.",
+    "aspects": {
+      "definition": [
+        "owner|equity"
+      ],
+      "dividends": [
+        "dividend"
+      ],
+      "capital_gain": [
+        "capital gain|resale|sell|selling"
+      ],
+      "price_risk": [
+        "price",
+        "fall|declin|loss|lose"
+      ],
+      "income_risk": [
+        "dividend",
+        "not guaranteed|uncertain|no guarantee"
+      ]
+    }
+  },
+  "result": {
+    "original_query": "What is a stock and what are its main sources of return and risk?",
+    "language": "en",
+    "script": "latin",
+    "answer": "A stock represents ownership of part of a company. Its main sources of return are dividends and capital gains realized upon resale. The primary risks associated with stocks include the potential for the stock price to fall and the fact that dividends are not guaranteed.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "definition": true,
+    "dividends": true,
+    "capital_gain": true,
+    "price_risk": true,
+    "income_risk": true
+  }
+}

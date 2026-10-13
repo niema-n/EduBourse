@@ -115,6 +115,7 @@ def formation_workflow(state: GraphState, catalog: TrainingCatalog | None = None
                     "Une courte évaluation est nécessaire avant de proposer un parcours; "
                     "le catalogue officiel n'est pas encore connecté."
                 ),
+                "response_key": "formation_elearning",
             }
         next_state |= assessment_node(state)
     profile_state = state | next_state
@@ -134,4 +135,5 @@ def formation_workflow(state: GraphState, catalog: TrainingCatalog | None = None
         "training_candidates": candidates,
         "recommended_training": recommendation,
         "business_answer": answer,
+        "response_key": "formation_elearning",
     }

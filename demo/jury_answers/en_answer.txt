@@ -1,0 +1,16 @@
+An Initial Public Offering (IPO) is a financial operation in which a company makes part of its share capital available to the public in exchange for newly collected funds. It enables the company to solicit public savings through a public offering of securities. The process is subject to legal and regulatory obligations designed to protect investors, including the publication of a prospectus and ongoing financial and extra-financial information.
+
+There are two main types of IPOs, which may also be combined in a mixed operation:
+
+- **Capital Increase:** New shares are created, enabling the company to raise new capital from the market and obtain an additional source of financing for its development.
+- **Sale of Existing Shares:** Original shareholders sell part of their existing shares to new investors. The company does not receive new liquidity; instead, the original shareholders reduce their participation in the company’s capital.
+- **Mixed Operation:** A combination of a capital increase and the sale of existing shares.
+
+Companies primarily choose to go public to diversify their financing options and raise funds for development. Other benefits include increasing the company’s notoriety and ensuring the mobility of its capital. For investors, an IPO provides an opportunity to acquire shares in companies with potential and diversify their investment portfolios.
+
+The IPO process involves several key actors:
+
+- **Internal Governance Bodies:** Validate the business plan, select external experts, and ensure the quality of the information provided to advisors.
+- **Regulatory Authority (AMMC):** Handles regulatory matters, including approval of the prospectus.
+- **Stock Exchange Operator (Casablanca Stock Exchange):** Manages the market on which the company’s shares will be admitted.
+- **External Experts:** Help the company structure, promote, and place the securities.

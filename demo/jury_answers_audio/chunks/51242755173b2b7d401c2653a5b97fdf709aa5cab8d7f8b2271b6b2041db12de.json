@@ -1,0 +1,6 @@
+{
+  "exact_tts_input": "\n- **Obligation :** le rendement principal prend la forme d’un intérêt appelé « coupon », versé en contrepartie du prêt. À l’échéance, l’émetteur rembourse le montant emprunté, c’est-à-dire le capital. Il existe aussi des obligations zéro coupon : aucun coupon n’est versé pendant la durée de vie du titre, et le principal ainsi que les intérêts sont remboursés intégralement à l’échéance.\n\n### 3. Risque\n\n- **Action :** les informations fournies mentionnent une section consacrée aux risques associés aux actions, mais les extraits disponibles ne les détaillent pas.",
+  "sample_rate_hz": 24000,
+  "tts_model": "gemini-2.5-flash-preview-tts",
+  "tts_voice": "Kore"
+}

@@ -1,0 +1,62 @@
+﻿{
+    "question":  "Quelle est la différence entre une action et une obligation ?",
+    "answer":  "La diffÃ©rence fondamentale entre une action et une obligation rÃ©side dans la nature du lien crÃ©Ã© avec l\u0027Ã©metteur : l\u0027action confÃ¨re une part de propriÃ©tÃ© dans le capital de l\u0027entreprise, tandis que l\u0027obligation fait de l\u0027investisseur un crÃ©ancier de l\u0027Ã©metteur.\n\nL\u0027action est un titre de propriÃ©tÃ© reprÃ©sentatif d\u0027une fraction du capital d\u0027une entreprise. En tant que dÃ©tenteur, l\u0027investisseur bÃ©nÃ©ficie de droits spÃ©cifiques, notamment le droit aux dividendes, le droit Ã  l\u0027information et le droit de vote lors des assemblÃ©es. Le rendement d\u0027une action dÃ©pend de la variation de son prix et des dividendes perÃ§us. Les risques associÃ©s sont principalement le risque de perte en capital (baisse du prix), le risque de liquiditÃ© (difficultÃ© Ã  revendre le titre) et le risque de dÃ©faut, qui peut entraÃ®ner la perte totale de l\u0027investissement en cas de faillite de l\u0027entreprise, les crÃ©anciers prioritaires Ã©tant remboursÃ©s en premier.\n\nL\u0027obligation est un titre de crÃ©ance reprÃ©sentant une fraction d\u0027un emprunt Ã©mis par une entreprise ou un Ãtat. L\u0027investisseur perÃ§oit une rÃ©munÃ©ration sous forme d\u0027intÃ©rÃªts, appelÃ©s coupons, et reÃ§oit le remboursement du principal, soit de maniÃ¨re pÃ©riodique, soit Ã  l\u0027Ã©chÃ©ance. Le rendement peut Ãªtre mesurÃ© par le rendement courant (rapport du coupon au prix) ou le rendement actuariel (rentabilitÃ© jusqu\u0027Ã  l\u0027Ã©chÃ©ance). Les risques spÃ©cifiques Ã  l\u0027obligation incluent le risque de crÃ©dit (capacitÃ© de l\u0027Ã©metteur Ã  honorer ses engagements), le risque de taux (variation inverse entre le taux d\u0027intÃ©rÃªt et le prix de l\u0027obligation) et le risque de liquiditÃ©.",
+    "language":  "fr",
+    "script":  "latin",
+    "route":  "pedagogie",
+    "grounded":  true,
+    "citations":  [
+                      {
+                          "evidence_id":  "S2",
+                          "chunk_id":  "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques-p007-c008-48fcb971",
+                          "source_id":  "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+                          "title":  "Comprendre les circuits et adopter les bonnes pratiques",
+                          "page":  7,
+                          "page_start":  7,
+                          "page_end":  7,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S1",
+                          "chunk_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p012-c013-696ceeb0",
+                          "source_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+                          "title":  "Comprendre les instruments financiers et leurs mÃ©canismes",
+                          "page":  12,
+                          "page_start":  12,
+                          "page_end":  12,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S3",
+                          "chunk_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p017-c020-97b86eb4",
+                          "source_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+                          "title":  "Comprendre les instruments financiers et leurs mÃ©canismes",
+                          "page":  17,
+                          "page_start":  17,
+                          "page_end":  17,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S7",
+                          "chunk_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p021-c025-a2fda662",
+                          "source_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+                          "title":  "Comprendre les instruments financiers et leurs mÃ©canismes",
+                          "page":  21,
+                          "page_start":  21,
+                          "page_end":  21,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S10",
+                          "chunk_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p020-c024-48cf0952",
+                          "source_id":  "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+                          "title":  "Comprendre les instruments financiers et leurs mÃ©canismes",
+                          "page":  20,
+                          "page_start":  20,
+                          "page_end":  20,
+                          "heading":  null
+                      }
+                  ],
+    "thread_id":  "jury-final-fr-9664e00b-82a4-4f3b-ab81-a17e54a6d39c",
+    "latency":  null
+}

@@ -91,8 +91,15 @@ financial instruments, indices and MASI, IPOs, dividends, orders, liquidity, ris
 Bourse de Casablanca, Ecole de la Bourse, e-learning, CISI, e-Bourse, and the
 Championnat de la Bourse.
 For safe in-domain general financial education with no specialized workflow, use pedagogie.
-Use formation_elearning for structured courses or modules; orientation for learning-path
-guidance; cisi for professional finance certification; quiz for assessment or practice;
+Use formation_elearning for explicit requests for formation e-learning, cours, modules,
+programme de formation, learning modules or structured training, even if the user asks
+for a path adapted to their level. For example, "Je veux suivre des modules de formation
+e-learning" routes to formation_elearning. Use orientation for open-ended guidance:
+"par où commencer ?", "que dois-je apprendre ensuite ?", "guide-moi dans mon apprentissage",
+"what should I learn next?" or "Je ne sais pas par où commencer mon apprentissage."
+Do not extract or determine the user's learning level.
+Use cisi for professional finance certification; quiz for explicit level assessment
+("Je veux évaluer mon niveau en Bourse", "Teste mon niveau") or practice;
 championnat for educational trading competition or simulation; support_ecole for school
 account, access, registration, platform, or navigation support.
 Clearly unrelated requests use domain_status=out_of_domain and route=out_of_domain.

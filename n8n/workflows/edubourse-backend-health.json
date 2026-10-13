@@ -1,0 +1,117 @@
+{
+  "name": "EduBourse - Backend Health Bridge",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "edubourse-backend-health",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "9e2b1c01-0001-4000-8000-000000000001",
+      "name": "Backend Health Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "http://backend:8000/api/v1/health/live",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          },
+          "timeout": 5000
+        }
+      },
+      "id": "9e2b1c01-0001-4000-8000-000000000002",
+      "name": "Call EduBourse Backend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "status",
+              "name": "status",
+              "type": "string",
+              "value": "={{ $json.status === 'ok' ? 'ok' : 'error' }}"
+            },
+            {
+              "id": "service",
+              "name": "service",
+              "type": "string",
+              "value": "n8n"
+            },
+            {
+              "id": "backend",
+              "name": "backend",
+              "type": "string",
+              "value": "={{ $json.status === 'ok' ? 'reachable' : 'unreachable' }}"
+            },
+            {
+              "id": "integration",
+              "name": "integration",
+              "type": "string",
+              "value": "edubourse"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9e2b1c01-0001-4000-8000-000000000003",
+      "name": "Prepare Backend Health Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 0]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {
+          "responseCode": "={{ $json.status === 'ok' ? 200 : 503 }}"
+        }
+      },
+      "id": "9e2b1c01-0001-4000-8000-000000000004",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [760, 0]
+    }
+  ],
+  "connections": {
+    "Backend Health Webhook": {
+      "main": [[{
+        "node": "Call EduBourse Backend",
+        "type": "main",
+        "index": 0
+      }]]
+    },
+    "Call EduBourse Backend": {
+      "main": [[{
+        "node": "Prepare Backend Health Response",
+        "type": "main",
+        "index": 0
+      }]]
+    },
+    "Prepare Backend Health Response": {
+      "main": [[{
+        "node": "Respond to Webhook",
+        "type": "main",
+        "index": 0
+      }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

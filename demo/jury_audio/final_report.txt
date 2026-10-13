@@ -1,0 +1,41 @@
+FR_FILE=demo/jury_audio/jury_fr_action_vs_obligation.wav
+FR_DURATION=8.414s
+FR_PLAYABLE=true
+
+EN_FILE=demo/jury_audio/jury_en_ipo.wav
+EN_DURATION=5.789s
+EN_PLAYABLE=true
+
+AR_FILE=demo/jury_audio/jury_ar_investment_risks.wav
+AR_DURATION=6.631s
+AR_PLAYABLE=true
+
+DARIJA_FILE=demo/jury_audio/jury_darija_dividend.wav
+DARIJA_DURATION=4.284s
+DARIJA_PLAYABLE=true
+
+TTS_PROVIDER=gemini
+TTS_MODEL=gemini-2.5-flash-preview-tts
+TTS_VOICE=Kore
+
+POWERSHELL_PLAYER_READY=true
+CODE_CHANGED=true
+PRODUCTION_CODE_CHANGED=false
+CODE_CHANGE_SCOPE=New standalone demo scripts only
+FILES_CREATED=
+demo/jury_audio/jury_fr_action_vs_obligation.wav
+demo/jury_audio/jury_en_ipo.wav
+demo/jury_audio/jury_ar_investment_risks.wav
+demo/jury_audio/jury_darija_dividend.wav
+demo/jury_audio/play_demo.ps1
+demo/jury_audio/README.txt
+demo/jury_audio/generate_audio.py
+demo/jury_audio/validation.json
+demo/jury_audio/final_report.txt
+
+Validation: WAV structure, duration, nonzero PCM, padding, clipping, exact input text,
+Windows PowerShell playback, automated transcription and audio-content/dialect audit passed.
+The automated audio audit confirmed the Darija loanword despite the STT spelling variant.
+
+Verdict:
+EDUBOURSE_JURY_AUDIO_DEMO_READY

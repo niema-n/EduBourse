@@ -5,15 +5,20 @@ description = "FastAPI foundation for a financial education assistant."
 requires-python = ">=3.11"
 dependencies = [
     "alembic>=1.14.0",
-    "chromadb-client==0.5.23",
+    "chromadb==1.5.9",
     "fastapi>=0.115.6",
     "google-genai>=2.22.0",
     "groq>=1.7.0",
     "joblib>=1.4.0",
     "langgraph>=0.6.11,<0.7.0",
+    "langgraph-checkpoint-postgres>=3.0.5",
+    "numpy>=1.26.0,<3.0.0",
+    "openai==3.14.1",
     "psycopg[binary]>=3.2.3",
     "pydantic-settings>=2.7.0",
+    "pypdf>=5.0.0",
     "scikit-learn>=1.5.0,<2.0.0",
+    "sentence-transformers>=3.0.0,<6.0.0",
     "sqlalchemy>=2.0.36",
     "uvicorn[standard]>=0.34.0",
 ]

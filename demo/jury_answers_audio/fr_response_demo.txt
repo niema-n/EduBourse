@@ -1,0 +1,6 @@
+Voici les principales différences entre une action et une obligation :
+
+### 1. Nature du titre
+
+- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.
+- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur.

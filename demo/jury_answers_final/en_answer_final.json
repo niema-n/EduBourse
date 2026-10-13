@@ -1,0 +1,52 @@
+﻿{
+    "question":  "How does an IPO work, and why does a company choose to go public?",
+    "answer":  "An Initial Public Offering (IPO) is a financial operation in which a company makes part of its share capital available to the public in exchange for newly raised funds. It allows the company to solicit public savings through a public offering of securities, subject to legal and regulatory obligations intended to protect investors. These include publishing a prospectus and providing ongoing financial and extra-financial information.\n\nThere are two main types of IPO, along with a mixed structure:\n\n- **Capital increase:** The company creates new shares and raises new capital from the market, providing an additional source of financing for its development.\n- **Sale of existing shares:** Original shareholders sell some of their existing shares to new investors. The company receives no new liquidity; instead, the original shareholders reduce their participation in its capital.\n- **Mixed operation:** This combines a capital increase with the sale of existing shares.\n\nCompanies primarily go public to diversify their financing options and raise funds for development. Other benefits include increasing the companyâs visibility and facilitating the mobility of its capital. For investors, an IPO provides an opportunity to acquire shares in companies with potential and diversify their investment portfolios.\n\nSeveral key actors are involved in the process:\n\n- **Internal governance bodies:** Validate the business plan, select external experts, and ensure the quality of the information provided to advisers.\n- **Regulatory authority (AMMC):** Oversees regulatory matters, including approval of the prospectus.\n- **Stock exchange operator (Casablanca Stock Exchange):** Manages the market on which the companyâs shares will be admitted.\n- **External experts:** Help the company structure, promote, and place the securities.",
+    "language":  "en",
+    "script":  "latin",
+    "route":  "pedagogie",
+    "grounded":  true,
+    "citations":  [
+                      {
+                          "evidence_id":  "S3",
+                          "chunk_id":  "ammc-comprendre-les-ipo-p008-c005-43410108",
+                          "source_id":  "ammc-comprendre-les-ipo",
+                          "title":  "Comprendre les IPO",
+                          "page":  8,
+                          "page_start":  8,
+                          "page_end":  8,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S1",
+                          "chunk_id":  "ammc-comprendre-les-ipo-p008-c006-b6e1375d",
+                          "source_id":  "ammc-comprendre-les-ipo",
+                          "title":  "Comprendre les IPO",
+                          "page":  8,
+                          "page_start":  8,
+                          "page_end":  8,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S5",
+                          "chunk_id":  "ammc-comprendre-les-ipo-p010-c008-6ca1d995",
+                          "source_id":  "ammc-comprendre-les-ipo",
+                          "title":  "Comprendre les IPO",
+                          "page":  10,
+                          "page_start":  10,
+                          "page_end":  10,
+                          "heading":  null
+                      },
+                      {
+                          "evidence_id":  "S2",
+                          "chunk_id":  "ammc-comprendre-les-ipo-p014-c015-addad64c",
+                          "source_id":  "ammc-comprendre-les-ipo",
+                          "title":  "Comprendre les IPO",
+                          "page":  14,
+                          "page_start":  14,
+                          "page_end":  14,
+                          "heading":  null
+                      }
+                  ],
+    "thread_id":  "jury-final-en-retry-e77e5e79-a1f7-4b3c-b03f-d223ecc8cf4e",
+    "latency":  null
+}

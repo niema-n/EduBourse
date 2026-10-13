@@ -3,6 +3,7 @@
 # Translation tables intentionally keep complete user-facing sentences together.
 # ruff: noqa: E501
 
+from app.agents.contracts import OUT_OF_DOMAIN_MESSAGES
 from app.graph.language_adapter import BusinessLanguage, BusinessScript
 from app.multilingual.script_detector import count_scripts
 from app.multilingual.script_validator import validate_script
@@ -63,73 +64,62 @@ MESSAGES: dict[BusinessLanguage, dict[str, str]] = {
 }
 
 
+DARIJA_ARABIC_MESSAGES = {
+    "pedagogie": "نقدر نشرح ليك ببساطة شنو هما الأسهم والسندات والمؤشرات والمخاطر.",
+    "formation_elearning": "نقدر نعرفك على المسارات التعليمية اللي كاينة.",
+    "orientation": "نقدر نعاونك تختار مسار تعلم مناسب للهدف ديالك.",
+    "cisi": "المعلومات المفصلة على CISI خاصها الكاتالوغ الرسمي.",
+    "quiz": "نقدر ندير ليك كويز تعليمي على السوق والأدوات المالية.",
+    "championnat": "نقدر نشرح ليك بطولة البورصة و e-Bourse بطريقة بسيطة.",
+    "support_ecole": "نقدر نعاونك فالولوج والتسجيل والتنقل فمدرسة البورصة.",
+    "out_of_domain": "أنا مختص فالبورصة والأسواق والتثقيف المالي.",
+    "fallback": "ما فهمتش الطلب. نقدر نعاونك فالبورصة والتثقيف المالي.",
+    "blocked": "ما نقدرش نعيّن ليك سهم ولا نختار ليك استثمار.",
+    "error": "الجواب المتحكّم فيه ما متوفرش دابا. عاود صيغ الطلب.",
+}
+
+
 def localize_answer(
     business_answer: str,
     language: BusinessLanguage,
     script: BusinessScript,
     *,
     route: str = "fallback",
+    response_key: str | None = None,
     blocked: bool = False,
     error: bool = False,
 ) -> str:
+    if route == "quiz" and response_key == "quiz" and business_answer.strip() and not blocked and not error:
+        return business_answer
     key = "error" if error else "blocked" if blocked else route
+    if key == "out_of_domain":
+        return OUT_OF_DOMAIN_MESSAGES[(language, script)]
     answer = MESSAGES[language].get(key, MESSAGES[language]["fallback"])
+    static_response = response_key == route and route in MESSAGES[language]
     if (
+        static_response
+        and not blocked
+        and not error
+        and route != "fallback"
+    ):
+        answer = business_answer if language == "fr" else MESSAGES[language][route]
+    elif (
         business_answer.strip()
         and not blocked
         and not error
-        and route
-        not in {
-            "out_of_domain",
-            "fallback",
-        }
+        and route not in {"out_of_domain", "fallback"}
     ):
-        answer = _translate_business_answer(business_answer, language)
+        answer = business_answer
     if language == "ary" and script == "arabic":
         # Keep the Darija business wording in Arabic script for this boundary.
-        if (
-            business_answer.strip()
-            and not blocked
-            and not error
-            and route
-            not in {
-                "out_of_domain",
-                "fallback",
-            }
-        ):
-            known_translation = {
-                "Je peux expliquer les actions, obligations, indices et risques a visee educative.": "نقدر نشرح ليك الأسهم والسندات والمؤشرات والمخاطر بطريقة تعليمية.",
-            }.get(business_answer)
+        if static_response and not blocked and not error and route != "fallback":
+            known_translation = DARIJA_ARABIC_MESSAGES.get(route)
             if known_translation:
                 return known_translation
+        if business_answer.strip() and not blocked and not error and route != "fallback":
             return business_answer
-        return {
-            "pedagogie": "نقدر نشرح ليك الأسهم والسندات والمؤشرات والمخاطر بطريقة تعليمية.",
-            "formation_elearning": "نقدر نعرفك على المسارات التعليمية المتوفرة.",
-            "orientation": "نقدر نعاونك تختار مسار تعلم مناسب لهدفك.",
-            "cisi": "المعلومات المفصلة على CISI خاصها دليل رسمي.",
-            "quiz": "نقدر نقدم ليك اختبار تعليمي على السوق والأدوات المالية.",
-            "championnat": "نقدر نشرح ليك بطولة البورصة و e-Bourse بطريقة تعليمية.",
-            "support_ecole": "نقدر نعاونك فالولوج والتسجيل والتنقل فمدرسة البورصة.",
-            "out_of_domain": "أنا متخصص فالبورصة والأسواق والتثقيف المالي.",
-            "fallback": "ما فهمتش الطلب. نقدر نعاونك فالبورصة والتثقيف المالي.",
-            "blocked": "ما نقدرش نعين ليك سهم ولا نختار ليك استثمار.",
-            "error": "الجواب المتحكم فيه ما متوفرش دابا. عاود صيغ الطلب.",
-        }.get(key, "ما فهمتش الطلب.")
+        return DARIJA_ARABIC_MESSAGES.get(key, "ما فهمتش الطلب.")
     return answer
-
-
-def _translate_business_answer(business_answer: str, language: BusinessLanguage) -> str:
-    """Translate known local agent text while preserving arbitrary injected content."""
-    if language == "fr":
-        return business_answer
-    translations = {
-        "Je peux expliquer les actions, obligations, indices et risques a visee educative.": {
-            "en": "I can explain stocks, bonds, indexes, and risk for educational purposes.",
-            "ary": "N9der nshra7 lik saham, sanadat, indicateurs w lkhatar b tariqa ta3limiya.",
-        },
-    }
-    return translations.get(business_answer, {}).get(language, business_answer)
 
 
 def validate_localized_script(

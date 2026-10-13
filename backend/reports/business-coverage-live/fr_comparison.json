@@ -1,0 +1,67 @@
+{
+  "case": {
+    "id": "fr_comparison",
+    "language": "fr",
+    "script": "latin",
+    "question": "Compare une action et une obligation : propriété, rendement et risques.",
+    "source": "A stock represents ownership of part of a company. A bond is a debt: its holder is a creditor, not an owner. Stocks may pay dividends and generate a capital gain on resale. A bond generally pays interest and repays principal at maturity. A stock's price can fall, and dividends are not guaranteed. Bond holders face issuer default risk and a resale price that can fall when market interest rates rise.",
+    "aspects": {
+      "ownership_stock": [
+        "propriet|capital"
+      ],
+      "ownership_bond": [
+        "creanc|dette"
+      ],
+      "return_stock": [
+        "dividende",
+        "plus.value|gain"
+      ],
+      "return_bond": [
+        "interet|coupon"
+      ],
+      "risk_stock": [
+        "cours|prix",
+        "bais|perte"
+      ],
+      "risk_bond": [
+        "defaut|non.remboursement",
+        "taux"
+      ]
+    }
+  },
+  "result": {
+    "original_query": "Compare une action et une obligation : propriété, rendement et risques.",
+    "language": "fr",
+    "script": "latin",
+    "answer": "Voici une comparaison entre une action et une obligation selon les critères demandés :\n\n- **Propriété** : Une action représente la propriété d'une partie d'une entreprise. En revanche, une obligation est une dette : son détenteur est un créancier et non un propriétaire.\n- **Rendement** : Les actions peuvent verser des dividendes et générer un gain en capital lors de la revente. Les obligations versent généralement des intérêts et remboursent le principal à l'échéance.\n- **Risques** : Le prix d'une action peut baisser et les dividendes ne sont pas garantis. Les détenteurs d'obligations sont exposés au risque de défaut de l'émetteur et à une baisse du prix de revente lorsque les taux d'intérêt du marché augmentent.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "ownership_stock": true,
+    "ownership_bond": true,
+    "return_stock": true,
+    "return_bond": true,
+    "risk_stock": true,
+    "risk_bond": true
+  }
+}

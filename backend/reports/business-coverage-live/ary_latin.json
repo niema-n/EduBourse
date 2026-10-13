@@ -1,0 +1,53 @@
+{
+  "case": {
+    "id": "ary_latin",
+    "language": "ary",
+    "script": "latin",
+    "question": "Chno howa fonds indiciel, kifach kaykhdem w chno l7odod dyalou?",
+    "source": "An index fund is a collective investment fund aiming to track an index. It holds securities representing that index. Its value can fall when the index falls. It does not guarantee capital or returns.",
+    "aspects": {
+      "definition": [
+        "fond|sandou9|sando9",
+        "indic|index|mo2ach|moach"
+      ],
+      "mechanism": [
+        "titres|securit|awra9|ashom|asham|as8om|saham"
+      ],
+      "limits": [
+        "hbet|hbat|n9es|n9as|khser|khsar|baisse|tih|ti7|tn9es|yhbe|yhb"
+      ]
+    }
+  },
+  "result": {
+    "original_query": "Chno howa fonds indiciel, kifach kaykhdem w chno l7odod dyalou?",
+    "language": "ary",
+    "script": "latin",
+    "answer": "Un fonds indiciel est un fonds d'investissement collectif dont l'objectif est de suivre un indice. Il détient des titres représentant cet indice. Sa valeur peut baisser lorsque l'indice baisse, et il ne garantit ni le capital ni les rendements.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "definition": true,
+    "mechanism": true,
+    "limits": true
+  }
+}

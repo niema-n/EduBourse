@@ -8,6 +8,7 @@ from app.graph.core import build_graph
 from app.graph.state import create_turn_input
 from app.graph.workflows import ASSESSMENT_QUESTIONS
 from app.main import app
+from app.multilingual.models import LanguageAnalysis
 
 # Unicode escape sequences keep the test source ASCII and readable.
 # ruff: noqa: E501
@@ -68,6 +69,80 @@ def test_chat_preserves_business_language_and_script(client, message, language, 
     assert body["script"] == script
     assert body["route"] == "pedagogie"
     assert body["blocked"] is False
+    assert body["status"] == "ok"
+
+
+def test_active_quiz_uses_persisted_locale_for_single_letter_continuation(monkeypatch):
+    provider = FakeSupervisor(route="quiz")
+    graph = build_graph(supervisor_provider=provider)
+    app.dependency_overrides[get_chat_graph] = lambda: graph
+    import app.api.chat as chat_api
+
+    monkeypatch.setattr(
+        chat_api.multilingual,
+        "analyze",
+        lambda text: LanguageAnalysis(
+            language="ar" if text != "B" else "en",
+            script="arabic" if text != "B" else "latin",
+            normalized_text=text,
+            confidence=1.0,
+        ),
+    )
+    try:
+        with TestClient(app) as test_client:
+            first = test_client.post(
+                "/chat", json={"message": "أريد اختبارا", "thread_id": "quiz-ar"}
+            ).json()
+            second = test_client.post(
+                "/chat", json={"message": "B", "thread_id": "quiz-ar"}
+            ).json()
+    finally:
+        app.dependency_overrides.clear()
+    assert first["language"] == "ar"
+    assert first["script"] == "arabic"
+    assert second["language"] == "ar"
+    assert second["script"] == "arabic"
+    assert "السؤال" in second["answer"]
+
+
+@pytest.mark.parametrize(
+    ("message", "language", "script"),
+    [
+        (
+            "\u0645\u0627 \u0647\u0648 \u0627\u0644\u0640 SAM \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+            "ar",
+            "arabic",
+        ),
+        ("\u0645\u0627 \u0647\u0648 ETF\u061f", "ar", "arabic"),
+        ("\u0645\u0627 \u0647\u0648 MASI\u061f", "ar", "arabic"),
+        ("\u0645\u0627 \u0647\u0648 CISI\u061f", "ar", "arabic"),
+        ("\u0645\u0627 \u0647\u0648 IAM\u061f", "ar", "arabic"),
+        ("Bonjour \u0645\u0631\u062d\u0628\u0627", "fr", "latin"),
+        ("Hello \u0645\u0631\u062d\u0628\u0627", "en", "latin"),
+    ],
+)
+def test_mixed_script_inputs_use_canonical_business_script(
+    client, monkeypatch, message, language, script
+):
+    import app.api.chat as chat_api
+
+    monkeypatch.setattr(
+        chat_api.multilingual,
+        "analyze",
+        lambda text: LanguageAnalysis(
+            language=language,
+            script="mixed",
+            normalized_text=text,
+            confidence=1.0,
+        ),
+    )
+
+    response = client.post("/chat", json={"message": message, "thread_id": f"mixed-{language}"})
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["language"] == language
+    assert body["script"] == script
     assert body["status"] == "ok"
 
 
@@ -284,7 +359,7 @@ def test_code_switched_darija_is_controlled(message, script):
     assert body["status"] == "ok"
 
 
-def test_graph_failure_preserves_fail_closed_security_decision():
+def test_graph_failure_returns_neutral_controlled_fallback():
     class BrokenGraph:
         def invoke(self, state, config):
             raise RuntimeError("graph exploded")
@@ -300,9 +375,10 @@ def test_graph_failure_preserves_fail_closed_security_decision():
 
     body = response.json()
     assert response.status_code == 200
-    assert body["blocked"] is True
-    assert body["status"] == "blocked"
-    assert body["route"] == "securite"
+    assert body["blocked"] is False
+    assert body["status"] == "error"
+    assert body["route"] == "fallback"
+    assert "recommander" not in body["answer"].casefold()
 
 
 def test_checkpoint_state_is_isolated_and_resumed_per_thread():

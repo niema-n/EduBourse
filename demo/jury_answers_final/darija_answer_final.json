@@ -1,0 +1,85 @@
+{
+  "question": "شنو الفرق بين السهم والسند؟",
+  "answer": "الفرق الجوهري بين السهم والسند كاين فطبيعتهم: السهم أداة ملكية كتمثل جزء من رأسمال الشركة، بينما السند أداة دين كتمثل قرض كيقدمو المستثمر للجهة المصدرة.\n\nالسهم هو أداة رأسمال كتمثل حصة فشركة. كيعطي لحاملو حقوق مالية، بحال الحصول على الأرباح الموزعة وحق التصويت فالجمعيات العامة، وحقوق غير مالية بحال الحق فالوصول للمعلومات.\n\nالعائد ديال السهم كيجي من الأرباح الموزعة ومن فرق الثمن، يعني الربح أو الخسارة وقت البيع. والمخاطر ديالو كتشمل خسارة رأس المال إلا هبط الثمن، وخطر السيولة إلا ما تلقاش المشتري، وخطر التعثر اللي يقدر يؤدي لخسارة الاستثمار كامل إلا فلست الشركة.\n\nالسند هو أداة دين، أو أداة مطالبة، كتمثل قرض من المستثمر للجهة المصدرة. كيعطي لحاملو الحق فالحصول على فائدة دورية، كتسمى القسيمة، واسترجاع رأس المال عند الاستحقاق.\n\nالعائد ديال السند كيتكوّن من فوائد ثابتة أو متغيرة، ويمكن قياسو بالعائد الجاري أو العائد الاكتواري. والمخاطر الرئيسية ديالو هي خطر التعثر، أي عدم قدرة الجهة المصدرة على السداد، وخطر سعر الفائدة، بحيث ملي كترتفع الفائدة كينخفض ثمن السند، ثم خطر السيولة.\n\nبصفة عامة، كلما زاد العائد المحتمل، زاد معاه الخطر.",
+  "route": "pedagogie",
+  "language": "ary",
+  "script": "arabic",
+  "grounded": true,
+  "status": "ok",
+  "citations": [
+    {
+      "evidence_id": "S8",
+      "chunk_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p008-c008-0f5c8ff2",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "title": "Comprendre les instruments financiers et leurs mécanismes",
+      "page": 8,
+      "page_start": 8,
+      "page_end": 8,
+      "heading": null
+    },
+    {
+      "evidence_id": "S2",
+      "chunk_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p010-c011-a42d98a2",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "title": "Comprendre les instruments financiers et leurs mécanismes",
+      "page": 10,
+      "page_start": 10,
+      "page_end": 10,
+      "heading": null
+    },
+    {
+      "evidence_id": "S1",
+      "chunk_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p012-c013-696ceeb0",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "title": "Comprendre les instruments financiers et leurs mécanismes",
+      "page": 12,
+      "page_start": 12,
+      "page_end": 12,
+      "heading": null
+    },
+    {
+      "evidence_id": "S3",
+      "chunk_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p020-c024-48cf0952",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "title": "Comprendre les instruments financiers et leurs mécanismes",
+      "page": 20,
+      "page_start": 20,
+      "page_end": 20,
+      "heading": null
+    },
+    {
+      "evidence_id": "S4",
+      "chunk_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p021-c025-a2fda662",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "title": "Comprendre les instruments financiers et leurs mécanismes",
+      "page": 21,
+      "page_start": 21,
+      "page_end": 21,
+      "heading": null
+    },
+    {
+      "evidence_id": "S5",
+      "chunk_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p005-c004-178ed83d",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "title": "Comprendre les instruments financiers et leurs mécanismes",
+      "page": 5,
+      "page_start": 5,
+      "page_end": 5,
+      "heading": null
+    },
+    {
+      "evidence_id": "S7",
+      "chunk_id": "ammc-renforcer-la-protection-de-vos-placements-p008-c007-1be164ac",
+      "source_id": "ammc-renforcer-la-protection-de-vos-placements",
+      "title": "Renforcer la protection de vos placements",
+      "page": 8,
+      "page_start": 8,
+      "page_end": 8,
+      "heading": null
+    }
+  ],
+  "latency_seconds": 224.68,
+  "thread_id": "assistant-jury-darija-audio-20260923",
+  "captured_at": "2026-09-23T15:16:44Z",
+  "endpoint": "POST /api/v1/chat"
+}

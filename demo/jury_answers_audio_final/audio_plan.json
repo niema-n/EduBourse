@@ -1,0 +1,26 @@
+{
+  "fr": {
+    "demo_text": "﻿La diffÃ©rence fondamentale entre une action et une obligation rÃ©side dans la nature du lien crÃ©Ã© avec l'Ã©metteur : l'action confÃ¨re une part de propriÃ©tÃ© dans le capital de l'entreprise, tandis que l'obligation fait de l'investisseur un crÃ©ancier de l'Ã©metteur.\n\nL'action est un titre de propriÃ©tÃ© reprÃ©sentatif d'une fraction du capital d'une entreprise.",
+    "sentence_count": 2,
+    "full_text_sha256": "d3b9404fcb4fe1b7b48d174f46e7d150314a438766eea8ad1d665537afede7e1",
+    "shortened_playback_version": true,
+    "demo_audio_file": "fr_response_demo.wav",
+    "full_audio_file": "fr_response_full.wav"
+  },
+  "en": {
+    "demo_text": "﻿An Initial Public Offering (IPO) is a financial operation in which a company makes part of its share capital available to the public in exchange for newly raised funds. It allows the company to solicit public savings through a public offering of securities, subject to legal and regulatory obligations intended to protect investors.",
+    "sentence_count": 2,
+    "full_text_sha256": "760d2b964506ac1dfeb2cad2c2755ab77a2d3104e055f5044d2e8d512b0728eb",
+    "shortened_playback_version": true,
+    "demo_audio_file": "en_response_demo.wav",
+    "full_audio_file": "en_response_full.wav"
+  },
+  "ar": {
+    "demo_text": "تُعرَّف مخاطر الاستثمار في البورصة بأنها الاحتمالات التي قد تؤدي إلى تآكل قيمة رأس المال المستثمر أو صعوبة استرجاعه. ويمكن فهم أهم هذه المخاطر على النحو الآتي:\n\n- **مخاطر رأس المال (Risque de perte en capital):**\n  - **المفهوم:** احتمال انخفاض قيمة الاستثمار.\n  - **كيف يفهمها المستثمر:** ينبغي أن يدرك أن تقلبات السوق، والتغيرات الاقتصادية، أو الأداء السيئ للشركة أو القطاع قد تؤدي إلى خسارة جزئية أو كلية لرأس المال.",
+    "sentence_count": 3,
+    "full_text_sha256": "c8b5c4ac82ee0d231dc650dc04b007a28bb67000f3a264015549fa5b91bc93ce",
+    "shortened_playback_version": true,
+    "demo_audio_file": "ar_response_demo.wav",
+    "full_audio_file": "ar_response_full.wav"
+  }
+}

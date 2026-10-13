@@ -1,0 +1,44 @@
+{
+  "fr": {
+    "full": {
+      "filename": "fr_response.wav",
+      "duration_seconds": 104.687,
+      "sample_rate_hz": 24000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "tts_provider": "gemini",
+      "tts_model": "gemini-2.5-flash-preview-tts",
+      "tts_voice": "Kore",
+      "speech_segments": 3,
+      "exact_tts_segments": [
+        "Voici les principales différences entre une action et une obligation :\n\n### 1. Nature du titre\n\n- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.\n- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur.\n\n### 2. Rendement\n\n- **Action :** les informations fournies mentionnent une section consacrée au rendement des actions, sans préciser sa nature, comme les dividendes ou les plus-values, dans les extraits disponibles.",
+        "\n- **Obligation :** le rendement principal prend la forme d’un intérêt appelé « coupon », versé en contrepartie du prêt. À l’échéance, l’émetteur rembourse le montant emprunté, c’est-à-dire le capital. Il existe aussi des obligations zéro coupon : aucun coupon n’est versé pendant la durée de vie du titre, et le principal ainsi que les intérêts sont remboursés intégralement à l’échéance.\n\n### 3. Risque\n\n- **Action :** les informations fournies mentionnent une section consacrée aux risques associés aux actions, mais les extraits disponibles ne les détaillent pas.",
+        "\n- **Obligation :** l’investisseur est principalement exposé à trois types de risques :\n  - **Risque de défaut ou de crédit :** risque lié à la capacité de l’émetteur à respecter ses engagements, notamment le paiement des intérêts et le remboursement du capital.\n  - **Risque de taux :** le taux d’intérêt et le prix de l’obligation évoluent en sens inverse. Si les taux augmentent, le prix de l’obligation baisse, et inversement.\n  - **Risque de liquidité :** risque de ne pas trouver de contrepartie pour vendre l’obligation avant son échéance."
+      ],
+      "exact_tts_input": "Voici les principales différences entre une action et une obligation :\n\n### 1. Nature du titre\n\n- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.\n- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur.\n\n### 2. Rendement\n\n- **Action :** les informations fournies mentionnent une section consacrée au rendement des actions, sans préciser sa nature, comme les dividendes ou les plus-values, dans les extraits disponibles.\n- **Obligation :** le rendement principal prend la forme d’un intérêt appelé « coupon », versé en contrepartie du prêt. À l’échéance, l’émetteur rembourse le montant emprunté, c’est-à-dire le capital. Il existe aussi des obligations zéro coupon : aucun coupon n’est versé pendant la durée de vie du titre, et le principal ainsi que les intérêts sont remboursés intégralement à l’échéance.\n\n### 3. Risque\n\n- **Action :** les informations fournies mentionnent une section consacrée aux risques associés aux actions, mais les extraits disponibles ne les détaillent pas.\n- **Obligation :** l’investisseur est principalement exposé à trois types de risques :\n  - **Risque de défaut ou de crédit :** risque lié à la capacité de l’émetteur à respecter ses engagements, notamment le paiement des intérêts et le remboursement du capital.\n  - **Risque de taux :** le taux d’intérêt et le prix de l’obligation évoluent en sens inverse. Si les taux augmentent, le prix de l’obligation baisse, et inversement.\n  - **Risque de liquidité :** risque de ne pas trouver de contrepartie pour vendre l’obligation avant son échéance.",
+      "tts_input_sha256": "a1b2271a7ac69039cdd040961a68b2eea166a7dcc9e99a26b62bcd7cc7417b0c",
+      "wav_sha256": "eeab69d697b5ffeac7d0b1ceb6a0e37c29f5e6d4791df68b53debf65999cd28d",
+      "wav_validation_passed": true
+    },
+    "demo_excerpt": {
+      "filename": "fr_response_demo.wav",
+      "duration_seconds": 24.554,
+      "sample_rate_hz": 24000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "tts_provider": "gemini",
+      "tts_model": "gemini-2.5-flash-preview-tts",
+      "tts_voice": "Kore",
+      "speech_segments": 1,
+      "exact_tts_segments": [
+        "Voici les principales différences entre une action et une obligation :\n\n### 1. Nature du titre\n\n- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.\n- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur."
+      ],
+      "exact_tts_input": "Voici les principales différences entre une action et une obligation :\n\n### 1. Nature du titre\n\n- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.\n- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur.",
+      "tts_input_sha256": "3e1b105152c466fa80a143d1d9f234d5b6d9e97cde93a78af06a674966b452a6",
+      "wav_sha256": "bd8f80be1ee37267e66d18b324456fd57ab168ecb751dee34346d23b79615770",
+      "wav_validation_passed": true,
+      "shortened_playback_version": true,
+      "selection": "Exact prefix through the first three complete sentences; not a rewritten answer"
+    }
+  }
+}

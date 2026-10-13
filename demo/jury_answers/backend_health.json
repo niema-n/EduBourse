@@ -1,0 +1,1 @@
+{"status":"ok","app":"Financial Education Assistant","version":"0.1.0","environment":"local","postgres":{"status":"ok"},"rag_index":{"status":"available","collection":"j6_bge_m3_content_v1","document_count":353},"chroma_server":{"status":"unavailable","collection":"financial_education_foundation","collection_status":"unknown","document_count":0,"role":"legacy_infrastructure"}}

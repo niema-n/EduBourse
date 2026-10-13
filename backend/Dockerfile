@@ -10,7 +10,7 @@ COPY app ./app
 COPY alembic.ini ./alembic.ini
 COPY alembic ./alembic
 
-RUN pip install --no-cache-dir . \
+RUN pip install --no-cache-dir --extra-index-url https://pypi.org/simple . \
     && adduser --disabled-password --gecos "" appuser \
     && chown -R appuser:appuser /app
 

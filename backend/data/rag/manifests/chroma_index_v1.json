@@ -1,0 +1,104 @@
+{
+  "chroma_vs_offline_ranking": "MATCH",
+  "chunks_sha256": "62d76b117a2273ba3fd2ddbc2cf32a5fdb72ced468e1cf6b2097a2322a4346e1",
+  "collection_name": "j6_bge_m3_content_v1",
+  "confirmatory_quality_gate": false,
+  "created_from_frozen_chunks": true,
+  "distance_metric": "cosine",
+  "duplicate_groups_excluded": 3,
+  "embedding_dimension": 1024,
+  "embedding_model": "BAAI/bge-m3",
+  "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "excluded_navigation_count": 34,
+  "excluded_shared_redundant_count": 13,
+  "index_path": "backend/data/rag/indexes/bge_m3_v1",
+  "index_version": 1,
+  "indexed_chunk_count": 353,
+  "indexed_role": "content",
+  "input_chunk_count": 400,
+  "known_limitations": [
+    "Ary-Latin unweighted RRF dilution.",
+    "The brochure placement source has only three content chunks and creates cross-language competition for confirmatory group 11."
+  ],
+  "next_step": "J6_06_RETRIEVAL_SERVICE",
+  "no_more_retrieval_policy_tuning": true,
+  "persistence_reopen_test": true,
+  "production_integration": false,
+  "retrieval_policy": "H1_LANGUAGE_ROUTED_V1",
+  "retrieval_policy_status": "ACCEPTED_WITH_DOCUMENTED_CONFIRMATORY_LIMITATIONS",
+  "schema_version": "j6-chroma-index-v1",
+  "smoke_queries": [
+    {
+      "case_id": "fr-01",
+      "chroma_top5": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p017-c020-97b86eb4",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p019-c023-53a9d1d9",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p014-c016-c05d62e2",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques-p007-c008-48fcb971",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p003-c002-3204250c"
+      ],
+      "match": true,
+      "offline_top5": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p017-c020-97b86eb4",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p019-c023-53a9d1d9",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p014-c016-c05d62e2",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques-p007-c008-48fcb971",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p003-c002-3204250c"
+      ]
+    },
+    {
+      "case_id": "en-01",
+      "chroma_top5": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p019-c023-53a9d1d9",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p008-c008-0f5c8ff2",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p017-c020-97b86eb4",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p009-c009-d640eba6",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p010-c011-a42d98a2"
+      ],
+      "match": true,
+      "offline_top5": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p019-c023-53a9d1d9",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p008-c008-0f5c8ff2",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p017-c020-97b86eb4",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p009-c009-d640eba6",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p010-c011-a42d98a2"
+      ]
+    },
+    {
+      "case_id": "ary-latin-01",
+      "chroma_top5": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p016-c018-074a6be3",
+        "ammc-comprendre-le-financement-collaboratif-p015-c018-adcf9d5b",
+        "ammc-comprendre-le-financement-collaboratif-p015-c017-7a30cd7d",
+        "ammc-pea-p009-c007-73605bf7",
+        "ammc-comprendre-le-financement-collaboratif-p031-c038-7d079e76"
+      ],
+      "match": true,
+      "offline_top5": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p016-c018-074a6be3",
+        "ammc-comprendre-le-financement-collaboratif-p015-c018-adcf9d5b",
+        "ammc-comprendre-le-financement-collaboratif-p015-c017-7a30cd7d",
+        "ammc-pea-p009-c007-73605bf7",
+        "ammc-comprendre-le-financement-collaboratif-p031-c038-7d079e76"
+      ]
+    }
+  ],
+  "smoke_query_count": 3,
+  "source_count": 13,
+  "source_distribution": {
+    "ammc-brochure-produits-de-placement": 3,
+    "ammc-comprendre-le-financement-collaboratif": 37,
+    "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques": 38,
+    "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes": 36,
+    "ammc-comprendre-les-ipo": 39,
+    "ammc-comprendre-les-offres-publics": 25,
+    "ammc-comprendre-les-operations-sur-titres": 33,
+    "ammc-les-assemblees-generales-ordinaires": 34,
+    "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre": 35,
+    "ammc-les-opcvm": 24,
+    "ammc-pea": 17,
+    "ammc-renforcer-la-protection-de-vos-placements": 25,
+    "ammc-sur-le-budget-l-epargne-et-l-investissement": 7
+  },
+  "unique_chunk_id_count": 353
+}

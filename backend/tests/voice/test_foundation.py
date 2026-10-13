@@ -105,6 +105,32 @@ def test_process_to_text_reuses_j4_and_does_not_call_tts():
     assert tts.calls == []
 
 
+def test_voice_does_not_call_final_response_composer_or_send_its_output(monkeypatch):
+    import app.api.chat as chat_api
+
+    composer = type(
+        "FakeComposer",
+        (),
+        {
+            "calls": 0,
+            "compose": lambda self, *args, **kwargs: setattr(self, "calls", self.calls + 1)
+            or "AZURE_VOICE_FINAL",
+        },
+    )()
+    monkeypatch.setattr(chat_api, "get_final_response_composer", lambda: composer)
+
+    service, tts = make_service("What is a stock?")
+    result = service.process(
+        AudioInput(data=b"audio", mime_type="audio/wav"),
+        session_id="voice-composer-isolation",
+        thread_id="voice-composer-isolation",
+    )
+
+    assert composer.calls == 0
+    assert "AZURE_VOICE_FINAL" not in result.text_response.answer
+    assert "AZURE_VOICE_FINAL" not in tts.calls[0][0]
+
+
 def test_voice_turns_preserve_thread_and_isolate_other_thread():
     provider = FakeSupervisor()
     graph = build_graph(supervisor_provider=provider)
@@ -439,9 +465,18 @@ def test_gemini_tts_uses_interactions_audio_contract_and_pcm_metadata():
     assert result.sample_width_bytes == 2
     assert client.interactions.kwargs == {
         "model": "gemini-3.1-flash-tts-preview",
-        "input": "final safe answer",
+        "input": (
+            "### DIRECTOR'S NOTES\n"
+            "Speak naturally in clear contemporary French. Use a warm, professional "
+            "educational tone and a moderate conversational pace. Use natural French "
+            "pronunciation and prosody. Read the supplied transcript faithfully. Do not "
+            "translate, summarize, paraphrase, add, or remove any content."
+            "\n\n#### TRANSCRIPT\nfinal safe answer"
+        ),
         "response_format": {"type": "audio"},
-        "generation_config": {"speech_config": [{"voice": "Kore"}]},
+        "generation_config": {
+            "speech_config": [{"language": "French", "voice": "Kore"}]
+        },
         "stream": True,
     }
 

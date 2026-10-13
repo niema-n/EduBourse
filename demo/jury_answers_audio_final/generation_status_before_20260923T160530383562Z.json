@@ -1,0 +1,20 @@
+{
+  "status": "blocked",
+  "stopped": true,
+  "requests_sent": 1,
+  "failed_file": "ar_response_demo.wav",
+  "error": {
+    "code": "rate_limit_exceeded",
+    "message": "Rate limit exceeded for model gemini-2.5-flash-tts (limit: 10 requests per day on Free Tier). Please retry in 23s or upgrade your tier at https://ai.dev/rate-limit."
+  },
+  "retry_performed": false,
+  "provider_changed": false,
+  "production_configuration_changed": false,
+  "language_order": [
+    "fr",
+    "en",
+    "ar"
+  ],
+  "source": "validated TXT files only",
+  "answers_regenerated": false
+}

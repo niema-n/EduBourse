@@ -1,6 +1,10 @@
 import pytest
 
+from app.multilingual import detector
 from app.multilingual.detector import detect_language
+from app.multilingual.normalizer import normalize_text
+
+# ruff: noqa: E501
 
 
 @pytest.mark.parametrize(
@@ -75,6 +79,44 @@ def test_detects_darija_arabic(text: str, expected: str) -> None:
 
 
 @pytest.mark.parametrize(
+    "text",
+    [
+        "\u0634\u0646\u0648 \u0647\u0648 \u0627\u0644\u0633\u0647\u0645 \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+        "\u0634\u0646\u0648 \u0647\u0648 \u0627\u0644\u0645\u0624\u0634\u0631 \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+        "\u0648\u0627\u0634 \u0627\u0644\u0633\u0647\u0645 \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629 \u0641\u064a\u0647 \u0645\u062e\u0627\u0637\u0631\u061f",
+        "\u0634\u0646\u0648 \u0647\u064a \u0627\u0644\u0645\u062d\u0641\u0638\u0629 \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+        "\u0628\u063a\u064a\u062a \u0646\u0639\u0631\u0641 \u0634\u0646\u0648 \u0647\u0648 \u0627\u0644\u0633\u0647\u0645",
+        "\u0643\u064a\u0641\u0627\u0634 \u0646\u0642\u062f\u0631 \u0646\u062a\u0639\u0644\u0645 \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+        "\u0648\u0627\u0634 \u0643\u0627\u064a\u0646 \u0634\u064a \u0643\u0648\u0631\u0633 \u0639\u0644\u0649 \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+    ],
+)
+def test_high_precision_darija_wins_over_shared_msa_vocabulary(text: str) -> None:
+    assert detect_language(text).language == "ary-arabic"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "\u0645\u0627 \u0647\u0648 \u0627\u0644\u0633\u0647\u0645 \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+        "\u0643\u064a\u0641 \u064a\u0645\u0643\u0646\u0646\u064a \u062a\u0639\u0644\u0645 \u0623\u0633\u0627\u0633\u064a\u0627\u062a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f",
+        "\u0645\u0627 \u0627\u0644\u0645\u0642\u0635\u0648\u062f \u0628\u062a\u0646\u0648\u064a\u0639 \u0627\u0644\u0645\u062d\u0641\u0638\u0629\u061f",
+        "\u0644\u0645\u0627\u0630\u0627 \u064a\u062a\u063a\u064a\u0631 \u0633\u0639\u0631 \u0627\u0644\u0633\u0647\u0645\u061f",
+    ],
+)
+def test_msa_controls_remain_standard_arabic(text: str) -> None:
+    assert detect_language(text).language == "ar"
+
+
+def test_darija_override_has_precedence_when_both_rules_match() -> None:
+    text = "\u0634\u0646\u0648 \u0647\u0648 \u0627\u0644\u0633\u0647\u0645 \u0641\u064a \u0627\u0644\u0628\u0648\u0631\u0635\u0629\u061f"
+    normalized = normalize_text(text)
+
+    assert detector._has_high_precision_darija_rule(normalized, "ary-arabic")
+    assert detector._has_high_precision_msa_rule(normalized, "ar")
+    assert detect_language(text).language == "ary-arabic"
+
+
+@pytest.mark.parametrize(
     ("text", "expected"),
     [
         ("wach OPCVM fih risk?", "ary-latin"),
@@ -123,6 +165,30 @@ def test_detects_natural_english_regressions(text: str) -> None:
 )
 def test_detects_darija_latin_regressions(text: str) -> None:
     assert detect_language(text).language == "ary-latin"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Chno kay3ni IPO w 3lach chi charika katdkhol lborsa?",
+        "Wach n9dar nfhem chno howa dividend?",
+        "Kifach kaykhdem sou9 lborsa?",
+        "Chno homa lmakhatir dyal l-istitmar f saham?",
+        "Wach ETF kayn fih risk?",
+    ],
+)
+def test_financial_darija_latin_mixed_markers_remain_darija(text: str) -> None:
+    result = detect_language(text)
+    assert result.language == "ary-latin"
+    assert result.script == "latin"
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [("Qu'est-ce qu'une IPO ?", "fr"), ("What is an IPO?", "en")],
+)
+def test_financial_acronyms_do_not_change_french_or_english(text: str, expected: str) -> None:
+    assert detect_language(text).language == expected
 
 
 @pytest.mark.parametrize(

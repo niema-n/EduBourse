@@ -1,0 +1,1579 @@
+{
+  "cases": [
+    {
+      "expected_source_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+      ],
+      "failure_reasons": [],
+      "id": "ary-latin-01",
+      "original_query": "chno lfer9 bin sahm w sanad?",
+      "topic": "actions_obligations",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.477477,
+            0.445288,
+            0.438546,
+            0.436694,
+            0.434561
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les opérations sur titres",
+            "Comprendre le financement collaboratif",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les opérations sur titres"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.354793,
+            0.311898,
+            0.309259,
+            0.303969,
+            0.297868
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-pea",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "PEA",
+            "Comprendre le financement collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.462725,
+            0.434302,
+            0.429516,
+            0.425942,
+            0.423601
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les opérations sur titres",
+            "Comprendre le financement collaboratif",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les opérations sur titres"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.666157,
+            0.642311,
+            0.599379,
+            0.59796,
+            0.584357
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.354793,
+            0.311897,
+            0.309259,
+            0.303969,
+            0.297868
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-pea",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "PEA",
+            "Comprendre le financement collaboratif"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "failure_reasons": [],
+      "id": "ary-latin-02",
+      "original_query": "chno howa OPCVM w kifach kaykhdem?",
+      "topic": "opcvm_definition",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 2,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ],
+          "top_5_similarities": [
+            0.523753,
+            0.482026,
+            0.479377,
+            0.478965,
+            0.476221
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Les OPCVM",
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 2,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.465609,
+            0.461098,
+            0.442333,
+            0.440223,
+            0.438197
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm"
+          ],
+          "top_5_titles": [
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Les OPCVM",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Les OPCVM",
+            "Les OPCVM"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 7,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-renforcer-la-protection-de-vos-placements",
+          "top_3_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.580776,
+            0.542899,
+            0.540323,
+            0.520546,
+            0.51283
+          ],
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Renforcer la protection de vos placements",
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-les-opcvm",
+          "top_3_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm"
+          ],
+          "top_5_similarities": [
+            0.706042,
+            0.681512,
+            0.644104,
+            0.640189,
+            0.63429
+          ],
+          "top_5_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-brochure-produits-de-placement"
+          ],
+          "top_5_titles": [
+            "Les OPCVM",
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Les OPCVM",
+            "Les OPCVM",
+            "Brochure produits de placement"
+          ]
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 2,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm"
+          ],
+          "top_5_similarities": [
+            0.559584,
+            0.550172,
+            0.542881,
+            0.527214,
+            0.52583
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm"
+          ],
+          "top_5_titles": [
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Les OPCVM",
+            "Les OPCVM",
+            "Comprendre les circuits et adopter les bonnes pratiques",
+            "Les OPCVM"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "failure_reasons": [
+        "LANGUAGE_TRANSFER_GAP",
+        "TOPIC_OVERLAP"
+      ],
+      "id": "ary-latin-03",
+      "original_query": "chno kat3ni l9ima li kat7seb lssendou9?",
+      "topic": "valeur_liquidative",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 23,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.496292,
+            0.469198,
+            0.420618,
+            0.419919,
+            0.413922
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-les-operations-sur-titres"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les opérations sur titres",
+            "Comprendre les opérations sur titres"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 13,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.400569,
+            0.348162,
+            0.347679,
+            0.337055,
+            0.333726
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-les-ipo",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Les assemblées générales ordinaires",
+            "Comprendre les IPO",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 11,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.486448,
+            0.472904,
+            0.444655,
+            0.441973,
+            0.437245
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-les-opcvm",
+          "top_3_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm"
+          ],
+          "top_5_similarities": [
+            0.78463,
+            0.764604,
+            0.674625,
+            0.651479,
+            0.651016
+          ],
+          "top_5_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm"
+          ],
+          "top_5_titles": [
+            "Les OPCVM",
+            "Les OPCVM",
+            "Les OPCVM",
+            "Les OPCVM",
+            "Les OPCVM"
+          ]
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 13,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.400569,
+            0.348162,
+            0.347679,
+            0.337055,
+            0.333726
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-les-ipo",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Les assemblées générales ordinaires",
+            "Comprendre les IPO",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-comprendre-les-ipo"
+      ],
+      "failure_reasons": [],
+      "id": "ary-latin-04",
+      "original_query": "chno kay3ni l idraj dyal charika f lborça?",
+      "topic": "ipo",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-ipo",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.692168,
+            0.649329,
+            0.632682,
+            0.629474,
+            0.623317
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_titles": [
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 3,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-le-financement-collaboratif",
+          "top_3_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.357386,
+            0.343291,
+            0.334381,
+            0.321302,
+            0.319482
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre les IPO",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-ipo",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.664408,
+            0.648685,
+            0.620763,
+            0.611749,
+            0.606335
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_titles": [
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-ipo",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.76355,
+            0.737577,
+            0.734746,
+            0.727119,
+            0.715472
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_titles": [
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO",
+            "Comprendre les IPO"
+          ]
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 3,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-le-financement-collaboratif",
+          "top_3_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_similarities": [
+            0.357386,
+            0.343291,
+            0.334381,
+            0.321302,
+            0.319482
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre les IPO",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-comprendre-les-offres-publics"
+      ],
+      "failure_reasons": [
+        "CROSS_SCRIPT_GAP",
+        "TOPIC_OVERLAP"
+      ],
+      "id": "ary-latin-05",
+      "original_query": "kifach kaykhdem l3ard l3omomi?",
+      "topic": "public_offerings",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-offres-publics",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "top_5_similarities": [
+            0.479811,
+            0.446401,
+            0.443016,
+            0.44144,
+            0.440019
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "top_5_titles": [
+            "Comprendre les offres publics",
+            "Comprendre les offres publics",
+            "Comprendre les offres publics",
+            "Comprendre les offres publics",
+            "Comprendre les offres publics"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 23,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-comprendre-les-ipo",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.317498,
+            0.313234,
+            0.307059,
+            0.304862,
+            0.299357
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre les IPO",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-offres-publics",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "top_5_similarities": [
+            0.607926,
+            0.605224,
+            0.600807,
+            0.593562,
+            0.581778
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "top_5_titles": [
+            "Comprendre les offres publics",
+            "Comprendre les offres publics",
+            "Comprendre les offres publics",
+            "Comprendre les offres publics",
+            "Comprendre les offres publics"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": false
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 23,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-comprendre-les-ipo",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.317498,
+            0.313234,
+            0.307059,
+            0.304862,
+            0.299357
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre les IPO",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-renforcer-la-protection-de-vos-placements"
+      ],
+      "failure_reasons": [
+        "CROSS_SCRIPT_GAP",
+        "TOPIC_OVERLAP"
+      ],
+      "id": "ary-latin-06",
+      "original_query": "kifach n7mi l istithmarat dyali?",
+      "topic": "investor_protection",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-renforcer-la-protection-de-vos-placements",
+          "top_3_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "top_5_similarities": [
+            0.558649,
+            0.548123,
+            0.544563,
+            0.543576,
+            0.538836
+          ],
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "top_5_titles": [
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 6,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-les-assemblees-generales-ordinaires",
+          "top_3_source_ids": [
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.325466,
+            0.324827,
+            0.321368,
+            0.320902,
+            0.318157
+          ],
+          "top_5_source_ids": [
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_titles": [
+            "Les assemblées générales ordinaires",
+            "Les assemblées générales ordinaires",
+            "Comprendre le financement collaboratif",
+            "Comprendre les IPO",
+            "Comprendre les IPO"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-renforcer-la-protection-de-vos-placements",
+          "top_3_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "top_5_similarities": [
+            0.660472,
+            0.651868,
+            0.643757,
+            0.640921,
+            0.640273
+          ],
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "top_5_titles": [
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements",
+            "Renforcer la protection de vos placements"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": false
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 6,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_1_source_id": "ammc-les-assemblees-generales-ordinaires",
+          "top_3_source_ids": [
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.325466,
+            0.324827,
+            0.321368,
+            0.320902,
+            0.318157
+          ],
+          "top_5_source_ids": [
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ],
+          "top_5_titles": [
+            "Les assemblées générales ordinaires",
+            "Les assemblées générales ordinaires",
+            "Comprendre le financement collaboratif",
+            "Comprendre les IPO",
+            "Comprendre les IPO"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+      ],
+      "failure_reasons": [],
+      "id": "ary-latin-07",
+      "original_query": "chno khasni nqra f watha2i9 lma3loumat 9bel ma nestathmer?",
+      "topic": "information_documents",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+          "top_3_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-opcvm"
+          ],
+          "top_5_similarities": [
+            0.650433,
+            0.619707,
+            0.617706,
+            0.613561,
+            0.612211
+          ],
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ],
+          "top_5_titles": [
+            "Les documents d'information qu'il faut absolument connaître",
+            "Renforcer la protection de vos placements",
+            "Les OPCVM",
+            "Comprendre les IPO",
+            "Comprendre les circuits et adopter les bonnes pratiques"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 3,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "top_5_similarities": [
+            0.345244,
+            0.334757,
+            0.330912,
+            0.327472,
+            0.325073
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Renforcer la protection de vos placements",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Comprendre le financement collaboratif",
+            "Comprendre les circuits et adopter les bonnes pratiques"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+          "top_3_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "top_5_similarities": [
+            0.686834,
+            0.650523,
+            0.630699,
+            0.621137,
+            0.607855
+          ],
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ],
+          "top_5_titles": [
+            "Les documents d'information qu'il faut absolument connaître",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Renforcer la protection de vos placements",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Comprendre les circuits et adopter les bonnes pratiques"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+          "top_3_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "top_5_similarities": [
+            0.69652,
+            0.687605,
+            0.680109,
+            0.654154,
+            0.647808
+          ],
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "top_5_titles": [
+            "Les documents d'information qu'il faut absolument connaître",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Les documents d'information qu'il faut absolument connaître"
+          ]
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 3,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "top_5_similarities": [
+            0.345244,
+            0.334757,
+            0.330912,
+            0.327472,
+            0.325073
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Renforcer la protection de vos placements",
+            "Les documents d'information qu'il faut absolument connaître",
+            "Comprendre le financement collaboratif",
+            "Comprendre les circuits et adopter les bonnes pratiques"
+          ]
+        }
+      }
+    },
+    {
+      "expected_source_ids": [
+        "ammc-comprendre-le-financement-collaboratif"
+      ],
+      "failure_reasons": [],
+      "id": "ary-latin-08",
+      "original_query": "kifach kaykhdem ttamwil ttacharoki?",
+      "topic": "crowdfunding",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-le-financement-collaboratif",
+          "top_3_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.522198,
+            0.51075,
+            0.503113,
+            0.498857,
+            0.496842
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif"
+          ]
+        },
+        "ARY_LATIN_NORMALIZED": {
+          "available": true,
+          "expected_source_best_rank": 2,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.322513,
+            0.321999,
+            0.315778,
+            0.315758,
+            0.314121
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-operations-sur-titres"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre les opérations sur titres"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-le-financement-collaboratif",
+          "top_3_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.62758,
+            0.621736,
+            0.601962,
+            0.60046,
+            0.60008
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_titles": [
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_best_rank": 1,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-le-financement-collaboratif",
+          "top_3_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "top_5_similarities": [
+            0.64679,
+            0.638304,
+            0.617271,
+            0.608779,
+            0.58358
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_titles": [
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre le financement collaboratif",
+            "Comprendre les instruments financiers et leurs mécanismes"
+          ]
+        },
+        "ORIGINAL_ARY_LATIN": {
+          "available": true,
+          "expected_source_best_rank": 2,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_1_source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+          "top_3_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "top_5_similarities": [
+            0.322513,
+            0.321999,
+            0.315778,
+            0.315758,
+            0.314121
+          ],
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-operations-sur-titres"
+          ],
+          "top_5_titles": [
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre les instruments financiers et leurs mécanismes",
+            "Comprendre le financement collaboratif",
+            "Comprendre les opérations sur titres"
+          ]
+        }
+      }
+    }
+  ],
+  "chunks_sha256": "62d76b117a2273ba3fd2ddbc2cf32a5fdb72ced468e1cf6b2097a2322a4346e1",
+  "conclusion": {
+    "diagnosis": "QUERY_REPRESENTATION_GAP",
+    "rationale": "Two of three Ary-Latin misses show cross-script/Arabizi representation problems; one shows broader language and terminology transfer difficulty. All three show adjacent-topic competition. Corpus and gold ambiguity are not established as primary causes. A Darija-Latin adapter alone cannot satisfy the frozen gate while English and Arabic remain at 0.750.",
+    "recommended_next_step": "J6_07_QUERY_ADAPTER_EXPERIMENT"
+  },
+  "content_filtered_count": 353,
+  "diagnostic_projection": {
+    "ary_latin_to_0_875": {
+      "macro_recall5": 0.85,
+      "worst_recall5": 0.75
+    },
+    "ary_latin_to_1_000": {
+      "macro_recall5": 0.875,
+      "worst_recall5": 0.75
+    },
+    "current_bge_content_filtered": {
+      "ar": 0.75,
+      "ary-arabic": 0.875,
+      "ary-latin": 0.625,
+      "en": 0.75,
+      "fr": 1.0
+    }
+  },
+  "failure_reason_counts": {
+    "CROSS_SCRIPT_GAP": 2,
+    "LANGUAGE_TRANSFER_GAP": 1,
+    "TOPIC_OVERLAP": 3
+  },
+  "fr_counterpart_note": "FR_COUNTERPART Recall@5=1.000 is based on 6 available cases; public_offerings and investor_protection have no frozen French counterpart.",
+  "gold_ambiguity_findings": null,
+  "gold_ambiguity_status": "not_evaluated",
+  "gold_sha256": "68da7ebcd739dc42e874bf0052b7a2a6c33a2013ba1cd91979ccea7b6d0355b5",
+  "input_policy": "CONTENT_FILTERED",
+  "model_name": "BAAI/bge-m3",
+  "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "model_selection": "NO_WINNER",
+  "narrative": "Two of three Ary-Latin misses are recovered by Ary-Arabic; the third remains a miss in Ary-Arabic and Arabic but is recovered by French. The issue is broader than pure script transliteration.",
+  "next_work": {
+    "parallel_diagnostic_track": "EN_AR_RETRIEVAL_DIAGNOSTIC",
+    "primary_experiment": "J6_07_QUERY_ADAPTER_EXPERIMENT"
+  },
+  "normalization_note": "The tested lightweight normalization produced no Recall@5 improvement on this gold set; it changed only one of eight queries, so the evidence is limited.",
+  "schema_version": "j6-ary-latin-diagnostic-v1",
+  "variant_metrics": {
+    "ARY_ARABIC_COUNTERPART": {
+      "available_cases": 8,
+      "recall_at_5": 0.875
+    },
+    "ARY_LATIN_NORMALIZED": {
+      "available_cases": 8,
+      "recall_at_5": 0.625
+    },
+    "AR_COUNTERPART": {
+      "available_cases": 8,
+      "recall_at_5": 0.75
+    },
+    "FR_COUNTERPART": {
+      "available_cases": 6,
+      "recall_at_5": 1.0
+    },
+    "ORIGINAL_ARY_LATIN": {
+      "available_cases": 8,
+      "recall_at_5": 0.625
+    }
+  }
+}

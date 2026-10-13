@@ -1,0 +1,52 @@
+{
+  "case": {
+    "id": "follow_up",
+    "language": "fr",
+    "script": "latin",
+    "question": "Et son fonctionnement et ses limites ?",
+    "memory": "{\"user\":\"Explique un ordre à cours limité.\"}",
+    "source": "Un ordre à cours limité fixe un prix maximal à l'achat ou minimal à la vente. Il n'est exécuté que si une contrepartie accepte ce prix. Son exécution peut être partielle ou ne jamais avoir lieu.",
+    "aspects": {
+      "mechanism": [
+        "prix",
+        "maxim|plafond",
+        "minim|plancher"
+      ],
+      "limits": [
+        "partiel",
+        "jamais|non.execution|pas.*execut|aucune|sans execution"
+      ]
+    }
+  },
+  "result": {
+    "original_query": "Et son fonctionnement et ses limites ?",
+    "language": "fr",
+    "script": "latin",
+    "answer": "Un ordre à cours limité est une instruction de transaction qui fixe un prix maximal pour un achat ou un prix minimal pour une vente. Son fonctionnement repose sur l'acceptation de ce prix par une contrepartie ; l'ordre n'est exécuté que si cette condition est remplie. Concernant ses limites, l'exécution peut être partielle ou ne jamais avoir lieu si le marché ne rencontre pas le prix fixé.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "mechanism": true,
+    "limits": true
+  }
+}

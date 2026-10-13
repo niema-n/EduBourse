@@ -216,6 +216,22 @@ DARJA_LATIN_STRONG = {
     "walakin",
     "7it",
     "3lach",
+    # Common Darija-Latin forms in financial questions. These remain
+    # language evidence even when an acronym or an English/French term is
+    # present in the same utterance.
+    "kay3ni",
+    "kayt3na",
+    "kaykhdem",
+    "katdkhol",
+    "katmchi",
+    "charika",
+    "chi",
+    "istitmar",
+    "makhatir",
+    "mostatmir",
+    "mosahim",
+    "saham",
+    "sahm",
 }
 DARJA_LATIN_WEAK = {
     "f",
@@ -560,8 +576,15 @@ def _classifier_detection(normalized_text: str, script: str) -> tuple[LanguageCo
 def _has_high_precision_darija_rule(normalized_text: str, language: LanguageCode) -> bool:
     if language == "ary-latin":
         tokens = _latin_tokens(normalized_text)
+        token_set = set(tokens)
+        strong_markers = token_set & DARJA_LATIN_STRONG
+        arabizi_words = {
+            token for token in tokens
+            if ARABIZI_DIGIT_RE.search(token) and any(character.isalpha() for character in token)
+        }
         return bool(
-            {"chno", "kifach", "wach", "bghit", "bghina", "ghadi"} & set(tokens)
+            len(strong_markers) >= 2
+            or (strong_markers and arabizi_words)
             or any(token.startswith("gha") and len(token) >= 5 for token in tokens)
         )
     if language == "ary-arabic":
@@ -608,9 +631,11 @@ def detect_language(text: str) -> LanguageAnalysis:
             language, confidence = _classifier_detection(normalized_text, script)
         except StatisticalDetectorUnavailable:
             language, confidence = _heuristic_detection(normalized_text, script)
-        if language == "ar" and _has_high_precision_darija_rule(normalized_text, "ary-arabic"):
+        darija_override = _has_high_precision_darija_rule(normalized_text, "ary-arabic")
+        msa_override = _has_high_precision_msa_rule(normalized_text, "ar")
+        if language == "ar" and darija_override:
             language, confidence = "ary-arabic", max(confidence, 0.93)
-        if language == "ary-arabic" and _has_high_precision_msa_rule(normalized_text, "ar"):
+        if language == "ary-arabic" and msa_override and not darija_override:
             language, confidence = "ar", max(confidence, 0.93)
         return LanguageAnalysis(
             language=language,

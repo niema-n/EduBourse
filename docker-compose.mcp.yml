@@ -1,0 +1,26 @@
+services:
+  mcp:
+    build:
+      context: ./mcp
+    environment:
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: 8000
+      EDUBOURSE_BACKEND_URL: http://backend:8000
+      EDUBOURSE_MCP_BACKEND_TIMEOUT_SECONDS: ${EDUBOURSE_MCP_BACKEND_TIMEOUT_SECONDS:-300}
+      EDUBOURSE_MCP_AUTH_TOKEN: ${EDUBOURSE_MCP_AUTH_TOKEN:-}
+    ports:
+      - "127.0.0.1:8011:8000"
+    restart: unless-stopped
+    networks:
+      mcp_backend_network: {}
+      n8n_backend_network:
+        aliases:
+          - mcp
+
+networks:
+  mcp_backend_network:
+    name: financial-education-assistant_mcp_backend_network
+    external: true
+  n8n_backend_network:
+    name: financial-education-assistant_n8n_backend_network
+    external: true

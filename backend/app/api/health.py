@@ -3,7 +3,14 @@ from fastapi import APIRouter
 from app.config import get_settings
 from app.database.postgres import check_postgres
 from app.providers.chroma import check_chroma
-from app.schemas.health import ComponentHealth, HealthResponse, LiveResponse, VectorStoreHealth
+from app.rag.runtime import check_retrieval_index
+from app.schemas.health import (
+    ChromaServerHealth,
+    ComponentHealth,
+    HealthResponse,
+    LiveResponse,
+    RagIndexHealth,
+)
 
 router = APIRouter(tags=["System"])
 
@@ -32,9 +39,10 @@ def live() -> LiveResponse:
 def health() -> HealthResponse:
     settings = get_settings()
     postgres_status = check_postgres()
+    rag_index_status = check_retrieval_index()
     chroma_status = check_chroma()
     unavailable_count = sum(
-        status == "unavailable" for status in (postgres_status.status, chroma_status.status)
+        status == "unavailable" for status in (postgres_status.status, rag_index_status.status)
     )
     if unavailable_count == 0:
         overall = "ok"
@@ -49,7 +57,12 @@ def health() -> HealthResponse:
         version=settings.app_version,
         environment=settings.app_env,
         postgres=ComponentHealth(status=postgres_status.status),
-        chroma=VectorStoreHealth(
+        rag_index=RagIndexHealth(
+            status=rag_index_status.status,
+            collection=rag_index_status.collection,
+            document_count=rag_index_status.document_count,
+        ),
+        chroma_server=ChromaServerHealth(
             status=chroma_status.status,
             collection=settings.chroma_collection,
             collection_status=chroma_status.collection_status,

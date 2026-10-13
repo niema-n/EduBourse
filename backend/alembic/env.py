@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from app.config import get_settings
 from app.database.base import Base
+from app.persistence import models as persistence_models  # noqa: F401
 
 config = context.config
 
@@ -14,8 +15,16 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 
+def resolve_persistence_url(settings) -> str:
+    """Resolve the J8 migration target without falling back to legacy settings."""
+    url = settings.database_url.strip()
+    if not url:
+        raise RuntimeError("DATABASE_URL is required for persistence migrations")
+    return url
+
+
 def get_url() -> str:
-    return get_settings().postgres_dsn
+    return resolve_persistence_url(get_settings())
 
 
 def run_migrations_offline() -> None:

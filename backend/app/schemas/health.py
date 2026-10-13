@@ -17,13 +17,24 @@ class VectorStoreHealth(ComponentHealth):
     document_count: int = 0
 
 
+class RagIndexHealth(BaseModel):
+    status: Literal["available", "unavailable"]
+    collection: str
+    document_count: int = 0
+
+
+class ChromaServerHealth(VectorStoreHealth):
+    role: Literal["legacy_infrastructure"] = "legacy_infrastructure"
+
+
 class HealthResponse(BaseModel):
     status: HealthStatus
     app: str
     version: str
     environment: str
     postgres: ComponentHealth
-    chroma: VectorStoreHealth
+    rag_index: RagIndexHealth
+    chroma_server: ChromaServerHealth
 
     model_config = ConfigDict(extra="forbid")
 

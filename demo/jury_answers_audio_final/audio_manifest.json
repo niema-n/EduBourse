@@ -1,0 +1,77 @@
+{
+  "darija_response_demo.wav": {
+    "duration_seconds": 28.511,
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "exact_tts_segments": [
+      "الفرق الجوهري بين السهم والسند كاين فطبيعتهم: السهم أداة ملكية كتمثل جزء من رأسمال الشركة، بينما السند أداة دين كتمثل قرض كيقدمو المستثمر للجهة المصدرة.\n\nالسهم هو أداة رأسمال كتمثل حصة فشركة.\n\nالسند هو أداة دين، أو أداة مطالبة، كتمثل قرض من المستثمر للجهة المصدرة.\n\nبصفة عامة، كلما زاد العائد المحتمل، زاد معاه الخطر."
+    ],
+    "tts_input_sha256": "56ea8a8af6640d26e02b0938af8a6bd5fe4b702cf8665e8e7c8ddc6642408e57",
+    "tts_provider": "gemini",
+    "tts_model": "gemini-2.5-flash-preview-tts",
+    "tts_voice": "Kore",
+    "shortened_playback_version": true,
+    "source_answer_sha256": "7b4726b4be9b5c245c84fded30c326813137b4165634ba6224ca504259596819"
+  },
+  "darija_response_full.wav": {
+    "duration_seconds": 82.589,
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "exact_tts_segments": [
+      "الفرق الجوهري بين السهم والسند كاين فطبيعتهم: السهم أداة ملكية كتمثل جزء من رأسمال الشركة، بينما السند أداة دين كتمثل قرض كيقدمو المستثمر للجهة المصدرة.\n\nالسهم هو أداة رأسمال كتمثل حصة فشركة. كيعطي لحاملو حقوق مالية، بحال الحصول على الأرباح الموزعة وحق التصويت فالجمعيات العامة، وحقوق غير مالية بحال الحق فالوصول للمعلومات.\n\nالعائد ديال السهم كيجي من الأرباح الموزعة ومن فرق الثمن، يعني الربح أو الخسارة وقت البيع. والمخاطر ديالو كتشمل خسارة رأس المال إلا هبط الثمن، وخطر السيولة إلا ما تلقاش المشتري، وخطر التعثر اللي يقدر يؤدي لخسارة الاستثمار كامل إلا فلست الشركة.\n\nالسند هو أداة دين، أو أداة مطالبة، كتمثل قرض من المستثمر للجهة المصدرة.",
+      " كيعطي لحاملو الحق فالحصول على فائدة دورية، كتسمى القسيمة، واسترجاع رأس المال عند الاستحقاق.\n\nالعائد ديال السند كيتكوّن من فوائد ثابتة أو متغيرة، ويمكن قياسو بالعائد الجاري أو العائد الاكتواري. والمخاطر الرئيسية ديالو هي خطر التعثر، أي عدم قدرة الجهة المصدرة على السداد، وخطر سعر الفائدة، بحيث ملي كترتفع الفائدة كينخفض ثمن السند، ثم خطر السيولة.\n\nبصفة عامة، كلما زاد العائد المحتمل، زاد معاه الخطر."
+    ],
+    "tts_input_sha256": "7b4726b4be9b5c245c84fded30c326813137b4165634ba6224ca504259596819",
+    "tts_provider": "gemini",
+    "tts_model": "gemini-2.5-flash-preview-tts",
+    "tts_voice": "Kore",
+    "shortened_playback_version": false,
+    "source_answer_sha256": "7b4726b4be9b5c245c84fded30c326813137b4165634ba6224ca504259596819"
+  },
+  "fr_response_demo.wav": {
+    "duration_seconds": 22.342,
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "exact_tts_segments": [
+      "﻿La diffÃ©rence fondamentale entre une action et une obligation rÃ©side dans la nature du lien crÃ©Ã© avec l'Ã©metteur : l'action confÃ¨re une part de propriÃ©tÃ© dans le capital de l'entreprise, tandis que l'obligation fait de l'investisseur un crÃ©ancier de l'Ã©metteur.\n\nL'action est un titre de propriÃ©tÃ© reprÃ©sentatif d'une fraction du capital d'une entreprise."
+    ],
+    "tts_input_sha256": "caa04ecba6c92493f7bac656fdf66e25b3faab94824a30f15e2830940406d1ab",
+    "tts_provider": "gemini",
+    "tts_model": "gemini-2.5-flash-preview-tts",
+    "tts_voice": "Kore",
+    "shortened_playback_version": true
+  },
+  "en_response_demo.wav": {
+    "duration_seconds": 20.735,
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "exact_tts_segments": [
+      "﻿An Initial Public Offering (IPO) is a financial operation in which a company makes part of its share capital available to the public in exchange for newly raised funds. It allows the company to solicit public savings through a public offering of securities, subject to legal and regulatory obligations intended to protect investors."
+    ],
+    "tts_input_sha256": "b15a8c71683b40a5d00369c4036134e99284422f5e0e9eede529067f32dd4e7a",
+    "tts_provider": "gemini",
+    "tts_model": "gemini-2.5-flash-preview-tts",
+    "tts_voice": "Kore",
+    "shortened_playback_version": true
+  },
+  "fr_response_full.wav": {
+    "duration_seconds": 88.687,
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "exact_tts_segments": [
+      "﻿La diffÃ©rence fondamentale entre une action et une obligation rÃ©side dans la nature du lien crÃ©Ã© avec l'Ã©metteur : l'action confÃ¨re une part de propriÃ©tÃ© dans le capital de l'entreprise, tandis que l'obligation fait de l'investisseur un crÃ©ancier de l'Ã©metteur.\n\nL'action est un titre de propriÃ©tÃ© reprÃ©sentatif d'une fraction du capital d'une entreprise. En tant que dÃ©tenteur, l'investisseur bÃ©nÃ©ficie de droits spÃ©cifiques, notamment le droit aux dividendes, le droit Ã  l'information et le droit de vote lors des assemblÃ©es. Le rendement d'une action dÃ©pend de la variation de son prix et des dividendes perÃ§us.",
+      " Les risques associÃ©s sont principalement le risque de perte en capital (baisse du prix), le risque de liquiditÃ© (difficultÃ© Ã  revendre le titre) et le risque de dÃ©faut, qui peut entraÃ®ner la perte totale de l'investissement en cas de faillite de l'entreprise, les crÃ©anciers prioritaires Ã©tant remboursÃ©s en premier.\n\nL'obligation est un titre de crÃ©ance reprÃ©sentant une fraction d'un emprunt Ã©mis par une entreprise ou un Ãtat. L'investisseur perÃ§oit une rÃ©munÃ©ration sous forme d'intÃ©rÃªts, appelÃ©s coupons, et reÃ§oit le remboursement du principal, soit de maniÃ¨re pÃ©riodique, soit Ã  l'Ã©chÃ©ance.",
+      " Le rendement peut Ãªtre mesurÃ© par le rendement courant (rapport du coupon au prix) ou le rendement actuariel (rentabilitÃ© jusqu'Ã  l'Ã©chÃ©ance). Les risques spÃ©cifiques Ã  l'obligation incluent le risque de crÃ©dit (capacitÃ© de l'Ã©metteur Ã  honorer ses engagements), le risque de taux (variation inverse entre le taux d'intÃ©rÃªt et le prix de l'obligation) et le risque de liquiditÃ©.\n"
+    ],
+    "tts_input_sha256": "d3b9404fcb4fe1b7b48d174f46e7d150314a438766eea8ad1d665537afede7e1",
+    "tts_provider": "gemini",
+    "tts_model": "gemini-2.5-flash-preview-tts",
+    "tts_voice": "Kore",
+    "shortened_playback_version": false
+  }
+}

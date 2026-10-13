@@ -1,0 +1,53 @@
+{
+  "case": {
+    "id": "fr_multi",
+    "language": "fr",
+    "script": "latin",
+    "question": "Qu'est-ce qu'une obligation et quels sont ses risques ?",
+    "source": "A stock represents ownership of part of a company. A bond is a debt: its holder is a creditor, not an owner. Stocks may pay dividends and generate a capital gain on resale. A bond generally pays interest and repays principal at maturity. A stock's price can fall, and dividends are not guaranteed. Bond holders face issuer default risk and a resale price that can fall when market interest rates rise.",
+    "aspects": {
+      "definition": [
+        "dette|creance|creancier"
+      ],
+      "default": [
+        "defaut|rembours|honorer"
+      ],
+      "rate_risk": [
+        "taux",
+        "bais|perte"
+      ]
+    }
+  },
+  "result": {
+    "original_query": "Qu'est-ce qu'une obligation et quels sont ses risques ?",
+    "language": "fr",
+    "script": "latin",
+    "answer": "Une obligation est un instrument de dette : son détenteur est un créancier de l'émetteur, et non un propriétaire de la société. En général, elle verse des intérêts et rembourse le capital à l'échéance.\n\nLes risques principaux associés aux obligations sont :\n- Le risque de défaut de l'émetteur, c'est-à-dire la possibilité que l'émetteur ne soit pas en mesure de rembourser la dette ou de payer les intérêts.\n- Le risque de baisse du prix de revente, qui peut survenir lorsque les taux d'intérêt du marché augmentent.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "definition": true,
+    "default": true,
+    "rate_risk": true
+  }
+}

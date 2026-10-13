@@ -1,0 +1,1944 @@
+{
+  "baseline_metrics": {
+    "ar": {
+      "mrr_at_10": 0.7678571428571428,
+      "recall_at_1": 0.75,
+      "recall_at_3": 0.75,
+      "recall_at_5": 0.75
+    },
+    "en": {
+      "mrr_at_10": 0.75,
+      "recall_at_1": 0.75,
+      "recall_at_3": 0.75,
+      "recall_at_5": 0.75
+    }
+  },
+  "cases": [
+    {
+      "case_id": "en-01",
+      "expected_source_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "en",
+      "original_query": "What is the difference between a stock and a bond?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-pea",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-02",
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "failure_reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "original_language": "en",
+      "original_query": "How does an investment fund work?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 2,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 2,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 7,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-brochure-produits-de-placement"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 17,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-sur-le-budget-l-epargne-et-l-investissement",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-03",
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "failure_reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "original_language": "en",
+      "original_query": "What does net asset value mean for a fund?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 23,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 13,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-les-ipo",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 11,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 23,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-04",
+      "expected_source_ids": [
+        "ammc-comprendre-les-ipo"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "en",
+      "original_query": "What happens during an IPO?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 3,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-05",
+      "expected_source_ids": [
+        "ammc-comprendre-les-offres-publics"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "en",
+      "original_query": "What is a public offering?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 23,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-06",
+      "expected_source_ids": [
+        "ammc-renforcer-la-protection-de-vos-placements"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "en",
+      "original_query": "How can an investor protect their investments?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 6,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-07",
+      "expected_source_ids": [
+        "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "en",
+      "original_query": "What documents should I read before buying securities?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 3,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "en-08",
+      "expected_source_ids": [
+        "ammc-comprendre-le-financement-collaboratif"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "en",
+      "original_query": "How does crowdfunding finance a project?",
+      "original_script": "latin",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 2,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "EN_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-01",
+      "expected_source_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "ar",
+      "original_query": "ما الفرق بين السهم والسند؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-pea",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-02",
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "failure_reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "original_language": "ar",
+      "original_query": "ما هو صندوق الاستثمار الجماعي؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 2,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 2,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 17,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-sur-le-budget-l-epargne-et-l-investissement",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-brochure-produits-de-placement"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 7,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-03",
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "failure_reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "original_language": "ar",
+      "original_query": "ماذا تعني القيمة الصافية للأصول؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 23,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-operations-sur-titres",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 13,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-les-ipo",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 23,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm",
+            "ammc-les-opcvm"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-opcvm"
+          ],
+          "expected_source_rank": 11,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-04",
+      "expected_source_ids": [
+        "ammc-comprendre-les-ipo"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "ar",
+      "original_query": "ماذا يحدث عند طرح شركة في البورصة؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 3,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-ipo"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-05",
+      "expected_source_ids": [
+        "ammc-comprendre-les-offres-publics"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "ar",
+      "original_query": "ما هي شروط العرض العمومي؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 23,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-les-offres-publics"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics",
+            "ammc-comprendre-les-offres-publics"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-06",
+      "expected_source_ids": [
+        "ammc-renforcer-la-protection-de-vos-placements"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "ar",
+      "original_query": "كيف أحمي استثماراتي من المخاطر؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 6,
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_5": false,
+          "top_5_source_ids": [
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-les-assemblees-generales-ordinaires",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-ipo"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-renforcer-la-protection-de-vos-placements"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-07",
+      "expected_source_ids": [
+        "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "ar",
+      "original_query": "ما هي الوثائق التي يجب قراءتها قبل الاستثمار؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-opcvm",
+            "ammc-comprendre-les-ipo",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 3,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-renforcer-la-protection-de-vos-placements",
+            "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+            "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "ar-08",
+      "expected_source_ids": [
+        "ammc-comprendre-le-financement-collaboratif"
+      ],
+      "failure_reason": "NOT_A_FAILURE",
+      "original_language": "ar",
+      "original_query": "كيف يعمل التمويل التشاركي؟",
+      "original_script": "arabic",
+      "variants": {
+        "ARY_ARABIC_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "ARY_LATIN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 2,
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-operations-sur-titres"
+          ]
+        },
+        "AR_COUNTERPART": {
+          "available": false,
+          "expected_source_rank": null
+        },
+        "EN_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        },
+        "FR_COUNTERPART": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+          ]
+        },
+        "ORIGINAL": {
+          "available": true,
+          "expected_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif"
+          ],
+          "expected_source_rank": 1,
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_5": true,
+          "top_5_source_ids": [
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif",
+            "ammc-comprendre-le-financement-collaboratif"
+          ]
+        }
+      }
+    }
+  ],
+  "chunks_sha256": "62d76b117a2273ba3fd2ddbc2cf32a5fdb72ced468e1cf6b2097a2322a4346e1",
+  "content_filtered_count": 353,
+  "counterpart_metrics": {
+    "ar": {
+      "ARY_ARABIC_COUNTERPART": {
+        "available_cases": 8,
+        "hit_at_5_count": 7,
+        "recall_at_5_available": 0.875
+      },
+      "ARY_LATIN_COUNTERPART": {
+        "available_cases": 8,
+        "hit_at_5_count": 5,
+        "recall_at_5_available": 0.625
+      },
+      "AR_COUNTERPART": {
+        "available_cases": 0,
+        "hit_at_5_count": 0,
+        "recall_at_5_available": 0.0
+      },
+      "EN_COUNTERPART": {
+        "available_cases": 8,
+        "hit_at_5_count": 6,
+        "recall_at_5_available": 0.75
+      },
+      "FR_COUNTERPART": {
+        "available_cases": 6,
+        "hit_at_5_count": 6,
+        "recall_at_5_available": 1.0
+      }
+    },
+    "en": {
+      "ARY_ARABIC_COUNTERPART": {
+        "available_cases": 8,
+        "hit_at_5_count": 7,
+        "recall_at_5_available": 0.875
+      },
+      "ARY_LATIN_COUNTERPART": {
+        "available_cases": 8,
+        "hit_at_5_count": 5,
+        "recall_at_5_available": 0.625
+      },
+      "AR_COUNTERPART": {
+        "available_cases": 8,
+        "hit_at_5_count": 6,
+        "recall_at_5_available": 0.75
+      },
+      "EN_COUNTERPART": {
+        "available_cases": 0,
+        "hit_at_5_count": 0,
+        "recall_at_5_available": 0.0
+      },
+      "FR_COUNTERPART": {
+        "available_cases": 6,
+        "hit_at_5_count": 6,
+        "recall_at_5_available": 1.0
+      }
+    }
+  },
+  "diagnostic_projections": {
+    "ar": {
+      "diagnostic_only": true,
+      "language": "ar",
+      "projected_macro_recall5": 0.85,
+      "projected_worst_recall5": 0.625,
+      "recoverable_recall5": 1.0
+    },
+    "en": {
+      "diagnostic_only": true,
+      "language": "en",
+      "projected_macro_recall5": 0.85,
+      "projected_worst_recall5": 0.625,
+      "recoverable_recall5": 1.0
+    }
+  },
+  "diagnostic_reason_counts": {
+    "FRENCH_REPRESENTATION_RECOVERY": 4
+  },
+  "french_counterpart_recovery": {
+    "ar": {
+      "available_cases": 6,
+      "hit_at_5_count": 6,
+      "recall_at_5_available": 1.0
+    },
+    "en": {
+      "available_cases": 6,
+      "hit_at_5_count": 6,
+      "recall_at_5_available": 1.0
+    }
+  },
+  "frozen_baseline_recall5": {
+    "ar": 0.75,
+    "ary-arabic": 0.875,
+    "ary-latin": 0.625,
+    "en": 0.75,
+    "fr": 1.0
+  },
+  "global_diagnosis": "QUERY_REPRESENTATION_GAP_SUPPORTED",
+  "gold_ambiguity_status": "not_evaluated",
+  "gold_sha256": "68da7ebcd739dc42e874bf0052b7a2a6c33a2013ba1cd91979ccea7b6d0355b5",
+  "input_policy": "CONTENT_FILTERED",
+  "model_name": "BAAI/bge-m3",
+  "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "model_selection": "NO_WINNER",
+  "per_failure_analysis": [
+    {
+      "case_id": "en-02",
+      "counterpart_ranks": {
+        "ARY_ARABIC_COUNTERPART": 2,
+        "ARY_LATIN_COUNTERPART": 2,
+        "AR_COUNTERPART": 7,
+        "EN_COUNTERPART": null,
+        "FR_COUNTERPART": 1
+      },
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "original_expected_source_rank": 17,
+      "original_query": "How does an investment fund work?",
+      "reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "top_5_source_ids": [
+        "ammc-renforcer-la-protection-de-vos-placements",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-sur-le-budget-l-epargne-et-l-investissement",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+      ]
+    },
+    {
+      "case_id": "en-03",
+      "counterpart_ranks": {
+        "ARY_ARABIC_COUNTERPART": 23,
+        "ARY_LATIN_COUNTERPART": 13,
+        "AR_COUNTERPART": 11,
+        "EN_COUNTERPART": null,
+        "FR_COUNTERPART": 1
+      },
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "original_expected_source_rank": 23,
+      "original_query": "What does net asset value mean for a fund?",
+      "reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "top_5_source_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-le-financement-collaboratif",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"
+      ]
+    },
+    {
+      "case_id": "ar-02",
+      "counterpart_ranks": {
+        "ARY_ARABIC_COUNTERPART": 2,
+        "ARY_LATIN_COUNTERPART": 2,
+        "AR_COUNTERPART": null,
+        "EN_COUNTERPART": 17,
+        "FR_COUNTERPART": 1
+      },
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "original_expected_source_rank": 7,
+      "original_query": "ما هو صندوق الاستثمار الجماعي؟",
+      "reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "top_5_source_ids": [
+        "ammc-renforcer-la-protection-de-vos-placements",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-le-financement-collaboratif",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+      ]
+    },
+    {
+      "case_id": "ar-03",
+      "counterpart_ranks": {
+        "ARY_ARABIC_COUNTERPART": 23,
+        "ARY_LATIN_COUNTERPART": 13,
+        "AR_COUNTERPART": null,
+        "EN_COUNTERPART": 23,
+        "FR_COUNTERPART": 1
+      },
+      "expected_source_ids": [
+        "ammc-les-opcvm"
+      ],
+      "original_expected_source_rank": 11,
+      "original_query": "ماذا تعني القيمة الصافية للأصول؟",
+      "reason": "FRENCH_REPRESENTATION_RECOVERY",
+      "top_5_source_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"
+      ]
+    }
+  ],
+  "rank_matrix": [
+    {
+      "ar_counterpart_rank": 1,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 1,
+      "case_id": "en-01",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": 1,
+      "original_language": "en",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": 7,
+      "ary_arabic_counterpart_rank": 2,
+      "ary_latin_counterpart_rank": 2,
+      "case_id": "en-02",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": 1,
+      "original_language": "en",
+      "original_rank": 17
+    },
+    {
+      "ar_counterpart_rank": 11,
+      "ary_arabic_counterpart_rank": 23,
+      "ary_latin_counterpart_rank": 13,
+      "case_id": "en-03",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": 1,
+      "original_language": "en",
+      "original_rank": 23
+    },
+    {
+      "ar_counterpart_rank": 1,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 3,
+      "case_id": "en-04",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": 1,
+      "original_language": "en",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": 1,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 23,
+      "case_id": "en-05",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": null,
+      "original_language": "en",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": 1,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 6,
+      "case_id": "en-06",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": null,
+      "original_language": "en",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": 1,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 3,
+      "case_id": "en-07",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": 1,
+      "original_language": "en",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": 1,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 2,
+      "case_id": "en-08",
+      "en_counterpart_rank": null,
+      "fr_counterpart_rank": 1,
+      "original_language": "en",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 1,
+      "case_id": "ar-01",
+      "en_counterpart_rank": 1,
+      "fr_counterpart_rank": 1,
+      "original_language": "ar",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 2,
+      "ary_latin_counterpart_rank": 2,
+      "case_id": "ar-02",
+      "en_counterpart_rank": 17,
+      "fr_counterpart_rank": 1,
+      "original_language": "ar",
+      "original_rank": 7
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 23,
+      "ary_latin_counterpart_rank": 13,
+      "case_id": "ar-03",
+      "en_counterpart_rank": 23,
+      "fr_counterpart_rank": 1,
+      "original_language": "ar",
+      "original_rank": 11
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 3,
+      "case_id": "ar-04",
+      "en_counterpart_rank": 1,
+      "fr_counterpart_rank": 1,
+      "original_language": "ar",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 23,
+      "case_id": "ar-05",
+      "en_counterpart_rank": 1,
+      "fr_counterpart_rank": null,
+      "original_language": "ar",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 6,
+      "case_id": "ar-06",
+      "en_counterpart_rank": 1,
+      "fr_counterpart_rank": null,
+      "original_language": "ar",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 3,
+      "case_id": "ar-07",
+      "en_counterpart_rank": 1,
+      "fr_counterpart_rank": 1,
+      "original_language": "ar",
+      "original_rank": 1
+    },
+    {
+      "ar_counterpart_rank": null,
+      "ary_arabic_counterpart_rank": 1,
+      "ary_latin_counterpart_rank": 2,
+      "case_id": "ar-08",
+      "en_counterpart_rank": 1,
+      "fr_counterpart_rank": 1,
+      "original_language": "ar",
+      "original_rank": 1
+    }
+  ],
+  "recommended_next_step": "RESUME_J6_07_WHEN_GROQ_AVAILABLE",
+  "schema_version": "j6-en-ar-diagnostic-v1",
+  "topic_competition": "NOT_EVALUATED"
+}

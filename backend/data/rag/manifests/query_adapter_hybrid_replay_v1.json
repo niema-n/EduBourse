@@ -1,0 +1,161 @@
+{
+  "ary_latin_branch_attribution": [
+    {
+      "ary_arabic_rank": 1,
+      "case_id": "ary-latin-01",
+      "french_rank": 1,
+      "fused_rank": 1,
+      "original_rank": 1
+    },
+    {
+      "ary_arabic_rank": 1,
+      "case_id": "ary-latin-02",
+      "french_rank": 1,
+      "fused_rank": 1,
+      "original_rank": 2
+    },
+    {
+      "ary_arabic_rank": 2,
+      "case_id": "ary-latin-03",
+      "french_rank": 7,
+      "fused_rank": 1,
+      "original_rank": 13
+    },
+    {
+      "ary_arabic_rank": 1,
+      "case_id": "ary-latin-04",
+      "french_rank": 1,
+      "fused_rank": 1,
+      "original_rank": 3
+    },
+    {
+      "ary_arabic_rank": 2,
+      "case_id": "ary-latin-05",
+      "french_rank": 25,
+      "fused_rank": 1,
+      "original_rank": 23
+    },
+    {
+      "ary_arabic_rank": 4,
+      "case_id": "ary-latin-06",
+      "french_rank": 2,
+      "fused_rank": 3,
+      "original_rank": 6
+    },
+    {
+      "ary_arabic_rank": 1,
+      "case_id": "ary-latin-07",
+      "french_rank": 1,
+      "fused_rank": 1,
+      "original_rank": 3
+    },
+    {
+      "ary_arabic_rank": 1,
+      "case_id": "ary-latin-08",
+      "french_rank": 1,
+      "fused_rank": 1,
+      "original_rank": 2
+    }
+  ],
+  "chroma_ready": false,
+  "chunks_sha256": "62d76b117a2273ba3fd2ddbc2cf32a5fdb72ced468e1cf6b2097a2322a4346e1",
+  "deployment_ready": false,
+  "evaluation_type": "SAME_GOLD_REPLAY",
+  "gold_sha256": "68da7ebcd739dc42e874bf0052b7a2a6c33a2013ba1cd91979ccea7b6d0355b5",
+  "independent_validation": false,
+  "macro_recall5": 0.95,
+  "meaning_preservation_known_issues": [
+    "ary-latin-03",
+    "ary-latin-05",
+    "ary-latin-06"
+  ],
+  "model_name": "BAAI/bge-m3",
+  "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "overall": {
+    "macro_recall5": 0.95,
+    "mrr_at_10": 0.9083333333333332,
+    "per_language_recall5": {
+      "ar": 0.875,
+      "ary-arabic": 1.0,
+      "ary-latin": 1.0,
+      "en": 0.875,
+      "fr": 1.0
+    },
+    "r_at_1": 0.875,
+    "r_at_3": 0.95,
+    "r_at_5": 0.95,
+    "worst_recall5": 0.875
+  },
+  "p0_metrics": {
+    "macro_recall5": 0.8,
+    "mrr_at_10": 0.7369047619047618,
+    "per_language_recall5": {
+      "ar": 0.75,
+      "ary-arabic": 0.875,
+      "ary-latin": 0.625,
+      "en": 0.75,
+      "fr": 1.0
+    },
+    "r_at_1": 0.675,
+    "r_at_3": 0.8,
+    "r_at_5": 0.8,
+    "worst_recall5": 0.625
+  },
+  "p1_metrics": {
+    "macro_recall5": 0.9,
+    "mrr_at_10": 0.8660714285714285,
+    "per_language_recall5": {
+      "ar": 0.875,
+      "ary-arabic": 1.0,
+      "ary-latin": 0.75,
+      "en": 0.875,
+      "fr": 1.0
+    },
+    "r_at_1": 0.825,
+    "r_at_3": 0.9,
+    "r_at_5": 0.9,
+    "worst_recall5": 0.75
+  },
+  "per_language_recall5": {
+    "ar": 0.875,
+    "ary-arabic": 1.0,
+    "ary-latin": 1.0,
+    "en": 0.875,
+    "fr": 1.0
+  },
+  "policy_definition": {
+    "ar": "french_only",
+    "ary_arabic": "french_only",
+    "ary_latin": "original_plus_french_plus_ary_arabic_rrf",
+    "en": "french_only",
+    "fr": "original_only"
+  },
+  "policy_id": "H1_LANGUAGE_ROUTED_V1",
+  "policy_origin": "POST_HOC_FROM_J6_07_EXP1",
+  "query_artifact_sha256": "b510a4a772175e1567f5fefd18131d6464de05a12d632acf5b3aca4e5f1939ef",
+  "recommended_next_step": "INDEPENDENT_CONFIRMATORY_EVALUATION",
+  "recovered_vs_p0": [
+    "en-03",
+    "ar-03",
+    "ary-latin-03",
+    "ary-latin-05",
+    "ary-latin-06",
+    "ary-arabic-03"
+  ],
+  "recovered_vs_p1": [
+    "ary-latin-03",
+    "ary-latin-05"
+  ],
+  "regressed_vs_p0": [],
+  "regressed_vs_p1": [],
+  "replay_quality_gate": true,
+  "rrf_k": 60,
+  "schema_version": "j6-07b-hybrid-replay-v1",
+  "selection_bias_acknowledged": true,
+  "source_leakage_true_count": 0,
+  "terminology_normalization_known_issues": [
+    "en-02",
+    "ar-02"
+  ],
+  "worst_recall5": 0.875
+}

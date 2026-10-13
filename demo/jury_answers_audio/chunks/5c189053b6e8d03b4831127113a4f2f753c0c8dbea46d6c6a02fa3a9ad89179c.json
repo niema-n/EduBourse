@@ -1,0 +1,6 @@
+{
+  "exact_tts_input": "An Initial Public Offering (IPO) is a financial operation in which a company makes part of its share capital available to the public in exchange for newly collected funds. It enables the company to solicit public savings through a public offering of securities. The process is subject to legal and regulatory obligations designed to protect investors, including the publication of a prospectus and ongoing financial and extra-financial information.\n\nThere are two main types of IPOs, which may also be combined in a mixed operation:\n\n",
+  "sample_rate_hz": 24000,
+  "tts_model": "gemini-2.5-flash-preview-tts",
+  "tts_voice": "Kore"
+}

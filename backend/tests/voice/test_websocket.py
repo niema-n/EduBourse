@@ -33,6 +33,13 @@ _CLIENT_SPEC.loader.exec_module(_CLIENT_MODULE)
 pcm_duration_seconds = _CLIENT_MODULE.pcm_duration_seconds
 
 
+@pytest.fixture(autouse=True)
+def disable_live_final_composer(monkeypatch):
+    import app.api.chat as chat_api
+
+    monkeypatch.setattr(chat_api, "get_final_response_composer", lambda: None)
+
+
 @dataclass
 class FakeLiveSession:
     events: list[object]
@@ -97,7 +104,9 @@ class FakeSupervisor:
         return {"domain_status": "in_domain", "route": "pedagogie"}
 
 
-def make_client(session, tts=None, *, max_chunk=65536, max_seconds=300, supervisor=None):
+def make_client(
+    session, tts=None, *, max_chunk=65536, max_seconds=300, supervisor=None, debug_dump_dir=""
+):
     tts = tts or FakeTTS()
     provider = FakeLiveProvider(session)
     graph = build_graph(supervisor_provider=supervisor or FakeSupervisor())
@@ -109,6 +118,7 @@ def make_client(session, tts=None, *, max_chunk=65536, max_seconds=300, supervis
         voice_ws_max_chunk_bytes=max_chunk,
         voice_ws_output_chunk_bytes=min(4096, max_chunk),
         voice_ws_max_session_seconds=max_seconds,
+        voice_debug_dump_dir=debug_dump_dir,
     )
     return TestClient(app), provider, tts, old_settings
 
@@ -130,6 +140,61 @@ def start_message():
             "sample_width_bytes": 2,
         },
     }
+
+
+@pytest.mark.parametrize("tts_fails", [False, True])
+def test_tts_and_audio_complete_without_waiting_for_semantic_indexing(monkeypatch, tts_fails):
+    from app.api import chat
+
+    entered, release, finished = threading.Event(), threading.Event(), threading.Event()
+
+    def index(thread_id, ids):
+        entered.set()
+        assert release.wait(5)
+        finished.set()
+
+    monkeypatch.setattr(chat, "get_conversation_history_store", lambda: SimpleNamespace(
+        append_turn=lambda *args, **kwargs: [SimpleNamespace(id=1), SimpleNamespace(id=2)],
+    ))
+    monkeypatch.setattr(chat, "get_memory_runtime", lambda: SimpleNamespace(
+        index_canonical_messages=index,
+    ))
+    session = FakeLiveSession([SimpleNamespace(kind="final", text="Une action ?")], [])
+
+    class ObservedTTS(FakeTTS):
+        def synthesize(self, text, *, language, script):
+            result = super().synthesize(text, language=language, script=script)
+            if tts_fails:
+                raise TTSFailed("controlled test failure")
+            return result
+
+    client, _, tts, old_settings = make_client(session, tts=ObservedTTS())
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            assert websocket.receive_json()["type"] == "session.ready"
+            websocket.send_bytes(b"\x01\x00")
+            websocket.send_json({"type": "audio.end"})
+            while True:
+                message = websocket.receive_json()
+                if message["type"] == "response.text":
+                    break
+            assert message["status"] == "ok"
+            assert entered.wait(2)
+            messages = _finish_messages(websocket)
+            expected = "error" if tts_fails else "response.complete"
+            assert any(item["type"] == expected for item in messages)
+            assert not release.is_set()
+            assert not finished.is_set()
+            assert tts.calls == [(message["answer"], message["language"], message["script"])]
+            # Closing the socket must drain enrichment even after audio completes.
+            timer = threading.Timer(0.1, release.set)
+            timer.start()
+        timer.join()
+        assert finished.is_set()
+    finally:
+        release.set()
+        cleanup(old_settings)
 
 
 def test_live_websocket_full_turn_uses_final_transcript_and_safe_j4_answer():
@@ -178,6 +243,36 @@ def test_live_websocket_full_turn_uses_final_transcript_and_safe_j4_answer():
         assert audio == b"\x01\x00" * 4
         assert len(tts.calls) == 1
         assert tts.calls[0][0] == messages[4]["answer"]
+    finally:
+        cleanup(old_settings)
+
+
+def test_live_websocket_sends_composed_answer_to_tts_and_response(monkeypatch):
+    import app.api.chat as chat_api
+
+    class FakeComposer:
+        validation_attempts = []
+
+        def compose(self, *args, **kwargs):
+            return "FINAL_AZURE_TEXT"
+
+    session = FakeLiveSession(
+        events=[SimpleNamespace(kind="final", text="What is a stock?")],
+        sent_audio=[],
+    )
+    monkeypatch.setattr(chat_api, "get_final_response_composer", lambda: FakeComposer())
+    client, _, tts, old_settings = make_client(session)
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = _finish_messages(websocket)
+        response = next(message for message in messages if message["type"] == "response.text")
+        assert response["answer"] == "FINAL_AZURE_TEXT"
+        assert tts.calls[0][0] == "FINAL_AZURE_TEXT"
+        assert response["answer"] == tts.calls[0][0]
     finally:
         cleanup(old_settings)
 
@@ -280,6 +375,86 @@ def test_duplicate_audio_start_is_non_fatal_and_socket_reusable():
         assert session.started_turns == 1
         assert session.finished_turns == 1
         assert len(tts.calls) == 1
+    finally:
+        cleanup(old_settings)
+
+
+@dataclass
+class ExpiringLiveSession(FakeLiveSession):
+    """Gemini Live closes idle sessions (1008): start_turn then fails."""
+
+    expired: bool = False
+
+    async def start_turn(self) -> None:
+        if self.expired:
+            raise TranscriptionFailed("Gemini Live turn start failed")
+        await super().start_turn()
+
+
+class SequenceLiveProvider:
+    def __init__(self, sessions):
+        self.sessions = list(sessions)
+        self.connections = 0
+
+    async def connect(self):
+        self.connections += 1
+        return self.sessions.pop(0)
+
+
+@pytest.mark.parametrize("second_turn_opener", ["audio.start", "binary"])
+def test_idle_expired_live_session_is_reopened_once_for_next_turn(second_turn_opener):
+    final = [SimpleNamespace(kind="final", text="What is a stock?")]
+    first = ExpiringLiveSession(list(final), [])
+    fresh = ExpiringLiveSession(list(final), [])
+    client, _, tts, old_settings = make_client(first)
+    provider = SequenceLiveProvider([first, fresh])
+    app.dependency_overrides[voice_api.get_live_stt_provider] = lambda: provider
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            assert websocket.receive_json()["type"] == "session.ready"
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            assert _finish_messages(websocket)[-1]["type"] == "response.complete"
+
+            first.expired = True  # idle time between turns closed the Live session
+            if second_turn_opener == "audio.start":
+                websocket.send_json({"type": "audio.start"})
+            websocket.send_bytes(b"\x01\x00")
+            websocket.send_json({"type": "audio.end"})
+            messages = _finish_messages(websocket)
+        assert messages[-1]["type"] == "response.complete"
+        assert not any(message.get("type") == "error" for message in messages)
+        assert provider.connections == 2
+        assert first.closed is True
+        assert fresh.started_turns == 1
+        assert fresh.sent_audio == [b"\x01\x00"]
+        assert len(tts.calls) == 2
+    finally:
+        cleanup(old_settings)
+
+
+def test_live_session_that_cannot_be_reopened_still_fails_closed():
+    final = [SimpleNamespace(kind="final", text="What is a stock?")]
+    first = ExpiringLiveSession(list(final), [])
+    dead = ExpiringLiveSession(list(final), [], expired=True)
+    client, _, _, old_settings = make_client(first)
+    provider = SequenceLiveProvider([first, dead])
+    app.dependency_overrides[voice_api.get_live_stt_provider] = lambda: provider
+    try:
+        with client.websocket_connect("/api/v1/voice/live") as websocket:
+            websocket.send_json(start_message())
+            websocket.receive_json()
+            websocket.send_bytes(b"\x00\x00")
+            websocket.send_json({"type": "audio.end"})
+            _finish_messages(websocket)
+            first.expired = True
+            websocket.send_json({"type": "audio.start"})
+            error = websocket.receive_json()
+        assert error["type"] == "error"
+        assert error["code"] == "TRANSCRIPTION_FAILED"
+        assert error["fatal"] is True
+        assert provider.connections == 2
     finally:
         cleanup(old_settings)
 
@@ -503,7 +678,7 @@ def test_gemini_live_provider_uses_transcription_only_config():
     assert isinstance(session, GeminiLiveTranscriptionSession)
     assert live.model == "gemini-3.5-transcribe-live"
     assert live.config.response_modalities == ["TEXT"]
-    assert live.config.input_audio_transcription.language_codes == []
+    assert live.config.input_audio_transcription.language_codes == ["fr", "en", "ar"]
     assert live.config.input_audio_transcription.mode == "VERBATIM"
     assert live.config.output_audio_transcription is None
     assert live.config.realtime_input_config.automatic_activity_detection.disabled is True
@@ -532,7 +707,9 @@ def test_gemini_live_session_sends_canonical_pcm_and_ignores_model_text():
             yield SimpleNamespace(
                 server_content=SimpleNamespace(
                     model_turn=SimpleNamespace(parts=[SimpleNamespace(text="buy XYZ")]),
-                    interim_input_transcription=SimpleNamespace(text="C'est quoi"),
+                    interim_input_transcription=SimpleNamespace(
+                        text="C'est quoi", language_code="fr"
+                    ),
                     input_transcription=None,
                 )
             )
@@ -541,7 +718,7 @@ def test_gemini_live_session_sends_canonical_pcm_and_ignores_model_text():
                     model_turn=None,
                     interim_input_transcription=None,
                     input_transcription=SimpleNamespace(
-                        text="C'est quoi une action ?", finished=True
+                        text="C'est quoi une action ?", finished=True, language_code="fr"
                     ),
                 )
             )
@@ -568,6 +745,7 @@ def test_gemini_live_session_sends_canonical_pcm_and_ignores_model_text():
         "interim_input_transcription",
         "input_transcription",
     ]
+    assert [event.language_code for event in events] == ["fr", "fr"]
 
 
 async def _collect_events(session):
@@ -582,7 +760,7 @@ def test_input_transcription_is_final_regardless_of_finished(finished):
                 server_content=SimpleNamespace(
                     interim_input_transcription=None,
                     input_transcription=SimpleNamespace(
-                        text="authoritative", finished=finished
+                        text="authoritative", finished=finished, language_code="ar"
                     ),
                 )
             )
@@ -593,6 +771,7 @@ def test_input_transcription_is_final_regardless_of_finished(finished):
     assert [(event.kind, event.source) for event in events] == [
         ("final", "input_transcription")
     ]
+    assert events[0].language_code == "ar"
 
 
 @pytest.mark.parametrize("finished", [None, False, True])
@@ -602,7 +781,7 @@ def test_interim_transcription_is_always_partial(finished):
             yield SimpleNamespace(
                 server_content=SimpleNamespace(
                     interim_input_transcription=SimpleNamespace(
-                        text="hypothesis", finished=finished
+                        text="hypothesis", finished=finished, language_code="ar"
                     ),
                     input_transcription=None,
                 )
@@ -614,6 +793,7 @@ def test_interim_transcription_is_always_partial(finished):
     assert [(event.kind, event.source) for event in events] == [
         ("partial", "interim_input_transcription")
     ]
+    assert events[0].language_code == "ar"
 
 
 class BlockingTTS(FakeTTS):
@@ -910,12 +1090,12 @@ def test_business_pipeline_error_is_non_fatal_and_reusable(monkeypatch):
     original = voice_api.process_text_message
     failed = False
 
-    def fail_once(payload, graph):
+    def fail_once(payload, graph, **kwargs):
         nonlocal failed
         if not failed:
             failed = True
             raise RuntimeError("private business failure")
-        return original(payload, graph)
+        return original(payload, graph, **kwargs)
 
     monkeypatch.setattr(voice_api, "process_text_message", fail_once)
     client, _, tts, old_settings = make_client(session)
@@ -1237,3 +1417,70 @@ def test_live_websocket_realistic_barge_in_after_first_frame(monkeypatch):
         assert [m["type"] for m in messages].count("response.complete") == 1
     finally:
         cleanup(old_settings)
+
+
+def _run_turn_with_chunks(client, chunks):
+    with client.websocket_connect("/api/v1/voice/live") as websocket:
+        websocket.send_json(start_message())
+        assert websocket.receive_json()["type"] == "session.ready"
+        websocket.send_json({"type": "audio.start"})
+        for chunk in chunks:
+            websocket.send_bytes(chunk)
+        websocket.send_json({"type": "audio.end"})
+        types = []
+        while True:
+            message = websocket.receive()
+            if message.get("bytes") is not None:
+                continue
+            types.append(json.loads(message["text"])["type"])
+            if types[-1] in {"response.complete", "error"}:
+                return types
+
+
+def test_debug_dump_writes_exact_received_pcm_without_changing_the_turn(tmp_path):
+    import wave
+
+    chunks = [b"\x10\x00\xf0\xff" * 400, b"\x00\x40\x00\xc0" * 400]
+    session = FakeLiveSession(
+        events=[SimpleNamespace(kind="final", text="C'est quoi une action ?")], sent_audio=[]
+    )
+    client, _, tts, old_settings = make_client(session, debug_dump_dir=str(tmp_path))
+    try:
+        types = _run_turn_with_chunks(client, chunks)
+    finally:
+        cleanup(old_settings)
+    assert types[-1] == "response.complete"
+    assert session.sent_audio == chunks  # STT receives exactly the same bytes
+    assert len(tts.calls) == 1
+    dumps = list(tmp_path.glob("*_input.wav"))
+    assert len(dumps) == 1
+    with wave.open(str(dumps[0]), "rb") as wav:
+        assert (wav.getnchannels(), wav.getsampwidth(), wav.getframerate()) == (1, 2, 16000)
+        assert wav.readframes(wav.getnframes()) == b"".join(chunks)
+
+
+def test_debug_dump_disabled_by_default_writes_nothing(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    session = FakeLiveSession(
+        events=[SimpleNamespace(kind="final", text="C'est quoi une action ?")], sent_audio=[]
+    )
+    client, _, _, old_settings = make_client(session)
+    try:
+        types = _run_turn_with_chunks(client, [b"\x01\x00" * 800])
+    finally:
+        cleanup(old_settings)
+    assert types[-1] == "response.complete"
+    assert list(tmp_path.rglob("*.wav")) == []
+
+
+def test_active_socket_counter_returns_to_baseline():
+    baseline = voice_api._active_voice_sockets
+    session = FakeLiveSession(
+        events=[SimpleNamespace(kind="final", text="C'est quoi une action ?")], sent_audio=[]
+    )
+    client, _, _, old_settings = make_client(session)
+    try:
+        _run_turn_with_chunks(client, [b"\x01\x00" * 800])
+    finally:
+        cleanup(old_settings)
+    assert voice_api._active_voice_sockets == baseline

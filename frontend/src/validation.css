@@ -1,0 +1,225 @@
+/* =====================================================================
+ * Validation page — same design system as the other EduBourse pages.
+ * Scoped to .validation-page / .page-validation.
+ * ===================================================================== */
+
+.page-validation .topbar h1 { font-size: 2.2rem; line-height: 1.08; letter-spacing: -.035em; }
+.page-validation .topbar-kicker { margin-top: 4px; color: #0f2a47; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; }
+.page-validation .topbar-subtitle { margin-top: 2px; color: #4a6680; font-size: 1.05rem; }
+.page-validation .topbar-leading { flex: 1 1 auto; min-width: 0; }
+
+.validation-page { display: grid; gap: 16px; }
+.validation-page button { font: inherit; }
+.validation-page button:focus-visible, .validation-page a:focus-visible { outline: 2px solid #2f80d8; outline-offset: 2px; }
+.validation-page code { padding: 1px 5px; border-radius: 5px; color: #35506b; background: #eef3f8; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .74em; overflow-wrap: anywhere; }
+.validation-page h3 { margin: 0; }
+.validation-page .vl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* status colours */
+.validation-page .vl-icon-pass { flex: none; color: #16a06a; }
+.validation-page .vl-icon-warn { flex: none; color: #e08a0e; }
+.validation-page .vl-icon-info { flex: none; color: #8193a5; }
+.validation-page .vl-icon-fail { flex: none; color: #d23a53; }
+.validation-page .vl-badge { display: inline-flex; flex: none; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+.validation-page .vl-badge-pass { color: #148a5a; background: #dff5ea; }
+.validation-page .vl-badge-warn { color: #a4600a; background: #fdf0dc; }
+.validation-page .vl-badge-info { color: #55697d; background: #eef2f6; }
+.validation-page .vl-badge-fail { color: #b3263e; background: #fde8ec; }
+.validation-page .vl-spin { animation: vl-spin 1s linear infinite; }
+@keyframes vl-spin { to { transform: rotate(360deg); } }
+
+/* ---------- KPI cards ---------- */
+.validation-page .vl-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.validation-page .vl-card { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 90px; padding: 12px; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+.validation-page .vl-card-icon { display: grid; place-items: center; width: 46px; height: 46px; flex: none; border-radius: 13px; }
+.validation-page .vl-soft-green { color: #139a68; background: #e3f6ec; }
+.validation-page .vl-soft-purple { color: #7b56d8; background: #efe9fd; }
+.validation-page .vl-soft-blue { color: #1f6fd1; background: #e3effc; }
+.validation-page .vl-soft-orange { color: #e0862a; background: #fdeee0; }
+.validation-page .vl-card-copy { display: grid; justify-items: start; gap: 1px; min-width: 0; }
+.validation-page .vl-card-copy span { color: #1d3350; font-size: .8rem; font-weight: 600; }
+.validation-page .vl-card-copy strong { font-size: 1.08rem; font-weight: 700; line-height: 1.2; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.validation-page .vl-card-copy small { color: #6d8296; font-size: .72rem; line-height: 1.3; overflow-wrap: anywhere; }
+.validation-page .vl-value-green { color: #0d8f63; }
+.validation-page .vl-value-purple, .validation-page .vl-value-blue { color: #1f6fd1; }
+.validation-page .vl-value-orange { color: #b86b06; }
+
+/* ---------- panels ---------- */
+.validation-page .vl-panel { min-width: 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+.validation-page .vl-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 14px; }
+.validation-page .vl-head-tile { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 11px; color: #fff; background: linear-gradient(145deg, #2f8cef, #1b6fd6); }
+.validation-page .vl-tile-green { background: linear-gradient(145deg, #1bb07f, #0d8f63); }
+.validation-page .vl-tile-purple { background: linear-gradient(145deg, #9270ea, #6b46cf); }
+.validation-page .vl-tile-pink { background: linear-gradient(145deg, #f06a86, #cf2f55); }
+.validation-page .vl-head-copy { flex: 1 1 170px; min-width: 0; display: grid; gap: 3px; }
+.validation-page .vl-head-copy h2 { color: #0f2a47; font-size: 1.12rem; font-weight: 700; letter-spacing: -.01em; }
+.validation-page .vl-head-copy p { color: #6a8196; font-size: .82rem; }
+.validation-page .vl-subtitle { display: flex; align-items: center; gap: 6px; margin: 14px 0 8px !important; color: #0f2a47; font-size: .86rem; font-weight: 700; }
+.validation-page .vl-subtitle small { color: #6a8196; font-size: .74rem; font-weight: 500; }
+.validation-page .vl-subtitle-ok { margin-top: 0 !important; color: #0d8f63; }
+.validation-page .vl-subtitle-warn { margin-top: 0 !important; color: #b86b06; }
+.validation-page .vl-note { margin-top: 8px; color: #5d7388; font-size: .74rem; line-height: 1.45; }
+
+/* ---------- summary ---------- */
+.validation-page .vl-summary { display: grid; gap: 14px; border-color: #cdebdc; background: linear-gradient(120deg, #f1fbf6, #fff 55%); }
+.validation-page .vl-summary-lead { display: flex; align-items: center; gap: 14px; }
+.validation-page .vl-summary-icon { display: grid; place-items: center; width: 56px; height: 56px; flex: none; border-radius: 16px; color: #fff; background: linear-gradient(145deg, #1bb07f, #0d8f63); box-shadow: 0 6px 14px rgb(16 150 105 / 24%); }
+.validation-page .vl-summary-lead h2 { color: #0f3d2c; font-size: 1.22rem; font-weight: 700; letter-spacing: -.01em; }
+.validation-page .vl-summary-lead p { margin-top: 3px; color: #3d6a57; font-size: .84rem; }
+.validation-page .vl-summary-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-summary-item { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 2px 7px; padding: 9px 11px; border: 1px solid #d2ede0; border-radius: 11px; background: #fff; }
+.validation-page .vl-summary-item span { color: #35506b; font-size: .74rem; line-height: 1.3; }
+.validation-page .vl-summary-item strong { grid-column: 2; color: #0d8f63; font-size: .86rem; }
+.validation-page .vl-summary-warn { border-color: #f6e2c3; background: #fffaf2; }
+.validation-page .vl-summary-warn strong { color: #b86b06; }
+.validation-page .vl-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: #5d7388; font-size: .74rem; }
+.validation-page .vl-legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+/* ---------- rows ---------- */
+.validation-page .vl-row { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.validation-page .vl-row-middle { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr); }
+.validation-page .vl-row-bottom { grid-template-columns: minmax(0, 2.45fr) minmax(0, 1fr); }
+
+/* ---------- automated table ---------- */
+.validation-page .vl-table-wrap { overflow-x: auto; border: 1px solid #e3eaf2; border-radius: 11px; }
+.validation-page .vl-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .8rem; }
+.validation-page .vl-table th, .validation-page .vl-table td { padding: 8px 8px; border-bottom: 1px solid #edf2f7; text-align: left; vertical-align: middle; }
+.validation-page .vl-table thead th { color: #1d3350; background: #f4f8fc; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+.validation-page .vl-table tbody tr:last-child > * { border-bottom: 0; }
+.validation-page .vl-table tbody th { color: #0f2a47; font-weight: 600; }
+.validation-page .vl-table td { color: #35506b; }
+.validation-page .vl-evidence-cell { display: flex; flex-wrap: wrap; gap: 3px; }
+.validation-page .vl-table td.vl-evidence-cell { display: table-cell; }
+.validation-page .vl-evidence-cell code { display: inline-block; margin: 1px 3px 1px 0; font-size: .68rem; overflow-wrap: anywhere; }
+.validation-page .vl-table col.vl-col-label { width: 25%; }
+.validation-page .vl-table col.vl-col-result { width: 21%; }
+.validation-page .vl-table col.vl-col-status { width: 96px; }
+.validation-page .vl-row-total > * { background: #f3fbf7; }
+.validation-page .vl-row-total th, .validation-page .vl-row-total td:nth-child(2) { color: #0f3d2c; font-weight: 700; }
+.validation-page .vl-foot { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: .78rem; line-height: 1.45; }
+.validation-page .vl-foot svg { flex: none; margin-top: 1px; }
+.validation-page .vl-foot-ok { border: 1px solid #cdebdc; color: #2f6a52; background: #eefaf4; }
+.validation-page .vl-foot-ok strong { color: #0f3d2c; }
+
+/* ---------- runtime ---------- */
+.validation-page .vl-runtime-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-runtime-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; padding: 8px 11px; border: 1px solid #e3eaf2; border-radius: 10px; }
+.validation-page .vl-runtime-name { display: grid; gap: 1px; min-width: 0; }
+.validation-page .vl-runtime-name strong { color: #0f2a47; font-size: .84rem; }
+.validation-page .vl-runtime-name small { color: #5a7187; font-size: .72rem; overflow-wrap: anywhere; }
+.validation-page .vl-runtime-status { display: inline-flex; align-items: center; gap: 6px; align-self: start; font-size: .76rem; font-weight: 700; white-space: nowrap; }
+.validation-page .vl-runtime-status i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.validation-page .vl-runtime-ok { color: #148a5a; }
+.validation-page .vl-runtime-down { color: #c62f47; }
+.validation-page .vl-runtime-pending { color: #b86b06; }
+.validation-page .vl-runtime-unknown { color: #6a7d90; }
+.validation-page .vl-runtime-source { grid-column: 1 / -1; justify-self: start; font-size: .68rem !important; }
+.validation-page .vl-alert { display: flex; align-items: flex-start; gap: 6px; margin-top: 10px; padding: 8px 10px; border: 1px solid #f5c9d1; border-radius: 9px; color: #a32a41; background: #fff6f8; font-size: .78rem; }
+.validation-page .vl-alert svg { flex: none; margin-top: 1px; }
+.validation-page .vl-runtime-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 12px; }
+.validation-page .vl-runtime-foot small { color: #6a8196; font-size: .72rem; line-height: 1.45; }
+
+/* ---------- buttons ---------- */
+.validation-page .vl-button-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px; margin-top: 12px; padding: 0 12px; border-radius: 10px; color: #fff; background: linear-gradient(145deg, #2b8ff0, #1a73d9); font-size: .88rem; font-weight: 600; box-shadow: 0 6px 14px rgb(31 134 232 / 22%); cursor: pointer; }
+.validation-page .vl-button-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 42px; padding: 0 14px; border: 1px solid #c9dcf1; border-radius: 10px; color: #1f5fa8; background: #fff; font-size: .86rem; font-weight: 600; cursor: pointer; }
+.validation-page .vl-button-ghost:hover:not(:disabled) { background: #f3f7fb; }
+.validation-page .vl-button-ghost:disabled { cursor: progress; opacity: .6; }
+.validation-page .vl-button-small { justify-content: space-between; min-height: 36px; padding: 0 10px; font-size: .78rem; }
+.validation-page .vl-button-small svg:last-child { margin-left: auto; }
+.validation-page .vl-nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 175px), 1fr)); gap: 6px; margin-top: 8px; }
+
+/* ---------- lists ---------- */
+.validation-page .vl-check-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-check-list li { display: flex; align-items: flex-start; gap: 8px; color: #1d3350; font-size: .84rem; line-height: 1.4; }
+.validation-page .vl-check-list svg { margin-top: 1px; }
+.validation-page .vl-check-compact { gap: 5px; }
+.validation-page .vl-check-compact li { color: #35506b; font-size: .78rem; }
+.validation-page .vl-security-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-security-list li { display: grid; gap: 2px; padding: 7px 9px; border-radius: 9px; background: #f6f9fc; font-size: .76rem; }
+.validation-page .vl-security-list q { color: #0f2a47; font-weight: 600; }
+.validation-page .vl-security-list span { color: #4a6178; }
+
+/* ---------- manual examples ---------- */
+.validation-page .vl-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 185px), 1fr)); gap: 7px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-example { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 1px 8px; width: 100%; height: 100%; padding: 8px 10px; border: 1px solid; border-radius: 10px; text-align: left; cursor: pointer; }
+.validation-page .vl-example span { color: #0f2a47; font-size: .8rem; font-weight: 600; overflow-wrap: anywhere; }
+.validation-page .vl-example small { grid-column: 2; color: #5d7388; font-size: .7rem; }
+.validation-page .vl-example-safe { border-color: #d2ede0; color: #16a06a; background: #f1fbf6; }
+.validation-page .vl-example-blocked { border-color: #f8d3dd; color: #d8436a; background: #fff5f7; }
+.validation-page .vl-example-ood { border-color: #f6e2c3; color: #d27f0c; background: #fffaf2; }
+.validation-page .vl-example:hover { filter: brightness(.98); }
+
+/* ---------- points ---------- */
+.validation-page .vl-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+/* ---------- voice ---------- */
+.validation-page .vl-voice-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-voice-list li { display: flex; align-items: flex-start; gap: 9px; padding: 6px 9px; border-radius: 9px; background: #f6f9fc; }
+.validation-page .vl-voice-list li svg { margin-top: 2px; }
+.validation-page .vl-voice-list div { display: grid; gap: 1px; min-width: 0; }
+.validation-page .vl-voice-list strong { color: #0f2a47; font-size: .8rem; }
+.validation-page .vl-voice-list small { color: #5d7388; font-size: .71rem; overflow-wrap: anywhere; }
+.validation-page .vl-voice-list .vl-voice-warn { border: 1px solid #f6e2c3; background: #fffaf2; }
+
+/* ---------- evidence ---------- */
+.validation-page .vl-evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.validation-page .vl-evidence-grid article { min-width: 0; padding: 12px; border: 1px solid #e3eaf2; border-radius: 12px; background: #fbfdff; }
+.validation-page .vl-evidence-grid h3 { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; color: #0f2a47; font-size: .88rem; font-weight: 700; }
+.validation-page .vl-evidence-grid h3 svg { color: #1f6fd1; }
+.validation-page .vl-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; }
+.validation-page .vl-facts > div { display: grid; gap: 2px; min-width: 0; padding: 6px 8px; border-radius: 8px; background: #f1f6fb; }
+.validation-page .vl-facts .vl-facts-wide { grid-column: 1 / -1; }
+.validation-page .vl-facts dt { color: #6a8196; font-size: .6rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.validation-page .vl-facts dd { margin: 0; color: #0f2a47; font-size: .82rem; font-weight: 600; overflow-wrap: anywhere; }
+.validation-page .vl-lang-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.validation-page .vl-lang-list li { display: flex; align-items: center; gap: 7px; color: #1d3350; font-size: .8rem; }
+.validation-page .vl-lang-list code { margin-left: auto; }
+.validation-page .vl-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.validation-page .vl-tags code { color: #5b3fb0; background: #efe9fd; }
+.validation-page .vl-tags-muted span { padding: 3px 9px; border: 1px solid #e3eaf2; border-radius: 999px; color: #4a6178; background: #f6f9fc; font-size: .74rem; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1400px) {
+  .validation-page .vl-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .validation-page .vl-summary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 1440px) {
+  .validation-page .vl-row, .validation-page .vl-row-middle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .validation-page .vl-row > :first-child { grid-column: 1 / -1; }
+  .validation-page .vl-row-bottom { grid-template-columns: minmax(0, 1fr); }
+  .validation-page .vl-row-bottom > :first-child { grid-column: auto; }
+}
+@media (max-width: 1100px) {
+  .validation-page .vl-row, .validation-page .vl-row-middle { grid-template-columns: minmax(0, 1fr); }
+  .validation-page .vl-evidence-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .page-validation .topbar h1 { font-size: 1.9rem; }
+  .page-validation .topbar-kicker { font-size: 1.25rem; }
+}
+@media (max-width: 900px) {
+  .validation-page .vl-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .validation-page .vl-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .validation-page .vl-cards, .validation-page .vl-summary-grid, .validation-page .vl-points,
+  .validation-page .vl-evidence-grid, .validation-page .vl-examples, .validation-page .vl-nav-grid { grid-template-columns: minmax(0, 1fr); }
+  .validation-page .vl-summary-lead { align-items: flex-start; }
+  .page-validation .topbar h1 { font-size: 1.6rem; }
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .validation-page .vl-points { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+}
+
+/* The automated table becomes stacked cards whenever its card is narrow. */
+.validation-page .vl-automated { container: vl-auto / inline-size; }
+@container vl-auto (max-width: 600px) {
+  .validation-page .vl-table-wrap { border: 0; overflow: visible; }
+  .validation-page .vl-table thead, .validation-page .vl-table colgroup { display: none; }
+  .validation-page .vl-table, .validation-page .vl-table tbody, .validation-page .vl-table tr, .validation-page .vl-table th, .validation-page .vl-table td { display: block; width: 100%; }
+  .validation-page .vl-table tr { margin-bottom: 8px; padding: 8px 10px; border: 1px solid #e3eaf2; border-radius: 10px; }
+  .validation-page .vl-table th, .validation-page .vl-table td { padding: 3px 0; border: 0; }
+  .validation-page .vl-table td.vl-evidence-cell { display: flex; flex-wrap: wrap; align-items: baseline; }
+  .validation-page .vl-table td::before { content: attr(data-label) " : "; margin-right: 4px; color: #6a8196; font-size: .7rem; font-weight: 700; }
+  .validation-page .vl-row-total > * { background: transparent; }
+  .validation-page .vl-row-total { background: #f3fbf7; }
+}
+@media (prefers-reduced-motion: reduce) { .validation-page .vl-spin { animation: none; } }

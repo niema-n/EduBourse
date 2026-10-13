@@ -23,6 +23,8 @@ def normalize_business_language(
     result = mapping.get(language)
     if result is None:
         raise ValueError(f"Unsupported J2 language label: {language}")
+    if script == "mixed":
+        return result
     if script is not None and script != result[1]:
         raise ValueError(f"Invalid script {script!r} for language {language!r}")
     return result

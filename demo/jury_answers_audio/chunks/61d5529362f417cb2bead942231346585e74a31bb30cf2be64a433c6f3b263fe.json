@@ -1,0 +1,9 @@
+{
+  "exact_tts_input": "- **Capital Increase:** New shares are created, enabling the company to raise new capital from the market and obtain an additional source of financing for its development.\n- **Sale of Existing Shares:** Original shareholders sell part of their existing shares to new investors. The company does not receive new liquidity; instead, the original shareholders reduce their participation in the company’s capital.\n- **Mixed Operation:** A combination of a capital increase and the sale of existing shares.\n\nCompanies primarily choose to go public to diversify their financing options and raise funds for development.",
+  "request_segments": [
+    "- **Capital Increase:** New shares are created, enabling the company to raise new capital from the market and obtain an additional source of financing for its development.\n- **Sale of Existing Shares:** Original shareholders sell part of their existing shares to new investors. The company does not receive new liquidity; instead, the original shareholders reduce their participation in the company’s capital.\n- **Mixed Operation:** A combination of a capital increase and the sale of existing shares.\n\nCompanies primarily choose to go public to diversify their financing options and raise funds for development."
+  ],
+  "sample_rate_hz": 24000,
+  "tts_model": "gemini-2.5-flash-preview-tts",
+  "tts_voice": "Kore"
+}

@@ -10,6 +10,7 @@ secrets/
 *.key
 
 __pycache__/
+*.pyc
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
@@ -17,6 +18,7 @@ __pycache__/
 *.egg-info/
 venv/
 .venv/
+venv*/
 
 node_modules/
 dist/
@@ -30,8 +32,32 @@ htmlcov/
 *.log
 logs/
 data/
+!backend/data/
+!backend/data/rag/
+backend/data/rag/*
+backend/data/rag/raw/**
+backend/data/rag/processed/**
+backend/data/rag/indexes/**
+backend/data/rag/indexes/
+backend/data/models/
+!backend/data/rag/manifests/
+backend/data/rag/manifests/*
+!backend/data/rag/manifests/*.json
+backend/data/memory/**
 results/
+tmp_tts_listen/
 .langgraph_api/
+
+# Downloaded model weights, local vector databases and editor backups.
+.cache/huggingface/
+*.safetensors
+*.onnx
+*.pt
+*.pth
+*.sqlite
+*.sqlite3
+*.bak
+*.nouveau-dashboard
 
 .DS_Store
 Thumbs.db

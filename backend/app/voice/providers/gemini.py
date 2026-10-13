@@ -5,6 +5,7 @@ import os
 import tempfile
 import time
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -25,6 +26,87 @@ MIME_SUFFIXES = {
     "audio/wav": ".wav",
     "audio/webm": ".webm",
 }
+
+
+@dataclass(frozen=True)
+class TTSSpeechProfile:
+    speech_language: str
+    instruction: str
+
+
+TTS_SPEECH_PROFILES: dict[tuple[str, str], TTSSpeechProfile] = {
+    ("fr", "latin"): TTSSpeechProfile(
+        speech_language="French",
+        instruction=(
+            "Speak naturally in clear contemporary French. Use a warm, professional "
+            "educational tone and a moderate conversational pace. Use natural French "
+            "pronunciation and prosody. Read the supplied transcript faithfully. Do not "
+            "translate, summarize, paraphrase, add, or remove any content."
+        ),
+    ),
+    ("en", "latin"): TTSSpeechProfile(
+        speech_language="English",
+        instruction=(
+            "Speak naturally in clear fluent English with a neutral, internationally "
+            "understandable accent. Use a warm professional educational tone and a "
+            "moderate conversational pace. Read the supplied transcript faithfully. Do "
+            "not translate, summarize, paraphrase, add, or remove any content."
+        ),
+    ),
+    ("ar", "arabic"): TTSSpeechProfile(
+        speech_language="Arabic",
+        instruction=(
+            "Speak in natural, clear Modern Standard Arabic (MSA / العربية الفصحى). "
+            "Use professional educational pronunciation and a calm conversational pace. "
+            "Do not switch to Moroccan Darija or another regional Arabic dialect. Read "
+            "the transcript faithfully without translating or rewriting it."
+        ),
+    ),
+    ("ary", "arabic"): TTSSpeechProfile(
+        speech_language="Arabic",
+        instruction=(
+            "Speak this transcript in authentic contemporary Moroccan Darija as naturally "
+            "spoken in Morocco. Use a clearly Moroccan accent and Moroccan rhythm, "
+            "pronunciation and intonation. Do not pronounce it as Modern Standard Arabic. "
+            "Do not use an Egyptian, Levantine or Gulf accent. The delivery should sound "
+            "like a friendly Moroccan financial-education assistant speaking naturally to "
+            "another Moroccan person. Keep technical financial terminology intelligible, "
+            "but preserve Moroccan Darija prosody around it. Read the supplied transcript "
+            "faithfully. Do not translate it. Do not paraphrase it. Do not add or remove "
+            "information."
+        ),
+    ),
+    ("ary", "latin"): TTSSpeechProfile(
+        speech_language="Arabic",
+        instruction=(
+            "Speak this transcript as authentic contemporary Moroccan Darija. The transcript "
+            "is Moroccan Darija written in Latin/Arabizi script. Interpret it as spoken "
+            "Moroccan Darija. Digits such as 3, 7 and 9 are Arabizi phonetic symbols where "
+            "applicable. Do not read them as literal numbers or spell the Latin characters. "
+            "Use a clearly Moroccan accent, rhythm, pronunciation and intonation. Do not "
+            "pronounce it as Modern Standard Arabic or another regional Arabic dialect. "
+            "Read the supplied transcript faithfully. Do not translate, paraphrase, add, "
+            "or remove any information."
+        ),
+    ),
+}
+
+
+def _get_tts_profile(language: str, script: str) -> TTSSpeechProfile:
+    try:
+        return TTS_SPEECH_PROFILES[(language, script)]
+    except KeyError as exc:
+        raise TTSFailed(f"Unsupported TTS language/script: {language}/{script}") from exc
+
+
+def _tts_input(profile: TTSSpeechProfile, text: str) -> str:
+    """Speaking profile as director's notes, followed by the exact transcript.
+
+    Gemini TTS models reject ``system_instruction`` ("Developer instruction is not
+    enabled for this model"), so the style guidance travels in the input using the
+    documented notes/transcript structure. Only the transcript is spoken.
+    """
+    return f"### DIRECTOR'S NOTES\n{profile.instruction}\n\n#### TRANSCRIPT\n{text}"
 
 
 class GeminiVoiceProvider:
@@ -146,11 +228,11 @@ class GeminiVoiceProvider:
             logger.warning("gemini_stt_remote_cleanup_failed")
 
     def synthesize(self, text: str, *, language: str, script: str) -> SpeechSynthesisResult:
-        del language, script
         if not isinstance(text, str) or not text.strip():
             raise TTSFailed("TTS input is empty")
         if not self.tts_model.strip() or not self.tts_voice.strip():
             raise VoiceProviderUnavailable("Gemini TTS configuration is incomplete")
+        profile = _get_tts_profile(language, script)
 
         started = time.perf_counter()
         try:
@@ -161,9 +243,13 @@ class GeminiVoiceProvider:
                 raise VoiceProviderUnavailable("Gemini Interactions API is unavailable")
             response = create(
                 model=self.tts_model,
-                input=text,
+                input=_tts_input(profile, text),
                 response_format={"type": "audio"},
-                generation_config={"speech_config": [{"voice": self.tts_voice}]},
+                generation_config={
+                    "speech_config": [
+                        {"language": profile.speech_language, "voice": self.tts_voice}
+                    ]
+                },
                 stream=True,
             )
             audio, mime_type, sample_rate, channels = _extract_audio_stream(response)

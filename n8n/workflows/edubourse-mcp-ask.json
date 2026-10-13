@@ -1,0 +1,135 @@
+{
+  "name": "EduBourse - MCP Ask",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "edubourse-mcp-ask",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a9030001-0001-4000-8000-000000000001",
+      "webhookId": "edubourse-mcp-ask",
+      "name": "MCP Ask Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json;\nconst message = body.message;\nconst threadId = body.thread_id;\nconst validMessage = typeof message === 'string' && message.trim().length >= 1 && message.length <= 4000;\nconst validThread = typeof threadId === 'string' && threadId.trim().length >= 1 && threadId.length <= 200 && !/[\\u0000\\r\\n]/.test(threadId);\nif (!validMessage || !validThread) {\n  return [{ json: { status: 'error', error: 'invalid_request' } }];\n}\nreturn [{ json: { message, thread_id: threadId } }];"
+      },
+      "id": "a9030001-0001-4000-8000-000000000002",
+      "name": "Validate MCP Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            { "id": "valid", "leftValue": "={{ $json.status }}", "rightValue": "error", "operator": { "type": "string", "operation": "notEquals" } }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a9030001-0001-4000-8000-000000000003",
+      "name": "Input Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://mcp:8000/mcp",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Accept", "value": "application/json, text/event-stream" }, { "name": "Host", "value": "localhost:8011" }, { "name": "Connection", "value": "close" }] },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'edubourse-n8n', version: '1.0' } } } }}",
+        "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } }, "timeout": 10000 },
+        "onError": "continueRegularOutput"
+      },
+      "credentials": { "httpHeaderAuth": { "id": "19ebdd04-8fea-4922-95f1-f5a698c512c8", "name": "EduBourse MCP Bearer" } },
+      "id": "a9030001-0001-4000-8000-000000000004",
+      "name": "MCP Initialize",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, -80]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://mcp:8000/mcp",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Accept", "value": "application/json, text/event-stream" }, { "name": "Host", "value": "localhost:8011" }, { "name": "Connection", "value": "close" }] },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'ask_edubourse', arguments: { message: $node['Validate MCP Input'].json.message, thread_id: $node['Validate MCP Input'].json.thread_id } } } }}",
+        "options": { "response": { "response": { "neverError": true, "responseFormat": "json" } }, "timeout": 330000 },
+        "onError": "continueRegularOutput"
+      },
+      "credentials": { "httpHeaderAuth": { "id": "19ebdd04-8fea-4922-95f1-f5a698c512c8", "name": "EduBourse MCP Bearer" } },
+      "id": "a9030001-0001-4000-8000-000000000005",
+      "name": "Call MCP ask_edubourse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [960, -80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rpc = $json;\nif (rpc.error || !rpc.result) {\n  return [{ json: { status: 'error', error: 'mcp_unavailable' } }];\n}\nconst structured = rpc.result.structuredContent;\nlet payload = structured;\nif (!payload && Array.isArray(rpc.result.content)) {\n  const text = rpc.result.content.find((item) => item.type === 'text')?.text;\n  try { payload = text ? JSON.parse(text) : null; } catch { payload = null; }\n}\nif (!payload || typeof payload !== 'object') {\n  return [{ json: { status: 'error', error: 'invalid_backend_response' } }];\n}\nconst fields = ['status', 'answer', 'language', 'script', 'route', 'blocked', 'thread_id', 'grounded', 'citations'];\nconst result = Object.fromEntries(fields.filter((field) => field in payload).map((field) => [field, payload[field]]));\nif (typeof result.status !== 'string' || typeof result.answer !== 'string') {\n  return [{ json: { status: 'error', error: 'invalid_backend_response' } }];\n}\nreturn [{ json: result }];"
+      },
+      "id": "a9030001-0001-4000-8000-000000000006",
+      "name": "Bound MCP Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, -80]
+    },
+    {
+      "parameters": {
+        "assignments": { "assignments": [{ "id": "error", "name": "error", "type": "string", "value": "={{ $json.error || 'invalid_request' }}" }] },
+        "options": {}
+      },
+      "id": "a9030001-0001-4000-8000-000000000007",
+      "name": "Bound Input Error",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [720, 160]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": { "responseCode": "={{ $json.status === 'ok' ? 200 : 400 }}" }
+      },
+      "id": "a9030001-0001-4000-8000-000000000008",
+      "name": "Respond MCP Ask",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1440, 0]
+    }
+  ],
+  "connections": {
+    "MCP Ask Webhook": { "main": [[{ "node": "Validate MCP Input", "type": "main", "index": 0 }]] },
+    "Validate MCP Input": { "main": [[{ "node": "Input Valid?", "type": "main", "index": 0 }]] },
+    "Input Valid?": { "main": [[{ "node": "MCP Initialize", "type": "main", "index": 0 }], [{ "node": "Bound Input Error", "type": "main", "index": 0 }]] },
+    "MCP Initialize": { "main": [[{ "node": "Call MCP ask_edubourse", "type": "main", "index": 0 }]] },
+    "Call MCP ask_edubourse": { "main": [[{ "node": "Bound MCP Result", "type": "main", "index": 0 }]] },
+    "Bound MCP Result": { "main": [[{ "node": "Respond MCP Ask", "type": "main", "index": 0 }]] },
+    "Bound Input Error": { "main": [[{ "node": "Respond MCP Ask", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "pinData": {},
+  "tags": []
+}

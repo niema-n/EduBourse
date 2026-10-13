@@ -1,0 +1,20 @@
+{
+  "status": "blocked",
+  "stopped": true,
+  "requests_sent": 1,
+  "failed_file": "darija_response_demo.wav",
+  "error": {
+    "code": "APIConnectionError"
+  },
+  "retry_performed": false,
+  "provider_changed": false,
+  "production_configuration_changed": false,
+  "language_order": [
+    "darija",
+    "fr",
+    "en",
+    "ar"
+  ],
+  "source": "validated TXT files only",
+  "answers_regenerated": false
+}

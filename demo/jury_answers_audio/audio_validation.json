@@ -1,0 +1,37 @@
+{
+  "fr": {
+    "full_audio_available": true,
+    "files": [
+      {
+        "kind": "full",
+        "filename": "fr_response.wav",
+        "valid_wav": true,
+        "duration_seconds": 104.687,
+        "exact_source_text_verified": true
+      },
+      {
+        "kind": "demo_excerpt",
+        "filename": "fr_response_demo.wav",
+        "valid_wav": true,
+        "duration_seconds": 24.554,
+        "exact_source_text_verified": true
+      }
+    ],
+    "blocked_reason": null
+  },
+  "en": {
+    "full_audio_available": false,
+    "files": [],
+    "blocked_reason": "Gemini TTS rate_limit_exceeded; see tts_service_status.json"
+  },
+  "ar": {
+    "full_audio_available": false,
+    "files": [],
+    "blocked_reason": "Gemini TTS rate_limit_exceeded; see tts_service_status.json"
+  },
+  "darija": {
+    "full_audio_available": false,
+    "files": [],
+    "blocked_reason": "Gemini TTS rate_limit_exceeded; see tts_service_status.json"
+  }
+}

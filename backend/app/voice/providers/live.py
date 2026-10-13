@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 from collections.abc import AsyncIterator, Callable
 from dataclasses import dataclass
 from typing import Any, Protocol
@@ -15,6 +16,7 @@ class LiveTranscriptEvent:
     # Which Gemini field produced this event. Only "input_transcription" is
     # authoritative; "interim_input_transcription" carries cumulative hypotheses.
     source: str = ""
+    language_code: str | None = None
 
 
 class LiveTranscriptionSession(Protocol):
@@ -78,7 +80,7 @@ class GeminiLiveSTTProvider:
             config = types.LiveConnectConfig(
                 response_modalities=["TEXT"],
                 input_audio_transcription=types.AudioTranscriptionConfig(
-                    language_codes=[], mode="VERBATIM"
+                    language_codes=["fr", "en", "ar"], mode="VERBATIM"
                 ),
                 realtime_input_config=types.RealtimeInputConfig(
                     automatic_activity_detection=types.AutomaticActivityDetection(
@@ -127,26 +129,49 @@ class GeminiLiveTranscriptionSession:
             raise TranscriptionFailed("Gemini Live turn completion failed") from exc
 
     async def receive_events(self) -> AsyncIterator[LiveTranscriptEvent]:
+        log = logging.getLogger(__name__)
         try:
             async for message in self._session.receive():
+                # Diagnostic only: the kinds of payload present, never their text.
+                log.info("gemini_live_event types=%s", ",".join(_event_types(message)) or "none")
                 content = getattr(message, "server_content", None)
                 if content is None:
                     continue
                 interim = getattr(content, "interim_input_transcription", None)
                 if interim is not None and getattr(interim, "text", None):
+                    language_code = getattr(interim, "language_code", None)
+                    logging.getLogger(__name__).debug(
+                        "gemini_live_transcription source=%s kind=%s "
+                        "language_code=%s text_length=%d",
+                        "interim_input_transcription",
+                        "partial",
+                        language_code,
+                        len(interim.text),
+                    )
                     yield LiveTranscriptEvent(
-                        "partial", interim.text, "interim_input_transcription"
+                        "partial", interim.text, "interim_input_transcription", language_code
                     )
                 transcription = getattr(content, "input_transcription", None)
                 if transcription is not None and getattr(transcription, "text", None):
-                    yield LiveTranscriptEvent(
-                        "final", transcription.text, "input_transcription"
+                    language_code = getattr(transcription, "language_code", None)
+                    logging.getLogger(__name__).debug(
+                        "gemini_live_transcription source=%s kind=%s "
+                        "language_code=%s text_length=%d",
+                        "input_transcription",
+                        "final",
+                        language_code,
+                        len(transcription.text),
                     )
+                    yield LiveTranscriptEvent(
+                        "final", transcription.text, "input_transcription", language_code
+                    )
+            log.info("gemini_live_stream_ended")
         except (TranscriptionFailed, VoiceProviderUnavailable):
             raise
         except asyncio.CancelledError:
             raise
         except Exception as exc:
+            log.warning("gemini_live_receive_error error_class=%s", type(exc).__name__)
             raise TranscriptionFailed("Gemini Live receive failed") from exc
 
     async def close(self) -> None:
@@ -154,6 +179,39 @@ class GeminiLiveTranscriptionSession:
             await self._context.__aexit__(None, None, None)
         except Exception:
             pass
+
+
+_TOP_LEVEL_EVENT_FIELDS = (
+    "setup_complete",
+    "go_away",
+    "session_resumption_update",
+    "tool_call",
+    "tool_call_cancellation",
+    "usage_metadata",
+    "voice_activity_detection_signal",
+)
+_SERVER_CONTENT_FIELDS = (
+    "interim_input_transcription",
+    "input_transcription",
+    "output_transcription",
+    "model_turn",
+    "generation_complete",
+    "turn_complete",
+    "interrupted",
+    "waiting_for_input",
+)
+
+
+def _event_types(message: Any) -> list[str]:
+    """Names of the populated fields of a Live message; values are never read out."""
+    types = [name for name in _TOP_LEVEL_EVENT_FIELDS if getattr(message, name, None)]
+    content = getattr(message, "server_content", None)
+    if content is not None:
+        populated = [name for name in _SERVER_CONTENT_FIELDS if getattr(content, name, None)]
+        types.extend(f"server_content.{name}" for name in populated)
+        if not populated:
+            types.append("server_content.empty")
+    return types
 
 
 async def receive_final_event(

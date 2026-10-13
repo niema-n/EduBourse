@@ -1,0 +1,20 @@
+{
+  "answers_unchanged": true,
+  "production_code_changed": false,
+  "production_files_checked": 250,
+  "files": {
+    "darija_response_demo.wav": {
+      "valid_wav": true,
+      "nonzero_audio": true,
+      "windows_decoder_load_passed": true,
+      "complete_pcm_data": true,
+      "beginning_silence_seconds": 0.4,
+      "ending_silence_seconds": 0.7,
+      "duration_seconds": 24.282,
+      "exact_source_text_sent_to_tts": true,
+      "language_profile": "ary",
+      "independent_spoken_content_review": "not performed",
+      "powershell_player_playback_passed": true
+    }
+  }
+}

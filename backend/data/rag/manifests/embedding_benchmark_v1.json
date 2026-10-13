@@ -1,0 +1,270 @@
+{
+  "candidate_models": [
+    {
+      "distance_metric": "cosine",
+      "embedding_dimension": 1024,
+      "expected_dimension": 1024,
+      "load_status": "completed",
+      "model_name": "BAAI/bge-m3",
+      "normalize_embeddings": true,
+      "passage_format": "title_heading_text",
+      "passage_mode": "title_heading_text",
+      "query_format": "original",
+      "query_instruction": null,
+      "query_mode": "original",
+      "resolved_revision": "5617a9f61b028005a4858fdac845db406aefb181"
+    },
+    {
+      "distance_metric": "cosine",
+      "embedding_dimension": 768,
+      "expected_dimension": 768,
+      "load_status": "completed",
+      "model_name": "intfloat/multilingual-e5-base",
+      "normalize_embeddings": true,
+      "passage_format": "passage: {text}",
+      "passage_mode": "title_heading_text",
+      "query_format": "query: {text}",
+      "query_instruction": null,
+      "query_mode": "original",
+      "resolved_revision": "d128750597153bb5987e10b1c3493a34e5a4502a"
+    },
+    {
+      "distance_metric": "cosine",
+      "embedding_dimension": 1024,
+      "expected_dimension": 1024,
+      "load_status": "completed",
+      "model_name": "intfloat/multilingual-e5-large-instruct",
+      "normalize_embeddings": true,
+      "passage_format": "title_heading_text",
+      "passage_mode": "title_heading_text",
+      "query_format": "Instruct: {instruction}\nQuery: {text}",
+      "query_instruction": "Given a user question about the Moroccan capital market and financial education, retrieve the most relevant passage from the official French financial-education corpus.",
+      "query_mode": "instruct",
+      "resolved_revision": "274baa43b0e13e37fafa6428dbc7938e62e5c439"
+    }
+  ],
+  "canonical_chunk_count": 400,
+  "chunks_sha256": "62d76b117a2273ba3fd2ddbc2cf32a5fdb72ced468e1cf6b2097a2322a4346e1",
+  "duplicate_groups": [
+    {
+      "char_count": 160,
+      "chunk_ids": [
+        "ammc-comprendre-les-offres-publics-p025-c031-44b8b008",
+        "ammc-les-opcvm-p029-c032-44b8b008"
+      ],
+      "reason": "exact repeated edge/boilerplate content across sources",
+      "retrieval_role": "shared_redundant",
+      "source_ids": [
+        "ammc-comprendre-les-offres-publics",
+        "ammc-les-opcvm"
+      ],
+      "text_sha256": "df6e73b9593d7834ceadf8604f90c7da74ad6a86ad28a03682d6ebb6405b3672"
+    },
+    {
+      "char_count": 152,
+      "chunk_ids": [
+        "ammc-comprendre-le-financement-collaboratif-p030-c037-70c8fa9f",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques-p022-c037-70c8fa9f",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p030-c036-70c8fa9f",
+        "ammc-comprendre-les-offres-publics-p024-c030-70c8fa9f",
+        "ammc-comprendre-les-operations-sur-titres-p028-c036-70c8fa9f",
+        "ammc-les-assemblees-generales-ordinaires-p030-c038-70c8fa9f",
+        "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre-p030-c036-70c8fa9f",
+        "ammc-les-opcvm-p028-c031-70c8fa9f",
+        "ammc-pea-p021-c021-70c8fa9f"
+      ],
+      "reason": "exact repeated edge/boilerplate content across sources",
+      "retrieval_role": "shared_redundant",
+      "source_ids": [
+        "ammc-comprendre-le-financement-collaboratif",
+        "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-offres-publics",
+        "ammc-comprendre-les-operations-sur-titres",
+        "ammc-les-assemblees-generales-ordinaires",
+        "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+        "ammc-les-opcvm",
+        "ammc-pea"
+      ],
+      "text_sha256": "d7efe75bd79f93ec85f41d68b3977224d499a0d4d8cc2291c9190b4276ef1bc7"
+    },
+    {
+      "char_count": 109,
+      "chunk_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes-p001-c000-e9b85e1a",
+        "ammc-comprendre-les-operations-sur-titres-p001-c000-e9b85e1a"
+      ],
+      "reason": "exact repeated edge/boilerplate content across sources",
+      "retrieval_role": "shared_redundant",
+      "source_ids": [
+        "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+        "ammc-comprendre-les-operations-sur-titres"
+      ],
+      "text_sha256": "fd92fb6c274858311cb6b6e7421c7acafc73305eb84343284b44b73a8cdf11c7"
+    }
+  ],
+  "gold_dataset_sha256": "68da7ebcd739dc42e874bf0052b7a2a6c33a2013ba1cd91979ccea7b6d0355b5",
+  "gold_language_counts": {
+    "ar": 8,
+    "ary-arabic": 8,
+    "ary-latin": 8,
+    "en": 8,
+    "fr": 8
+  },
+  "gold_query_count": 40,
+  "model_errors": {},
+  "page_chunk_metric_status": "not_evaluated",
+  "results": {
+    "BAAI/bge-m3::ALL_CANONICAL": {
+      "document_embedding_ms": 426622.457,
+      "documents_indexed": 400,
+      "embedding_dimension": 1024,
+      "macro_source_recall5": 0.8,
+      "model_load_ms": 12037.089,
+      "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "mrr10": 0.7285714285714285,
+      "page_chunk_metric_status": "not_evaluated",
+      "per_language_recall5": {
+        "ar": 0.75,
+        "ary-arabic": 0.875,
+        "ary-latin": 0.625,
+        "en": 0.75,
+        "fr": 1.0
+      },
+      "query_encoding_median_ms": 180.281,
+      "query_encoding_p95_ms": 261.234,
+      "source_recall1": 0.675,
+      "source_recall3": 0.75,
+      "source_recall5": 0.8,
+      "worst_language_recall5": 0.625
+    },
+    "BAAI/bge-m3::CONTENT_FILTERED": {
+      "document_embedding_ms": 401186.53,
+      "documents_indexed": 353,
+      "embedding_dimension": 1024,
+      "macro_source_recall5": 0.8,
+      "model_load_ms": 12037.089,
+      "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "mrr10": 0.7369047619047618,
+      "page_chunk_metric_status": "not_evaluated",
+      "per_language_recall5": {
+        "ar": 0.75,
+        "ary-arabic": 0.875,
+        "ary-latin": 0.625,
+        "en": 0.75,
+        "fr": 1.0
+      },
+      "query_encoding_median_ms": 172.448,
+      "query_encoding_p95_ms": 210.74,
+      "source_recall1": 0.675,
+      "source_recall3": 0.8,
+      "source_recall5": 0.8,
+      "worst_language_recall5": 0.625
+    },
+    "intfloat/multilingual-e5-base::ALL_CANONICAL": {
+      "document_embedding_ms": 121095.83,
+      "documents_indexed": 400,
+      "embedding_dimension": 768,
+      "macro_source_recall5": 0.7,
+      "model_load_ms": 11715.385,
+      "model_revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+      "mrr10": 0.6034027777777777,
+      "page_chunk_metric_status": "not_evaluated",
+      "per_language_recall5": {
+        "ar": 0.75,
+        "ary-arabic": 0.75,
+        "ary-latin": 0.25,
+        "en": 0.75,
+        "fr": 1.0
+      },
+      "query_encoding_median_ms": 51.497,
+      "query_encoding_p95_ms": 67.667,
+      "source_recall1": 0.525,
+      "source_recall3": 0.65,
+      "source_recall5": 0.7,
+      "worst_language_recall5": 0.25
+    },
+    "intfloat/multilingual-e5-base::CONTENT_FILTERED": {
+      "document_embedding_ms": 114295.715,
+      "documents_indexed": 353,
+      "embedding_dimension": 768,
+      "macro_source_recall5": 0.75,
+      "model_load_ms": 11715.385,
+      "model_revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+      "mrr10": 0.6395833333333333,
+      "page_chunk_metric_status": "not_evaluated",
+      "per_language_recall5": {
+        "ar": 0.75,
+        "ary-arabic": 0.75,
+        "ary-latin": 0.5,
+        "en": 0.75,
+        "fr": 1.0
+      },
+      "query_encoding_median_ms": 53.493,
+      "query_encoding_p95_ms": 68.432,
+      "source_recall1": 0.55,
+      "source_recall3": 0.725,
+      "source_recall5": 0.75,
+      "worst_language_recall5": 0.5
+    },
+    "intfloat/multilingual-e5-large-instruct::ALL_CANONICAL": {
+      "batch_size": 8,
+      "device": "cpu",
+      "document_embedding_ms": 676979.22,
+      "documents_indexed": 400,
+      "embedding_dimension": 1024,
+      "macro_source_recall5": 0.725,
+      "model_load_ms": 85001.783,
+      "model_revision": "274baa43b0e13e37fafa6428dbc7938e62e5c439",
+      "mrr10": 0.6359325396825397,
+      "page_chunk_metric_status": "not_evaluated",
+      "per_language_recall5": {
+        "ar": 0.75,
+        "ary-arabic": 0.75,
+        "ary-latin": 0.25,
+        "en": 0.875,
+        "fr": 1.0
+      },
+      "query_encoding_ms": 14429.033,
+      "source_recall1": 0.55,
+      "source_recall3": 0.7,
+      "source_recall5": 0.725,
+      "worst_language_recall5": 0.25
+    },
+    "intfloat/multilingual-e5-large-instruct::CONTENT_FILTERED": {
+      "batch_size": 8,
+      "device": "cpu",
+      "document_embedding_ms": 676979.22,
+      "documents_indexed": 353,
+      "embedding_dimension": 1024,
+      "macro_source_recall5": 0.725,
+      "model_load_ms": 85001.783,
+      "model_revision": "274baa43b0e13e37fafa6428dbc7938e62e5c439",
+      "mrr10": 0.636279761904762,
+      "page_chunk_metric_status": "not_evaluated",
+      "per_language_recall5": {
+        "ar": 0.75,
+        "ary-arabic": 0.75,
+        "ary-latin": 0.25,
+        "en": 0.875,
+        "fr": 1.0
+      },
+      "query_encoding_ms": 14429.033,
+      "source_recall1": 0.55,
+      "source_recall3": 0.7,
+      "source_recall5": 0.725,
+      "worst_language_recall5": 0.25
+    }
+  },
+  "retrieval_roles": {
+    "content": 353,
+    "navigation": 34,
+    "shared_redundant": 13
+  },
+  "schema_version": "j6-embedding-benchmark-v1",
+  "selection": {
+    "rationale": "Neither model met macro Recall@5 >= 0.90 and per-language Recall@5 >= 0.80",
+    "selected_model_policy": null,
+    "status": "NO_WINNER"
+  }
+}

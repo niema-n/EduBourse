@@ -1,0 +1,100 @@
+{
+  "name": "EduBourse - Health Webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "edubourse-health",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "8e2de46f-0c73-4f7d-8f03-5e2e82c0e001",
+      "name": "Health Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "status",
+              "name": "status",
+              "type": "string",
+              "value": "ok"
+            },
+            {
+              "id": "service",
+              "name": "service",
+              "type": "string",
+              "value": "n8n"
+            },
+            {
+              "id": "integration",
+              "name": "integration",
+              "type": "string",
+              "value": "edubourse"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8e2de46f-0c73-4f7d-8f03-5e2e82c0e002",
+      "name": "Prepare response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      },
+      "id": "8e2de46f-0c73-4f7d-8f03-5e2e82c0e003",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Health Webhook": {
+      "main": [
+        [
+          {
+            "node": "Prepare response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

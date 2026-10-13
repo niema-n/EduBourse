@@ -1,0 +1,19 @@
+Voici les principales différences entre une action et une obligation :
+
+### 1. Nature du titre
+
+- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.
+- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur.
+
+### 2. Rendement
+
+- **Action :** les informations fournies mentionnent une section consacrée au rendement des actions, sans préciser sa nature, comme les dividendes ou les plus-values, dans les extraits disponibles.
+- **Obligation :** le rendement principal prend la forme d’un intérêt appelé « coupon », versé en contrepartie du prêt. À l’échéance, l’émetteur rembourse le montant emprunté, c’est-à-dire le capital. Il existe aussi des obligations zéro coupon : aucun coupon n’est versé pendant la durée de vie du titre, et le principal ainsi que les intérêts sont remboursés intégralement à l’échéance.
+
+### 3. Risque
+
+- **Action :** les informations fournies mentionnent une section consacrée aux risques associés aux actions, mais les extraits disponibles ne les détaillent pas.
+- **Obligation :** l’investisseur est principalement exposé à trois types de risques :
+  - **Risque de défaut ou de crédit :** risque lié à la capacité de l’émetteur à respecter ses engagements, notamment le paiement des intérêts et le remboursement du capital.
+  - **Risque de taux :** le taux d’intérêt et le prix de l’obligation évoluent en sens inverse. Si les taux augmentent, le prix de l’obligation baisse, et inversement.
+  - **Risque de liquidité :** risque de ne pas trouver de contrepartie pour vendre l’obligation avant son échéance.

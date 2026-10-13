@@ -4,7 +4,10 @@ from datetime import UTC, datetime
 from typing import Any, Literal, TypedDict
 from uuid import uuid4
 
+from app.formation.models import FormationSession
 from app.graph.language_adapter import normalize_business_language
+from app.graph.workflow_context import ConversationWorkflowContext
+from app.quiz.models import QuizSession
 
 Route = Literal[
     "pedagogie",
@@ -53,8 +56,17 @@ class GraphState(TypedDict, total=False):
     risk_level: str
     selected_route: Route
     business_answer: str
+    response_key: str
     raw_agent_answer: str
     localized_answer: str
+    grounded_answer: str
+    grounded_status: str
+    grounded_citations: list[dict[str, Any]]
+    grounded: bool
+    knowledge_source: str
+    web_grounded: bool
+    web_sources: list[dict[str, Any]]
+    web_search_entry_point: str | None
     error: str | None
     status: str
     route_confidence: float
@@ -74,6 +86,15 @@ class GraphState(TypedDict, total=False):
     recommended_training: TrainingRecord | None
     cisi_delegated: bool
     metadata: dict[str, Any]
+    workflow_context: ConversationWorkflowContext
+    quiz_session: QuizSession
+    formation_session: FormationSession
+    internal_pedagogical_source: dict[str, Any] | None
+    orientation_recommendation: Any
+    memory_status: str
+    memory_relevant_message_ids: list[int]
+    recent_turns: list[dict[str, str]]
+    retrieval_query: str
 
 
 def create_initial_state(
@@ -114,11 +135,28 @@ def create_turn_input(
         "risk_level": "none",
         "selected_route": "fallback",
         "business_answer": "",
+        "response_key": "",
         "raw_agent_answer": "",
         "localized_answer": "",
         "error": None,
         "status": "initialized",
         "assessment_required": False,
+        "internal_pedagogical_source": None,
+        # Grounding is a per-turn result. The checkpointer merges this input
+        # onto the thread's stored state, so leaving these set would let the
+        # previous turn's citations resurface on a turn that never ran RAG.
+        "grounded_answer": "",
+        "grounded_status": "",
+        "grounded_citations": [],
+        "grounded": False,
+        "knowledge_source": "",
+        "web_grounded": False,
+        "web_sources": [],
+        "web_search_entry_point": None,
+        "retrieval_query": "",
+        "response_status": "",
+        "route_confidence": 0.0,
+        "route_scores": {},
     }
     if language is not None:
         # J2 supplies script-specific Darija labels; their mapped script wins.

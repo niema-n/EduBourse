@@ -1,0 +1,39 @@
+{
+  "answer_generation": true,
+  "citation_rendering": false,
+  "corpus_language": "fr",
+  "direct_target_language_generation": true,
+  "empty_evidence_answer_fail_closed": true,
+  "generation_model": "qwen/qwen3.6-27b",
+  "grounding_prompt_sha256": "2339deb276ae2ac3d20ab457a4acb1fb4996fcee6bb1e4156e0cb846beb5dd8d",
+  "next_step": "J6_FINAL_INTEGRATION_AND_E2E",
+  "personalized_advice_defense_in_depth": true,
+  "production_integration": false,
+  "prompt_injection_context_is_data": true,
+  "retrieval_policy": "H1_LANGUAGE_ROUTED_V1",
+  "retrieval_service_manifest_sha256": "4467a6ed7c8a1d23ee2d90a39159ac0c404567d42c8d7da10d30dfce9e450f1e",
+  "retrieval_top_k_default": 5,
+  "schema_version": "j6-grounded-generation-v1",
+  "service_version": 1,
+  "structured_evidence_required": true,
+  "supported_language_script_combinations": [
+    "fr/latin",
+    "en/latin",
+    "ar/arabic",
+    "ary/latin",
+    "ary/arabic"
+  ],
+  "supported_languages": [
+    "fr",
+    "en",
+    "ar",
+    "ary"
+  ],
+  "supported_scripts": [
+    "latin",
+    "arabic"
+  ],
+  "temperature": 0,
+  "unknown_evidence_fail_closed": true,
+  "whole_corpus_translation": false
+}

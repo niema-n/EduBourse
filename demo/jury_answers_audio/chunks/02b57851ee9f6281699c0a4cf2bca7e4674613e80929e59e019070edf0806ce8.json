@@ -1,0 +1,9 @@
+{
+  "exact_tts_input": " Other benefits include increasing the company’s notoriety and ensuring the mobility of its capital. For investors, an IPO provides an opportunity to acquire shares in companies with potential and diversify their investment portfolios.\n\nThe IPO process involves several key actors:\n\n- **Internal Governance Bodies:** Validate the business plan, select external experts, and ensure the quality of the information provided to advisors.\n- **Regulatory Authority (AMMC):** Handles regulatory matters, including approval of the prospectus.",
+  "request_segments": [
+    " Other benefits include increasing the company’s notoriety and ensuring the mobility of its capital. For investors, an IPO provides an opportunity to acquire shares in companies with potential and diversify their investment portfolios.\n\nThe IPO process involves several key actors:\n\n- **Internal Governance Bodies:** Validate the business plan, select external experts, and ensure the quality of the information provided to advisors.\n- **Regulatory Authority (AMMC):** Handles regulatory matters, including approval of the prospectus."
+  ],
+  "sample_rate_hz": 24000,
+  "tts_model": "gemini-2.5-flash-preview-tts",
+  "tts_voice": "Kore"
+}

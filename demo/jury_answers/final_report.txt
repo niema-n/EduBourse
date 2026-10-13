@@ -1,0 +1,67 @@
+FR_ROUTE=pedagogie
+FR_LANGUAGE=fr
+FR_STATUS=ok
+FR_GROUNDED=true
+FR_CITATIONS=4
+FR_LATENCY=94.431s
+FR_ANSWER_FILE=demo/jury_answers/fr_answer.txt
+FR_AUDIO_FILE=demo/jury_answers_audio/fr_response.wav
+FR_FINAL_COMPOSER=accepted
+FR_THREAD_ID=jury-fr-503623c8637642ad967515bfed4fce35
+
+EN_ROUTE=pedagogie
+EN_LANGUAGE=en
+EN_STATUS=ok
+EN_GROUNDED=true
+EN_CITATIONS=4
+EN_LATENCY=21.291s
+EN_ANSWER_FILE=demo/jury_answers/en_answer.txt
+EN_AUDIO_FILE=UNAVAILABLE_GEMINI_TTS_RATE_LIMIT
+EN_FINAL_COMPOSER=accepted
+EN_THREAD_ID=jury-en-d4142f3c0d234095a9c9816b769dbff8
+
+AR_ROUTE=pedagogie
+AR_LANGUAGE=ar
+AR_SCRIPT=arabic
+AR_STATUS=ok
+AR_GROUNDED=true
+AR_CITATIONS=4
+AR_LATENCY=29.404s
+AR_ANSWER_FILE=demo/jury_answers/ar_answer.txt
+AR_AUDIO_FILE=UNAVAILABLE_GEMINI_TTS_RATE_LIMIT
+AR_FINAL_COMPOSER=accepted
+AR_THREAD_ID=jury-ar-d0f7e5cfa92d4040af6196f3fd3689c1
+
+DARIJA_ROUTE=pedagogie
+DARIJA_LANGUAGE=ary
+DARIJA_SCRIPT=arabic
+DARIJA_STATUS=error
+DARIJA_GROUNDED=false
+DARIJA_CITATIONS=0
+DARIJA_LATENCY=18.617s
+DARIJA_DEGRADED=true
+DARIJA_DEGRADATION_REASON=RateLimitError during grounded generation; exact controlled error response preserved
+DARIJA_ANSWER_FILE=demo/jury_answers/darija_answer.txt
+DARIJA_AUDIO_FILE=UNAVAILABLE_GEMINI_TTS_RATE_LIMIT
+DARIJA_FINAL_COMPOSER=accepted
+DARIJA_THREAD_ID=jury-darija-a6fd73c0671d48b5825af719c5bf880a
+
+FR_DEMO_AUDIO_FILE=demo/jury_answers_audio/fr_response_demo.wav
+FR_FULL_AUDIO_DURATION=104.687s
+FR_DEMO_AUDIO_DURATION=24.554s
+TTS_PROVIDER=gemini
+TTS_MODEL=gemini-2.5-flash-preview-tts
+TTS_VOICE=Kore
+
+PRODUCTION_CODE_CHANGED=false
+CAPTURE_COMPLETE=true
+ALL_ANSWERS_GROUNDED=false
+OPTIONAL_AUDIO_COMPLETE=false
+
+Verdict:
+EDUBOURSE_JURY_RESPONSES_READY
+
+Scope of verdict: the four real HTTP responses are captured and saved.
+Darija is degraded, and optional EN/AR/Darija audio is blocked by the Gemini TTS limit.
+The French answer also preserves its stated evidence gaps about equity returns/risks.
+Production source/configuration unchanged (250 file hashes checked).

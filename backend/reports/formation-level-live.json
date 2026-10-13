@@ -1,0 +1,104 @@
+[
+  {
+    "case": "A",
+    "http_status": 200,
+    "response": {
+      "answer": "## Parcours débutant — Module 1/8 : Rôle d’une Bourse\n\n**Objectif :** comprendre que la Bourse organise la rencontre entre les émetteurs et les investisseurs.\n\n**Leçon :** elle publie des règles et facilite la confrontation des ordres.\n\n**À retenir :**\n- Point central : le rôle d’une Bourse.\n- L’apprentissage ne garantit aucun profit.\n\n**Question de vérification :** quel rôle la Bourse joue-t-elle entre un émetteur et un investisseur ?\n\nRépondez à la question ou dites « suivant » pour passer au module suivant.",
+      "language": "fr",
+      "script": "latin",
+      "route": "formation_elearning",
+      "blocked": false,
+      "thread_id": "level-check-060b29e634-a",
+      "status": "ok",
+      "grounded": null,
+      "citations": [],
+      "knowledge_source": null,
+      "web_sources": []
+    }
+  },
+  {
+    "case": "B1",
+    "http_status": 200,
+    "response": {
+      "answer": "Quel est votre niveau actuel en Bourse : débutant, intermédiaire ou avancé ?",
+      "language": "fr",
+      "script": "latin",
+      "route": "formation_elearning",
+      "blocked": false,
+      "thread_id": "level-check-060b29e634-b",
+      "status": "ok",
+      "grounded": null,
+      "citations": [],
+      "knowledge_source": null,
+      "web_sources": []
+    }
+  },
+  {
+    "case": "B2",
+    "http_status": 200,
+    "response": {
+      "answer": "## Parcours intermédiaire — Module 1/8 : Organisation du marché\n\n**Objectif :** analyser les fonctions respectives des participants et des infrastructures.\n\n**Leçon :** l’organisation du marché sépare les fonctions d’émission, d’intermédiation, de négociation, de compensation et de règlement.\n\n**À retenir :**\n- Point central : l’organisation du marché.\n- L’apprentissage ne garantit aucun profit.\n\n**Question de vérification :** comment ces fonctions réduisent-elles les risques opérationnels ?\n\nRépondez à la question ou dites « suivant » pour passer au module suivant.",
+      "language": "fr",
+      "script": "latin",
+      "route": "formation_elearning",
+      "blocked": false,
+      "thread_id": "level-check-060b29e634-b",
+      "status": "ok",
+      "grounded": null,
+      "citations": [],
+      "knowledge_source": null,
+      "web_sources": []
+    }
+  },
+  {
+    "case": "C",
+    "http_status": 200,
+    "response": {
+      "answer": "Question 1/6\nQuel est le rôle principal d'une Bourse ?\nA. Organiser les échanges de titres\nB. Garantir un bénéfice\nC. Accorder des prêts\nD. Fixer les salaires",
+      "language": "fr",
+      "script": "latin",
+      "route": "quiz",
+      "blocked": false,
+      "thread_id": "level-check-060b29e634-c",
+      "status": "ok",
+      "grounded": null,
+      "citations": [],
+      "knowledge_source": null,
+      "web_sources": []
+    }
+  },
+  {
+    "case": "routing_formation",
+    "http_status": 200,
+    "response": {
+      "answer": "Quel est votre niveau actuel en Bourse : débutant, intermédiaire ou avancé ?",
+      "language": "fr",
+      "script": "latin",
+      "route": "formation_elearning",
+      "blocked": false,
+      "thread_id": "level-check-060b29e634-d",
+      "status": "ok",
+      "grounded": null,
+      "citations": [],
+      "knowledge_source": null,
+      "web_sources": []
+    }
+  },
+  {
+    "case": "routing_orientation",
+    "http_status": 200,
+    "response": {
+      "answer": "Quel est votre niveau actuel en Bourse : débutant, intermédiaire ou avancé ?",
+      "language": "fr",
+      "script": "latin",
+      "route": "orientation",
+      "blocked": false,
+      "thread_id": "level-check-060b29e634-e",
+      "status": "ok",
+      "grounded": null,
+      "citations": [],
+      "knowledge_source": null,
+      "web_sources": []
+    }
+  }
+]

@@ -1,0 +1,55 @@
+FR_QUESTION=Quelle est la différence entre une action et une obligation ?
+FR_STATUS=ok
+FR_ROUTE=pedagogie
+FR_GROUNDED=true
+FR_CITATIONS=2
+FR_LATENCY=20.986s
+
+EN_STATUS=ok
+EN_ROUTE=pedagogie
+EN_GROUNDED=true
+EN_CITATIONS=4
+EN_LATENCY=21.291s
+
+AR_STATUS=ok
+AR_ROUTE=pedagogie
+AR_GROUNDED=true
+AR_CITATIONS=4
+AR_LATENCY=29.404s
+
+DARIJA_QUESTION_SELECTED=شنو الفرق بين السهم والسند؟
+DARIJA_STATUS=ok
+DARIJA_ROUTE=pedagogie
+DARIJA_LANGUAGE=ary
+DARIJA_SCRIPT=arabic
+DARIJA_GROUNDED=true
+DARIJA_CITATIONS=5
+DARIJA_LATENCY=16.173s
+DARIJA_ATTEMPTS=1
+
+FR_DEMO_AUDIO=UNAVAILABLE_GEMINI_RATE_LIMIT
+EN_DEMO_AUDIO=UNAVAILABLE_GEMINI_RATE_LIMIT
+AR_DEMO_AUDIO=UNAVAILABLE_GEMINI_RATE_LIMIT
+DARIJA_DEMO_AUDIO=UNAVAILABLE_GEMINI_RATE_LIMIT
+
+AUDIO_REQUESTS_SENT=1
+AUDIO_RETRIES=0
+AUDIO_LIMITATION=rate_limit_exceeded; provider reports Free Tier 10 requests/day
+AUDIO_PROVIDER=gemini
+AUDIO_MODEL=gemini-2.5-flash-preview-tts
+AUDIO_VOICE=Kore
+
+PRODUCTION_CODE_CHANGED=false
+PREVIOUS_CAPTURE_FILES_CHANGED=false
+FINAL_TEXT_DATASET_COMPLETE=true
+FINAL_AUDIO_DATASET_COMPLETE=false
+
+Verdict:
+EDUBOURSE_FINAL_JURY_DATASET_READY
+
+Scope: all four selected REAL text responses meet the requested acceptance criteria.
+Audio was stopped immediately after the first Gemini rate-limit error, as requested.
+EN and AR are exact copies of the previous validated results.
+FR and Darija succeeded once each; no controlled retry or alternative question was used.
+The Darija response explicitly limits its explanation of bonds to the available evidence;
+that content is preserved unchanged. Latencies are observed single-run timings.

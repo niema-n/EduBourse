@@ -1,0 +1,251 @@
+{
+  "total_files": 13,
+  "valid_pdfs": 13,
+  "unique_documents": 13,
+  "duplicate_files": 0,
+  "invalid_pdfs": 0,
+  "review_required": 0,
+  "total_pages_unique": 315,
+  "total_bytes": 72126810,
+  "authority_counts": {
+    "ammc": 13
+  },
+  "category_counts": {
+    "corporate_actions": 1,
+    "crowdfunding": 1,
+    "financial_instruments": 2,
+    "general_assemblies": 1,
+    "information_documents": 1,
+    "investor_protection": 2,
+    "ipo": 1,
+    "market_basics": 1,
+    "opcvm": 1,
+    "pea": 1,
+    "public_offerings": 1,
+    "savings": 1
+  },
+  "files": [
+    {
+      "file_name": "Brochure-sur-le-budget-lepargne-et-linvestissement.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Brochure-sur-le-budget-lepargne-et-linvestissement.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 793976,
+      "sha256": "44c66930eca88254cda8b22a16580964af1de29eaa460e03f689dfccd9dcdf77",
+      "page_count": 8,
+      "pdf_metadata_title": null,
+      "canonical_title": "Sur le budget l'épargne et l'investissement",
+      "source_id": "ammc-sur-le-budget-l-epargne-et-l-investissement",
+      "categories": [
+        "savings"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Comprendre-le-financement-collaboratif-24-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Comprendre-le-financement-collaboratif-24-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 4948385,
+      "sha256": "d92457d0b72673de458259b875ac41027f0b8b1b628e0761e1497fcead1a25d7",
+      "page_count": 31,
+      "pdf_metadata_title": "Guide de l'investisseur -Comprendre le financement collaboratif-24-FR.indd",
+      "canonical_title": "Comprendre le financement collaboratif",
+      "source_id": "ammc-comprendre-le-financement-collaboratif",
+      "categories": [
+        "crowdfunding"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Comprendre-les-circuits-et-adopter-les-bonnes-pratiques-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Comprendre-les-circuits-et-adopter-les-bonnes-pratiques-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 4726945,
+      "sha256": "20f1f9901ce83c21076f2568ec5ce3b25096f0ed15302e2b1b7ba4733b8abe83",
+      "page_count": 23,
+      "pdf_metadata_title": null,
+      "canonical_title": "Comprendre les circuits et adopter les bonnes pratiques",
+      "source_id": "ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques",
+      "categories": [
+        "investor_protection"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Comprendre-les-instruments-financiers-et-leurs-mecanismes-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Comprendre-les-instruments-financiers-et-leurs-mecanismes-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 4998734,
+      "sha256": "89182e3f208677eddad9b8e71832963dc07d2ca513c1871ff5ea0982fd96e1cb",
+      "page_count": 31,
+      "pdf_metadata_title": "guide des instrumets-2.indd",
+      "canonical_title": "Comprendre les instruments financiers et leurs mécanismes",
+      "source_id": "ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes",
+      "categories": [
+        "financial_instruments"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Comprendre-les-IPO.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Comprendre-les-IPO.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 4834044,
+      "sha256": "c04046a77db8cd69cc24820e2438a35478e300ba61bfc882fe03658949fc20e6",
+      "page_count": 28,
+      "pdf_metadata_title": "Guide IPO V 16 juillet 2021.indd",
+      "canonical_title": "Comprendre les IPO",
+      "source_id": "ammc-comprendre-les-ipo",
+      "categories": [
+        "ipo"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Comprendre-les-offres-publics-VFR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Comprendre-les-offres-publics-VFR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 8414371,
+      "sha256": "cf6de28865d2adb1906efb74dde3a12c0e5520f375dc48cdb36a4f07a0d6c2d5",
+      "page_count": 25,
+      "pdf_metadata_title": "Guide de l'investisseur -Comprendre les offres publics.indd",
+      "canonical_title": "Comprendre les offres publics",
+      "source_id": "ammc-comprendre-les-offres-publics",
+      "categories": [
+        "public_offerings"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Comprendre-les-operations-sur-titres-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Comprendre-les-operations-sur-titres-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 6027745,
+      "sha256": "993feb5d7cc9658e55d644d2ad812ebeb70d337c04095d9bbf5c457c20faa867",
+      "page_count": 29,
+      "pdf_metadata_title": "Guide OST 2021 version 16mars.indd",
+      "canonical_title": "Comprendre les opérations sur titres",
+      "source_id": "ammc-comprendre-les-operations-sur-titres",
+      "categories": [
+        "corporate_actions"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-les-assemblees-generales-ordinaires-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-les-assemblees-generales-ordinaires-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 6671540,
+      "sha256": "79f6750e87900e6c35a11b5470b0569709979cddd899e75da45498505531d815",
+      "page_count": 31,
+      "pdf_metadata_title": "Guide de l'investisseur -les assemblées générales ordinaires.indd",
+      "canonical_title": "Les assemblées générales ordinaires",
+      "source_id": "ammc-les-assemblees-generales-ordinaires",
+      "categories": [
+        "general_assemblies"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-Les-documents-dinformation-quil-faut-absolument-connaitre-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-Les-documents-dinformation-quil-faut-absolument-connaitre-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 5926201,
+      "sha256": "56dcb08205eae6ea39de7ebf4870717420f159c27ae266fc64a137ef60cb5458",
+      "page_count": 31,
+      "pdf_metadata_title": "Guide de l'investisseur -Les documents d'information qu'il faut absolument connaitre-print.indd",
+      "canonical_title": "Les documents d'information qu'il faut absolument connaître",
+      "source_id": "ammc-les-documents-d-information-qu-il-faut-absolument-connaitre",
+      "categories": [
+        "information_documents"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-les-OPCVM-FR-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-les-OPCVM-FR-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 6050507,
+      "sha256": "314e1baba46a1e970f4fc415d642300b56ffabfedca2fbe0dc57f08c5d06c623",
+      "page_count": 29,
+      "pdf_metadata_title": "Guide de l'investisseur -les OPCVM.indd",
+      "canonical_title": "Les OPCVM",
+      "source_id": "ammc-les-opcvm",
+      "categories": [
+        "opcvm"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-PEA-Vfr-web.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-PEA-Vfr-web.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 9027306,
+      "sha256": "0aee0c1cf5fca9f7e7d37a8c3a76bc805fead3c225b7ab64422add1649205476",
+      "page_count": 22,
+      "pdf_metadata_title": null,
+      "canonical_title": "PEA",
+      "source_id": "ammc-pea",
+      "categories": [
+        "pea"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Guide-de-linvestisseur-renforcer-la-protection-de-vos-placements.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Guide-de-linvestisseur-renforcer-la-protection-de-vos-placements.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 6198651,
+      "sha256": "904de0c747ebd769124b7faa05c06bbbb996bfb7cc7753c8df2b795eb785c7b3",
+      "page_count": 24,
+      "pdf_metadata_title": null,
+      "canonical_title": "Renforcer la protection de vos placements",
+      "source_id": "ammc-renforcer-la-protection-de-vos-placements",
+      "categories": [
+        "investor_protection"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    },
+    {
+      "file_name": "Marché-des-capitaux-Les-principaux-placements-et-leurs-caractéristiques.pdf",
+      "relative_file_path": "data/rag/raw/ammc/Marché-des-capitaux-Les-principaux-placements-et-leurs-caractéristiques.pdf",
+      "authority": "ammc",
+      "file_size_bytes": 3508405,
+      "sha256": "932fb0dcc46991d167f2eb61fc2d2573c69f72f34775a3a1d2ea34643d290612",
+      "page_count": 3,
+      "pdf_metadata_title": "Brochure produits de placement",
+      "canonical_title": "Brochure produits de placement",
+      "source_id": "ammc-brochure-produits-de-placement",
+      "categories": [
+        "financial_instruments",
+        "market_basics"
+      ],
+      "status": "active",
+      "duplicate_of": null,
+      "error": null
+    }
+  ]
+}

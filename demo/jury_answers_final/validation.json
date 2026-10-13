@@ -1,0 +1,54 @@
+{
+  "fr": {
+    "accepted": true,
+    "language": "fr",
+    "script": "latin",
+    "raw_answer_and_citations_preserved": true,
+    "persisted_messages_match": true,
+    "preserved_from_previous_campaign": false,
+    "composer_status": "accepted"
+  },
+  "en": {
+    "accepted": true,
+    "language": "en",
+    "script": "latin",
+    "raw_answer_and_citations_preserved": true,
+    "persisted_messages_match": true,
+    "preserved_from_previous_campaign": true,
+    "composer_status": "accepted"
+  },
+  "ar": {
+    "accepted": true,
+    "language": "ar",
+    "script": "arabic",
+    "raw_answer_and_citations_preserved": true,
+    "persisted_messages_match": true,
+    "preserved_from_previous_campaign": true,
+    "composer_status": "accepted"
+  },
+  "darija": {
+    "accepted": true,
+    "language": "ary",
+    "script": "arabic",
+    "raw_answer_and_citations_preserved": true,
+    "persisted_messages_match": true,
+    "preserved_from_previous_campaign": false,
+    "composer_status": "accepted",
+    "language_review": "Moroccan Darija in Arabic script: forms such as ?????, ????, ????, ???, ??? are retained. Evidence limitations about bonds remain unchanged."
+  },
+  "production_hashes_before.json": {
+    "files_checked": 250,
+    "changed_files": []
+  },
+  "previous_capture_hashes.json": {
+    "files_checked": 20,
+    "changed_files": []
+  },
+  "audio": {
+    "status": "blocked_by_gemini_quota",
+    "requests_sent": 1,
+    "retry_performed": false,
+    "exact_excerpt_texts_prepared": true,
+    "wav_files_created": []
+  }
+}

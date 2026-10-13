@@ -1,0 +1,43 @@
+{
+  "answer_generation": false,
+  "ary_latin_full_corpus_rrf": true,
+  "collection_count": 353,
+  "collection_name": "j6_bge_m3_content_v1",
+  "configuration_error_retryable": false,
+  "confirmatory_quality_gate": false,
+  "default_top_k": 5,
+  "distance_metric": "cosine",
+  "embedding_dimension": 1024,
+  "embedding_function_none_required": true,
+  "embedding_model": "BAAI/bge-m3",
+  "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "index_manifest_sha256": "2585d7cb1b99632867e25d28948e78476e2fc00df7f13f402dd891bded25bfde",
+  "index_path": "backend/data/rag/indexes/bge_m3_v1",
+  "known_limitations": [
+    "Ary-Latin RRF dilution.",
+    "The brochure placement source has only three content chunks and creates cross-language competition."
+  ],
+  "max_top_k": 10,
+  "next_step": "J6_08_GROUNDED_GENERATION",
+  "no_more_retrieval_policy_tuning": true,
+  "production_integration": false,
+  "provider_error_retryable": true,
+  "provider_required_languages": [
+    "en",
+    "ar",
+    "ary"
+  ],
+  "query_adapter_model": "qwen/qwen3.6-27b",
+  "query_adapter_prompt_sha256": "b786ecd5ceed65dfd2fe418551732b67612863f771ebd89aafcd0865527d0300",
+  "required_chromadb_version": "1.5.9",
+  "retrieval_policy": "H1_LANGUAGE_ROUTED_V1",
+  "retrieval_policy_status": "ACCEPTED_WITH_DOCUMENTED_CONFIRMATORY_LIMITATIONS",
+  "retrieval_statuses": [
+    "ok",
+    "provider_error",
+    "configuration_error"
+  ],
+  "rrf_k": 60,
+  "schema_version": "j6-retrieval-service-v1",
+  "service_version": 1
+}

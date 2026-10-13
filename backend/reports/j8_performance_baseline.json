@@ -1,0 +1,1200 @@
+{
+  "baseline_type": "offline_fake_backed_real_pipeline",
+  "measured": true,
+  "network_used": false,
+  "real_postgres_used": false,
+  "real_gemini_used": false,
+  "real_groq_used": false,
+  "real_google_search_used": false,
+  "python_version": "3.11.9",
+  "system": "Windows",
+  "warmup_iterations": 1,
+  "measured_iterations": 5,
+  "scenario_count": 8,
+  "limitations": [
+    "This baseline measures local application/orchestration overhead with fake providers. It does not represent production latency of Gemini, Groq, Google Search or PostgreSQL.",
+    "Agent duration may include nested RAG or Financial Expert execution; stage durations are not additive."
+  ],
+  "voice_seam": "VoiceService.process: fake STT -> process_text_message -> fake TTS",
+  "scenarios": [
+    {
+      "scenario": "simple_pedagogie",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 7.92,
+        "min_ms": 7.14,
+        "max_ms": 8.66,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.7,
+          "min_ms": 1.44,
+          "max_ms": 2.33,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.03,
+          "min_ms": 0.03,
+          "max_ms": 0.04,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.0,
+          "min_ms": 0.0,
+          "max_ms": 0.0,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 7.54,
+          "min_ms": 6.8,
+          "max_ms": 8.22,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 7.92,
+          "min_ms": 7.14,
+          "max_ms": 8.66,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only"
+    },
+    {
+      "scenario": "rag_sufficient",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 7.57,
+        "min_ms": 6.97,
+        "max_ms": 8.12,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.53,
+          "min_ms": 1.48,
+          "max_ms": 1.64,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.03,
+          "min_ms": 0.03,
+          "max_ms": 0.03,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "rag": {
+          "count": 5,
+          "average_ms": 0.02,
+          "min_ms": 0.02,
+          "max_ms": 0.02,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.06,
+          "min_ms": 0.06,
+          "max_ms": 0.07,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 7.22,
+          "min_ms": 6.69,
+          "max_ms": 7.75,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 7.57,
+          "min_ms": 6.97,
+          "max_ms": 8.12,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only",
+      "fake_call_counts": {
+        "rag": 5
+      }
+    },
+    {
+      "scenario": "financial_expert_general",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 8.56,
+        "min_ms": 7.95,
+        "max_ms": 8.89,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.62,
+          "min_ms": 1.5,
+          "max_ms": 1.76,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.03,
+          "min_ms": 0.03,
+          "max_ms": 0.04,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "rag": {
+          "count": 5,
+          "average_ms": 0.02,
+          "min_ms": 0.02,
+          "max_ms": 0.03,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "financial_expert": {
+          "count": 5,
+          "average_ms": 0.01,
+          "min_ms": 0.01,
+          "max_ms": 0.01,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.11,
+          "min_ms": 0.1,
+          "max_ms": 0.12,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 8.08,
+          "min_ms": 7.4,
+          "max_ms": 8.39,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 8.56,
+          "min_ms": 7.95,
+          "max_ms": 8.89,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only",
+      "fake_call_counts": {
+        "rag": 5,
+        "financial_expert": 5
+      }
+    },
+    {
+      "scenario": "financial_expert_web",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 7.77,
+        "min_ms": 7.44,
+        "max_ms": 8.25,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.57,
+          "min_ms": 1.4,
+          "max_ms": 1.74,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.03,
+          "min_ms": 0.02,
+          "max_ms": 0.03,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "rag": {
+          "count": 5,
+          "average_ms": 0.02,
+          "min_ms": 0.02,
+          "max_ms": 0.02,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "financial_expert": {
+          "count": 5,
+          "average_ms": 0.01,
+          "min_ms": 0.01,
+          "max_ms": 0.01,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.1,
+          "min_ms": 0.09,
+          "max_ms": 0.1,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 7.3,
+          "min_ms": 6.92,
+          "max_ms": 7.87,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 7.77,
+          "min_ms": 7.44,
+          "max_ms": 8.25,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only",
+      "fake_call_counts": {
+        "rag": 5,
+        "financial_expert": 5
+      }
+    },
+    {
+      "scenario": "quiz",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 10.52,
+        "min_ms": 8.77,
+        "max_ms": 12.55,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 2,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.49,
+          "min_ms": 1.34,
+          "max_ms": 1.66,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.04,
+          "min_ms": 0.03,
+          "max_ms": 0.06,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.11,
+          "min_ms": 0.07,
+          "max_ms": 0.24,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 8.51,
+          "min_ms": 7.35,
+          "max_ms": 9.99,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 10.52,
+          "min_ms": 8.77,
+          "max_ms": 12.55,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 2,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only"
+    },
+    {
+      "scenario": "formation",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 8.79,
+        "min_ms": 8.07,
+        "max_ms": 9.73,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.63,
+          "min_ms": 1.32,
+          "max_ms": 2.58,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.06,
+          "min_ms": 0.05,
+          "max_ms": 0.08,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.0,
+          "min_ms": 0.0,
+          "max_ms": 0.0,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 7.65,
+          "min_ms": 7.03,
+          "max_ms": 8.74,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 8.79,
+          "min_ms": 8.07,
+          "max_ms": 9.73,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only"
+    },
+    {
+      "scenario": "security_blocked",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 3.5,
+        "min_ms": 2.99,
+        "max_ms": 4.56,
+        "bucket_counts": {
+          "1": 0,
+          "5": 5,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 0.03,
+          "min_ms": 0.02,
+          "max_ms": 0.06,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.0,
+          "min_ms": 0.0,
+          "max_ms": 0.0,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 3.02,
+          "min_ms": 2.53,
+          "max_ms": 3.92,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 3.5,
+          "min_ms": 2.99,
+          "max_ms": 4.56,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only"
+    },
+    {
+      "scenario": "voice",
+      "warmup_iterations": 1,
+      "measured_iterations": 5,
+      "request": {
+        "count": 5,
+        "average_ms": 7.95,
+        "min_ms": 6.87,
+        "max_ms": 8.79,
+        "bucket_counts": {
+          "1": 0,
+          "5": 0,
+          "10": 5,
+          "25": 5,
+          "50": 5,
+          "100": 5,
+          "250": 5,
+          "500": 5,
+          "1000": 5,
+          "2500": 5,
+          "5000": 5,
+          "10000": 5,
+          "+Inf": 5
+        }
+      },
+      "stages": {
+        "security": {
+          "count": 5,
+          "average_ms": 1.79,
+          "min_ms": 1.48,
+          "max_ms": 2.52,
+          "bucket_counts": {
+            "1": 0,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "routing": {
+          "count": 5,
+          "average_ms": 0.03,
+          "min_ms": 0.02,
+          "max_ms": 0.04,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "agent": {
+          "count": 5,
+          "average_ms": 0.0,
+          "min_ms": 0.0,
+          "max_ms": 0.0,
+          "bucket_counts": {
+            "1": 5,
+            "5": 5,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "graph": {
+          "count": 5,
+          "average_ms": 7.54,
+          "min_ms": 6.56,
+          "max_ms": 8.33,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        },
+        "request": {
+          "count": 5,
+          "average_ms": 7.95,
+          "min_ms": 6.87,
+          "max_ms": 8.79,
+          "bucket_counts": {
+            "1": 0,
+            "5": 0,
+            "10": 5,
+            "25": 5,
+            "50": 5,
+            "100": 5,
+            "250": 5,
+            "500": 5,
+            "1000": 5,
+            "2500": 5,
+            "5000": 5,
+            "10000": 5,
+            "+Inf": 5
+          }
+        }
+      },
+      "slowest_stage": "security",
+      "slowest_stage_interpretation": "local_fake_backed_measurement_only",
+      "fake_call_counts": {
+        "stt": 5,
+        "tts": 5
+      }
+    }
+  ]
+}

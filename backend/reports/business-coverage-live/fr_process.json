@@ -1,0 +1,73 @@
+{
+  "case": {
+    "id": "fr_process",
+    "language": "fr",
+    "script": "latin",
+    "question": "Explique-moi une IPO, ses étapes, les acteurs impliqués et son objectif.",
+    "source": "Une IPO est la première mise à disposition d'actions d'une entreprise au public. Elle permet de lever des capitaux. L'entreprise et ses conseillers préparent l'opération. L'autorité examine le prospectus. Les investisseurs souscrivent puis la Bourse organise la première cotation.",
+    "aspects": {
+      "definition": [
+        "premier|introduction",
+        "public"
+      ],
+      "preparation": [
+        "prepar"
+      ],
+      "prospectus": [
+        "prospectus"
+      ],
+      "subscription": [
+        "souscri|souscrip"
+      ],
+      "listing": [
+        "cotation"
+      ],
+      "actors": [
+        "entreprise",
+        "conseill",
+        "autorite",
+        "investisseur",
+        "bourse"
+      ],
+      "objective": [
+        "capitaux|financ"
+      ]
+    }
+  },
+  "result": {
+    "original_query": "Explique-moi une IPO, ses étapes, les acteurs impliqués et son objectif.",
+    "language": "fr",
+    "script": "latin",
+    "answer": "Une IPO (Introduction en Bourse) est la première mise à disposition d'actions d'une entreprise au public. Son objectif principal est de permettre à l'entreprise de lever des capitaux.\n\nLes étapes et acteurs impliqués sont les suivants :\n1. **Préparation** : L'entreprise et ses conseillers préparent l'opération.\n2. **Examen réglementaire** : L'autorité compétente examine le prospectus.\n3. **Souscription** : Les investisseurs souscrivent aux actions.\n4. **Cotation** : La Bourse organise la première cotation des actions.",
+    "citations": [
+      {
+        "evidence_id": "S1",
+        "chunk_id": "coverage-fixture",
+        "source_id": "coverage-source",
+        "title": "Educational fixture",
+        "page": 1,
+        "page_start": 1,
+        "page_end": 1,
+        "heading": null
+      }
+    ],
+    "used_evidence_ids": [
+      "S1"
+    ],
+    "retrieval_status": "ok",
+    "generation_status": "ok",
+    "grounded": true,
+    "insufficient_evidence": false,
+    "provider_retryable": false,
+    "retrieval_query": null
+  },
+  "coverage": {
+    "definition": true,
+    "preparation": true,
+    "prospectus": true,
+    "subscription": true,
+    "listing": true,
+    "actors": true,
+    "objective": true
+  }
+}

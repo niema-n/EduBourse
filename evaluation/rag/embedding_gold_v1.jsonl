@@ -1,0 +1,40 @@
+{"id":"fr-01","query":"Quelle est la différence entre une action et une obligation ?","language":"fr","script":"latin","topic":"actions_obligations","expected_source_ids":["ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"]}
+{"id":"fr-02","query":"Comment fonctionne le rendement d'une obligation ?","language":"fr","script":"latin","topic":"obligations","expected_source_ids":["ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"]}
+{"id":"fr-03","query":"Qu'est-ce qu'un OPCVM et à quoi sert-il ?","language":"fr","script":"latin","topic":"opcvm_definition","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"fr-04","query":"Comment comprendre la valeur liquidative d'un OPCVM ?","language":"fr","script":"latin","topic":"valeur_liquidative","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"fr-05","query":"Que signifie une introduction en bourse ?","language":"fr","script":"latin","topic":"ipo","expected_source_ids":["ammc-comprendre-les-ipo"]}
+{"id":"fr-06","query":"Quelles informations trouve-t-on dans un document d'information ?","language":"fr","script":"latin","topic":"information_documents","expected_source_ids":["ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"]}
+{"id":"fr-07","query":"Comment fonctionne le financement participatif au Maroc ?","language":"fr","script":"latin","topic":"crowdfunding","expected_source_ids":["ammc-comprendre-le-financement-collaboratif"]}
+{"id":"fr-08","query":"Quelles bonnes pratiques suivre avant d'investir ?","language":"fr","script":"latin","topic":"investor_protection","expected_source_ids":["ammc-comprendre-les-circuits-et-adopter-les-bonnes-pratiques"]}
+{"id":"en-01","query":"What is the difference between a stock and a bond?","language":"en","script":"latin","topic":"actions_obligations","expected_source_ids":["ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"]}
+{"id":"en-02","query":"How does an investment fund work?","language":"en","script":"latin","topic":"opcvm_definition","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"en-03","query":"What does net asset value mean for a fund?","language":"en","script":"latin","topic":"valeur_liquidative","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"en-04","query":"What happens during an IPO?","language":"en","script":"latin","topic":"ipo","expected_source_ids":["ammc-comprendre-les-ipo"]}
+{"id":"en-05","query":"What is a public offering?","language":"en","script":"latin","topic":"public_offerings","expected_source_ids":["ammc-comprendre-les-offres-publics"]}
+{"id":"en-06","query":"How can an investor protect their investments?","language":"en","script":"latin","topic":"investor_protection","expected_source_ids":["ammc-renforcer-la-protection-de-vos-placements"]}
+{"id":"en-07","query":"What documents should I read before buying securities?","language":"en","script":"latin","topic":"information_documents","expected_source_ids":["ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"]}
+{"id":"en-08","query":"How does crowdfunding finance a project?","language":"en","script":"latin","topic":"crowdfunding","expected_source_ids":["ammc-comprendre-le-financement-collaboratif"]}
+{"id":"ar-01","query":"ما الفرق بين السهم والسند؟","language":"ar","script":"arabic","topic":"actions_obligations","expected_source_ids":["ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"]}
+{"id":"ar-02","query":"ما هو صندوق الاستثمار الجماعي؟","language":"ar","script":"arabic","topic":"opcvm_definition","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"ar-03","query":"ماذا تعني القيمة الصافية للأصول؟","language":"ar","script":"arabic","topic":"valeur_liquidative","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"ar-04","query":"ماذا يحدث عند طرح شركة في البورصة؟","language":"ar","script":"arabic","topic":"ipo","expected_source_ids":["ammc-comprendre-les-ipo"]}
+{"id":"ar-05","query":"ما هي شروط العرض العمومي؟","language":"ar","script":"arabic","topic":"public_offerings","expected_source_ids":["ammc-comprendre-les-offres-publics"]}
+{"id":"ar-06","query":"كيف أحمي استثماراتي من المخاطر؟","language":"ar","script":"arabic","topic":"investor_protection","expected_source_ids":["ammc-renforcer-la-protection-de-vos-placements"]}
+{"id":"ar-07","query":"ما هي الوثائق التي يجب قراءتها قبل الاستثمار؟","language":"ar","script":"arabic","topic":"information_documents","expected_source_ids":["ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"]}
+{"id":"ar-08","query":"كيف يعمل التمويل التشاركي؟","language":"ar","script":"arabic","topic":"crowdfunding","expected_source_ids":["ammc-comprendre-le-financement-collaboratif"]}
+{"id":"ary-latin-01","query":"chno lfer9 bin sahm w sanad?","language":"ary","script":"latin","topic":"actions_obligations","expected_source_ids":["ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"]}
+{"id":"ary-latin-02","query":"chno howa OPCVM w kifach kaykhdem?","language":"ary","script":"latin","topic":"opcvm_definition","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"ary-latin-03","query":"chno kat3ni l9ima li kat7seb lssendou9?","language":"ary","script":"latin","topic":"valeur_liquidative","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"ary-latin-04","query":"chno kay3ni l idraj dyal charika f lborça?","language":"ary","script":"latin","topic":"ipo","expected_source_ids":["ammc-comprendre-les-ipo"]}
+{"id":"ary-latin-05","query":"kifach kaykhdem l3ard l3omomi?","language":"ary","script":"latin","topic":"public_offerings","expected_source_ids":["ammc-comprendre-les-offres-publics"]}
+{"id":"ary-latin-06","query":"kifach n7mi l istithmarat dyali?","language":"ary","script":"latin","topic":"investor_protection","expected_source_ids":["ammc-renforcer-la-protection-de-vos-placements"]}
+{"id":"ary-latin-07","query":"chno khasni nqra f watha2i9 lma3loumat 9bel ma nestathmer?","language":"ary","script":"latin","topic":"information_documents","expected_source_ids":["ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"]}
+{"id":"ary-latin-08","query":"kifach kaykhdem ttamwil ttacharoki?","language":"ary","script":"latin","topic":"crowdfunding","expected_source_ids":["ammc-comprendre-le-financement-collaboratif"]}
+{"id":"ary-arabic-01","query":"شنو الفرق بين السهم والسند؟","language":"ary","script":"arabic","topic":"actions_obligations","expected_source_ids":["ammc-comprendre-les-instruments-financiers-et-leurs-mecanismes"]}
+{"id":"ary-arabic-02","query":"شنو هو صندوق الاستثمار وكيفاش كيخدم؟","language":"ary","script":"arabic","topic":"opcvm_definition","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"ary-arabic-03","query":"شنو كتعني القيمة الصافية ديال الأصول؟","language":"ary","script":"arabic","topic":"valeur_liquidative","expected_source_ids":["ammc-les-opcvm"]}
+{"id":"ary-arabic-04","query":"شنو كيعني طرح الشركة فالبورصة؟","language":"ary","script":"arabic","topic":"ipo","expected_source_ids":["ammc-comprendre-les-ipo"]}
+{"id":"ary-arabic-05","query":"كيفاش كيخدم العرض العمومي؟","language":"ary","script":"arabic","topic":"public_offerings","expected_source_ids":["ammc-comprendre-les-offres-publics"]}
+{"id":"ary-arabic-06","query":"كيفاش نحمي فلوسي واستثماراتي؟","language":"ary","script":"arabic","topic":"investor_protection","expected_source_ids":["ammc-renforcer-la-protection-de-vos-placements"]}
+{"id":"ary-arabic-07","query":"شنو الوثائق اللي خاصني نقرا قبل الاستثمار؟","language":"ary","script":"arabic","topic":"information_documents","expected_source_ids":["ammc-les-documents-d-information-qu-il-faut-absolument-connaitre"]}
+{"id":"ary-arabic-08","query":"كيفاش كيخدم التمويل التشاركي؟","language":"ary","script":"arabic","topic":"crowdfunding","expected_source_ids":["ammc-comprendre-le-financement-collaboratif"]}

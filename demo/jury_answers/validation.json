@@ -1,0 +1,83 @@
+{
+  "fr": {
+    "text_and_json_exactly_match_http_response": true,
+    "citations_unchanged": true,
+    "persisted_message_count": 2,
+    "persisted_messages": [
+      {
+        "role": "user",
+        "content": "Quelle est la différence entre une action et une obligation, notamment en termes de propriété, de rendement et de risque ?",
+        "language": "fr",
+        "script": "latin",
+        "route": "pedagogie"
+      },
+      {
+        "role": "assistant",
+        "content": "Voici les principales différences entre une action et une obligation :\n\n### 1. Nature du titre\n\n- **Action :** l’acquéreur détient une part du capital de la société et devient propriétaire d’une fraction de l’entreprise.\n- **Obligation :** l’investisseur devient créancier de l’émetteur. Il ne détient aucune part du capital, mais une créance correspondant à un prêt accordé à l’émetteur.\n\n### 2. Rendement\n\n- **Action :** les informations fournies mentionnent une section consacrée au rendement des actions, sans préciser sa nature, comme les dividendes ou les plus-values, dans les extraits disponibles.\n- **Obligation :** le rendement principal prend la forme d’un intérêt appelé « coupon », versé en contrepartie du prêt. À l’échéance, l’émetteur rembourse le montant emprunté, c’est-à-dire le capital. Il existe aussi des obligations zéro coupon : aucun coupon n’est versé pendant la durée de vie du titre, et le principal ainsi que les intérêts sont remboursés intégralement à l’échéance.\n\n### 3. Risque\n\n- **Action :** les informations fournies mentionnent une section consacrée aux risques associés aux actions, mais les extraits disponibles ne les détaillent pas.\n- **Obligation :** l’investisseur est principalement exposé à trois types de risques :\n  - **Risque de défaut ou de crédit :** risque lié à la capacité de l’émetteur à respecter ses engagements, notamment le paiement des intérêts et le remboursement du capital.\n  - **Risque de taux :** le taux d’intérêt et le prix de l’obligation évoluent en sens inverse. Si les taux augmentent, le prix de l’obligation baisse, et inversement.\n  - **Risque de liquidité :** risque de ne pas trouver de contrepartie pour vendre l’obligation avant son échéance.",
+        "language": "fr",
+        "script": "latin",
+        "route": "pedagogie"
+      }
+    ],
+    "final_composer_status": "accepted",
+    "status": "ok",
+    "degraded": false
+  },
+  "en": {
+    "text_and_json_exactly_match_http_response": true,
+    "citations_unchanged": true,
+    "persisted_message_count": 2,
+    "persisted_messages": [
+      {
+        "role": "user",
+        "content": "How does an IPO work, and why does a company choose to go public?",
+        "language": "en",
+        "script": "latin",
+        "route": "pedagogie"
+      },
+      {
+        "role": "assistant",
+        "content": "An Initial Public Offering (IPO) is a financial operation in which a company makes part of its share capital available to the public in exchange for newly collected funds. It enables the company to solicit public savings through a public offering of securities. The process is subject to legal and regulatory obligations designed to protect investors, including the publication of a prospectus and ongoing financial and extra-financial information.\n\nThere are two main types of IPOs, which may also be combined in a mixed operation:\n\n- **Capital Increase:** New shares are created, enabling the company to raise new capital from the market and obtain an additional source of financing for its development.\n- **Sale of Existing Shares:** Original shareholders sell part of their existing shares to new investors. The company does not receive new liquidity; instead, the original shareholders reduce their participation in the company’s capital.\n- **Mixed Operation:** A combination of a capital increase and the sale of existing shares.\n\nCompanies primarily choose to go public to diversify their financing options and raise funds for development. Other benefits include increasing the company’s notoriety and ensuring the mobility of its capital. For investors, an IPO provides an opportunity to acquire shares in companies with potential and diversify their investment portfolios.\n\nThe IPO process involves several key actors:\n\n- **Internal Governance Bodies:** Validate the business plan, select external experts, and ensure the quality of the information provided to advisors.\n- **Regulatory Authority (AMMC):** Handles regulatory matters, including approval of the prospectus.\n- **Stock Exchange Operator (Casablanca Stock Exchange):** Manages the market on which the company’s shares will be admitted.\n- **External Experts:** Help the company structure, promote, and place the securities.",
+        "language": "en",
+        "script": "latin",
+        "route": "pedagogie"
+      }
+    ],
+    "final_composer_status": "accepted",
+    "status": "ok",
+    "degraded": false
+  },
+  "ar": {
+    "text_and_json_exactly_match_http_response": true,
+    "citations_unchanged": true,
+    "persisted_message_count": 2,
+    "persisted_messages": [
+      {
+        "role": "user",
+        "content": "ما هي أهم مخاطر الاستثمار في البورصة وكيف يمكن للمستثمر فهمها؟",
+        "language": "ar",
+        "script": "arabic",
+        "route": "pedagogie"
+      },
+      {
+        "role": "assistant",
+        "content": "تُعرَّف مخاطر الاستثمار في البورصة بأنها الاحتمالات التي قد تؤدي إلى تآكل قيمة رأس المال المستثمر أو صعوبة استرجاعه. ويمكن فهم أهم هذه المخاطر على النحو الآتي:\n\n- **مخاطر رأس المال (Risque de perte en capital):**\n  - **المفهوم:** احتمال انخفاض قيمة الاستثمار.\n  - **كيف يفهمها المستثمر:** ينبغي أن يدرك أن تقلبات السوق، والتغيرات الاقتصادية، أو الأداء السيئ للشركة أو القطاع قد تؤدي إلى خسارة جزئية أو كلية لرأس المال. ففي حالة الأسهم، إذا انخفض سعر السهم عن سعر الشراء، فقد يضطر المستثمر إلى بيعه بخسارة. وفي حالة إفلاس الشركة، قد يخسر كامل استثماره، لأن أصول الشركة تُباع أولاً لسداد الديون ذات الأولوية، مثل أجور الموظفين والديون الحكومية، قبل تعويض المساهمين.\n\n- **مخاطر السيولة (Risque de liquidité):**\n  - **المفهوم:** صعوبة بيع الأصل المالي بسرعة وفي ظروف سوقية عادية.\n  - **كيف يفهمها المستثمر:** يختلف هذا الخطر من أداة إلى أخرى. فقد يواجه المستثمر صعوبة في إيجاد مشترٍ بالسعر المطلوب، خاصة عندما يكون الطلب على الأصل منخفضاً، مما قد يؤدي إلى خسائر محتملة عند الحاجة إلى البيع السريع.\n\n- **مخاطر التعثر أو الائتمان (Risque de défaut / de crédit):**\n  - **المفهوم:** عدم قدرة المُصدر، سواء كان شركة أو كياناً، على الوفاء بالتزاماته المالية.\n  - **كيف يفهمها المستثمر:** يتعلق هذا الخطر أساساً بالسندات، أي الالتزامات المالية، ويرتبط بقدرة المُصدر على دفع الفوائد وسداد رأس المال. وفي حال التعثر، قد لا يسترد المستثمر كامل استثماره. ويُعرف هذا الخطر أيضاً بمخاطر المُصدر.\n\n- **مخاطر أسعار الفائدة (Risque de taux):**\n  - **المفهوم:** تأثير تقلبات أسعار الفائدة في قيمة الاستثمارات.\n  - **كيف يفهمها المستثمر:** توجد علاقة عكسية بين سعر الفائدة وسعر السند. فإذا ارتفعت أسعار الفائدة في السوق، انخفض سعر السند الذي يملكه المستثمر، والعكس صحيح. وهذا يعني أن قيمة الاستثمار في السندات تتأثر مباشرة بتغيرات السياسة النقدية أو ظروف السوق.\n\n**كيف يمكن للمستثمر فهم هذه المخاطر وإدارتها؟**\n\n1. **التنوع (Diversification):** يُعد التنوع أداة أساسية لتقليل التعرض للمخاطر. فبدلاً من تركيز الاستثمار في سهم شركة واحدة أو قطاع واحد، ينبغي توزيع الاستثمارات على عدة فئات أصول، وشركات من قطاعات مختلفة وأحجام متباينة. ويساعد ذلك على تحقيق توازن في أداء المحفظة، إذ قد تعوض أرباح بعض الأصول خسائر أصول أخرى.\n\n2. **الحذر من الوعود غير الواقعية:** ينبغي الحذر من العروض التي تعد بعوائد مرتفعة بشكل غير طبيعي أو مضمونة، إذ غالباً ما ترتبط الوعود بعوائد استثنائية بمخاطر خفية. ومن علامات الخطر: الضغط لاتخاذ قرار سريع، وغياب الشفافية بشأن استراتيجية الاستثمار، والوعد بعوائد تتجاوز متوسطات السوق بكثير.\n\n3. **فهم طبيعة الأداة:** يجب التمييز بين مخاطر الأسهم، التي قد تصل إلى خسارة كاملة في حال الإفلاس، ومخاطر السندات، التي تتأثر بأسعار الفائدة وقدرة المُصدر على السداد.",
+        "language": "ar",
+        "script": "arabic",
+        "route": "pedagogie"
+      }
+    ],
+    "final_composer_status": "accepted",
+    "status": "ok",
+    "degraded": false
+  },
+  "darija": {
+    "text_and_json_exactly_match_http_response": true,
+    "citations_unchanged": true,
+    "persisted_message_count": 0,
+    "persisted_messages": [],
+    "final_composer_status": "accepted",
+    "status": "error",
+    "degraded": true
+  }
+}
